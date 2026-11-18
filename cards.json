@@ -1,0 +1,1466 @@
+{
+  "topics": [
+    {
+      "id": "differentiation",
+      "title": "Differentiation",
+      "collection": "revision"
+    },
+    {
+      "id": "sequences",
+      "title": "Sequences and series",
+      "collection": "revision"
+    },
+    {
+      "id": "logarithms",
+      "title": "Exponentials and logs",
+      "collection": "revision"
+    },
+    {
+      "id": "integration",
+      "title": "Integration and area",
+      "collection": "revision"
+    },
+    {
+      "id": "algebra",
+      "title": "Algebra and functions",
+      "collection": "revision"
+    },
+    {
+      "id": "modelling",
+      "title": "Modelling",
+      "collection": "revision"
+    },
+    {
+      "id": "triangles",
+      "title": "Triangles and radians",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "graphs",
+      "title": "Exact values and graphs",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "identities",
+      "title": "Core identities and approximations",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "angles",
+      "title": "Compound and double angles",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "equations",
+      "title": "Trig equations and modelling",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "trig-calculus",
+      "title": "Trig calculus",
+      "collection": "trigonometry"
+    }
+  ],
+  "cards": [
+    {
+      "id": "first-principles-replace-x",
+      "topic": "differentiation",
+      "front": "When finding $f(x+h)$, what do you replace each $x$ with?",
+      "back": [
+        "In the original formula for $f(x)$, replace every $x$ with $(x+h)$ and keep any coefficients outside the brackets.",
+        "In $f(x+h)-f(x)$, the second term is the original $f(x)$.",
+        "For $f(x)=cx^2$, write $f(x+h)=c(x+h)^2$."
+      ]
+    },
+    {
+      "id": "first-principles-limit",
+      "topic": "differentiation",
+      "front": "What is the first-principles formula for the derivative?",
+      "back": [
+        "$f'(x)=\\lim_{h\\to0}\\dfrac{f(x+h)-f(x)}{h}$",
+        "Expand, simplify and divide by $h$ before taking the limit."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "first-principles-square",
+      "topic": "differentiation",
+      "front": "How do you expand $(x+h)^2$?",
+      "back": [
+        "$(x+h)^2=x^2+2xh+h^2$",
+        "Keep the $h^2$ term through division. It becomes $h$, which tends to zero."
+      ]
+    },
+    {
+      "id": "power-rule",
+      "topic": "differentiation",
+      "front": "How do you differentiate $cx^n$?",
+      "back": [
+        "$\\dfrac{d}{dx}(cx^n)=cnx^{n-1}$",
+        "Multiply by the old power, then reduce it by one."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "chain-rule",
+      "topic": "differentiation",
+      "front": "How do you differentiate a function inside another function?",
+      "back": [
+        "$\\dfrac{d}{dx}f(g(x))=f'(g(x))g'(x)$",
+        "Differentiate the outside, keep the inside, then multiply by the derivative of the inside."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "product-rule",
+      "topic": "differentiation",
+      "front": "What is the derivative of $u(x)v(x)$?",
+      "back": [
+        "$(uv)'=u'v+uv'$",
+        "Differentiate one factor at a time and add the two terms."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exponential-derivative",
+      "topic": "differentiation",
+      "front": "What is the derivative of $e^{kx}$?",
+      "back": [
+        "$\\dfrac{d}{dx}e^{kx}=ke^{kx}$",
+        "Keep the exponent $kx$ and multiply by its derivative, $k$."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "reciprocal-derivative",
+      "topic": "differentiation",
+      "front": "If you have $\\dfrac{dx}{dy}$, how do you find $\\dfrac{dy}{dx}$?",
+      "back": [
+        "$\\dfrac{dy}{dx}=\\dfrac{1}{dx/dy}$",
+        "Take the reciprocal where $dx/dy\\ne0$."
+      ]
+    },
+    {
+      "id": "stationary-points",
+      "topic": "differentiation",
+      "front": "Which expression do you set to zero for a stationary point?",
+      "back": [
+        "Set the derivative to zero. $f'(x)=0$ gives candidates for stationary points."
+      ]
+    },
+    {
+      "id": "minimum-test",
+      "topic": "differentiation",
+      "front": "How can the second derivative confirm a local minimum?",
+      "back": [
+        "At a stationary point, $f''(x)>0$ gives a local minimum and $f''(x)<0$ gives a local maximum. If $f''(x)=0$, check how $f'(x)$ behaves on both sides."
+      ]
+    },
+    {
+      "id": "inflection-test",
+      "topic": "differentiation",
+      "front": "How can you confirm a point of inflection using the second derivative?",
+      "back": [
+        "Check that $f''(x)$ changes sign across the point. This means the curve switches between curving up and curving down."
+      ]
+    },
+    {
+      "id": "recover-curve",
+      "topic": "differentiation",
+      "front": "You know $f'(x)$ and a point on the curve. How do you find $f(x)$?",
+      "back": [
+        "Integrate $f'(x)$ and include $+C$. Substitute the known point to find $C$."
+      ]
+    },
+    {
+      "id": "parametric-derivative",
+      "topic": "differentiation",
+      "front": "How do you find the gradient from parametric equations?",
+      "back": [
+        "$\\dfrac{dy}{dx}=\\dfrac{dy/dt}{dx/dt}$",
+        "Differentiate both coordinates with respect to $t$, then divide where $dx/dt\\ne0$."
+      ]
+    },
+    {
+      "id": "sigma-starting-term",
+      "topic": "sequences",
+      "front": "How do you find the first included term in $\\displaystyle\\sum_{n=m}^{N}u_n$?",
+      "back": [
+        "Substitute the lower limit $m$ into $u_n$. The first included term is $u_m$."
+      ]
+    },
+    {
+      "id": "sigma-term-count",
+      "topic": "sequences",
+      "front": "How many terms are in $\\displaystyle\\sum_{n=m}^{N}u_n$?",
+      "back": [
+        "$N-m+1$",
+        "Count both ends."
+      ]
+    },
+    {
+      "id": "sigma-sum-meaning",
+      "topic": "sequences",
+      "front": "What does $\\displaystyle\\sum_{n=1}^{N}u_n$ ask you to find?",
+      "back": [
+        "$u_1+u_2+\\cdots+u_N$",
+        "Add every term from the first through the $N$th."
+      ]
+    },
+    {
+      "id": "shifted-exponent-ratio",
+      "topic": "sequences",
+      "front": "What is the common ratio when the term is $Cb^{kn+c}$?",
+      "back": [
+        "$r=b^k$",
+        "When $n$ goes up by one, the exponent goes up by $k$."
+      ]
+    },
+    {
+      "id": "geometric-ratio",
+      "topic": "sequences",
+      "front": "How do you find a geometric series’ common ratio?",
+      "back": [
+        "$r=\\dfrac{u_{n+1}}{u_n}$",
+        "Divide the next term by the previous term."
+      ]
+    },
+    {
+      "id": "geometric-term",
+      "topic": "sequences",
+      "front": "What is the $n$th term of a geometric sequence?",
+      "back": [
+        "$u_n=ar^{n-1}$",
+        "$a$ is the first term. There are $n-1$ multiplications by $r$."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "geometric-finite-sum",
+      "topic": "sequences",
+      "front": "What is the sum of the first n terms of a geometric series?",
+      "back": [
+        "$S_n=\\dfrac{a(1-r^n)}{1-r}\\quad(r\\ne1)$",
+        "For $r=1$, every term is $a$, so $S_n=na$."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "geometric-infinite-sum",
+      "topic": "sequences",
+      "front": "When does a geometric series have a sum to infinity, and what is it?",
+      "back": [
+        "$S_\\infty=\\dfrac{a}{1-r}\\quad\\text{for }|r|<1$",
+        "Use the first term included in the sum for $a$."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "geometric-tail",
+      "topic": "sequences",
+      "front": "How do you find the sum after the first n terms of a convergent geometric series?",
+      "back": [
+        "$S_\\infty-S_n=\\dfrac{ar^n}{1-r}$",
+        "The first term of the remaining series is $ar^n$."
+      ]
+    },
+    {
+      "id": "arithmetic-difference",
+      "topic": "sequences",
+      "front": "How do you find the common difference in an arithmetic sequence?",
+      "back": [
+        "$d=u_{n+1}-u_n$",
+        "Subtract the previous term from the next term."
+      ]
+    },
+    {
+      "id": "arithmetic-term",
+      "topic": "sequences",
+      "front": "What is the $n$th term of an arithmetic sequence?",
+      "back": [
+        "$u_n=a+(n-1)d$",
+        "$a$ is the first term and $d$ is the common difference."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "arithmetic-sum",
+      "topic": "sequences",
+      "front": "How do you find the sum of the first n terms of an arithmetic series?",
+      "back": [
+        "$S_n=\\dfrac n2[2a+(n-1)d]$",
+        "Or multiply $n$ by the average of the first and last terms."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "recurrence-rule",
+      "topic": "sequences",
+      "front": "How do you use a rule that gives $u_{n+1}$ in terms of $u_n$?",
+      "back": [
+        "Start with the given first term. Put the current term into the rule to get the next term, then repeat."
+      ]
+    },
+    {
+      "id": "periodic-order",
+      "topic": "sequences",
+      "front": "What does the order of a repeating sequence tell you?",
+      "back": [
+        "It’s the number of terms in the shortest block that repeats."
+      ]
+    },
+    {
+      "id": "periodic-sum",
+      "topic": "sequences",
+      "front": "How do you add many terms of a repeating sequence quickly?",
+      "back": [
+        "Count the complete blocks and multiply by the sum of one block. Then add the leftover terms at the start of the next block."
+      ]
+    },
+    {
+      "id": "log-quotient",
+      "topic": "logarithms",
+      "front": "How do you split $\\log_b(A/B)$?",
+      "back": [
+        "$\\log_b(A/B)=\\log_b A-\\log_b B$",
+        "Use the same base for both logs and positive arguments."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "log-product",
+      "topic": "logarithms",
+      "front": "How do you split $\\log_b(AB)$?",
+      "back": [
+        "$\\log_b(AB)=\\log_b A+\\log_b B$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "log-power",
+      "topic": "logarithms",
+      "front": "What happens to the exponent when you expand $\\log_b(A^k)$?",
+      "back": [
+        "$\\log_b(A^k)=k\\log_b A$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "log-domain",
+      "topic": "logarithms",
+      "front": "When is a real logarithm $\\log_b A$ defined?",
+      "back": [
+        "$A>0,\\qquad b>0,\\qquad b\\ne1$",
+        "Check the argument of every original log after solving."
+      ]
+    },
+    {
+      "id": "equal-logs",
+      "topic": "logarithms",
+      "front": "If $\\log_b A=\\log_b B$, what can you conclude?",
+      "back": [
+        "$A=B$, provided both log arguments are positive and the base is valid."
+      ]
+    },
+    {
+      "id": "solve-exponential",
+      "topic": "logarithms",
+      "front": "How do you solve $b^x=A$ using logarithms?",
+      "back": [
+        "$x=\\log_b A=\\dfrac{\\ln A}{\\ln b}$",
+        "Taking the same log on both sides lets you bring down the exponent."
+      ]
+    },
+    {
+      "id": "telescoping-log-sum",
+      "topic": "logarithms",
+      "front": "How do you spot cancellation in a sum of log fractions?",
+      "back": [
+        "Split each log of a fraction into two logs. Write the first few and last few terms. Matching logs with opposite signs cancel, so keep the terms at the ends."
+      ]
+    },
+    {
+      "id": "linearise-power",
+      "topic": "logarithms",
+      "front": "How do you turn $y=ax^n$ into a straight line?",
+      "back": [
+        "$\\log y=n\\log x+\\log a$",
+        "Plot $\\log y$ against $\\log x$. The slope gives $n$. Undo the log of the intercept to find $a$."
+      ]
+    },
+    {
+      "id": "linearise-exponential",
+      "topic": "logarithms",
+      "front": "How do you turn $y=kb^x$ into a straight line?",
+      "back": [
+        "$\\log y=x\\log b+\\log k$",
+        "Plot $\\log y$ against $x$. Undo the logs of the slope and intercept to find $b$ and $k$."
+      ]
+    },
+    {
+      "id": "exponential-graph",
+      "topic": "logarithms",
+      "front": "What features should you mark on a sketch of $y=b^x$?",
+      "back": [
+        "For $b>0$ and $b\\ne1$, the graph passes through $(0,1)$ and stays above the horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$."
+      ]
+    },
+    {
+      "id": "exponential-multiplier",
+      "topic": "logarithms",
+      "front": "How do you find the multiplier in an exponential model?",
+      "back": [
+        "$\\text{Multiplier}=\\dfrac{\\text{new value}}{\\text{previous value}}$",
+        "A decrease of $p\\%$ gives multiplier $1-p/100$."
+      ]
+    },
+    {
+      "id": "exponential-parameter",
+      "topic": "logarithms",
+      "front": "What do $A$ and $b$ mean in $y=Ab^t$?",
+      "back": [
+        "$A$ is the value at $t=0$. Each time $t$ goes up by one, the value is multiplied by $b$."
+      ]
+    },
+    {
+      "id": "definite-integral-bounds",
+      "topic": "integration",
+      "front": "Which way round do you use the bounds in a definite integral?",
+      "back": [
+        "$\\int_a^b f(x)\\,dx=F(b)-F(a)$",
+        "Put the upper bound into every term of the antiderivative, then subtract the whole lower-bound result."
+      ]
+    },
+    {
+      "id": "signed-area",
+      "topic": "integration",
+      "front": "How do you get the total geometric area if a curve crosses the x-axis?",
+      "back": [
+        "Split the integral at each crossing. Add the sizes of the separate areas, turning negative integral values into positive areas."
+      ]
+    },
+    {
+      "id": "area-between-curves",
+      "topic": "integration",
+      "front": "Which function goes first when finding the area between two curves?",
+      "back": [
+        "Integrate $y_{\\text{top}}-y_{\\text{bottom}}$. Split where the curves cross if they swap order."
+      ]
+    },
+    {
+      "id": "area-limits",
+      "topic": "integration",
+      "front": "How do you choose the bounds for a region bounded by curves or the x-axis?",
+      "back": [
+        "Find the x-coordinates where the relevant boundaries meet. Use the left endpoint as the lower bound and the right endpoint as the upper bound."
+      ]
+    },
+    {
+      "id": "repeated-rectangles",
+      "topic": "integration",
+      "front": "What does a limiting sum of thin rectangle areas represent?",
+      "back": [
+        "$\\sum f(x_i)\\Delta x$ tends to $\\int_a^b f(x)\\,dx$ as the widths tend to zero."
+      ]
+    },
+    {
+      "id": "substitution-all-one-variable",
+      "topic": "integration",
+      "front": "What must you change when using substitution in an integral?",
+      "back": [
+        "Rewrite the whole integrand and $dx$ in terms of the new variable $u$. For a definite integral, change the bounds if you plan to evaluate in $u$."
+      ]
+    },
+    {
+      "id": "simple-log-integral",
+      "topic": "integration",
+      "front": "What is $\\displaystyle\\int\\frac{1}{ax+b}\\,dx$?",
+      "back": [
+        "$\\dfrac{1}{a}\\ln|ax+b|+C\\quad(a\\ne0)$",
+        "Divide by the derivative of the denominator."
+      ]
+    },
+    {
+      "id": "partial-fraction-integrals",
+      "topic": "integration",
+      "front": "How do partial fractions help you integrate a rational function?",
+      "back": [
+        "Factor the denominator and split the fraction first. Then integrate the simpler terms and apply the bounds to the whole antiderivative."
+      ]
+    },
+    {
+      "id": "trapezium-endpoints",
+      "topic": "integration",
+      "front": "How does the trapezium rule weight readings at equal intervals?",
+      "back": [
+        "$\\dfrac h2\\left(y_0+y_n+2\\sum_{i=1}^{n-1}y_i\\right)$",
+        "Use each endpoint once and every interior reading twice."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "trapezium-error",
+      "topic": "integration",
+      "front": "How can you tell if a trapezium estimate is too high or too low?",
+      "back": [
+        "Look at the straight chords joining the sample points. When they lie above the curve the estimate is too high. When they lie below, it is too low."
+      ]
+    },
+    {
+      "id": "modulus-cases",
+      "topic": "algebra",
+      "front": "What two equations should you solve when $|f(x)|=g(x)$?",
+      "back": [
+        "Solve $f(x)=g(x)$ and $-f(x)=g(x)$ as separate cases.",
+        "Check each answer in the original equation. Any valid answer must have $g(x)\\ge0$."
+      ]
+    },
+    {
+      "id": "piecewise-branch",
+      "topic": "algebra",
+      "front": "When composing a piecewise function, what decides which branch you use?",
+      "back": [
+        "Look at the input to each function call. Work out the inner function first, then use that result to choose the branch for the outer function."
+      ]
+    },
+    {
+      "id": "piecewise-inequality",
+      "topic": "algebra",
+      "front": "How do you solve an inequality involving a piecewise function?",
+      "back": [
+        "Solve it on every branch. Keep only the values allowed by that branch’s domain, then combine the results."
+      ]
+    },
+    {
+      "id": "elimination",
+      "topic": "algebra",
+      "front": "How do you eliminate a variable from simultaneous equations?",
+      "back": [
+        "Multiply the equations as needed to match the variable’s coefficients. Subtract if the coefficients have the same sign, or add if they have opposite signs."
+      ]
+    },
+    {
+      "id": "parametric-crossing",
+      "topic": "algebra",
+      "front": "How do you find where a parametric curve meets a Cartesian curve?",
+      "back": [
+        "Substitute both parametric expressions into the Cartesian equation. Solve for the parameter, check its allowed range, then calculate the coordinates."
+      ]
+    },
+    {
+      "id": "vertical-asymptote",
+      "topic": "algebra",
+      "front": "Where should you look for vertical asymptotes in a rational function?",
+      "back": [
+        "Factor and cancel any common factors first. Check the real zeros of the remaining denominator for vertical asymptotes."
+      ]
+    },
+    {
+      "id": "break-even",
+      "topic": "modelling",
+      "front": "How do you set up a break-even equation?",
+      "back": [
+        "$\\text{Revenue}=\\text{Total cost}$",
+        "For positive profit, revenue must be greater than total cost."
+      ]
+    },
+    {
+      "id": "cost-model",
+      "topic": "modelling",
+      "front": "What do $c$ and $m$ mean in a total-cost model $C=c+mx$?",
+      "back": [
+        "$c$ is the fixed cost and $m$ is the extra cost per unit. Extra profit per unit is selling price minus $m$."
+      ]
+    },
+    {
+      "id": "optimisation-constraint",
+      "topic": "modelling",
+      "front": "How do you get a formula in one variable for an optimisation problem?",
+      "back": [
+        "Use the constraint to write one variable in terms of the other, then substitute into the quantity you want to maximise or minimise."
+      ]
+    },
+    {
+      "id": "distance-speed-graph",
+      "topic": "modelling",
+      "front": "What does the area under a speed–time graph represent?",
+      "back": [
+        "Distance travelled."
+      ]
+    },
+    {
+      "id": "absolute-value-graph",
+      "topic": "modelling",
+      "front": "How do you sketch $y=|f(x)|$ from $y=f(x)$?",
+      "back": [
+        "Reflect the parts below the x-axis upwards. Leave the parts on or above the axis in place."
+      ]
+    },
+    {
+      "id": "sohcahtoa-sine",
+      "topic": "triangles",
+      "front": "What is sine in a right-angled triangle?",
+      "back": [
+        "$\\sin\\theta=\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$"
+      ]
+    },
+    {
+      "id": "sohcahtoa-cosine",
+      "topic": "triangles",
+      "front": "What is cosine in a right-angled triangle?",
+      "back": [
+        "$\\cos\\theta=\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$"
+      ]
+    },
+    {
+      "id": "sohcahtoa-tangent",
+      "topic": "triangles",
+      "front": "What is tangent in a right-angled triangle?",
+      "back": [
+        "$\\tan\\theta=\\dfrac{\\text{opposite}}{\\text{adjacent}}$"
+      ]
+    },
+    {
+      "id": "unit-circle",
+      "topic": "triangles",
+      "front": "What are the coordinates at angle $\\theta$ on the unit circle?",
+      "back": [
+        "$(x,y)=(\\cos\\theta,\\sin\\theta)$"
+      ]
+    },
+    {
+      "id": "sine-rule",
+      "topic": "triangles",
+      "front": "What is the sine rule?",
+      "back": [
+        "$\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}$",
+        "Each side is paired with the angle opposite it."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "sine-rule-ambiguous",
+      "topic": "triangles",
+      "front": "When can the sine rule give two possible angles?",
+      "back": [
+        "Two angles between $0^\\circ$ and $180^\\circ$ can have the same sine. Check both $A$ and $180^\\circ-A$ (or $\\pi-A$ in radians) against the sides and other angles."
+      ]
+    },
+    {
+      "id": "cosine-rule",
+      "topic": "triangles",
+      "front": "What is the cosine rule for an unknown side a?",
+      "back": [
+        "$a^2=b^2+c^2-2bc\\cos A$",
+        "$A$ is the angle between sides $b$ and $c$."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "cosine-rule-angle",
+      "topic": "triangles",
+      "front": "How do you use the cosine rule to find angle A?",
+      "back": [
+        "$\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}$",
+        "Take inverse cosine to find the angle."
+      ]
+    },
+    {
+      "id": "triangle-area",
+      "topic": "triangles",
+      "front": "What is the triangle area formula using two sides and their included angle?",
+      "back": [
+        "$\\text{Area}=\\dfrac12 ab\\sin C$",
+        "$C$ is the angle between sides $a$ and $b$."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "degree-to-radians",
+      "topic": "triangles",
+      "front": "How do you convert degrees to radians?",
+      "back": [
+        "Multiply by $\\dfrac{\\pi}{180}$. A full turn is $360^\\circ=2\\pi$ radians."
+      ]
+    },
+    {
+      "id": "radians-to-degrees",
+      "topic": "triangles",
+      "front": "How do you convert radians to degrees?",
+      "back": [
+        "Multiply by $\\dfrac{180}{\\pi}$."
+      ]
+    },
+    {
+      "id": "arc-length",
+      "topic": "triangles",
+      "front": "What is the arc length formula with an angle in radians?",
+      "back": [
+        "$s=r\\theta$",
+        "$r$ is the radius and $\\theta$ is the central angle."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "sector-area",
+      "topic": "triangles",
+      "front": "What is the sector area formula with an angle in radians?",
+      "back": [
+        "$A=\\dfrac12 r^2\\theta$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "segment-area",
+      "topic": "triangles",
+      "front": "How do you find the area of the smaller circular segment?",
+      "back": [
+        "Subtract the triangle from the sector. For a central angle $\\theta$ in radians,",
+        "$A=\\dfrac12 r^2(\\theta-\\sin\\theta)$"
+      ]
+    },
+    {
+      "id": "exact-0",
+      "topic": "graphs",
+      "front": "What are the exact trig values at $0^\\circ$?",
+      "back": [
+        "$\\sin 0=0$",
+        "$\\cos 0=1$",
+        "$\\tan 0=0$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exact-30",
+      "topic": "graphs",
+      "front": "What are the exact trig values at $30^\\circ$ ($\\pi/6$ radians)?",
+      "back": [
+        "$\\sin 30^\\circ=\\tfrac12$",
+        "$\\cos 30^\\circ=\\tfrac{\\sqrt3}{2}$",
+        "$\\tan 30^\\circ=\\tfrac{1}{\\sqrt3}$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exact-45",
+      "topic": "graphs",
+      "front": "What are the exact trig values at $45^\\circ$ ($\\pi/4$ radians)?",
+      "back": [
+        "$\\sin 45^\\circ=\\cos 45^\\circ=\\tfrac{1}{\\sqrt2}$",
+        "$\\tan 45^\\circ=1$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exact-60",
+      "topic": "graphs",
+      "front": "What are the exact trig values at $60^\\circ$ ($\\pi/3$ radians)?",
+      "back": [
+        "$\\sin 60^\\circ=\\tfrac{\\sqrt3}{2}$",
+        "$\\cos 60^\\circ=\\tfrac12$",
+        "$\\tan 60^\\circ=\\sqrt3$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exact-90",
+      "topic": "graphs",
+      "front": "What are the exact trig values at $90^\\circ$ ($\\pi/2$ radians)?",
+      "back": [
+        "$\\sin 90^\\circ=1,\\quad \\cos 90^\\circ=0$",
+        "$\\tan 90^\\circ$ is undefined because the cosine is zero."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exact-180",
+      "topic": "graphs",
+      "front": "What are the exact trig values at $180^\\circ$ ($\\pi$ radians)?",
+      "back": [
+        "$\\sin 180^\\circ=0$",
+        "$\\cos 180^\\circ=-1$",
+        "$\\tan 180^\\circ=0$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "exact-angle-quadrants",
+      "topic": "graphs",
+      "front": "Which trig functions are positive in each quadrant?",
+      "back": [
+        "I — sine, cosine and tangent. II — sine. III — tangent. IV — cosine.",
+        "Use the acute reference angle for the size of the value, then apply the quadrant sign."
+      ]
+    },
+    {
+      "id": "angle-calculator-mode",
+      "topic": "graphs",
+      "front": "How do you choose the angle mode on your calculator?",
+      "back": [
+        "Use degrees for angles written with $^\\circ$ and radians for angles given as radians or in terms of $\\pi$. Check the interval uses the same units."
+      ]
+    },
+    {
+      "id": "sine-symmetry",
+      "topic": "graphs",
+      "front": "How do $\\sin(-x)$ and $\\sin(\\pi-x)$ relate to $\\sin x$?",
+      "back": [
+        "$\\sin(-x)=-\\sin x$",
+        "$\\sin(\\pi-x)=\\sin x$"
+      ]
+    },
+    {
+      "id": "cosine-symmetry",
+      "topic": "graphs",
+      "front": "How do $\\cos(-x)$ and $\\cos(\\pi-x)$ relate to $\\cos x$?",
+      "back": [
+        "$\\cos(-x)=\\cos x$",
+        "$\\cos(\\pi-x)=-\\cos x$"
+      ]
+    },
+    {
+      "id": "tangent-symmetry",
+      "topic": "graphs",
+      "front": "How do $\\tan(-x)$ and $\\tan(\\pi-x)$ relate to $\\tan x$?",
+      "back": [
+        "$\\tan(-x)=-\\tan x$",
+        "$\\tan(\\pi-x)=-\\tan x$"
+      ]
+    },
+    {
+      "id": "sine-cosine-complement",
+      "topic": "graphs",
+      "front": "How do sine and cosine link for complementary angles?",
+      "back": [
+        "$\\sin(\\pi/2-x)=\\cos x$",
+        "$\\cos(\\pi/2-x)=\\sin x$"
+      ]
+    },
+    {
+      "id": "sin-cos-period",
+      "topic": "graphs",
+      "front": "What are the period and range of sine and cosine?",
+      "back": [
+        "Both repeat every $2\\pi$ radians ($360^\\circ$), have range $[-1,1]$, and are defined for every real angle."
+      ]
+    },
+    {
+      "id": "tan-period",
+      "topic": "graphs",
+      "front": "What are the period, range and vertical asymptotes of tangent?",
+      "back": [
+        "Period $\\pi$ ($180^\\circ$), range $\\mathbb{R}$, and asymptotes at $x=\\pi/2+k\\pi$ for integer $k$."
+      ]
+    },
+    {
+      "id": "sin-cos-zeros",
+      "topic": "graphs",
+      "front": "Where do the sine and cosine graphs cross the x-axis?",
+      "back": [
+        "Sine at $x=k\\pi$. Cosine at $x=\\pi/2+k\\pi$. Here $k$ is any integer."
+      ]
+    },
+    {
+      "id": "sec-graph",
+      "topic": "graphs",
+      "front": "Where is secant undefined, and what values can it take?",
+      "back": [
+        "Where $\\cos x=0$, at $x=\\pi/2+k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
+      ]
+    },
+    {
+      "id": "cosec-graph",
+      "topic": "graphs",
+      "front": "Where is cosecant undefined, and what values can it take?",
+      "back": [
+        "Where $\\sin x=0$, at $x=k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
+      ]
+    },
+    {
+      "id": "cot-graph",
+      "topic": "graphs",
+      "front": "Where is cotangent undefined, and what values can it take?",
+      "back": [
+        "Where $\\sin x=0$, at $x=k\\pi$. The period is $\\pi$ and the range is $\\mathbb{R}$. On each branch it falls through zero at $x=\\pi/2+k\\pi$."
+      ]
+    },
+    {
+      "id": "arcsin-range",
+      "topic": "graphs",
+      "front": "What is the input domain and output range of inverse sine?",
+      "back": [
+        "$\\arcsin x$ takes inputs in $[-1,1]$ and returns angles in $[-\\pi/2,\\pi/2]$."
+      ]
+    },
+    {
+      "id": "arccos-range",
+      "topic": "graphs",
+      "front": "What is the input domain and output range of inverse cosine?",
+      "back": [
+        "$\\arccos x$ takes inputs in $[-1,1]$ and returns angles in $[0,\\pi]$."
+      ]
+    },
+    {
+      "id": "arctan-range",
+      "topic": "graphs",
+      "front": "What is the input domain and output range of inverse tangent?",
+      "back": [
+        "$\\arctan x$ takes any real input and returns angles in $(-\\pi/2,\\pi/2)$."
+      ]
+    },
+    {
+      "id": "inverse-trig-graph",
+      "topic": "graphs",
+      "front": "How do you sketch an inverse trig graph?",
+      "back": [
+        "Choose the branch that gives exactly one angle for each allowable input, then reflect that branch in $y=x$. The restricted trig graph’s range and domain swap roles."
+      ]
+    },
+    {
+      "id": "tangent-quotient",
+      "topic": "identities",
+      "front": "What does $\\tan A$ equal in terms of sine and cosine?",
+      "back": [
+        "$\\tan A=\\dfrac{\\sin A}{\\cos A}$",
+        "Valid where $\\cos A\\ne0$."
+      ]
+    },
+    {
+      "id": "sec-definition",
+      "topic": "identities",
+      "front": "What does $\\sec A$ equal?",
+      "back": [
+        "$\\sec A=\\dfrac{1}{\\cos A}$"
+      ]
+    },
+    {
+      "id": "cosec-definition",
+      "topic": "identities",
+      "front": "What does $\\cosec A$ equal?",
+      "back": [
+        "$\\cosec A=\\dfrac{1}{\\sin A}$"
+      ]
+    },
+    {
+      "id": "cot-definition",
+      "topic": "identities",
+      "front": "What does $\\cot A$ equal?",
+      "back": [
+        "$\\cot A=\\dfrac{\\cos A}{\\sin A}$",
+        "Also $1/\\tan A$ where that expression is defined."
+      ]
+    },
+    {
+      "id": "sin-cos-pythagorean",
+      "topic": "identities",
+      "front": "What identity links sine squared and cosine squared?",
+      "back": [
+        "$\\sin^2 A+\\cos^2 A=1$",
+        "On the unit circle this is Pythagoras’ theorem."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "sec-tan-pythagorean",
+      "topic": "identities",
+      "front": "What identity links secant squared and tangent squared?",
+      "back": [
+        "$\\sec^2 A=1+\\tan^2 A$",
+        "Divide $\\sin^2 A+\\cos^2 A=1$ by $\\cos^2 A$."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "cosec-cot-pythagorean",
+      "topic": "identities",
+      "front": "What identity links cosecant squared and cotangent squared?",
+      "back": [
+        "$\\cosec^2 A=1+\\cot^2 A$",
+        "Divide $\\sin^2 A+\\cos^2 A=1$ by $\\sin^2 A$."
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "choose-root-sign",
+      "topic": "identities",
+      "front": "How do you recover cosine if you know sine and the angle’s interval?",
+      "back": [
+        "$\\cos\\theta=\\pm\\sqrt{1-\\sin^2\\theta}$",
+        "Choose the sign from the quadrant or the stated interval. This lets you replace a cosine when the equation gives you the sine."
+      ]
+    },
+    {
+      "id": "small-angle-sine",
+      "topic": "identities",
+      "front": "What is the small-angle approximation for sine?",
+      "back": [
+        "$\\sin\\theta\\approx\\theta$",
+        "The angle $\\theta$ must be small and in radians."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "small-angle-cosine",
+      "topic": "identities",
+      "front": "What is the small-angle approximation for cosine?",
+      "back": [
+        "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
+        "The angle $\\theta$ must be small and in radians."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "small-angle-tangent",
+      "topic": "identities",
+      "front": "What is the small-angle approximation for tangent?",
+      "back": [
+        "$\\tan\\theta\\approx\\theta$",
+        "The angle $\\theta$ must be small and in radians."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "small-angle-inner",
+      "topic": "identities",
+      "front": "Which part of the expression do you use as the angle in a small-angle approximation?",
+      "back": [
+        "Use the whole argument. If $kx$ is small and in radians, $\\sin(kx)\\approx kx$."
+      ]
+    },
+    {
+      "id": "small-angle-gradient",
+      "topic": "identities",
+      "front": "How can a small-angle approximation give the gradient near the origin?",
+      "back": [
+        "Use the approximation to simplify the relation, then put $y$ on the left. If $y\\approx mx$ near the origin, the coefficient $m$ is the gradient there."
+      ]
+    },
+    {
+      "id": "sine-double-angle",
+      "topic": "angles",
+      "front": "What does $\\sin 2A$ equal?",
+      "back": [
+        "$\\sin 2A=2\\sin A\\cos A$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "cosine-double-angle",
+      "topic": "angles",
+      "front": "What are the three forms of $\\cos 2A$?",
+      "back": [
+        "$\\cos 2A=\\cos^2 A-\\sin^2 A$",
+        "$\\cos 2A=2\\cos^2 A-1$",
+        "$\\cos 2A=1-2\\sin^2 A$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "tangent-double-angle",
+      "topic": "angles",
+      "front": "What does $\\tan 2A$ equal?",
+      "back": [
+        "$\\tan 2A=\\dfrac{2\\tan A}{1-\\tan^2 A}$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "sine-compound",
+      "topic": "angles",
+      "front": "What does $\\sin(A\\pm B)$ equal?",
+      "back": [
+        "$\\sin(A\\pm B)=$",
+        "$\\sin A\\cos B\\pm\\cos A\\sin B$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "cosine-compound",
+      "topic": "angles",
+      "front": "What does $\\cos(A\\pm B)$ equal?",
+      "back": [
+        "$\\cos(A\\pm B)=$",
+        "$\\cos A\\cos B\\mp\\sin A\\sin B$",
+        "Cosine uses the opposite sign between the two products."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "tangent-compound",
+      "topic": "angles",
+      "front": "What does $\\tan(A\\pm B)$ equal?",
+      "back": [
+        "$\\tan(A\\pm B)=$",
+        "$\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$",
+        "The numerator follows the sign in the angle. The denominator uses the opposite sign."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "sine-half-angle-square",
+      "topic": "angles",
+      "front": "How can you write $\\sin^2 A$ in terms of $\\cos 2A$?",
+      "back": [
+        "$\\sin^2 A=\\dfrac{1-\\cos 2A}{2}$",
+        "This follows from $\\cos 2A=1-2\\sin^2 A$."
+      ]
+    },
+    {
+      "id": "cosine-half-angle-square",
+      "topic": "angles",
+      "front": "How can you write $\\cos^2 A$ in terms of $\\cos 2A$?",
+      "back": [
+        "$\\cos^2 A=\\dfrac{1+\\cos 2A}{2}$",
+        "This follows from $\\cos 2A=2\\cos^2 A-1$."
+      ]
+    },
+    {
+      "id": "half-angle-signs",
+      "topic": "angles",
+      "front": "How do you find $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$ from $\\cos\\theta$?",
+      "back": [
+        "$\\sin(\\theta/2)=\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$",
+        "$\\cos(\\theta/2)=\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$",
+        "Choose each sign using the quadrant of the half angle."
+      ]
+    },
+    {
+      "id": "sine-sum-to-product",
+      "topic": "angles",
+      "front": "How do you write $\\sin A+\\sin B$ as a product?",
+      "back": [
+        "$\\sin A+\\sin B=$",
+        "$2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "sine-difference-to-product",
+      "topic": "angles",
+      "front": "How do you write $\\sin A-\\sin B$ as a product?",
+      "back": [
+        "$\\sin A-\\sin B=$",
+        "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "cosine-sum-to-product",
+      "topic": "angles",
+      "front": "How do you write $\\cos A+\\cos B$ as a product?",
+      "back": [
+        "$\\cos A+\\cos B=$",
+        "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "cosine-difference-to-product",
+      "topic": "angles",
+      "front": "How do you write $\\cos A-\\cos B$ as a product?",
+      "back": [
+        "$\\cos A-\\cos B=$",
+        "$-2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "cosine-geometric-proof",
+      "topic": "angles",
+      "front": "How can you prove the cosine difference formula using the unit circle?",
+      "back": [
+        "Take $P=(\\cos A,\\sin A)$ and $Q=(\\cos B,\\sin B)$. Find $PQ^2$ using the distance formula and again using the triangle cosine rule. Equate the results and use the fact that cosine is even."
+      ]
+    },
+    {
+      "id": "compound-from-cosine",
+      "topic": "angles",
+      "front": "How can you get sine and tangent compound-angle formulas from cosine?",
+      "back": [
+        "For sine, use $\\sin x=\\cos(\\pi/2-x)$ and expand with the cosine compound-angle formula. For tangent, divide the sine expansion by the cosine expansion."
+      ]
+    },
+    {
+      "id": "solve-sine",
+      "topic": "equations",
+      "front": "What angles give the same sine as $\\alpha$?",
+      "back": [
+        "$x=\\alpha+2k\\pi$ or $x=\\pi-\\alpha+2k\\pi$, for integer $k$.",
+        "In degrees, use $360^\\circ$ for $2\\pi$ and $180^\\circ$ for $\\pi$."
+      ]
+    },
+    {
+      "id": "solve-cosine",
+      "topic": "equations",
+      "front": "What angles give the same cosine as $\\alpha$?",
+      "back": [
+        "$x=\\pm\\alpha+2k\\pi$",
+        "For integer $k$. In degrees use multiples of $360^\\circ$."
+      ]
+    },
+    {
+      "id": "solve-tangent",
+      "topic": "equations",
+      "front": "What angles give the same tangent as $\\alpha$?",
+      "back": [
+        "$x=\\alpha+k\\pi$",
+        "For integer $k$. In degrees use multiples of $180^\\circ$."
+      ]
+    },
+    {
+      "id": "multiple-angle-interval",
+      "topic": "equations",
+      "front": "How do you handle a trig equation like $\\cos(kx+c)=b$ on a fixed interval?",
+      "back": [
+        "Work out the interval for the whole angle $kx+c$. Find all angles in that interval, then solve each one for $x$."
+      ]
+    },
+    {
+      "id": "trig-equation-square",
+      "topic": "equations",
+      "front": "How do you solve a quadratic equation that mixes sine and cosine squared?",
+      "back": [
+        "Use $\\cos^2 x=1-\\sin^2 x$ to make a quadratic in $\\sin x$. Keep sine values in $[-1,1]$, then find all angles in the given interval."
+      ]
+    },
+    {
+      "id": "trig-equation-zero-factor",
+      "topic": "equations",
+      "front": "What should you check before dividing an equation by a trig expression?",
+      "back": [
+        "Check when the expression equals zero. Test those values in the original equation before dividing."
+      ]
+    },
+    {
+      "id": "identity-proof-fractions",
+      "topic": "equations",
+      "front": "What’s a useful first step for proving a trig identity with fractions?",
+      "back": [
+        "Work from one side. Rewrite reciprocal functions in sine and cosine if helpful, then combine fractions over a common denominator."
+      ]
+    },
+    {
+      "id": "r-cos-form",
+      "topic": "equations",
+      "front": "How do you match $a\\cos x+b\\sin x$ to $R\\cos(x-\\alpha)$?",
+      "back": [
+        "$R=\\sqrt{a^2+b^2}$",
+        "$R\\cos\\alpha=a,\\qquad R\\sin\\alpha=b$",
+        "Choose the quadrant of $\\alpha$ using both signs."
+      ]
+    },
+    {
+      "id": "r-sin-form",
+      "topic": "equations",
+      "front": "How do you match $a\\cos x+b\\sin x$ to $R\\sin(x+\\alpha)$?",
+      "back": [
+        "$R=\\sqrt{a^2+b^2}$",
+        "$R\\sin\\alpha=a,\\qquad R\\cos\\alpha=b$",
+        "Choose the quadrant of $\\alpha$ using both signs."
+      ]
+    },
+    {
+      "id": "trig-model-parameters",
+      "topic": "equations",
+      "front": "What are the amplitude, midline and period in $y=a\\sin(bx+c)+d$?",
+      "back": [
+        "Amplitude $|a|$, midline $y=d$, period $2\\pi/|b|$. The same applies to cosine.",
+        "Use $360^\\circ/|b|$ if the angle is measured in degrees."
+      ]
+    },
+    {
+      "id": "trig-model-shift",
+      "topic": "equations",
+      "front": "What is the horizontal shift in $y=a\\sin(bx+c)+d$?",
+      "back": [
+        "$-c/b$",
+        "Factor the argument as $b(x+c/b)$. The same applies to cosine."
+      ]
+    },
+    {
+      "id": "tangent-transform-period",
+      "topic": "equations",
+      "front": "What is the period of $y=\\tan(bx+c)$ when $b\\ne0$?",
+      "back": [
+        "$\\dfrac{\\pi}{|b|}$ radians, or $\\dfrac{180^\\circ}{|b|}$ in degrees."
+      ]
+    },
+    {
+      "id": "trig-model-extrema",
+      "topic": "equations",
+      "front": "How do you find the highest and lowest values of a full sine or cosine wave?",
+      "back": [
+        "For midline height $d$ and amplitude $R$, the maximum is $d+R$ and the minimum is $d-R$.",
+        "On a restricted interval, check whether those extremes occur in it."
+      ]
+    },
+    {
+      "id": "trig-components",
+      "topic": "equations",
+      "front": "How do you split a vector into horizontal and vertical components?",
+      "back": [
+        "If the direction makes angle $\\theta$ with the positive horizontal, the components are $R\\cos\\theta$ and $R\\sin\\theta$, respectively."
+      ]
+    },
+    {
+      "id": "differentiate-sin",
+      "topic": "trig-calculus",
+      "front": "What is the derivative of $\\sin(kx)$ in radians?",
+      "back": [
+        "$k\\cos(kx)$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "differentiate-cos",
+      "topic": "trig-calculus",
+      "front": "What is the derivative of $\\cos(kx)$ in radians?",
+      "back": [
+        "$-k\\sin(kx)$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "differentiate-tan",
+      "topic": "trig-calculus",
+      "front": "What is the derivative of $\\tan(kx)$ in radians?",
+      "back": [
+        "$k\\sec^2(kx)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "differentiate-sec",
+      "topic": "trig-calculus",
+      "front": "What is the derivative of $\\sec(kx)$ in radians?",
+      "back": [
+        "$k\\sec(kx)\\tan(kx)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "differentiate-cosec",
+      "topic": "trig-calculus",
+      "front": "What is the derivative of $\\cosec(kx)$ in radians?",
+      "back": [
+        "$-k\\cosec(kx)\\cot(kx)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "differentiate-cot",
+      "topic": "trig-calculus",
+      "front": "What is the derivative of $\\cot(kx)$ in radians?",
+      "back": [
+        "$-k\\cosec^2(kx)$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "integrate-sin",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\sin(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$-\\dfrac{1}{k}\\cos(kx)+C$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "integrate-cos",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\cos(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$\\dfrac{1}{k}\\sin(kx)+C$"
+      ],
+      "reference": "recall"
+    },
+    {
+      "id": "integrate-sec-square",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\sec^2(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$\\dfrac{1}{k}\\tan(kx)+C$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "integrate-tan",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\tan(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$-\\dfrac{1}{k}\\ln|\\cos(kx)|+C$",
+        "The equivalent form in the booklet is $\\dfrac{1}{k}\\ln|\\sec(kx)|+C$."
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "integrate-cot",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\cot(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$\\dfrac{1}{k}\\ln|\\sin(kx)|+C$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "integrate-sec",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\sec(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$\\dfrac{1}{k}\\ln|\\sec(kx)+\\tan(kx)|+C$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "integrate-cosec",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\cosec(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$-\\dfrac{1}{k}\\ln|\\cosec kx+\\cot kx|+C$"
+      ],
+      "reference": "booklet"
+    },
+    {
+      "id": "integrate-cosec-square",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\cosec^2(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$-\\dfrac{1}{k}\\cot(kx)+C$"
+      ]
+    },
+    {
+      "id": "integrate-sec-tan",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\sec(kx)\\tan(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$\\dfrac{1}{k}\\sec(kx)+C$"
+      ]
+    },
+    {
+      "id": "integrate-cosec-cot",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\cosec(kx)\\cot(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$-\\dfrac{1}{k}\\cosec(kx)+C$"
+      ]
+    },
+    {
+      "id": "integrate-trig-squared",
+      "topic": "trig-calculus",
+      "front": "What can you do before integrating sine squared, cosine squared or tangent squared?",
+      "back": [
+        "For sine and cosine, rewrite using $\\cos 2x$ and the double-angle formulas. For tangent, use $\\tan^2 x=\\sec^2 x-1$."
+      ]
+    },
+    {
+      "id": "trig-first-principles",
+      "topic": "trig-calculus",
+      "front": "What limits help you differentiate sine or cosine from first principles?",
+      "back": [
+        "$\\lim_{h\\to0}\\dfrac{\\sin h}{h}=1$",
+        "$\\lim_{h\\to0}\\dfrac{\\cos h-1}{h}=0$",
+        "Use radians. Expand $\\sin(x+h)$ or $\\cos(x+h)$ with the compound-angle formula."
+      ]
+    }
+  ]
+}

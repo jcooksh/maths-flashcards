@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Click-to-reveal flashcards for Edexcel A level Pure Maths revision and trigonometry.">
+  <meta name="theme-color" content="#edf1f9">
+  <title>Maths flashcards · Edexcel A level</title>
+  <link rel="stylesheet" href="./assets/katex/katex.min.css">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./assets/katex/katex.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Study decks">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">∑</span>
+        <div>
+          <p class="brand-name">Maths flashcards</p>
+          <p class="brand-course">Edexcel A level · 9MA0</p>
+        </div>
+      </div>
+
+      <nav class="deck-list" aria-label="Choose a deck">
+        <button class="deck-button" data-deck="all" type="button" aria-pressed="true">
+          <span>All cards</span><span class="deck-count" aria-label="cards" id="count-all"></span>
+        </button>
+        <button class="deck-button" data-deck="revision" type="button" aria-pressed="false">
+          <span>Revision topics</span><span class="deck-count" aria-label="cards" id="count-revision"></span>
+        </button>
+        <button class="deck-button" data-deck="trigonometry" type="button" aria-pressed="false">
+          <span>Trig rules</span><span class="deck-count" aria-label="cards" id="count-trigonometry"></span>
+        </button>
+        <button class="deck-button" data-deck="review" type="button" aria-pressed="false">
+          <span>To review</span><span class="deck-count" aria-label="cards" id="count-review"></span>
+        </button>
+      </nav>
+
+      <section class="known-panel" aria-label="Progress on this device">
+        <p class="known-label"><span id="known-count">0</span> known <span class="known-total" id="known-total"></span></p>
+        <div class="known-track" aria-hidden="true"><div id="known-fill"></div></div>
+        <p class="known-note">Saved on this device</p>
+      </section>
+    </aside>
+
+    <main class="study">
+      <div class="study-layout">
+        <header class="study-header">
+          <h1 id="deck-title">All cards</h1>
+          <div class="filters">
+            <div class="topic-filter">
+              <label for="topic">Topic</label>
+              <select id="topic" disabled>
+                <option value="all">All topics</option>
+              </select>
+            </div>
+            <button class="button button-light shuffle" id="shuffle" type="button" disabled>Shuffle</button>
+          </div>
+        </header>
+
+        <div id="loading" class="notice" role="status">Loading flashcards…</div>
+        <div id="empty" class="notice" hidden>
+          <p id="empty-message"></p>
+          <button class="button button-light" id="return-to-deck" type="button">Study all cards</button>
+        </div>
+
+        <section class="practice" id="practice" aria-label="Flashcard practice" hidden>
+          <div class="position">
+            <p id="position-label"></p>
+            <div class="position-track" aria-hidden="true"><div id="position-fill"></div></div>
+          </div>
+
+          <button class="flashcard" id="flashcard" type="button" aria-pressed="false">
+            <span class="card-topline">
+              <span class="card-topic" id="card-topic"></span>
+              <span class="card-face-label" id="card-face-label" hidden>Answer</span>
+            </span>
+            <span class="card-content" id="card-content"></span>
+            <span class="card-bottom">
+              <span class="flip-action"><span class="flip-icon" aria-hidden="true">⤾</span> <span id="flip-label">Show answer</span></span>
+              <span class="reference-label" id="reference-label" hidden></span>
+            </span>
+          </button>
+
+          <div class="controls" aria-label="Flashcard navigation">
+            <button class="button button-light" id="previous" type="button">Previous</button>
+            <div class="rating" id="rating" hidden aria-label="Rate your recall">
+              <button class="button button-review" id="review-card" type="button">Review again</button>
+              <button class="button button-known" id="know-card" type="button">Got it</button>
+            </div>
+            <button class="button button-primary" id="next" type="button">Next card</button>
+          </div>
+
+          <p class="keyboard"><kbd>Space</kbd> Flip <span aria-hidden="true">·</span> <kbd>←</kbd> <kbd>→</kbd> Change card</p>
+        </section>
+
+        <footer class="sources">
+          <span>Edexcel Pure Maths</span>
+          <div class="source-links">
+            <a href="https://qualifications.pearson.com/content/dam/pdf/A%20Level/Mathematics/2017/specification-and-sample-assesment/a-level-l3-mathematics-specification-issue4.pdf">Specification</a>
+            <a href="https://qualifications.pearson.com/content/dam/pdf/A%20Level/Mathematics/2017/specification-and-sample-assesment/pearson-edexcel-l3-advanced-gce-mathematics-9ma0-enhanced-content-guidance-issue-2.pdf">Content guidance</a>
+            <a href="https://qualifications.pearson.com/content/dam/pdf/A%20Level/Mathematics/2017/specification-and-sample-assesment/pearson-edexcel-a-level-gce-in-mathematics-formulae-book.pdf">Formula booklet</a>
+          </div>
+        </footer>
+        <p class="visually-hidden" id="announcer" role="status"></p>
+        <noscript><p class="notice">Enable JavaScript to use the flashcards.</p></noscript>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
