@@ -1,5 +1,5 @@
 import { studyPlan } from "./progress.js?v=1";
-import { connectAccount } from "./account.js?v=2";
+import { connectAccount } from "./account.js?v=3";
 
 const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (element) => [element.id, element]));
 const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", review: "To review", study: "Study next" };

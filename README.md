@@ -17,7 +17,7 @@ Questions mode presents four shuffled answer choices for each supported flashcar
 
 Ratings are stored in the current browser, so no account is needed. Signing in syncs them across devices. The first sign-in on a browser also includes existing ratings from that browser.
 
-Sign-in uses Supabase Auth with email and password: people can create an account, sign in, and reset a forgotten password by email. Confirmation and reset links return to the page they were requested from, so add the site URL to the project's Auth redirect URLs. To let anyone other than the project's team members sign up, keep sign-ups enabled and set up custom SMTP in Supabase, because the built-in email service only delivers to team members.
+Sign-in uses Supabase Auth with email and password. Accounts are created by the `create-account` Edge Function, which makes an already-confirmed account so sign-up never waits on an email. Password reset still sends an email; the link returns to the page it was requested from, so add the site URL to the project's Auth redirect URLs. Supabase's built-in email service is heavily rate limited and only delivers to the project's team members, so set up custom SMTP if other people need password resets.
 
 Progress is stored per account by the migration in `supabase/migrations/`. The browser uses the project's publishable API key. Supabase JS 2.119.1 is served locally with its licence in `assets/supabase/`.
 

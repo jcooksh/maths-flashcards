@@ -45,6 +45,25 @@ function readCallback() {
   return { type: params.has("access_token") ? params.get("type") : null };
 }
 
+// Creates a confirmed account through the project's create-account Edge Function,
+// so sign-up doesn't wait on Supabase's rate-limited confirmation emails.
+async function createAccount(email, password) {
+  let response;
+  try {
+    response = await fetch(apiUrl + "/functions/v1/create-account", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+      signal: AbortSignal.timeout(15_000),
+    });
+  } catch {
+    throw { name: "AuthRetryableFetchError" };
+  }
+  if (response.ok) return;
+  const body = await response.json().catch(() => ({}));
+  throw { code: body.code, status: response.status };
+}
+
 function errorMessage(error) {
   switch (error?.code) {
     case "invalid_credentials": return "That email and password don’t match.";
@@ -290,15 +309,11 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
         dialog.close();
         toast("Signed in. Your progress will sync.");
       } else if (current === "signup") {
-        const { data, error } = await client.auth.signUp({ email, password, options: { emailRedirectTo: redirectTo } });
+        await createAccount(email, password);
+        const { error } = await client.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        if (data.session) {
-          dialog.close();
-          toast("Account created. You’re signed in.");
-        } else {
-          sentText = "We’ve sent a confirmation link to " + email + ". Open it on any device to finish creating your account.";
-          setView("sent");
-        }
+        dialog.close();
+        toast("Account created. You’re signed in.");
       } else if (current === "forgot") {
         const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo });
         if (error) throw error;
