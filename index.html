@@ -2,19 +2,26 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Flashcards and multiple-choice questions for Edexcel A level Pure Maths revision and trigonometry.">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#141a2e">
   <title>Maths flashcards · Edexcel A level</title>
+  <script>
+    try {
+      const theme = localStorage.getItem("maths-flashcards.theme");
+      if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+    } catch {}
+  </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=4">
+  <link rel="stylesheet" href="./styles.css?v=5">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=4"></script>
+  <script type="module" src="./app.js?v=5"></script>
 </head>
 <body>
   <header class="mobile-header">
-    <p class="brand"><span aria-hidden="true">∑</span> Maths flashcards</p>
+    <p class="brand"><span class="brand-mark" aria-hidden="true">∑</span>Maths flashcards</p>
     <button class="menu-button" id="open-topics" type="button" aria-haspopup="dialog" aria-controls="topics-dialog" aria-expanded="false">
       <span class="menu-dot" aria-hidden="true"></span>Topics
     </button>
@@ -22,7 +29,7 @@
 
   <div class="app">
     <aside class="sidebar" id="sidebar" aria-label="Study topics">
-      <p class="brand"><span aria-hidden="true">∑</span> Maths flashcards</p>
+      <p class="brand"><span class="brand-mark" aria-hidden="true">∑</span>Maths flashcards</p>
       <div class="library" id="library">
         <nav class="topic-nav" aria-label="Flashcard categories">
           <div class="topic-group">
@@ -37,9 +44,12 @@
             <span id="all-deck-label">All cards</span><span id="count-all"></span>
           </button>
         </nav>
-        <section class="progress-summary" aria-label="Progress on this device">
-          <span><span id="known-count">0</span> known</span>
-          <button data-deck="review" type="button" aria-pressed="false"><span id="count-review">0</span> to review</button>
+        <section class="progress-summary" aria-label="Your progress">
+          <div class="mastery-track" aria-hidden="true"><span class="mastery-fill" id="mastery-fill"></span></div>
+          <div class="progress-row">
+            <span><span id="known-count">0</span> known</span>
+            <button data-deck="review" type="button" aria-pressed="false"><span id="count-review">0</span> to review</button>
+          </div>
         </section>
       </div>
     </aside>
@@ -51,67 +61,103 @@
       <div class="shape shape-navy" aria-hidden="true"></div>
 
       <div class="study-layout">
-        <header class="study-header">
-          <div class="study-topline">
-            <nav class="study-modes" aria-label="Study mode">
-              <button class="mode-button" id="flashcard-mode" type="button" aria-pressed="true">Flashcards</button>
-              <button class="mode-button" id="question-mode" type="button" aria-pressed="false">Maths questions</button>
-            </nav>
-            <button class="account-button" id="account-button" type="button" aria-haspopup="dialog" aria-controls="account-dialog">Sign in</button>
-          </div>
-          <p class="position"><span id="collection-label">Revision</span><span id="position-label"></span></p>
-          <div class="study-title">
-            <h1 id="deck-title">Differentiation</h1>
-            <button class="study-next" id="study-next" type="button" disabled>
-              <span id="study-next-label">Study next</span><span id="study-next-count"></span>
+        <div class="study-topline">
+          <nav class="study-modes segmented" id="study-modes" aria-label="Study mode">
+            <span class="segmented-indicator" aria-hidden="true"></span>
+            <button class="mode-button" id="flashcard-mode" type="button" aria-pressed="true">Flashcards</button>
+            <button class="mode-button" id="question-mode" type="button" aria-pressed="false">Questions</button>
+          </nav>
+          <div class="topline-actions">
+            <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+              <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+              <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </button>
+            <button class="account-button" id="account-button" type="button" aria-haspopup="dialog" aria-controls="account-dialog">
+              <span class="avatar" id="account-avatar" aria-hidden="true" hidden></span>
+              <span id="account-label">Sign in</span>
             </button>
           </div>
-          <div class="review-filter" id="review-filter" hidden>
-            <label for="review-topic">Topic</label>
-            <select id="review-topic">
-              <option value="all">All topics</option>
-            </select>
-          </div>
-        </header>
-
-        <div id="loading" class="notice" role="status">Loading flashcards…</div>
-        <div id="empty" class="notice" hidden>
-          <p id="empty-message"></p>
-          <button class="quiet-button" id="return-to-deck" type="button">Study all cards</button>
         </div>
 
-        <section id="practice" aria-label="Flashcard practice" hidden>
-          <button class="flashcard" id="flashcard" type="button" aria-pressed="false">
-            <span class="card-face-label" id="card-face-label" hidden>Answer</span>
-            <span class="card-content" id="card-content"></span>
-            <span class="card-bottom">
-              <span class="flip-hint" id="flip-hint">Tap to flip<span class="space-hint"> · Space</span></span>
-              <span class="reference-label" id="reference-label" hidden></span>
-            </span>
-          </button>
-
-          <div class="card-actions" id="flashcard-actions" role="group" aria-label="Flashcard actions">
-            <button class="pill pill-review" id="review-card" type="button">Not yet</button>
-            <button class="pill pill-flip" id="flip-card" type="button" aria-pressed="false">Show answer</button>
-            <button class="pill pill-known" id="know-card" type="button">Got it</button>
-          </div>
-
-          <div class="question-card" id="question-card" hidden>
-            <h2 id="question-prompt" tabindex="-1"></h2>
-            <div class="question-options" id="question-options" role="group" aria-label="Answer choices"></div>
-            <div class="question-feedback">
-              <p id="question-feedback" role="status" tabindex="-1"></p>
-              <button class="quiet-button" id="reveal-question" type="button">Show answer</button>
+        <div class="deck-view" id="deck-view">
+          <header class="study-header">
+            <p class="position" id="collection-label">Revision</p>
+            <div class="study-title">
+              <h1 id="deck-title">Differentiation</h1>
+              <button class="study-next" id="study-next" type="button" disabled>
+                <span id="study-next-label">Study next</span><span id="study-next-count"></span>
+              </button>
             </div>
-            <div class="question-explanation" id="question-explanation" hidden></div>
+            <div class="review-filter" id="review-filter" hidden>
+              <label for="review-topic">Topic</label>
+              <select id="review-topic">
+                <option value="all">All topics</option>
+              </select>
+            </div>
+          </header>
+
+          <div id="loading" class="notice loading" role="status">
+            <span class="skeleton skeleton-label"></span>
+            <span class="skeleton skeleton-line"></span>
+            <span class="skeleton skeleton-line short"></span>
+            <span class="visually-hidden">Loading flashcards…</span>
+          </div>
+          <div id="empty" class="notice" hidden>
+            <span class="notice-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <p id="empty-message"></p>
+            <button class="pill pill-primary notice-button" id="return-to-deck" type="button">Study all cards</button>
           </div>
 
-          <div class="card-navigation" role="group" aria-label="Practice navigation">
-            <button class="quiet-button" id="previous" type="button">Previous</button>
-            <button class="quiet-button" id="shuffle" type="button">Shuffle</button>
-            <button class="quiet-button" id="next" type="button">Next card</button>
-          </div>
-        </section>
+          <section id="practice" aria-label="Flashcard practice" hidden>
+            <button class="flashcard" id="flashcard" type="button" aria-pressed="false">
+              <span class="swipe-stamp swipe-known" aria-hidden="true">Got it</span>
+              <span class="swipe-stamp swipe-review" aria-hidden="true">Not yet</span>
+              <span class="card-top">
+                <span class="card-face-label" id="card-face-label">Question</span>
+              </span>
+              <span class="card-content" id="card-content"></span>
+              <span class="card-bottom">
+                <span class="flip-hint" id="flip-hint"><span class="hint-touch">Tap to flip · swipe to rate</span><span class="hint-keys">Click to flip <kbd>Space</kbd></span></span>
+                <span class="reference-label" id="reference-label" hidden></span>
+              </span>
+            </button>
+
+            <div class="card-actions" id="flashcard-actions" role="group" aria-label="Flashcard actions">
+              <button class="pill pill-review" id="review-card" type="button" aria-keyshortcuts="1">Not yet<kbd aria-hidden="true">1</kbd></button>
+              <button class="pill pill-flip" id="flip-card" type="button" aria-pressed="false">Show answer</button>
+              <button class="pill pill-known" id="know-card" type="button" aria-keyshortcuts="2">Got it<kbd aria-hidden="true">2</kbd></button>
+            </div>
+
+            <div class="question-card" id="question-card" hidden>
+              <h2 id="question-prompt" tabindex="-1"></h2>
+              <div class="question-options" id="question-options" role="group" aria-label="Answer choices"></div>
+              <div class="question-feedback">
+                <p id="question-feedback" role="status" tabindex="-1"></p>
+                <button class="quiet-button" id="reveal-question" type="button">Show answer</button>
+              </div>
+              <div class="question-explanation" id="question-explanation" hidden></div>
+            </div>
+
+            <div class="card-navigation" role="group" aria-label="Practice navigation">
+              <button class="nav-button" id="previous" type="button" aria-label="Previous card">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <div class="deck-progress" aria-hidden="true">
+                <span class="deck-progress-track"><span class="deck-progress-fill" id="deck-progress-fill"></span></span>
+                <span class="deck-progress-text" id="position-label"></span>
+              </div>
+              <button class="nav-button" id="shuffle" type="button" aria-label="Shuffle cards" title="Shuffle">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+              </button>
+              <button class="nav-button nav-next" id="next" type="button">
+                <span id="next-label">Next</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </section>
+        </div>
 
         <footer class="sources">
           <span>Edexcel A level Pure Maths · 9MA0</span>
@@ -127,30 +173,81 @@
     </main>
   </div>
 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <dialog class="topics-dialog" id="topics-dialog" aria-labelledby="topics-title">
-    <header class="mobile-header">
-      <p class="brand" id="topics-title"><span aria-hidden="true">∑</span> Maths flashcards</p>
-      <form method="dialog"><button class="menu-button" type="submit" autofocus>Close</button></form>
+    <header class="drawer-header">
+      <p class="brand" id="topics-title"><span class="brand-mark" aria-hidden="true">∑</span>Topics</p>
+      <button class="icon-button on-dark" id="close-topics" type="button" aria-label="Close topics">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
     </header>
     <div id="mobile-library"></div>
   </dialog>
 
   <dialog class="account-dialog" id="account-dialog" aria-labelledby="account-title" aria-describedby="account-intro">
-    <div class="account-dialog-header">
+    <div class="dialog-header">
       <h2 id="account-title">Sign in</h2>
-      <form method="dialog"><button class="quiet-button" id="account-close" type="submit">Close</button></form>
+      <button class="icon-button" id="account-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
     </div>
-    <p id="account-intro">Sync your flashcard progress across your devices.</p>
-    <form class="sign-in-form" id="sign-in-form">
-      <label for="account-password">Password</label>
-      <input id="account-password" type="password" required autocomplete="current-password">
-      <button class="pill pill-flip" id="sign-in-submit" type="submit">Sign in</button>
+    <p class="dialog-intro" id="account-intro">Sync your progress across your devices.</p>
+
+    <div class="auth-tabs segmented" id="auth-tabs" data-active="signin">
+      <span class="segmented-indicator" aria-hidden="true"></span>
+      <button type="button" id="tab-signin" aria-pressed="true">Sign in</button>
+      <button type="button" id="tab-signup" aria-pressed="false">Create account</button>
+    </div>
+
+    <form class="auth-form" id="sign-in-form">
+      <div class="field" id="email-field">
+        <label for="account-email">Email</label>
+        <input id="account-email" name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com">
+      </div>
+      <div class="field" id="password-field">
+        <div class="field-label-row">
+          <label for="account-password">Password</label>
+          <button class="text-button" id="forgot-password" type="button">Forgot password?</button>
+        </div>
+        <div class="password-wrap">
+          <input id="account-password" name="password" type="password" required autocomplete="current-password">
+          <button class="reveal-password" id="reveal-password" type="button" aria-label="Show password" aria-pressed="false">
+            <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-10-8-10-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24M1 1l22 22"/></svg>
+          </button>
+        </div>
+        <p class="field-hint" id="password-hint">At least 8 characters.</p>
+      </div>
+      <p class="form-message" id="account-message" role="alert"></p>
+      <button class="pill pill-primary submit-button" id="sign-in-submit" type="submit">
+        <span id="submit-label">Sign in</span><span class="spinner" aria-hidden="true"></span>
+      </button>
+      <button class="text-button back-button" id="back-to-sign-in" type="button" hidden>Back to sign in</button>
     </form>
-    <div class="signed-in-panel" id="signed-in-panel" hidden>
-      <p id="sync-status" role="status"></p>
-      <button class="quiet-button" id="sign-out" type="button">Sign out</button>
+
+    <div class="check-email" id="check-email" hidden>
+      <span class="check-email-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+      </span>
+      <p id="check-email-text"></p>
+      <button class="quiet-button" id="check-email-back" type="button">Back to sign in</button>
     </div>
-    <p id="account-message" role="status"></p>
+
+    <div class="signed-in-panel" id="signed-in-panel" hidden>
+      <div class="account-card">
+        <span class="avatar avatar-large" id="account-avatar-large" aria-hidden="true"></span>
+        <div class="account-details">
+          <p class="account-email" id="account-email-label"></p>
+          <p class="sync-status" id="sync-status" role="status"></p>
+        </div>
+      </div>
+      <button class="quiet-button sign-out" id="sign-out" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Sign out
+      </button>
+    </div>
+
+    <p class="dialog-footnote" id="guest-note">No account? You can keep studying — your progress is saved in this browser.</p>
   </dialog>
 </body>
 </html>

@@ -4,11 +4,22 @@ Quick recall of methods and formulas for Edexcel A level Pure Mathematics (9MA0)
 
 Study next starts with missed cards and then cards due for review. When those are done, it offers up to ten new cards. Each correct review increases the time before the next one. A missed card is due straight away.
 
-Maths questions presents four shuffled answer choices for each supported flashcard. The first answer updates the same progress as flashcard practice. Revealing an answer also puts that card in review. You can open Maths questions directly with `?mode=questions`.
+Questions mode presents four shuffled answer choices for each supported flashcard. The first answer updates the same progress as flashcard practice. Revealing an answer also puts that card in review. You can open Questions directly with `?mode=questions`.
 
-Ratings are stored in the current browser and sync across devices when signed in. The first sign-in on a browser also includes existing ratings from that browser. The GitHub Pages site uses Supabase Auth and the account-scoped progress migration in `supabase/migrations/`. The browser uses the project's publishable API key. Supabase JS 2.119.1 is served locally with its licence in `assets/supabase/`.
+## Controls
 
-The site has a single personal sign-in. Initial setup uses a Supabase Auth invitation for the account in `account.js`, and the user chooses their own password. The one-time invitation token is passed in the URL fragment and exchanged on form submission.
+- Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. Arrow keys move between cards.
+- Questions: press 1–4 or A–D to answer, Enter for the next question.
+- The moon/sun button switches between light and dark mode. It follows the system setting until you choose one.
+- Animations are reduced when the system “reduce motion” setting is on.
+
+## Accounts
+
+Ratings are stored in the current browser, so no account is needed. Signing in syncs them across devices. The first sign-in on a browser also includes existing ratings from that browser.
+
+Sign-in uses Supabase Auth with email and password: people can create an account, sign in, and reset a forgotten password by email. Confirmation and reset links return to the page they were requested from, so add the site URL to the project's Auth redirect URLs. To let anyone other than the project's team members sign up, keep sign-ups enabled and set up custom SMTP in Supabase, because the built-in email service only delivers to team members.
+
+Progress is stored per account by the migration in `supabase/migrations/`. The browser uses the project's publishable API key. Supabase JS 2.119.1 is served locally with its licence in `assets/supabase/`.
 
 ## Run locally
 
