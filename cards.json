@@ -70,6 +70,12 @@
         "In the original formula for $f(x)$, replace every $x$ with $(x+h)$ and keep any coefficients outside the brackets.",
         "In $f(x+h)-f(x)$, the second term is the original $f(x)$.",
         "For $f(x)=cx^2$, write $f(x+h)=c(x+h)^2$."
+      ],
+      "choices": [
+        "$(x+h)$",
+        "$(x-h)$",
+        "$xh$",
+        "$h$"
       ]
     },
     {
@@ -80,7 +86,13 @@
         "$f'(x)=\\lim_{h\\to0}\\dfrac{f(x+h)-f(x)}{h}$",
         "Expand, simplify and divide by $h$ before taking the limit."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$",
+        "$\\displaystyle\\lim_{h\\to0}\\frac{f(x-h)-f(x)}{h}$",
+        "$\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)+f(x)}{h}$",
+        "$\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(h)}{h}$"
+      ]
     },
     {
       "id": "first-principles-square",
@@ -89,6 +101,12 @@
       "back": [
         "$(x+h)^2=x^2+2xh+h^2$",
         "Keep the $h^2$ term through division. It becomes $h$, which tends to zero."
+      ],
+      "choices": [
+        "$x^2+2xh+h^2$",
+        "$x^2+h^2$",
+        "$x^2+xh+h^2$",
+        "$x^2+2xh-h^2$"
       ]
     },
     {
@@ -99,7 +117,13 @@
         "$\\dfrac{d}{dx}(cx^n)=cnx^{n-1}$",
         "Multiply by the old power, then reduce it by one."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$cnx^{n-1}$",
+        "$cx^{n-1}$",
+        "$cnx^{n+1}$",
+        "$c(n-1)x^{n-1}$"
+      ]
     },
     {
       "id": "chain-rule",
@@ -109,7 +133,13 @@
         "$\\dfrac{d}{dx}f(g(x))=f'(g(x))g'(x)$",
         "Differentiate the outside, keep the inside, then multiply by the derivative of the inside."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$f'(g(x))g'(x)$",
+        "$f'(g(x))$",
+        "$f'(x)g'(x)$",
+        "$f(g'(x))$"
+      ]
     },
     {
       "id": "product-rule",
@@ -119,7 +149,13 @@
         "$(uv)'=u'v+uv'$",
         "Differentiate one factor at a time and add the two terms."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$(uv)'=u'v+uv'$",
+        "$(uv)'=u'v'$",
+        "$(uv)'=u'v-uv'$",
+        "$(uv)'=u'+v'$"
+      ]
     },
     {
       "id": "exponential-derivative",
@@ -129,7 +165,13 @@
         "$\\dfrac{d}{dx}e^{kx}=ke^{kx}$",
         "Keep the exponent $kx$ and multiply by its derivative, $k$."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$ke^{kx}$",
+        "$e^{kx}$",
+        "$kxe^{kx}$",
+        "$e^{k}$"
+      ]
     },
     {
       "id": "reciprocal-derivative",
@@ -138,6 +180,12 @@
       "back": [
         "$\\dfrac{dy}{dx}=\\dfrac{1}{dx/dy}$",
         "Take the reciprocal where $dx/dy\\ne0$."
+      ],
+      "choices": [
+        "Take the reciprocal of $dx/dy$ when it is nonzero.",
+        "Take the negative of $dx/dy$.",
+        "Square $dx/dy$.",
+        "Take the negative reciprocal of $dx/dy$."
       ]
     },
     {
@@ -146,6 +194,12 @@
       "front": "Which expression do you set to zero for a stationary point?",
       "back": [
         "Set the derivative to zero. $f'(x)=0$ gives candidates for stationary points."
+      ],
+      "choices": [
+        "The first derivative, $f'(x)$.",
+        "The second derivative, $f''(x)$.",
+        "The original function, $f(x)$.",
+        "The independent variable, $x$."
       ]
     },
     {
@@ -154,6 +208,12 @@
       "front": "How can the second derivative confirm a local minimum?",
       "back": [
         "At a stationary point, $f''(x)>0$ gives a local minimum and $f''(x)<0$ gives a local maximum. If $f''(x)=0$, check how $f'(x)$ behaves on both sides."
+      ],
+      "choices": [
+        "At a stationary point, check that $f''(x)>0$.",
+        "At a stationary point, check that $f''(x)<0$.",
+        "Any point where $f''(x)=0$ is a minimum.",
+        "A zero first derivative always confirms a minimum."
       ]
     },
     {
@@ -162,6 +222,12 @@
       "front": "How can you confirm a point of inflection using the second derivative?",
       "back": [
         "Check that $f''(x)$ changes sign across the point. This means the curve switches between curving up and curving down."
+      ],
+      "choices": [
+        "Check that $f''(x)$ changes sign across the point.",
+        "Check only that $f''(x)=0$ at the point.",
+        "Check that $f'(x)$ changes sign across the point.",
+        "Check that $f''(x)$ is positive on both sides."
       ]
     },
     {
@@ -170,6 +236,12 @@
       "front": "You know $f'(x)$ and a point on the curve. How do you find $f(x)$?",
       "back": [
         "Integrate $f'(x)$ and include $+C$. Substitute the known point to find $C$."
+      ],
+      "choices": [
+        "Integrate $f'(x)$ and find $C$ using the known point.",
+        "Differentiate $f'(x)$ and find $C$ using the known point.",
+        "Integrate $f'(x)$ and set $C$ equal to the point’s $y$-coordinate.",
+        "Integrate $f'(x)$ and set $C=0$."
       ]
     },
     {
@@ -179,6 +251,12 @@
       "back": [
         "$\\dfrac{dy}{dx}=\\dfrac{dy/dt}{dx/dt}$",
         "Differentiate both coordinates with respect to $t$, then divide where $dx/dt\\ne0$."
+      ],
+      "choices": [
+        "$\\dfrac{dy/dt}{dx/dt}$",
+        "$\\dfrac{dx/dt}{dy/dt}$",
+        "$\\dfrac{dy}{dt}\\dfrac{dx}{dt}$",
+        "$\\dfrac{dy}{dt}-\\dfrac{dx}{dt}$"
       ]
     },
     {
@@ -187,6 +265,12 @@
       "front": "How do you find the first included term in $\\displaystyle\\sum_{n=m}^{N}u_n$?",
       "back": [
         "Substitute the lower limit $m$ into $u_n$. The first included term is $u_m$."
+      ],
+      "choices": [
+        "Use $u_m$, the term at the lower limit.",
+        "Use $u_1$, whatever the lower limit.",
+        "Use $u_{m+1}$, the term after the lower limit.",
+        "Use $u_N$, the term at the upper limit."
       ]
     },
     {
@@ -196,6 +280,12 @@
       "back": [
         "$N-m+1$",
         "Count both ends."
+      ],
+      "choices": [
+        "$N-m+1$",
+        "$N-m$",
+        "$N+m$",
+        "$N-m-1$"
       ]
     },
     {
@@ -205,6 +295,12 @@
       "back": [
         "$u_1+u_2+\\cdots+u_N$",
         "Add every term from the first through the $N$th."
+      ],
+      "choices": [
+        "$u_1+u_2+\\cdots+u_N$",
+        "$u_1u_2\\cdots u_N$",
+        "$u_1+u_N$",
+        "$u_N$"
       ]
     },
     {
@@ -214,6 +310,12 @@
       "back": [
         "$r=b^k$",
         "When $n$ goes up by one, the exponent goes up by $k$."
+      ],
+      "choices": [
+        "$b^k$",
+        "$b^{k+c}$",
+        "$Cb^k$",
+        "$b^c$"
       ]
     },
     {
@@ -223,6 +325,12 @@
       "back": [
         "$r=\\dfrac{u_{n+1}}{u_n}$",
         "Divide the next term by the previous term."
+      ],
+      "choices": [
+        "$r=\\dfrac{u_{n+1}}{u_n}$",
+        "$\\dfrac{u_n}{u_{n+1}}$",
+        "$u_{n+1}-u_n$",
+        "$u_{n+1}+u_n$"
       ]
     },
     {
@@ -233,7 +341,13 @@
         "$u_n=ar^{n-1}$",
         "$a$ is the first term. There are $n-1$ multiplications by $r$."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$u_n=ar^{n-1}$",
+        "$u_n=ar^n$",
+        "$u_n=a+(n-1)r$",
+        "$u_n=a^{n-1}r$"
+      ]
     },
     {
       "id": "geometric-finite-sum",
@@ -243,7 +357,13 @@
         "$S_n=\\dfrac{a(1-r^n)}{1-r}\\quad(r\\ne1)$",
         "For $r=1$, every term is $a$, so $S_n=na$."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "For $r\\ne1$, $\\dfrac{a(1-r^n)}{1-r}$. For $r=1$, $na$.",
+        "For $r\\ne1$, $\\dfrac{a(1-r^{n-1})}{1-r}$. For $r=1$, $na$.",
+        "For $r\\ne1$, $\\dfrac{a(1-r^n)}{r-1}$. For $r=1$, $na$.",
+        "For $r\\ne1$, $\\dfrac{ar^n}{1-r}$. For $r=1$, $na$."
+      ]
     },
     {
       "id": "geometric-infinite-sum",
@@ -253,7 +373,13 @@
         "$S_\\infty=\\dfrac{a}{1-r}\\quad\\text{for }|r|<1$",
         "Use the first term included in the sum for $a$."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{a}{1-r}$ when $|r|<1$",
+        "$\\dfrac{a}{1-r}$ whenever $r<1$",
+        "$\\dfrac{a}{1+r}$ when $|r|<1$",
+        "$\\dfrac{a}{1-r}$ when $|r|>1$"
+      ]
     },
     {
       "id": "geometric-tail",
@@ -262,6 +388,12 @@
       "back": [
         "$S_\\infty-S_n=\\dfrac{ar^n}{1-r}$",
         "The first term of the remaining series is $ar^n$."
+      ],
+      "choices": [
+        "$S_\\infty-S_n=\\dfrac{ar^n}{1-r}$",
+        "$\\dfrac{a(1-r^n)}{1-r}$",
+        "$\\dfrac{ar^{n-1}}{1-r}$",
+        "$\\dfrac{ar^{n+1}}{1-r}$"
       ]
     },
     {
@@ -271,6 +403,12 @@
       "back": [
         "$d=u_{n+1}-u_n$",
         "Subtract the previous term from the next term."
+      ],
+      "choices": [
+        "$d=u_{n+1}-u_n$",
+        "$d=u_n-u_{n+1}$",
+        "$d=\\dfrac{u_{n+1}}{u_n}$",
+        "$d=u_{n+1}+u_n$"
       ]
     },
     {
@@ -281,7 +419,13 @@
         "$u_n=a+(n-1)d$",
         "$a$ is the first term and $d$ is the common difference."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$u_n=a+(n-1)d$",
+        "$u_n=a+nd$",
+        "$u_n=a+(n+1)d$",
+        "$u_n=ad^{n-1}$"
+      ]
     },
     {
       "id": "arithmetic-sum",
@@ -291,7 +435,13 @@
         "$S_n=\\dfrac n2[2a+(n-1)d]$",
         "Or multiply $n$ by the average of the first and last terms."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$S_n=\\dfrac n2[2a+(n-1)d]$",
+        "$S_n=n[2a+(n-1)d]$",
+        "$S_n=\\dfrac n2[2a+nd]$",
+        "$S_n=\\dfrac n2[a+(n-1)d]$"
+      ]
     },
     {
       "id": "recurrence-rule",
@@ -299,6 +449,12 @@
       "front": "How do you use a rule that gives $u_{n+1}$ in terms of $u_n$?",
       "back": [
         "Start with the given first term. Put the current term into the rule to get the next term, then repeat."
+      ],
+      "choices": [
+        "Feed each term into the rule to get the next one.",
+        "Feed the first term into the rule at every step.",
+        "Feed the term number into the rule in place of $u_n$.",
+        "Add the value from the rule to the current term every time."
       ]
     },
     {
@@ -307,6 +463,12 @@
       "front": "What does the order of a repeating sequence tell you?",
       "back": [
         "It’s the number of terms in the shortest block that repeats."
+      ],
+      "choices": [
+        "The number of terms in the shortest repeating block.",
+        "The sum of the terms in one repeating block.",
+        "The number of times the block appears in the sum.",
+        "The value of the first term in the block."
       ]
     },
     {
@@ -315,6 +477,12 @@
       "front": "How do you add many terms of a repeating sequence quickly?",
       "back": [
         "Count the complete blocks and multiply by the sum of one block. Then add the leftover terms at the start of the next block."
+      ],
+      "choices": [
+        "Multiply one block’s sum by the number of complete blocks, then add the leftover terms.",
+        "Multiply one block’s sum by the number of terms in the sequence.",
+        "Multiply one block’s sum by the number of complete blocks, then discard the leftover terms.",
+        "Find the last term and multiply it by the number of terms."
       ]
     },
     {
@@ -325,7 +493,13 @@
         "$\\log_b(A/B)=\\log_b A-\\log_b B$",
         "Use the same base for both logs and positive arguments."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\log_b A-\\log_b B$",
+        "$\\log_b A+\\log_b B$",
+        "$\\log_b B-\\log_b A$",
+        "$\\dfrac{\\log_b A}{\\log_b B}$"
+      ]
     },
     {
       "id": "log-product",
@@ -334,7 +508,13 @@
       "back": [
         "$\\log_b(AB)=\\log_b A+\\log_b B$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\log_b A+\\log_b B$",
+        "$\\log_b A-\\log_b B$",
+        "$(\\log_b A)(\\log_b B)$",
+        "$\\log_b(A+B)$"
+      ]
     },
     {
       "id": "log-power",
@@ -343,7 +523,13 @@
       "back": [
         "$\\log_b(A^k)=k\\log_b A$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\log_b(A^k)=k\\log_b A$",
+        "$\\log_b(A^k)=(\\log_b A)^k$",
+        "$\\log_b(A^k)=\\log_b A+k$",
+        "$\\log_b(A^k)=\\dfrac{\\log_b A}{k}$"
+      ]
     },
     {
       "id": "log-domain",
@@ -352,6 +538,12 @@
       "back": [
         "$A>0,\\qquad b>0,\\qquad b\\ne1$",
         "Check the argument of every original log after solving."
+      ],
+      "choices": [
+        "$A>0$, $b>0$, and $b\\ne1$",
+        "$A\\ge0$, $b>0$, and $b\\ne1$",
+        "$A\\ne0$, $b>0$, and $b\\ne1$",
+        "$A>0$ and $b\\ge0$"
       ]
     },
     {
@@ -360,6 +552,12 @@
       "front": "If $\\log_b A=\\log_b B$, what can you conclude?",
       "back": [
         "$A=B$, provided both log arguments are positive and the base is valid."
+      ],
+      "choices": [
+        "$A=B$ for valid logarithms.",
+        "$A=-B$ because the logs cancel.",
+        "$AB=1$ because the logs have the same base.",
+        "$A+B=b$ because the sums of the arguments match."
       ]
     },
     {
@@ -369,6 +567,12 @@
       "back": [
         "$x=\\log_b A=\\dfrac{\\ln A}{\\ln b}$",
         "Taking the same log on both sides lets you bring down the exponent."
+      ],
+      "choices": [
+        "$x=\\dfrac{\\ln A}{\\ln b}$ for $A>0$, $b>0$, $b\\ne1$.",
+        "$x=\\dfrac{\\ln b}{\\ln A}$",
+        "$x=\\ln A-\\ln b$",
+        "$x=b\\ln A$"
       ]
     },
     {
@@ -377,6 +581,12 @@
       "front": "How do you spot cancellation in a sum of log fractions?",
       "back": [
         "Split each log of a fraction into two logs. Write the first few and last few terms. Matching logs with opposite signs cancel, so keep the terms at the ends."
+      ],
+      "choices": [
+        "Split each fraction’s log into a difference, then cancel matching terms with opposite signs.",
+        "Add the numerators and denominators separately, then take the log of the resulting fraction.",
+        "Find a constant ratio between the log terms and use a geometric sum formula.",
+        "Cancel each term’s numerator and denominator inside its own log."
       ]
     },
     {
@@ -386,6 +596,12 @@
       "back": [
         "$\\log y=n\\log x+\\log a$",
         "Plot $\\log y$ against $\\log x$. The slope gives $n$. Undo the log of the intercept to find $a$."
+      ],
+      "choices": [
+        "$\\log y=n\\log x+\\log a$",
+        "$\\log y=(\\log n)\\log x+\\log a$",
+        "$\\log y=x\\log n+\\log a$",
+        "$\\log y=n\\log x+a$"
       ]
     },
     {
@@ -395,6 +611,12 @@
       "back": [
         "$\\log y=x\\log b+\\log k$",
         "Plot $\\log y$ against $x$. Undo the logs of the slope and intercept to find $b$ and $k$."
+      ],
+      "choices": [
+        "$\\log y=x\\log b+\\log k$",
+        "$\\log y=(\\log x)\\log b+\\log k$",
+        "$\\log y=x\\log k+\\log b$",
+        "$\\log y=x b+\\log k$"
       ]
     },
     {
@@ -403,6 +625,12 @@
       "front": "What features should you mark on a sketch of $y=b^x$?",
       "back": [
         "For $b>0$ and $b\\ne1$, the graph passes through $(0,1)$ and stays above the horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$."
+      ],
+      "choices": [
+        "It crosses the $y$-axis at $(0,1)$, with horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$.",
+        "It crosses the $y$-axis at $(0,b)$, with horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$.",
+        "It crosses the $y$-axis at $(0,1)$, with horizontal asymptote $y=1$. It rises for $b>1$ and falls for $0<b<1$.",
+        "It crosses the $y$-axis at $(0,1)$, with horizontal asymptote $y=0$. It falls for $b>1$ and rises for $0<b<1$."
       ]
     },
     {
@@ -412,6 +640,12 @@
       "back": [
         "$\\text{Multiplier}=\\dfrac{\\text{new value}}{\\text{previous value}}$",
         "A decrease of $p\\%$ gives multiplier $1-p/100$."
+      ],
+      "choices": [
+        "Divide the new value by the previous value.",
+        "Divide the previous value by the new value.",
+        "Subtract the previous value from the new value.",
+        "Divide the change by the previous value."
       ]
     },
     {
@@ -420,6 +654,12 @@
       "front": "What do $A$ and $b$ mean in $y=Ab^t$?",
       "back": [
         "$A$ is the value at $t=0$. Each time $t$ goes up by one, the value is multiplied by $b$."
+      ],
+      "choices": [
+        "$A$ is the starting value and $b$ is the multiplier per time step.",
+        "$b$ is the starting value and $A$ is the multiplier per time step.",
+        "$A$ is the starting value and $b$ is added at every time step.",
+        "$A$ is the percentage change and $b$ is the starting value."
       ]
     },
     {
@@ -429,6 +669,12 @@
       "back": [
         "$\\int_a^b f(x)\\,dx=F(b)-F(a)$",
         "Put the upper bound into every term of the antiderivative, then subtract the whole lower-bound result."
+      ],
+      "choices": [
+        "$F(b)-F(a)$",
+        "$F(a)-F(b)$",
+        "$F(a)+F(b)$",
+        "$F(b-a)$"
       ]
     },
     {
@@ -437,6 +683,12 @@
       "front": "How do you get the total geometric area if a curve crosses the x-axis?",
       "back": [
         "Split the integral at each crossing. Add the sizes of the separate areas, turning negative integral values into positive areas."
+      ],
+      "choices": [
+        "Split at the crossings and add the magnitudes of the separate integrals.",
+        "Integrate over the full interval and keep the signed result.",
+        "Integrate over the full interval and take the absolute value at the end.",
+        "Integrate only the portions above the $x$-axis."
       ]
     },
     {
@@ -445,6 +697,12 @@
       "front": "Which function goes first when finding the area between two curves?",
       "back": [
         "Integrate $y_{\\text{top}}-y_{\\text{bottom}}$. Split where the curves cross if they swap order."
+      ],
+      "choices": [
+        "Integrate top minus bottom, splitting if their order changes.",
+        "Integrate bottom minus top across the full region.",
+        "Integrate the sum of the two functions across the region.",
+        "Integrate the greater gradient minus the smaller gradient."
       ]
     },
     {
@@ -453,6 +711,12 @@
       "front": "How do you choose the bounds for a region bounded by curves or the x-axis?",
       "back": [
         "Find the x-coordinates where the relevant boundaries meet. Use the left endpoint as the lower bound and the right endpoint as the upper bound."
+      ],
+      "choices": [
+        "Find where the boundaries meet and use the left and right $x$-coordinates.",
+        "Use where each boundary crosses the $y$-axis.",
+        "Find the maximum and minimum $y$-values and use those as $x$-bounds.",
+        "Use the origin and the largest $x$-value for every region."
       ]
     },
     {
@@ -461,6 +725,12 @@
       "front": "What does a limiting sum of thin rectangle areas represent?",
       "back": [
         "$\\sum f(x_i)\\Delta x$ tends to $\\int_a^b f(x)\\,dx$ as the widths tend to zero."
+      ],
+      "choices": [
+        "The definite integral of $f$ over the interval.",
+        "The derivative of $f$ at the right endpoint.",
+        "The maximum height of the curve.",
+        "The difference between the curve’s endpoint heights."
       ]
     },
     {
@@ -469,6 +739,12 @@
       "front": "What must you change when using substitution in an integral?",
       "back": [
         "Rewrite the whole integrand and $dx$ in terms of the new variable $u$. For a definite integral, change the bounds if you plan to evaluate in $u$."
+      ],
+      "choices": [
+        "Rewrite the integrand and $dx$ using $u$, and use $u$-bounds if you evaluate in $u$.",
+        "Replace the expression you chose with $u$, but keep $dx$ and all other factors as written.",
+        "Change $dx$ to $du$ without changing the integrand.",
+        "Replace every $x$ with $u$ and keep the original bounds when evaluating in $u$."
       ]
     },
     {
@@ -478,6 +754,12 @@
       "back": [
         "$\\dfrac{1}{a}\\ln|ax+b|+C\\quad(a\\ne0)$",
         "Divide by the derivative of the denominator."
+      ],
+      "choices": [
+        "$\\dfrac{1}{a}\\ln|ax+b|+C$",
+        "$a\\ln|ax+b|+C$",
+        "$\\ln|ax+b|+C$",
+        "$\\dfrac{1}{a(ax+b)}+C$"
       ]
     },
     {
@@ -486,6 +768,12 @@
       "front": "How do partial fractions help you integrate a rational function?",
       "back": [
         "Factor the denominator and split the fraction first. Then integrate the simpler terms and apply the bounds to the whole antiderivative."
+      ],
+      "choices": [
+        "Split the fraction using the factors of its denominator, then integrate the simpler terms.",
+        "Integrate the numerator and denominator separately, then divide.",
+        "Differentiate the denominator and discard the original numerator.",
+        "Apply the same antiderivative to every rational function."
       ]
     },
     {
@@ -496,7 +784,13 @@
         "$\\dfrac h2\\left(y_0+y_n+2\\sum_{i=1}^{n-1}y_i\\right)$",
         "Use each endpoint once and every interior reading twice."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "Count both endpoint readings once and all interior readings twice. Multiply by half the interval width.",
+        "Count both endpoint readings twice and all interior readings once. Multiply by half the interval width.",
+        "Count every reading once. Multiply by half the interval width.",
+        "Count all interior readings twice and leave out both endpoint readings. Multiply by half the interval width."
+      ]
     },
     {
       "id": "trapezium-error",
@@ -504,6 +798,12 @@
       "front": "How can you tell if a trapezium estimate is too high or too low?",
       "back": [
         "Look at the straight chords joining the sample points. When they lie above the curve the estimate is too high. When they lie below, it is too low."
+      ],
+      "choices": [
+        "Chords above the curve give an overestimate. Chords below give an underestimate.",
+        "Chords above the curve give an underestimate. Chords below give an overestimate.",
+        "Every increasing curve gives an overestimate.",
+        "Every decreasing curve gives an underestimate."
       ]
     },
     {
@@ -513,6 +813,12 @@
       "back": [
         "Solve $f(x)=g(x)$ and $-f(x)=g(x)$ as separate cases.",
         "Check each answer in the original equation. Any valid answer must have $g(x)\\ge0$."
+      ],
+      "choices": [
+        "$f(x)=g(x)$ and $-f(x)=g(x)$",
+        "$f(x)=g(x)$ and $f(x)=0$",
+        "$f(x)=g(x)$ and $-f(x)=-g(x)$",
+        "$f(x)=0$ and $g(x)=0$"
       ]
     },
     {
@@ -521,6 +827,12 @@
       "front": "When composing a piecewise function, what decides which branch you use?",
       "back": [
         "Look at the input to each function call. Work out the inner function first, then use that result to choose the branch for the outer function."
+      ],
+      "choices": [
+        "Use the input to each call. The inner function’s result becomes the outer input.",
+        "Use the original input for both functions even after evaluating the inner function.",
+        "Always use the same branch for the outer function as for the inner function.",
+        "Choose each branch by comparing the function’s output with its domain."
       ]
     },
     {
@@ -529,6 +841,12 @@
       "front": "How do you solve an inequality involving a piecewise function?",
       "back": [
         "Solve it on every branch. Keep only the values allowed by that branch’s domain, then combine the results."
+      ],
+      "choices": [
+        "Solve it on each branch and keep only results inside that branch’s domain.",
+        "Solve it on each branch and combine the results without checking the domains.",
+        "Solve it on the first branch and use those results on every branch.",
+        "Test only the points where the branches join."
       ]
     },
     {
@@ -537,6 +855,12 @@
       "front": "How do you eliminate a variable from simultaneous equations?",
       "back": [
         "Multiply the equations as needed to match the variable’s coefficients. Subtract if the coefficients have the same sign, or add if they have opposite signs."
+      ],
+      "choices": [
+        "Match the size of the chosen coefficients, then subtract for matching signs or add for opposite signs.",
+        "Match the size of the chosen coefficients, then add for matching signs or subtract for opposite signs.",
+        "Match only the constants on the right, then subtract to eliminate the chosen variable.",
+        "Multiply the two equations together so the chosen variable cancels."
       ]
     },
     {
@@ -545,6 +869,12 @@
       "front": "How do you find where a parametric curve meets a Cartesian curve?",
       "back": [
         "Substitute both parametric expressions into the Cartesian equation. Solve for the parameter, check its allowed range, then calculate the coordinates."
+      ],
+      "choices": [
+        "Substitute both parametric coordinates into the Cartesian equation and solve for the parameter.",
+        "Substitute only the $x$-coordinate and set $y=0$.",
+        "Equate the two parametric coordinates before using the Cartesian equation.",
+        "Differentiate the parametric coordinates and solve where both derivatives vanish."
       ]
     },
     {
@@ -553,6 +883,12 @@
       "front": "Where should you look for vertical asymptotes in a rational function?",
       "back": [
         "Factor and cancel any common factors first. Check the real zeros of the remaining denominator for vertical asymptotes."
+      ],
+      "choices": [
+        "Check real zeros of the denominator after cancelling common factors.",
+        "Check real zeros of the numerator after cancelling common factors.",
+        "Use only the point where the function crosses the $y$-axis.",
+        "Look only at the degrees of the numerator and denominator."
       ]
     },
     {
@@ -562,6 +898,12 @@
       "back": [
         "$\\text{Revenue}=\\text{Total cost}$",
         "For positive profit, revenue must be greater than total cost."
+      ],
+      "choices": [
+        "Total revenue equals total cost.",
+        "Total revenue equals zero.",
+        "Profit per unit equals selling price.",
+        "Fixed cost equals variable cost."
       ]
     },
     {
@@ -570,6 +912,12 @@
       "front": "What do $c$ and $m$ mean in a total-cost model $C=c+mx$?",
       "back": [
         "$c$ is the fixed cost and $m$ is the extra cost per unit. Extra profit per unit is selling price minus $m$."
+      ],
+      "choices": [
+        "$c$ is fixed cost and $m$ is the additional cost per unit.",
+        "$m$ is fixed cost and $c$ is the additional cost per unit.",
+        "$c$ is selling price and $m$ is profit per unit.",
+        "$c$ is the number of units and $m$ is total cost."
       ]
     },
     {
@@ -578,6 +926,12 @@
       "front": "How do you get a formula in one variable for an optimisation problem?",
       "back": [
         "Use the constraint to write one variable in terms of the other, then substitute into the quantity you want to maximise or minimise."
+      ],
+      "choices": [
+        "Rearrange the constraint for one variable and substitute it into the quantity you’re optimising.",
+        "Set both variables equal to one another and substitute into the quantity you’re optimising.",
+        "Set the quantity you’re optimising to zero and ignore the constraint.",
+        "Differentiate the constraint and set it to zero instead of using it to eliminate a variable."
       ]
     },
     {
@@ -586,6 +940,12 @@
       "front": "What does the area under a speed–time graph represent?",
       "back": [
         "Distance travelled."
+      ],
+      "choices": [
+        "Distance travelled.",
+        "The change in speed.",
+        "Average acceleration.",
+        "Final speed."
       ]
     },
     {
@@ -594,6 +954,12 @@
       "front": "How do you sketch $y=|f(x)|$ from $y=f(x)$?",
       "back": [
         "Reflect the parts below the x-axis upwards. Leave the parts on or above the axis in place."
+      ],
+      "choices": [
+        "Reflect the parts below the $x$-axis upwards and leave the other parts in place.",
+        "Reflect the parts above the $x$-axis downwards and leave the other parts in place.",
+        "Reflect every part of the graph across the $x$-axis.",
+        "Reflect the parts to the left of the $y$-axis to the right."
       ]
     },
     {
@@ -602,6 +968,12 @@
       "front": "What is sine in a right-angled triangle?",
       "back": [
         "$\\sin\\theta=\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$",
+        "$\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$",
+        "$\\dfrac{\\text{opposite}}{\\text{adjacent}}$",
+        "$\\dfrac{\\text{hypotenuse}}{\\text{opposite}}$"
       ]
     },
     {
@@ -610,6 +982,12 @@
       "front": "What is cosine in a right-angled triangle?",
       "back": [
         "$\\cos\\theta=\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$",
+        "$\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$",
+        "$\\dfrac{\\text{opposite}}{\\text{adjacent}}$",
+        "$\\dfrac{\\text{hypotenuse}}{\\text{adjacent}}$"
       ]
     },
     {
@@ -618,6 +996,12 @@
       "front": "What is tangent in a right-angled triangle?",
       "back": [
         "$\\tan\\theta=\\dfrac{\\text{opposite}}{\\text{adjacent}}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\text{opposite}}{\\text{adjacent}}$",
+        "$\\dfrac{\\text{adjacent}}{\\text{opposite}}$",
+        "$\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$",
+        "$\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$"
       ]
     },
     {
@@ -626,6 +1010,12 @@
       "front": "What are the coordinates at angle $\\theta$ on the unit circle?",
       "back": [
         "$(x,y)=(\\cos\\theta,\\sin\\theta)$"
+      ],
+      "choices": [
+        "$(x,y)=(\\cos\\theta,\\sin\\theta)$",
+        "$(x,y)=(\\sin\\theta,\\cos\\theta)$",
+        "$(x,y)=(\\cos\\theta,-\\sin\\theta)$",
+        "$(x,y)=(-\\cos\\theta,\\sin\\theta)$"
       ]
     },
     {
@@ -636,7 +1026,13 @@
         "$\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}$",
         "Each side is paired with the angle opposite it."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}$",
+        "$\\dfrac{a}{\\cos A}=\\dfrac{b}{\\cos B}=\\dfrac{c}{\\cos C}$",
+        "$a\\sin A=b\\sin B=c\\sin C$",
+        "$\\dfrac{a}{\\sin B}=\\dfrac{b}{\\sin C}=\\dfrac{c}{\\sin A}$"
+      ]
     },
     {
       "id": "sine-rule-ambiguous",
@@ -644,6 +1040,12 @@
       "front": "When can the sine rule give two possible angles?",
       "back": [
         "Two angles between $0^\\circ$ and $180^\\circ$ can have the same sine. Check both $A$ and $180^\\circ-A$ (or $\\pi-A$ in radians) against the sides and other angles."
+      ],
+      "choices": [
+        "When an angle and its supplement have the same sine and both fit the triangle.",
+        "Whenever an angle and its complement both fit the triangle.",
+        "Only when one of the answers is a right angle.",
+        "Whenever you know all three sides and no angles."
       ]
     },
     {
@@ -654,7 +1056,13 @@
         "$a^2=b^2+c^2-2bc\\cos A$",
         "$A$ is the angle between sides $b$ and $c$."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$a^2=b^2+c^2-2bc\\cos A$",
+        "$a^2=b^2+c^2+2bc\\cos A$",
+        "$a^2=b^2+c^2-2bc\\sin A$",
+        "$a^2=b^2-c^2+2bc\\cos A$"
+      ]
     },
     {
       "id": "cosine-rule-angle",
@@ -663,6 +1071,12 @@
       "back": [
         "$\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}$",
         "Take inverse cosine to find the angle."
+      ],
+      "choices": [
+        "Find $\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}$, then take inverse cosine.",
+        "Find $\\cos A=\\dfrac{a^2-b^2-c^2}{2bc}$, then take inverse cosine.",
+        "Find $\\cos A=\\dfrac{b^2+c^2-a^2}{bc}$, then take inverse cosine.",
+        "Find $\\sin A=\\dfrac{b^2+c^2-a^2}{2bc}$, then take inverse sine."
       ]
     },
     {
@@ -673,7 +1087,13 @@
         "$\\text{Area}=\\dfrac12 ab\\sin C$",
         "$C$ is the angle between sides $a$ and $b$."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac12 ab\\sin C$",
+        "$\\dfrac12 ab\\cos C$",
+        "$ab\\sin C$",
+        "$\\dfrac12(a+b)\\sin C$"
+      ]
     },
     {
       "id": "degree-to-radians",
@@ -681,6 +1101,12 @@
       "front": "How do you convert degrees to radians?",
       "back": [
         "Multiply by $\\dfrac{\\pi}{180}$. A full turn is $360^\\circ=2\\pi$ radians."
+      ],
+      "choices": [
+        "Multiply by $\\dfrac{\\pi}{180}$.",
+        "Multiply by $\\dfrac{180}{\\pi}$.",
+        "Multiply by $\\dfrac{\\pi}{360}$.",
+        "Multiply by $\\dfrac{90}{\\pi}$."
       ]
     },
     {
@@ -689,6 +1115,12 @@
       "front": "How do you convert radians to degrees?",
       "back": [
         "Multiply by $\\dfrac{180}{\\pi}$."
+      ],
+      "choices": [
+        "Multiply by $\\dfrac{180}{\\pi}$.",
+        "Multiply by $\\dfrac{\\pi}{180}$.",
+        "Multiply by $\\dfrac{360}{\\pi}$.",
+        "Multiply by $\\dfrac{\\pi}{360}$."
       ]
     },
     {
@@ -699,7 +1131,13 @@
         "$s=r\\theta$",
         "$r$ is the radius and $\\theta$ is the central angle."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$r\\theta$",
+        "$r^2\\theta$",
+        "$\\dfrac12 r\\theta$",
+        "$r\\sin\\theta$"
+      ]
     },
     {
       "id": "sector-area",
@@ -708,7 +1146,13 @@
       "back": [
         "$A=\\dfrac12 r^2\\theta$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac12 r^2\\theta$",
+        "$r\\theta$",
+        "$r^2\\theta$",
+        "$\\dfrac12 r^2\\sin\\theta$"
+      ]
     },
     {
       "id": "segment-area",
@@ -717,6 +1161,12 @@
       "back": [
         "Subtract the triangle from the sector. For a central angle $\\theta$ in radians,",
         "$A=\\dfrac12 r^2(\\theta-\\sin\\theta)$"
+      ],
+      "choices": [
+        "Subtract the triangle’s area from the sector’s area.",
+        "Subtract the sector’s area from the whole circle’s area.",
+        "Add the triangle’s area to the sector’s area.",
+        "Take half of the sector’s area regardless of the angle."
       ]
     },
     {
@@ -728,7 +1178,13 @@
         "$\\cos 0=1$",
         "$\\tan 0=0$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "Sine $0$, cosine $1$, tangent $0$.",
+        "Sine $1$, cosine $0$, tangent undefined.",
+        "Sine $0$, cosine $-1$, tangent $0$.",
+        "Sine $0$, cosine $1$, tangent undefined."
+      ]
     },
     {
       "id": "exact-30",
@@ -739,7 +1195,13 @@
         "$\\cos 30^\\circ=\\tfrac{\\sqrt3}{2}$",
         "$\\tan 30^\\circ=\\tfrac{1}{\\sqrt3}$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\tfrac1{\\sqrt3}$.",
+        "Sine $\\tfrac{\\sqrt3}{2}$, cosine $\\tfrac12$, tangent $\\sqrt3$.",
+        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\sqrt3$.",
+        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $1$."
+      ]
     },
     {
       "id": "exact-45",
@@ -749,7 +1211,13 @@
         "$\\sin 45^\\circ=\\cos 45^\\circ=\\tfrac{1}{\\sqrt2}$",
         "$\\tan 45^\\circ=1$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $1$.",
+        "Sine $\\tfrac12$, cosine $\\tfrac12$, tangent $1$.",
+        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $0$.",
+        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\tfrac1{\\sqrt3}$."
+      ]
     },
     {
       "id": "exact-60",
@@ -760,7 +1228,13 @@
         "$\\cos 60^\\circ=\\tfrac12$",
         "$\\tan 60^\\circ=\\sqrt3$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "Sine $\\tfrac{\\sqrt3}{2}$, cosine $\\tfrac12$, tangent $\\sqrt3$.",
+        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\tfrac1{\\sqrt3}$.",
+        "Sine $\\tfrac{\\sqrt3}{2}$, cosine $\\tfrac12$, tangent $\\tfrac1{\\sqrt3}$.",
+        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $1$."
+      ]
     },
     {
       "id": "exact-90",
@@ -770,7 +1244,13 @@
         "$\\sin 90^\\circ=1,\\quad \\cos 90^\\circ=0$",
         "$\\tan 90^\\circ$ is undefined because the cosine is zero."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "Sine $1$, cosine $0$, tangent undefined.",
+        "Sine $1$, cosine $0$, tangent $0$.",
+        "Sine $0$, cosine $-1$, tangent $0$.",
+        "Sine $0$, cosine $1$, tangent undefined."
+      ]
     },
     {
       "id": "exact-180",
@@ -781,7 +1261,13 @@
         "$\\cos 180^\\circ=-1$",
         "$\\tan 180^\\circ=0$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "Sine $0$, cosine $-1$, tangent $0$.",
+        "Sine $0$, cosine $1$, tangent $0$.",
+        "Sine $-1$, cosine $0$, tangent undefined.",
+        "Sine $0$, cosine $-1$, tangent undefined."
+      ]
     },
     {
       "id": "exact-angle-quadrants",
@@ -790,6 +1276,12 @@
       "back": [
         "I — sine, cosine and tangent. II — sine. III — tangent. IV — cosine.",
         "Use the acute reference angle for the size of the value, then apply the quadrant sign."
+      ],
+      "choices": [
+        "I — all. II — sine. III — tangent. IV — cosine.",
+        "I — all. II — tangent. III — sine. IV — cosine.",
+        "I — all. II — cosine. III — tangent. IV — sine.",
+        "I — all. II — sine. III — cosine. IV — tangent."
       ]
     },
     {
@@ -798,6 +1290,12 @@
       "front": "How do you choose the angle mode on your calculator?",
       "back": [
         "Use degrees for angles written with $^\\circ$ and radians for angles given as radians or in terms of $\\pi$. Check the interval uses the same units."
+      ],
+      "choices": [
+        "Use degree mode for angles marked ° and radian mode for angles given in radians.",
+        "Use degree mode when an angle involves $\\pi$ and radian mode when it is marked °.",
+        "Use degree mode for whole numbers and radian mode for decimals.",
+        "Use degree mode for sine and cosine and radian mode for tangent."
       ]
     },
     {
@@ -807,6 +1305,12 @@
       "back": [
         "$\\sin(-x)=-\\sin x$",
         "$\\sin(\\pi-x)=\\sin x$"
+      ],
+      "choices": [
+        "$-\\sin x$ and $\\sin x$, respectively.",
+        "$\\sin x$ and $-\\sin x$, respectively.",
+        "$-\\sin x$ and $-\\sin x$, respectively.",
+        "$\\sin x$ and $\\sin x$, respectively."
       ]
     },
     {
@@ -816,6 +1320,12 @@
       "back": [
         "$\\cos(-x)=\\cos x$",
         "$\\cos(\\pi-x)=-\\cos x$"
+      ],
+      "choices": [
+        "$\\cos x$ and $-\\cos x$, respectively.",
+        "$-\\cos x$ and $\\cos x$, respectively.",
+        "$-\\cos x$ and $-\\cos x$, respectively.",
+        "$\\cos x$ and $\\cos x$, respectively."
       ]
     },
     {
@@ -825,6 +1335,12 @@
       "back": [
         "$\\tan(-x)=-\\tan x$",
         "$\\tan(\\pi-x)=-\\tan x$"
+      ],
+      "choices": [
+        "$-\\tan x$ and $-\\tan x$, respectively.",
+        "$\\tan x$ and $-\\tan x$, respectively.",
+        "$-\\tan x$ and $\\tan x$, respectively.",
+        "$\\tan x$ and $\\tan x$, respectively."
       ]
     },
     {
@@ -834,6 +1350,12 @@
       "back": [
         "$\\sin(\\pi/2-x)=\\cos x$",
         "$\\cos(\\pi/2-x)=\\sin x$"
+      ],
+      "choices": [
+        "$\\sin(\\pi/2-x)=\\cos x$ and $\\cos(\\pi/2-x)=\\sin x$.",
+        "$\\sin(\\pi/2-x)=\\sin x$ and $\\cos(\\pi/2-x)=\\cos x$.",
+        "$\\sin(\\pi/2-x)=-\\cos x$ and $\\cos(\\pi/2-x)=\\sin x$.",
+        "$\\sin(\\pi/2-x)=\\cos x$ and $\\cos(\\pi/2-x)=-\\sin x$."
       ]
     },
     {
@@ -842,6 +1364,12 @@
       "front": "What are the period and range of sine and cosine?",
       "back": [
         "Both repeat every $2\\pi$ radians ($360^\\circ$), have range $[-1,1]$, and are defined for every real angle."
+      ],
+      "choices": [
+        "Period $2\\pi$ and range $[-1,1]$ for both.",
+        "Period $\\pi$ and range $[-1,1]$ for both.",
+        "Period $2\\pi$ and range $[0,1]$ for both.",
+        "Period $\\pi$ and range $\\mathbb{R}$ for both."
       ]
     },
     {
@@ -850,6 +1378,12 @@
       "front": "What are the period, range and vertical asymptotes of tangent?",
       "back": [
         "Period $\\pi$ ($180^\\circ$), range $\\mathbb{R}$, and asymptotes at $x=\\pi/2+k\\pi$ for integer $k$."
+      ],
+      "choices": [
+        "Period $\\pi$, range $\\mathbb{R}$, asymptotes at $\\pi/2+k\\pi$.",
+        "Period $\\pi/2$, range $\\mathbb{R}$, asymptotes at $\\pi/2+k\\pi$.",
+        "Period $\\pi$, range $[-1,1]$, asymptotes at $\\pi/2+k\\pi$.",
+        "Period $\\pi$, range $\\mathbb{R}$, asymptotes at $k\\pi$."
       ]
     },
     {
@@ -858,6 +1392,12 @@
       "front": "Where do the sine and cosine graphs cross the x-axis?",
       "back": [
         "Sine at $x=k\\pi$. Cosine at $x=\\pi/2+k\\pi$. Here $k$ is any integer."
+      ],
+      "choices": [
+        "Sine at $k\\pi$. Cosine at $\\pi/2+k\\pi$.",
+        "Sine at $\\pi/2+k\\pi$. Cosine at $k\\pi$.",
+        "Sine at $\\pi/2+2k\\pi$. Cosine at $2k\\pi$.",
+        "Both at $k\\pi$."
       ]
     },
     {
@@ -866,6 +1406,12 @@
       "front": "Where is secant undefined, and what values can it take?",
       "back": [
         "Where $\\cos x=0$, at $x=\\pi/2+k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
+      ],
+      "choices": [
+        "Undefined where $\\cos x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\cos x=0$. Values satisfy $|y|\\le1$.",
+        "Undefined where $\\cos x=0$. Values satisfy $y\\ge1$."
       ]
     },
     {
@@ -874,6 +1420,12 @@
       "front": "Where is cosecant undefined, and what values can it take?",
       "back": [
         "Where $\\sin x=0$, at $x=k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
+      ],
+      "choices": [
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\cos x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\le1$.",
+        "Undefined where $\\sin x=0$. Values satisfy $y\\ge1$."
       ]
     },
     {
@@ -882,6 +1434,12 @@
       "front": "Where is cotangent undefined, and what values can it take?",
       "back": [
         "Where $\\sin x=0$, at $x=k\\pi$. The period is $\\pi$ and the range is $\\mathbb{R}$. On each branch it falls through zero at $x=\\pi/2+k\\pi$."
+      ],
+      "choices": [
+        "Undefined where $\\sin x=0$. Its range is all real numbers.",
+        "Undefined where $\\cos x=0$. Its range is all real numbers.",
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\cos x=0$. Values lie in $[-1,1]$."
       ]
     },
     {
@@ -890,6 +1448,12 @@
       "front": "What is the input domain and output range of inverse sine?",
       "back": [
         "$\\arcsin x$ takes inputs in $[-1,1]$ and returns angles in $[-\\pi/2,\\pi/2]$."
+      ],
+      "choices": [
+        "Input $[-1,1]$. Output $[-\\pi/2,\\pi/2]$.",
+        "Input $[-1,1]$. Output $[0,\\pi]$.",
+        "Input $\\mathbb{R}$. Output $(-\\pi/2,\\pi/2)$.",
+        "Input $[-\\pi/2,\\pi/2]$. Output $[-1,1]$."
       ]
     },
     {
@@ -898,6 +1462,12 @@
       "front": "What is the input domain and output range of inverse cosine?",
       "back": [
         "$\\arccos x$ takes inputs in $[-1,1]$ and returns angles in $[0,\\pi]$."
+      ],
+      "choices": [
+        "Input $[-1,1]$. Output $[0,\\pi]$.",
+        "Input $[-1,1]$. Output $[-\\pi/2,\\pi/2]$.",
+        "Input $[0,\\pi]$. Output $[-1,1]$.",
+        "Input $\\mathbb{R}$. Output $[0,\\pi]$."
       ]
     },
     {
@@ -906,6 +1476,12 @@
       "front": "What is the input domain and output range of inverse tangent?",
       "back": [
         "$\\arctan x$ takes any real input and returns angles in $(-\\pi/2,\\pi/2)$."
+      ],
+      "choices": [
+        "Input $\\mathbb{R}$. Output $(-\\pi/2,\\pi/2)$.",
+        "Input $\\mathbb{R}$. Output $[-\\pi/2,\\pi/2]$.",
+        "Input $[-1,1]$. Output $[0,\\pi]$.",
+        "Input $(-\\pi/2,\\pi/2)$. Output $\\mathbb{R}$."
       ]
     },
     {
@@ -914,6 +1490,12 @@
       "front": "How do you sketch an inverse trig graph?",
       "back": [
         "Choose the branch that gives exactly one angle for each allowable input, then reflect that branch in $y=x$. The restricted trig graph’s range and domain swap roles."
+      ],
+      "choices": [
+        "Choose a one-to-one branch and reflect it in $y=x$.",
+        "Reflect the entire trig graph in $y=x$ without restricting its domain.",
+        "Choose a one-to-one branch and reflect it in the $x$-axis.",
+        "Take the reciprocal of every height on the original graph."
       ]
     },
     {
@@ -923,6 +1505,12 @@
       "back": [
         "$\\tan A=\\dfrac{\\sin A}{\\cos A}$",
         "Valid where $\\cos A\\ne0$."
+      ],
+      "choices": [
+        "$\\dfrac{\\sin A}{\\cos A}$",
+        "$\\dfrac{\\cos A}{\\sin A}$",
+        "$\\sin A\\cos A$",
+        "$\\sin A-\\cos A$"
       ]
     },
     {
@@ -931,6 +1519,12 @@
       "front": "What does $\\sec A$ equal?",
       "back": [
         "$\\sec A=\\dfrac{1}{\\cos A}$"
+      ],
+      "choices": [
+        "$\\dfrac1{\\cos A}$",
+        "$\\dfrac1{\\sin A}$",
+        "$\\dfrac1{\\tan A}$",
+        "$\\cos^2 A$"
       ]
     },
     {
@@ -939,6 +1533,12 @@
       "front": "What does $\\cosec A$ equal?",
       "back": [
         "$\\cosec A=\\dfrac{1}{\\sin A}$"
+      ],
+      "choices": [
+        "$\\dfrac1{\\sin A}$",
+        "$\\dfrac1{\\cos A}$",
+        "$\\dfrac1{\\tan A}$",
+        "$\\sin^2 A$"
       ]
     },
     {
@@ -948,6 +1548,12 @@
       "back": [
         "$\\cot A=\\dfrac{\\cos A}{\\sin A}$",
         "Also $1/\\tan A$ where that expression is defined."
+      ],
+      "choices": [
+        "$\\dfrac{\\cos A}{\\sin A}$",
+        "$\\dfrac{\\sin A}{\\cos A}$",
+        "$\\dfrac1{\\cos A}$",
+        "$\\dfrac1{\\sin A}$"
       ]
     },
     {
@@ -958,7 +1564,13 @@
         "$\\sin^2 A+\\cos^2 A=1$",
         "On the unit circle this is Pythagoras’ theorem."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\sin^2 A+\\cos^2 A=1$",
+        "$\\sin^2 A-\\cos^2 A=1$",
+        "$\\sin A+\\cos A=1$",
+        "$\\sin^2 A+\\cos^2 A=2$"
+      ]
     },
     {
       "id": "sec-tan-pythagorean",
@@ -968,7 +1580,13 @@
         "$\\sec^2 A=1+\\tan^2 A$",
         "Divide $\\sin^2 A+\\cos^2 A=1$ by $\\cos^2 A$."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\sec^2 A=1+\\tan^2 A$",
+        "$\\sec^2 A=1-\\tan^2 A$",
+        "$\\tan^2 A=1+\\sec^2 A$",
+        "$\\sec^2 A=1+\\tan A$"
+      ]
     },
     {
       "id": "cosec-cot-pythagorean",
@@ -978,7 +1596,13 @@
         "$\\cosec^2 A=1+\\cot^2 A$",
         "Divide $\\sin^2 A+\\cos^2 A=1$ by $\\sin^2 A$."
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\cosec^2 A=1+\\cot^2 A$",
+        "$\\cosec^2 A=1-\\cot^2 A$",
+        "$\\cot^2 A=1+\\cosec^2 A$",
+        "$\\cosec^2 A=1+\\cot A$"
+      ]
     },
     {
       "id": "choose-root-sign",
@@ -987,6 +1611,12 @@
       "back": [
         "$\\cos\\theta=\\pm\\sqrt{1-\\sin^2\\theta}$",
         "Choose the sign from the quadrant or the stated interval. This lets you replace a cosine when the equation gives you the sine."
+      ],
+      "choices": [
+        "Use $\\pm\\sqrt{1-\\sin^2\\theta}$ and choose the sign from the given interval.",
+        "Always use $+\\sqrt{1-\\sin^2\\theta}$.",
+        "Always use $-\\sqrt{1-\\sin^2\\theta}$.",
+        "Use $\\pm\\sqrt{1-\\sin\\theta}$ and choose the sign from the given interval."
       ]
     },
     {
@@ -997,7 +1627,13 @@
         "$\\sin\\theta\\approx\\theta$",
         "The angle $\\theta$ must be small and in radians."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\sin\\theta\\approx\\theta$",
+        "$\\sin\\theta\\approx\\theta^2$",
+        "$\\sin\\theta\\approx1-\\dfrac{\\theta^2}{2}$",
+        "$\\sin\\theta\\approx1+\\theta$"
+      ]
     },
     {
       "id": "small-angle-cosine",
@@ -1007,7 +1643,13 @@
         "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
         "The angle $\\theta$ must be small and in radians."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
+        "$\\cos\\theta\\approx1+\\dfrac{\\theta^2}{2}$",
+        "$\\cos\\theta\\approx1-\\theta$",
+        "$\\cos\\theta\\approx\\theta$"
+      ]
     },
     {
       "id": "small-angle-tangent",
@@ -1017,7 +1659,13 @@
         "$\\tan\\theta\\approx\\theta$",
         "The angle $\\theta$ must be small and in radians."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\tan\\theta\\approx\\theta$",
+        "$\\tan\\theta\\approx\\theta^2$",
+        "$\\tan\\theta\\approx1-\\theta$",
+        "$\\tan\\theta\\approx\\dfrac1{\\theta}$"
+      ]
     },
     {
       "id": "small-angle-inner",
@@ -1025,6 +1673,12 @@
       "front": "Which part of the expression do you use as the angle in a small-angle approximation?",
       "back": [
         "Use the whole argument. If $kx$ is small and in radians, $\\sin(kx)\\approx kx$."
+      ],
+      "choices": [
+        "Use the whole argument, so $\\sin(kx)\\approx kx$ for small $kx$ in radians.",
+        "Use only the variable, so $\\sin(kx)\\approx x$ for any $k$.",
+        "Use only the coefficient, so $\\sin(kx)\\approx k$ for any small $x$.",
+        "Change the argument to degrees before applying the radian approximation."
       ]
     },
     {
@@ -1033,6 +1687,12 @@
       "front": "How can a small-angle approximation give the gradient near the origin?",
       "back": [
         "Use the approximation to simplify the relation, then put $y$ on the left. If $y\\approx mx$ near the origin, the coefficient $m$ is the gradient there."
+      ],
+      "choices": [
+        "Simplify the relation and write it as $y\\approx mx$. Then read off $m$.",
+        "Simplify the relation, then read off its $y$-intercept as the gradient.",
+        "Set $x=0$, then use the value of $y$ as the gradient.",
+        "Write it as $x\\approx my$, then use $m$ directly as $dy/dx$."
       ]
     },
     {
@@ -1042,7 +1702,13 @@
       "back": [
         "$\\sin 2A=2\\sin A\\cos A$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$2\\sin A\\cos A$",
+        "$2\\sin A$",
+        "$\\sin^2 A+\\cos^2 A$",
+        "$\\cos^2 A-\\sin^2 A$"
+      ]
     },
     {
       "id": "cosine-double-angle",
@@ -1053,7 +1719,13 @@
         "$\\cos 2A=2\\cos^2 A-1$",
         "$\\cos 2A=1-2\\sin^2 A$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\cos^2 A-\\sin^2 A$, $2\\cos^2 A-1$, and $1-2\\sin^2 A$",
+        "$\\sin^2 A-\\cos^2 A$, $2\\sin^2 A-1$, and $1-2\\cos^2 A$",
+        "$\\cos^2 A+\\sin^2 A$, $2\\cos^2 A$, and $2\\sin^2 A$",
+        "$2\\sin A\\cos A$, $2\\cos^2 A+1$, and $1+2\\sin^2 A$"
+      ]
     },
     {
       "id": "tangent-double-angle",
@@ -1062,7 +1734,13 @@
       "back": [
         "$\\tan 2A=\\dfrac{2\\tan A}{1-\\tan^2 A}$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{2\\tan A}{1-\\tan^2 A}$",
+        "$\\dfrac{2\\tan A}{1+\\tan^2 A}$",
+        "$\\dfrac{\\tan A}{1-\\tan^2 A}$",
+        "$\\dfrac{1-\\tan^2 A}{2\\tan A}$"
+      ]
     },
     {
       "id": "sine-compound",
@@ -1072,7 +1750,13 @@
         "$\\sin(A\\pm B)=$",
         "$\\sin A\\cos B\\pm\\cos A\\sin B$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\sin A\\cos B\\pm\\cos A\\sin B$",
+        "$\\sin A\\cos B\\mp\\cos A\\sin B$",
+        "$\\sin A\\sin B\\pm\\cos A\\cos B$",
+        "$\\sin A\\pm\\sin B$"
+      ]
     },
     {
       "id": "cosine-compound",
@@ -1083,7 +1767,13 @@
         "$\\cos A\\cos B\\mp\\sin A\\sin B$",
         "Cosine uses the opposite sign between the two products."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\cos A\\cos B\\mp\\sin A\\sin B$",
+        "$\\cos A\\cos B\\pm\\sin A\\sin B$",
+        "$\\cos A\\sin B\\mp\\sin A\\cos B$",
+        "$\\cos A\\mp\\cos B$"
+      ]
     },
     {
       "id": "tangent-compound",
@@ -1094,7 +1784,13 @@
         "$\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$",
         "The numerator follows the sign in the angle. The denominator uses the opposite sign."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A\\pm\\tan B}{1\\pm\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A\\mp\\tan B}{1\\mp\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A\\tan B}{1\\mp\\tan A\\tan B}$"
+      ]
     },
     {
       "id": "sine-half-angle-square",
@@ -1103,6 +1799,12 @@
       "back": [
         "$\\sin^2 A=\\dfrac{1-\\cos 2A}{2}$",
         "This follows from $\\cos 2A=1-2\\sin^2 A$."
+      ],
+      "choices": [
+        "$\\dfrac{1-\\cos 2A}{2}$",
+        "$\\dfrac{1+\\cos 2A}{2}$",
+        "$1-\\cos 2A$",
+        "$\\dfrac{\\cos 2A-1}{2}$"
       ]
     },
     {
@@ -1112,6 +1814,12 @@
       "back": [
         "$\\cos^2 A=\\dfrac{1+\\cos 2A}{2}$",
         "This follows from $\\cos 2A=2\\cos^2 A-1$."
+      ],
+      "choices": [
+        "$\\dfrac{1+\\cos 2A}{2}$",
+        "$\\dfrac{1-\\cos 2A}{2}$",
+        "$1+\\cos 2A$",
+        "$\\dfrac{\\cos 2A-1}{2}$"
       ]
     },
     {
@@ -1122,6 +1830,12 @@
         "$\\sin(\\theta/2)=\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$",
         "$\\cos(\\theta/2)=\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$",
         "Choose each sign using the quadrant of the half angle."
+      ],
+      "choices": [
+        "For sine, $\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. For cosine, $\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. Use the quadrant for the signs.",
+        "For sine, $\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. For cosine, $\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. Use the quadrant for the signs.",
+        "For sine, $\\dfrac{1-\\cos\\theta}{2}$. For cosine, $\\dfrac{1+\\cos\\theta}{2}$.",
+        "For sine, $\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. For cosine, $\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. Both are always positive."
       ]
     },
     {
@@ -1132,7 +1846,13 @@
         "$\\sin A+\\sin B=$",
         "$2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
     },
     {
       "id": "sine-difference-to-product",
@@ -1142,7 +1862,13 @@
         "$\\sin A-\\sin B=$",
         "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$-2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
     },
     {
       "id": "cosine-sum-to-product",
@@ -1152,7 +1878,13 @@
         "$\\cos A+\\cos B=$",
         "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$-2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
     },
     {
       "id": "cosine-difference-to-product",
@@ -1162,7 +1894,13 @@
         "$\\cos A-\\cos B=$",
         "$-2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$-2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$-2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
     },
     {
       "id": "cosine-geometric-proof",
@@ -1170,6 +1908,12 @@
       "front": "How can you prove the cosine difference formula using the unit circle?",
       "back": [
         "Take $P=(\\cos A,\\sin A)$ and $Q=(\\cos B,\\sin B)$. Find $PQ^2$ using the distance formula and again using the triangle cosine rule. Equate the results and use the fact that cosine is even."
+      ],
+      "choices": [
+        "Find the chord’s squared length using coordinates and the cosine rule, then equate the two expressions.",
+        "Equate the lengths of the two radii and set $\\cos(A-B)=1$.",
+        "Add the two $x$-coordinates and call their sum $\\cos(A-B)$.",
+        "Use the angle sum $A+B$ as the angle between the radii for points at $A$ and $B$."
       ]
     },
     {
@@ -1178,6 +1922,12 @@
       "front": "How can you get sine and tangent compound-angle formulas from cosine?",
       "back": [
         "For sine, use $\\sin x=\\cos(\\pi/2-x)$ and expand with the cosine compound-angle formula. For tangent, divide the sine expansion by the cosine expansion."
+      ],
+      "choices": [
+        "Use $\\sin x=\\cos(\\pi/2-x)$, then divide the sine expansion by the cosine expansion for tangent.",
+        "Use $\\sin x=\\cos(\\pi-x)$, then divide the sine expansion by the cosine expansion for tangent.",
+        "Use $\\sin x=1-\\cos x$, then multiply the sine and cosine expansions for tangent.",
+        "Use $\\sin x=\\cos(\\pi/2-x)$, then divide the cosine expansion by the sine expansion for tangent."
       ]
     },
     {
@@ -1187,6 +1937,12 @@
       "back": [
         "$x=\\alpha+2k\\pi$ or $x=\\pi-\\alpha+2k\\pi$, for integer $k$.",
         "In degrees, use $360^\\circ$ for $2\\pi$ and $180^\\circ$ for $\\pi$."
+      ],
+      "choices": [
+        "$x=\\alpha+2k\\pi$ or $x=\\pi-\\alpha+2k\\pi$, for integer $k$.",
+        "$x=\\pm\\alpha+2k\\pi$, for integer $k$.",
+        "$x=\\alpha+k\\pi$, for integer $k$.",
+        "$x=\\alpha+2k\\pi$ or $x=\\pi+\\alpha+2k\\pi$, for integer $k$."
       ]
     },
     {
@@ -1196,6 +1952,12 @@
       "back": [
         "$x=\\pm\\alpha+2k\\pi$",
         "For integer $k$. In degrees use multiples of $360^\\circ$."
+      ],
+      "choices": [
+        "$x=\\pm\\alpha+2k\\pi$, for integer $k$.",
+        "$x=\\alpha+2k\\pi$ or $x=\\pi-\\alpha+2k\\pi$, for integer $k$.",
+        "$x=\\alpha+k\\pi$, for integer $k$.",
+        "$x=\\pm\\alpha+k\\pi$, for integer $k$."
       ]
     },
     {
@@ -1205,6 +1967,12 @@
       "back": [
         "$x=\\alpha+k\\pi$",
         "For integer $k$. In degrees use multiples of $180^\\circ$."
+      ],
+      "choices": [
+        "$x=\\alpha+k\\pi$, for integer $k$.",
+        "$x=\\pm\\alpha+k\\pi$, for integer $k$.",
+        "$x=\\alpha+k\\pi/2$, for integer $k$.",
+        "$x=\\pi/2-\\alpha+k\\pi$, for integer $k$."
       ]
     },
     {
@@ -1213,6 +1981,12 @@
       "front": "How do you handle a trig equation like $\\cos(kx+c)=b$ on a fixed interval?",
       "back": [
         "Work out the interval for the whole angle $kx+c$. Find all angles in that interval, then solve each one for $x$."
+      ],
+      "choices": [
+        "Transform the interval to one for $kx+c$, solve there, then find $x$.",
+        "Keep the original $x$-interval as the interval for $kx+c$.",
+        "Solve for $kx+c$ using its principal value only.",
+        "Subtract $c$ from every solution and leave out the division by $k$."
       ]
     },
     {
@@ -1221,6 +1995,12 @@
       "front": "How do you solve a quadratic equation that mixes sine and cosine squared?",
       "back": [
         "Use $\\cos^2 x=1-\\sin^2 x$ to make a quadratic in $\\sin x$. Keep sine values in $[-1,1]$, then find all angles in the given interval."
+      ],
+      "choices": [
+        "Rewrite using one trig function squared, solve the quadratic, then find the angles.",
+        "Replace $\\cos^2x$ with $1-\\sin x$, then solve the quadratic.",
+        "Square the whole equation and keep all solutions without checking them.",
+        "Drop the powers of two from both trig functions and solve."
       ]
     },
     {
@@ -1229,6 +2009,12 @@
       "front": "What should you check before dividing an equation by a trig expression?",
       "back": [
         "Check when the expression equals zero. Test those values in the original equation before dividing."
+      ],
+      "choices": [
+        "Find where the expression is zero and test those values in the original equation.",
+        "Discard every value that makes the expression zero before checking the equation.",
+        "Check only that the expression is positive at one endpoint.",
+        "Divide first and assume the simplified equation has every original solution."
       ]
     },
     {
@@ -1237,6 +2023,12 @@
       "front": "What’s a useful first step for proving a trig identity with fractions?",
       "back": [
         "Work from one side. Rewrite reciprocal functions in sine and cosine if helpful, then combine fractions over a common denominator."
+      ],
+      "choices": [
+        "Work on one side, rewrite reciprocal functions if helpful, and use a common denominator.",
+        "Add the numerators and add the denominators to combine the fractions.",
+        "Cancel matching terms across additions before factoring.",
+        "Check the two sides at one angle and conclude they are identical."
       ]
     },
     {
@@ -1247,6 +2039,12 @@
         "$R=\\sqrt{a^2+b^2}$",
         "$R\\cos\\alpha=a,\\qquad R\\sin\\alpha=b$",
         "Choose the quadrant of $\\alpha$ using both signs."
+      ],
+      "choices": [
+        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=-b$.",
+        "$R=a+b$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$."
       ]
     },
     {
@@ -1257,6 +2055,12 @@
         "$R=\\sqrt{a^2+b^2}$",
         "$R\\sin\\alpha=a,\\qquad R\\cos\\alpha=b$",
         "Choose the quadrant of $\\alpha$ using both signs."
+      ],
+      "choices": [
+        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=-a$ and $R\\cos\\alpha=b$.",
+        "$R=a+b$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$."
       ]
     },
     {
@@ -1266,6 +2070,12 @@
       "back": [
         "Amplitude $|a|$, midline $y=d$, period $2\\pi/|b|$. The same applies to cosine.",
         "Use $360^\\circ/|b|$ if the angle is measured in degrees."
+      ],
+      "choices": [
+        "Amplitude $|a|$, midline $y=d$, period $2\\pi/|b|$.",
+        "Amplitude $|b|$, midline $y=d$, period $2\\pi/|a|$.",
+        "Amplitude $|a|$, midline $y=c$, period $2\\pi/|b|$.",
+        "Amplitude $|a|$, midline $y=d$, period $2\\pi|b|$."
       ]
     },
     {
@@ -1275,6 +2085,12 @@
       "back": [
         "$-c/b$",
         "Factor the argument as $b(x+c/b)$. The same applies to cosine."
+      ],
+      "choices": [
+        "$-c/b$",
+        "$c/b$",
+        "$-c$",
+        "$-b/c$"
       ]
     },
     {
@@ -1283,6 +2099,12 @@
       "front": "What is the period of $y=\\tan(bx+c)$ when $b\\ne0$?",
       "back": [
         "$\\dfrac{\\pi}{|b|}$ radians, or $\\dfrac{180^\\circ}{|b|}$ in degrees."
+      ],
+      "choices": [
+        "$\\dfrac{\\pi}{|b|}$ radians",
+        "$\\dfrac{\\pi}{2|b|}$ radians",
+        "$\\pi|b|$ radians",
+        "$\\dfrac{\\pi}{|b+c|}$ radians"
       ]
     },
     {
@@ -1292,6 +2114,12 @@
       "back": [
         "For midline height $d$ and amplitude $R$, the maximum is $d+R$ and the minimum is $d-R$.",
         "On a restricted interval, check whether those extremes occur in it."
+      ],
+      "choices": [
+        "Add the amplitude to the midline for the maximum and subtract it for the minimum.",
+        "Use the amplitude and its negative as the maximum and minimum, whatever the midline.",
+        "Use the midline as the maximum and subtract the amplitude for the minimum.",
+        "Add the whole period to the midline for the maximum and subtract it for the minimum."
       ]
     },
     {
@@ -1300,6 +2128,12 @@
       "front": "How do you split a vector into horizontal and vertical components?",
       "back": [
         "If the direction makes angle $\\theta$ with the positive horizontal, the components are $R\\cos\\theta$ and $R\\sin\\theta$, respectively."
+      ],
+      "choices": [
+        "Horizontal $R\\cos\\theta$, vertical $R\\sin\\theta$, for $\\theta$ measured from the positive horizontal.",
+        "Horizontal $R\\sin\\theta$, vertical $R\\cos\\theta$, for $\\theta$ measured from the positive horizontal.",
+        "Horizontal $R\\cos\\theta$, vertical $-R\\sin\\theta$, for $\\theta$ measured from the positive horizontal.",
+        "Horizontal $R\\tan\\theta$, vertical $R\\sin\\theta$, for $\\theta$ measured from the positive horizontal."
       ]
     },
     {
@@ -1309,7 +2143,13 @@
       "back": [
         "$k\\cos(kx)$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$k\\cos(kx)$",
+        "$-k\\cos(kx)$",
+        "$k\\sin(kx)$",
+        "$\\cos(kx)$"
+      ]
     },
     {
       "id": "differentiate-cos",
@@ -1318,7 +2158,13 @@
       "back": [
         "$-k\\sin(kx)$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$-k\\sin(kx)$",
+        "$k\\sin(kx)$",
+        "$-k\\cos(kx)$",
+        "$-\\sin(kx)$"
+      ]
     },
     {
       "id": "differentiate-tan",
@@ -1327,7 +2173,13 @@
       "back": [
         "$k\\sec^2(kx)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$k\\sec^2(kx)$",
+        "$-k\\sec^2(kx)$",
+        "$k\\tan^2(kx)$",
+        "$k\\sec(kx)\\tan(kx)$"
+      ]
     },
     {
       "id": "differentiate-sec",
@@ -1336,7 +2188,13 @@
       "back": [
         "$k\\sec(kx)\\tan(kx)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$k\\sec(kx)\\tan(kx)$",
+        "$-k\\sec(kx)\\tan(kx)$",
+        "$k\\sec^2(kx)$",
+        "$k\\cosec(kx)\\cot(kx)$"
+      ]
     },
     {
       "id": "differentiate-cosec",
@@ -1345,7 +2203,13 @@
       "back": [
         "$-k\\cosec(kx)\\cot(kx)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$-k\\cosec(kx)\\cot(kx)$",
+        "$k\\cosec(kx)\\cot(kx)$",
+        "$-k\\cosec^2(kx)$",
+        "$k\\sec(kx)\\tan(kx)$"
+      ]
     },
     {
       "id": "differentiate-cot",
@@ -1354,7 +2218,13 @@
       "back": [
         "$-k\\cosec^2(kx)$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$-k\\cosec^2(kx)$",
+        "$k\\cosec^2(kx)$",
+        "$-k\\sec^2(kx)$",
+        "$-k\\cosec(kx)\\cot(kx)$"
+      ]
     },
     {
       "id": "integrate-sin",
@@ -1363,7 +2233,13 @@
       "back": [
         "$-\\dfrac{1}{k}\\cos(kx)+C$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$-\\dfrac{1}{k}\\cos(kx)+C$",
+        "$\\dfrac1k\\cos(kx)+C$",
+        "$-k\\cos(kx)+C$",
+        "$\\dfrac1k\\sin(kx)+C$"
+      ]
     },
     {
       "id": "integrate-cos",
@@ -1372,7 +2248,13 @@
       "back": [
         "$\\dfrac{1}{k}\\sin(kx)+C$"
       ],
-      "reference": "recall"
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{1}{k}\\sin(kx)+C$",
+        "$-\\dfrac1k\\sin(kx)+C$",
+        "$k\\sin(kx)+C$",
+        "$\\dfrac1k\\cos(kx)+C$"
+      ]
     },
     {
       "id": "integrate-sec-square",
@@ -1381,7 +2263,13 @@
       "back": [
         "$\\dfrac{1}{k}\\tan(kx)+C$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{1}{k}\\tan(kx)+C$",
+        "$-\\dfrac1k\\tan(kx)+C$",
+        "$\\dfrac1k\\sec(kx)+C$",
+        "$\\dfrac1k\\cot(kx)+C$"
+      ]
     },
     {
       "id": "integrate-tan",
@@ -1391,7 +2279,13 @@
         "$-\\dfrac{1}{k}\\ln|\\cos(kx)|+C$",
         "The equivalent form in the booklet is $\\dfrac{1}{k}\\ln|\\sec(kx)|+C$."
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$-\\dfrac{1}{k}\\ln|\\cos(kx)|+C$",
+        "$\\dfrac1k\\ln|\\cos(kx)|+C$",
+        "$-\\dfrac1k\\ln|\\sin(kx)|+C$",
+        "$\\dfrac1k\\tan(kx)+C$"
+      ]
     },
     {
       "id": "integrate-cot",
@@ -1400,7 +2294,13 @@
       "back": [
         "$\\dfrac{1}{k}\\ln|\\sin(kx)|+C$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{1}{k}\\ln|\\sin(kx)|+C$",
+        "$-\\dfrac1k\\ln|\\sin(kx)|+C$",
+        "$\\dfrac1k\\ln|\\cos(kx)|+C$",
+        "$\\dfrac1k\\cot(kx)+C$"
+      ]
     },
     {
       "id": "integrate-sec",
@@ -1409,7 +2309,13 @@
       "back": [
         "$\\dfrac{1}{k}\\ln|\\sec(kx)+\\tan(kx)|+C$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{1}{k}\\ln|\\sec(kx)+\\tan(kx)|+C$",
+        "$-\\dfrac1k\\ln|\\sec(kx)+\\tan(kx)|+C$",
+        "$\\dfrac1k\\ln|\\cos(kx)|+C$",
+        "$\\dfrac1k\\ln|\\sec(kx)|+C$"
+      ]
     },
     {
       "id": "integrate-cosec",
@@ -1418,7 +2324,13 @@
       "back": [
         "$-\\dfrac{1}{k}\\ln|\\cosec kx+\\cot kx|+C$"
       ],
-      "reference": "booklet"
+      "reference": "booklet",
+      "choices": [
+        "$-\\dfrac{1}{k}\\ln|\\cosec kx+\\cot kx|+C$",
+        "$\\dfrac1k\\ln|\\cosec(kx)+\\cot(kx)|+C$",
+        "$-\\dfrac1k\\ln|\\sin(kx)|+C$",
+        "$-\\dfrac1k\\ln|\\cosec(kx)|+C$"
+      ]
     },
     {
       "id": "integrate-cosec-square",
@@ -1426,6 +2338,12 @@
       "front": "What is $\\displaystyle\\int\\cosec^2(kx)\\,dx$ for $k\\ne0$?",
       "back": [
         "$-\\dfrac{1}{k}\\cot(kx)+C$"
+      ],
+      "choices": [
+        "$-\\dfrac{1}{k}\\cot(kx)+C$",
+        "$\\dfrac1k\\cot(kx)+C$",
+        "$-\\dfrac1k\\cosec(kx)+C$",
+        "$-\\dfrac1k\\tan(kx)+C$"
       ]
     },
     {
@@ -1434,6 +2352,12 @@
       "front": "What is $\\displaystyle\\int\\sec(kx)\\tan(kx)\\,dx$ for $k\\ne0$?",
       "back": [
         "$\\dfrac{1}{k}\\sec(kx)+C$"
+      ],
+      "choices": [
+        "$\\dfrac{1}{k}\\sec(kx)+C$",
+        "$-\\dfrac1k\\sec(kx)+C$",
+        "$\\dfrac1k\\tan(kx)+C$",
+        "$\\dfrac1k\\cosec(kx)+C$"
       ]
     },
     {
@@ -1442,6 +2366,12 @@
       "front": "What is $\\displaystyle\\int\\cosec(kx)\\cot(kx)\\,dx$ for $k\\ne0$?",
       "back": [
         "$-\\dfrac{1}{k}\\cosec(kx)+C$"
+      ],
+      "choices": [
+        "$-\\dfrac{1}{k}\\cosec(kx)+C$",
+        "$\\dfrac1k\\cosec(kx)+C$",
+        "$-\\dfrac1k\\cot(kx)+C$",
+        "$-\\dfrac1k\\sec(kx)+C$"
       ]
     },
     {
@@ -1450,6 +2380,12 @@
       "front": "What can you do before integrating sine squared, cosine squared or tangent squared?",
       "back": [
         "For sine and cosine, rewrite using $\\cos 2x$ and the double-angle formulas. For tangent, use $\\tan^2 x=\\sec^2 x-1$."
+      ],
+      "choices": [
+        "Use double-angle identities for sine and cosine. Use $\\tan^2 x=\\sec^2 x-1$ for tangent.",
+        "Treat each squared function as the square of its antiderivative.",
+        "Use $\\sin^2 x=\\sin(2x)$, $\\cos^2 x=\\cos(2x)$ and $\\tan^2 x=\\tan(2x)$.",
+        "Integrate each unsquared function first, then multiply its result by two."
       ]
     },
     {
@@ -1460,6 +2396,12 @@
         "$\\lim_{h\\to0}\\dfrac{\\sin h}{h}=1$",
         "$\\lim_{h\\to0}\\dfrac{\\cos h-1}{h}=0$",
         "Use radians. Expand $\\sin(x+h)$ or $\\cos(x+h)$ with the compound-angle formula."
+      ],
+      "choices": [
+        "$\\dfrac{\\sin h}{h}\\to1$ and $\\dfrac{\\cos h-1}{h}\\to0$ as $h\\to0$.",
+        "$\\dfrac{\\sin h}{h}\\to0$ and $\\dfrac{\\cos h-1}{h}\\to1$ as $h\\to0$.",
+        "$\\dfrac{\\sin h}{h}\\to1$ and $\\dfrac{\\cos h-1}{h}\\to1$ as $h\\to0$.",
+        "$\\dfrac{\\sin h}{h}\\to0$ and $\\dfrac{\\cos h-1}{h}\\to0$ as $h\\to0$."
       ]
     }
   ]

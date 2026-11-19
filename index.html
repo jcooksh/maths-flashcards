@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Click-to-reveal flashcards for Edexcel A level Pure Maths revision and trigonometry.">
+  <meta name="description" content="Flashcards and multiple-choice questions for Edexcel A level Pure Maths revision and trigonometry.">
   <meta name="theme-color" content="#141a2e">
   <title>Maths flashcards · Edexcel A level</title>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=3">
+  <link rel="stylesheet" href="./styles.css?v=4">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=3"></script>
+  <script type="module" src="./app.js?v=4"></script>
 </head>
 <body>
   <header class="mobile-header">
@@ -34,7 +34,7 @@
             <div class="topic-list" id="trigonometry-topics"></div>
           </div>
           <button class="all-cards" data-deck="all" type="button" aria-pressed="false">
-            <span>All cards</span><span id="count-all"></span>
+            <span id="all-deck-label">All cards</span><span id="count-all"></span>
           </button>
         </nav>
         <section class="progress-summary" aria-label="Progress on this device">
@@ -53,9 +53,13 @@
       <div class="study-layout">
         <header class="study-header">
           <div class="study-topline">
-            <p class="position"><span id="collection-label">Revision</span><span id="position-label"></span></p>
+            <nav class="study-modes" aria-label="Study mode">
+              <button class="mode-button" id="flashcard-mode" type="button" aria-pressed="true">Flashcards</button>
+              <button class="mode-button" id="question-mode" type="button" aria-pressed="false">Maths questions</button>
+            </nav>
             <button class="account-button" id="account-button" type="button" aria-haspopup="dialog" aria-controls="account-dialog">Sign in</button>
           </div>
+          <p class="position"><span id="collection-label">Revision</span><span id="position-label"></span></p>
           <div class="study-title">
             <h1 id="deck-title">Differentiation</h1>
             <button class="study-next" id="study-next" type="button" disabled>
@@ -86,12 +90,23 @@
             </span>
           </button>
 
-          <div class="card-actions" role="group" aria-label="Flashcard actions">
+          <div class="card-actions" id="flashcard-actions" role="group" aria-label="Flashcard actions">
             <button class="pill pill-review" id="review-card" type="button">Not yet</button>
             <button class="pill pill-flip" id="flip-card" type="button" aria-pressed="false">Show answer</button>
             <button class="pill pill-known" id="know-card" type="button">Got it</button>
           </div>
-          <div class="card-navigation" role="group" aria-label="Flashcard navigation">
+
+          <div class="question-card" id="question-card" hidden>
+            <h2 id="question-prompt" tabindex="-1"></h2>
+            <div class="question-options" id="question-options" role="group" aria-label="Answer choices"></div>
+            <div class="question-feedback">
+              <p id="question-feedback" role="status" tabindex="-1"></p>
+              <button class="quiet-button" id="reveal-question" type="button">Show answer</button>
+            </div>
+            <div class="question-explanation" id="question-explanation" hidden></div>
+          </div>
+
+          <div class="card-navigation" role="group" aria-label="Practice navigation">
             <button class="quiet-button" id="previous" type="button">Previous</button>
             <button class="quiet-button" id="shuffle" type="button">Shuffle</button>
             <button class="quiet-button" id="next" type="button">Next card</button>
