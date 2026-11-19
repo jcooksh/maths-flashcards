@@ -1,8 +1,14 @@
 "use strict";
 
 const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (element) => [element.id, element]));
-const deckButtons = Array.from(document.querySelectorAll("[data-deck]"));
 const storageKey = "maths-flashcards.ratings.v1";
+const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", review: "To review" };
+const topicHues = {
+  differentiation: 155, sequences: 255, logarithms: 305, integration: 60, algebra: 20, modelling: 200,
+  triangles: 100, graphs: 230, identities: 330, angles: 40, equations: 175, "trig-calculus": 280,
+};
+const topicsDialog = ui["topics-dialog"];
+const mobileLayout = window.matchMedia("(max-width: 720px)");
 const referenceLabels = {
   recall: "Recall for the exam",
   booklet: "In the formula booklet",
@@ -18,6 +24,7 @@ let topics = new Map();
 let ratings = new Map();
 let queue = [];
 let activeDeck = "all";
+let activeTopic = "all";
 let position = 0;
 let answerVisible = false;
 
@@ -63,39 +70,60 @@ function matchesDeck(card) {
 function renderProgress() {
   const known = cards.filter((card) => ratings.get(card.id) === "known").length;
   const review = cards.filter((card) => ratings.get(card.id) === "review").length;
-  const revision = cards.filter((card) => topics.get(card.topic).collection === "revision").length;
   ui["count-all"].textContent = cards.length;
-  ui["count-revision"].textContent = revision;
-  ui["count-trigonometry"].textContent = cards.length - revision;
   ui["count-review"].textContent = review;
   ui["known-count"].textContent = known;
-  ui["known-total"].textContent = "of " + cards.length;
-  ui["known-fill"].style.width = (100 * known / cards.length) + "%";
+}
+
+function renderTopics() {
+  for (const topic of topics.values()) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "topic-button";
+    button.dataset.deck = topic.collection;
+    button.dataset.topic = topic.id;
+    button.style.setProperty("--hue", topicHues[topic.id] ?? 155);
+
+    const dot = document.createElement("span");
+    dot.className = "topic-dot";
+    dot.setAttribute("aria-hidden", "true");
+    const name = document.createElement("span");
+    name.className = "topic-name";
+    name.textContent = topic.title;
+    const count = document.createElement("span");
+    count.className = "topic-count";
+    count.textContent = cards.filter((card) => card.topic === topic.id).length;
+    button.append(dot, name, count);
+    ui[topic.collection + "-topics"].append(button);
+    ui["review-topic"].add(new Option(topic.title, topic.id));
+  }
 }
 
 function renderCard(announcement = "") {
   const card = queue[position];
+  const topic = topics.get(card?.topic ?? activeTopic);
   ui.practice.hidden = !card;
   ui.empty.hidden = Boolean(card);
+  ui["collection-label"].textContent = deckLabels[activeDeck];
+  ui["deck-title"].textContent = topic?.title ?? deckLabels[activeDeck];
+  ui["position-label"].textContent = card ? (position + 1) + " of " + queue.length : "";
   ui.shuffle.disabled = queue.length < 2;
   if (!card) {
-    const message = activeDeck === "review" && ui.topic.value === "all"
-      ? "Your review deck is empty. Choose “Review again” on any answer to add a card here."
+    const message = activeDeck === "review" && activeTopic === "all"
+      ? "Your review deck is empty. Choose “Not yet” on a card to add it here."
       : "There are no cards for this topic in this deck.";
     ui["empty-message"].textContent = message;
     ui.announcer.textContent = announcement || message;
     return;
   }
 
-  ui["position-label"].textContent = (position + 1) + " of " + queue.length;
-  ui["position-fill"].style.width = (100 * (position + 1) / queue.length) + "%";
-  ui["card-topic"].textContent = topics.get(card.topic).title;
   ui.flashcard.setAttribute("aria-pressed", String(answerVisible));
+  ui["flip-card"].setAttribute("aria-pressed", String(answerVisible));
+  ui["flip-card"].textContent = answerVisible ? "Show question" : "Show answer";
   ui["card-face-label"].hidden = !answerVisible;
-  ui["flip-label"].textContent = answerVisible ? "Show question" : "Show answer";
+  ui["flip-hint"].hidden = answerVisible;
   ui["reference-label"].hidden = !answerVisible || !card.reference;
   ui["reference-label"].textContent = answerVisible ? referenceLabels[card.reference] ?? "" : "";
-  ui.rating.hidden = !answerVisible;
   ui.previous.disabled = position === 0;
   ui.next.disabled = position === queue.length - 1;
 
@@ -110,25 +138,22 @@ function renderCard(announcement = "") {
 }
 
 function resetQueue() {
-  queue = cards.filter((card) => matchesDeck(card) && (ui.topic.value === "all" || ui.topic.value === card.topic));
+  queue = cards.filter((card) => matchesDeck(card) && (activeTopic === "all" || activeTopic === card.topic));
   position = 0;
   answerVisible = false;
 }
 
-function changeDeck(deck) {
+function changeDeck(deck, topic = "all") {
   activeDeck = deck;
-  for (const button of deckButtons) {
-    const active = button.dataset.deck === deck;
+  activeTopic = topic;
+  for (const button of ui.library.querySelectorAll("[data-deck]")) {
+    const active = button.dataset.deck === deck && (
+      deck === "review" || (button.dataset.topic ?? "all") === topic
+    );
     button.setAttribute("aria-pressed", String(active));
-    if (active) ui["deck-title"].textContent = button.firstElementChild.textContent;
   }
-
-  ui.topic.replaceChildren(new Option("All topics", "all"));
-  for (const topic of topics.values()) {
-    if (deck === "all" || deck === "review" || deck === topic.collection) {
-      ui.topic.add(new Option(topic.title, topic.id));
-    }
-  }
+  ui["review-filter"].hidden = deck !== "review";
+  ui["review-topic"].value = deck === "review" ? topic : "all";
   resetQueue();
   renderCard();
 }
@@ -165,7 +190,7 @@ function shuffleCards() {
 
 function rateCard(rating) {
   const card = queue[position];
-  if (!card || !answerVisible) return;
+  if (!card) return;
   ratings.set(card.id, rating);
   let announcement = rating === "known" ? "Marked as known." : "Added to your review deck.";
 
@@ -195,14 +220,15 @@ async function start() {
     ratings = loadRatings();
 
     ui.loading.hidden = true;
-    ui.topic.disabled = false;
+    renderTopics();
     renderProgress();
-    changeDeck("all");
 
-    const directLink = new URLSearchParams(window.location.search).get("card");
-    const directPosition = queue.findIndex((card) => card.id === directLink);
-    if (directPosition >= 0) {
-      position = directPosition;
+    const cardId = new URLSearchParams(window.location.search).get("card");
+    const directCard = cards.find((card) => card.id === cardId);
+    const topic = topics.get(directCard?.topic) ?? topics.values().next().value;
+    changeDeck(topic.collection, topic.id);
+    if (directCard) {
+      position = queue.findIndex((card) => card.id === cardId);
       renderCard();
     }
   } catch (error) {
@@ -212,17 +238,34 @@ async function start() {
   }
 }
 
-for (const button of deckButtons) {
-  button.addEventListener("click", () => {
-    if (cards.length && activeDeck !== button.dataset.deck) changeDeck(button.dataset.deck);
-  });
-}
-ui.topic.addEventListener("change", () => {
-  resetQueue();
-  renderCard();
+ui.library.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-deck]");
+  if (!button || !cards.length) return;
+  if (button.getAttribute("aria-pressed") !== "true") changeDeck(button.dataset.deck, button.dataset.topic);
+  if (topicsDialog.open) {
+    topicsDialog.close();
+    (queue.length ? ui.flashcard : ui["return-to-deck"]).focus({ preventScroll: true });
+  }
+});
+ui["review-topic"].addEventListener("change", (event) => {
+  changeDeck("review", event.target.value);
+});
+ui["open-topics"].addEventListener("click", () => {
+  ui["mobile-library"].append(ui.library);
+  topicsDialog.showModal();
+  ui["open-topics"].setAttribute("aria-expanded", "true");
+});
+topicsDialog.addEventListener("close", () => {
+  if (topicsDialog.open) return;
+  ui.sidebar.append(ui.library);
+  ui["open-topics"].setAttribute("aria-expanded", "false");
+});
+mobileLayout.addEventListener("change", (event) => {
+  if (!event.matches && topicsDialog.open) topicsDialog.close();
 });
 ui.shuffle.addEventListener("click", shuffleCards);
 ui.flashcard.addEventListener("click", flipCard);
+ui["flip-card"].addEventListener("click", flipCard);
 ui.previous.addEventListener("click", () => moveCard(-1));
 ui.next.addEventListener("click", () => moveCard(1));
 ui["know-card"].addEventListener("click", () => rateCard("known"));
@@ -232,7 +275,7 @@ ui["return-to-deck"].addEventListener("click", () => {
   ui.flashcard.focus();
 });
 document.addEventListener("keydown", (event) => {
-  if (event.altKey || event.ctrlKey || event.metaKey || !queue.length || event.defaultPrevented) return;
+  if (topicsDialog.open || event.altKey || event.ctrlKey || event.metaKey || !queue.length || event.defaultPrevented) return;
   if (event.target.closest("input, select, textarea, [contenteditable]")) return;
   if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
     event.preventDefault();
