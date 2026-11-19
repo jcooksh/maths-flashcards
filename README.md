@@ -1,6 +1,12 @@
 # Maths flashcards
 
-Quick recall of methods and formulas for Edexcel A level Pure Mathematics (9MA0). Click the card to reveal the answer, or use Space. Arrow keys move between cards. The review deck and known count use storage in the current browser.
+Quick recall of methods and formulas for Edexcel A level Pure Mathematics (9MA0). Click the card to reveal the answer, or use Space. Arrow keys move between cards.
+
+Study next starts with missed cards and then cards due for review. When those are done, it offers up to ten new cards. Each correct review increases the time before the next one. A missed card is due straight away.
+
+Ratings are stored in the current browser and sync across devices when signed in. The first sign-in on a browser also includes existing ratings from that browser. The GitHub Pages site uses Supabase Auth and the account-scoped progress migration in `supabase/migrations/`. The browser uses the project's publishable API key. Supabase JS 2.119.1 is served locally with its licence in `assets/supabase/`.
+
+The site has a single personal sign-in. Initial setup uses a Supabase Auth invitation for the account in `account.js`, and the user chooses their own password. The one-time invitation token is passed in the URL fragment and exchanged on form submission.
 
 ## Run locally
 

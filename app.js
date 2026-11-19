@@ -1,8 +1,8 @@
-"use strict";
+import { studyPlan } from "./progress.js?v=1";
+import { connectAccount } from "./account.js?v=1";
 
 const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (element) => [element.id, element]));
-const storageKey = "maths-flashcards.ratings.v1";
-const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", review: "To review" };
+const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", review: "To review", study: "Study next" };
 const topicHues = {
   differentiation: 155, sequences: 255, logarithms: 305, integration: 60, algebra: 20, modelling: 200,
   triangles: 100, graphs: 230, identities: 330, angles: 40, equations: 175, "trig-calculus": 280,
@@ -21,29 +21,12 @@ const mathOptions = {
 
 let cards = [];
 let topics = new Map();
-let ratings = new Map();
+let progress = new Map();
 let queue = [];
 let activeDeck = "all";
 let activeTopic = "all";
 let position = 0;
 let answerVisible = false;
-
-function loadRatings() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(storageKey));
-    return new Map(Object.entries(stored ?? {}).filter(([, value]) => value === "review" || value === "known"));
-  } catch {
-    return new Map();
-  }
-}
-
-function saveRatings() {
-  try {
-    localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(ratings)));
-  } catch {
-    ui.announcer.textContent += " Progress is available for this session.";
-  }
-}
 
 function appendMath(element, value) {
   const segments = value.split(/(\$[^$]+\$)/g);
@@ -63,16 +46,41 @@ function appendMath(element, value) {
 
 function matchesDeck(card) {
   if (activeDeck === "all") return true;
-  if (activeDeck === "review") return ratings.get(card.id) === "review";
+  if (activeDeck === "review") return progress.get(card.id)?.rating === "review";
   return topics.get(card.topic).collection === activeDeck;
 }
 
 function renderProgress() {
-  const known = cards.filter((card) => ratings.get(card.id) === "known").length;
-  const review = cards.filter((card) => ratings.get(card.id) === "review").length;
+  const known = cards.filter((card) => progress.get(card.id)?.rating === "known").length;
+  const review = cards.filter((card) => progress.get(card.id)?.rating === "review").length;
+  const plan = studyPlan(cards, progress);
   ui["count-all"].textContent = cards.length;
   ui["count-review"].textContent = review;
   ui["known-count"].textContent = known;
+  ui["study-next"].disabled = !plan.queue.length;
+  ui["study-next-label"].textContent = plan.queue.length ? "Study next" : "All caught up";
+  ui["study-next-count"].textContent = plan.reviewCount ? plan.reviewCount + " due" : plan.queue.length ? plan.queue.length + " new" : "";
+}
+
+function useProgress(next, accountChanged) {
+  progress = next;
+  if (!cards.length) return;
+  renderProgress();
+  if (activeDeck === "study" && accountChanged) {
+    resetQueue();
+    renderCard();
+  }
+  if (activeDeck === "review") {
+    const previousCard = queue[position];
+    const previousFace = answerVisible;
+    resetQueue();
+    const currentPosition = queue.indexOf(previousCard);
+    if (currentPosition !== -1) {
+      position = currentPosition;
+      answerVisible = previousFace;
+    }
+    renderCard();
+  }
 }
 
 function renderTopics() {
@@ -109,9 +117,15 @@ function renderCard(announcement = "") {
   ui["position-label"].textContent = card ? (position + 1) + " of " + queue.length : "";
   ui.shuffle.disabled = queue.length < 2;
   if (!card) {
-    const message = activeDeck === "review" && activeTopic === "all"
-      ? "Your review deck is empty. Choose “Not yet” on a card to add it here."
-      : "There are no cards for this topic in this deck.";
+    let message = "There are no cards for this topic in this deck.";
+    if (activeDeck === "study") {
+      message = ui["study-next"].disabled
+        ? "You’re caught up. Come back when more cards are due."
+        : "You’ve finished this round. Use Study next when you’re ready for another.";
+    }
+    if (activeDeck === "review" && activeTopic === "all") {
+      message = "Your review deck is empty. Choose “Not yet” on a card to add it here.";
+    }
     ui["empty-message"].textContent = message;
     ui.announcer.textContent = announcement || message;
     return;
@@ -138,7 +152,9 @@ function renderCard(announcement = "") {
 }
 
 function resetQueue() {
-  queue = cards.filter((card) => matchesDeck(card) && (activeTopic === "all" || activeTopic === card.topic));
+  queue = activeDeck === "study"
+    ? studyPlan(cards, progress).queue
+    : cards.filter((card) => matchesDeck(card) && (activeTopic === "all" || activeTopic === card.topic));
   position = 0;
   answerVisible = false;
 }
@@ -191,14 +207,14 @@ function shuffleCards() {
 function rateCard(rating) {
   const card = queue[position];
   if (!card) return;
-  ratings.set(card.id, rating);
+  const saved = account.rate(card.id, rating);
   let announcement = rating === "known" ? "Marked as known." : "Added to your review deck.";
 
-  if (activeDeck === "review" && rating === "known") {
+  if (activeDeck === "study" || (activeDeck === "review" && rating === "known")) {
     queue.splice(position, 1);
     position = Math.max(0, Math.min(position, queue.length - 1));
     answerVisible = false;
-    if (!queue.length) announcement += " No cards left for review in this selection.";
+    if (!queue.length) announcement += " You’ve finished this round.";
   } else if (position < queue.length - 1) {
     position++;
     answerVisible = false;
@@ -206,7 +222,7 @@ function rateCard(rating) {
 
   renderProgress();
   renderCard(announcement);
-  saveRatings();
+  if (!saved) ui.announcer.textContent += " Progress couldn’t be saved on this device.";
   (queue.length ? ui.flashcard : ui["return-to-deck"]).focus();
 }
 
@@ -217,7 +233,6 @@ async function start() {
     const data = await response.json();
     cards = data.cards;
     topics = new Map(data.topics.map((topic) => [topic.id, topic]));
-    ratings = loadRatings();
 
     ui.loading.hidden = true;
     renderTopics();
@@ -250,6 +265,10 @@ ui.library.addEventListener("click", (event) => {
 ui["review-topic"].addEventListener("change", (event) => {
   changeDeck("review", event.target.value);
 });
+ui["study-next"].addEventListener("click", () => {
+  changeDeck("study");
+  (queue.length ? ui.flashcard : ui["return-to-deck"]).focus({ preventScroll: true });
+});
 ui["open-topics"].addEventListener("click", () => {
   ui["mobile-library"].append(ui.library);
   topicsDialog.showModal();
@@ -275,7 +294,7 @@ ui["return-to-deck"].addEventListener("click", () => {
   ui.flashcard.focus();
 });
 document.addEventListener("keydown", (event) => {
-  if (topicsDialog.open || event.altKey || event.ctrlKey || event.metaKey || !queue.length || event.defaultPrevented) return;
+  if (topicsDialog.open || ui["account-dialog"].open || event.altKey || event.ctrlKey || event.metaKey || !queue.length || event.defaultPrevented) return;
   if (event.target.closest("input, select, textarea, [contenteditable]")) return;
   if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
     event.preventDefault();
@@ -285,4 +304,6 @@ document.addEventListener("keydown", (event) => {
     flipCard();
   }
 });
+const account = connectAccount(ui, useProgress);
 start();
+window.setInterval(() => { if (cards.length) renderProgress(); }, 60_000);
