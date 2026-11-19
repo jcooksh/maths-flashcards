@@ -323,6 +323,8 @@ function renderQuestion(card) {
     displayedQuestion = attempt;
     ui["question-prompt"].replaceChildren();
     appendMath(ui["question-prompt"], card.front, false);
+    const visibleLength = (text) => text.replace(/\\[a-zA-Z]+/g, "x").replace(/[${}^_\\\s]/g, "").length;
+    optionList.classList.toggle("compact", attempt.options.every((option) => visibleLength(option.text) <= 14));
     optionList.replaceChildren(...attempt.options.map((option, index) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -390,6 +392,14 @@ function answerQuestion(choiceIndex) {
   play(ui["question-feedback"], [{ opacity: 0, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: easeOut });
   if (!saved) ui["question-feedback"].textContent += " Progress couldn’t be saved on this device.";
   if (revealed) ui["question-feedback"].focus({ preventScroll: true });
+  if (attempt.outcome) {
+    const card = ui["question-card"];
+    requestAnimationFrame(() => {
+      if (card.scrollHeight > card.clientHeight) {
+        card.scrollTo({ top: card.scrollHeight, behavior: reducedMotion.matches ? "auto" : "smooth" });
+      }
+    });
+  }
 }
 
 function renderNextButton() {
@@ -410,6 +420,8 @@ function renderCard(announcement = "") {
   ui["collection-label"].textContent = deckName;
   ui["deck-title"].textContent = topic?.title ?? deckName;
   ui["open-topics"].style.setProperty("--hue", topicHues[topic?.id] ?? 155);
+  ui["menu-label"].textContent = topic?.title ?? deckName;
+  ui["open-topics"].setAttribute("aria-label", "Choose a topic. Current: " + (topic?.title ?? deckName));
   ui["position-label"].textContent = card ? (position + 1) + " / " + queue.length : "";
   ui["deck-progress-fill"].style.transform = `scaleX(${queue.length ? (position + 1) / queue.length : 0})`;
   ui.shuffle.disabled = queue.length < 2;
@@ -450,6 +462,7 @@ function renderCard(announcement = "") {
   ui.next.disabled = !questionMode && position === queue.length - 1;
   renderNextButton();
   if (questionMode) {
+    if (displayedQuestion !== questionAttempts.get(card.id)) ui["question-card"].scrollTop = 0;
     renderQuestion(card);
     ui.announcer.textContent = announcement || "Question " + (position + 1) + " of " + queue.length + ".";
     return;
@@ -705,6 +718,14 @@ function closeOnBackdrop(dialog) {
   });
 }
 
+/* ---------- Mobile header ---------- */
+
+// On phones the theme and account buttons live in the top bar so the page fits on one screen.
+function placeHeaderActions() {
+  const target = mobileLayout.matches ? ui["mobile-actions"] : ui["study-modes"].parentElement;
+  if (ui["topline-actions"].parentElement !== target) target.append(ui["topline-actions"]);
+}
+
 /* ---------- Start ---------- */
 
 async function start() {
@@ -778,6 +799,7 @@ topicsDialog.addEventListener("close", () => {
 });
 mobileLayout.addEventListener("change", (event) => {
   if (!event.matches && topicsDialog.open) topicsDialog.close();
+  placeHeaderActions();
 });
 closeOnBackdrop(topicsDialog);
 closeOnBackdrop(accountDialog);
@@ -822,6 +844,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 setupSwipe();
+placeHeaderActions();
 renderTheme();
 const account = connectAccount(ui, useProgress, toast);
 start();

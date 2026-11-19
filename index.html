@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Flashcards and multiple-choice questions for Edexcel A level Pure Maths revision and trigonometry.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#141a2e">
@@ -14,17 +14,20 @@
     } catch {}
   </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=5">
+  <link rel="stylesheet" href="./styles.css?v=7">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=6"></script>
+  <script type="module" src="./app.js?v=8"></script>
 </head>
 <body>
   <header class="mobile-header">
-    <p class="brand"><span class="brand-mark" aria-hidden="true">∑</span>Maths flashcards</p>
-    <button class="menu-button" id="open-topics" type="button" aria-haspopup="dialog" aria-controls="topics-dialog" aria-expanded="false">
-      <span class="menu-dot" aria-hidden="true"></span>Topics
+    <span class="brand-mark" aria-hidden="true">∑</span>
+    <button class="menu-button" id="open-topics" type="button" aria-haspopup="dialog" aria-controls="topics-dialog" aria-expanded="false" aria-label="Choose a topic">
+      <span class="menu-dot" aria-hidden="true"></span>
+      <span class="menu-label" id="menu-label">Topics</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </button>
+    <div class="mobile-actions" id="mobile-actions"></div>
   </header>
 
   <div class="app">
@@ -55,10 +58,12 @@
     </aside>
 
     <main class="study">
-      <div class="shape shape-green" aria-hidden="true"></div>
-      <div class="shape shape-lilac" aria-hidden="true"></div>
-      <div class="shape shape-gold" aria-hidden="true"></div>
-      <div class="shape shape-navy" aria-hidden="true"></div>
+      <div class="shapes" aria-hidden="true">
+        <div class="shape shape-green"></div>
+        <div class="shape shape-lilac"></div>
+        <div class="shape shape-gold"></div>
+        <div class="shape shape-navy"></div>
+      </div>
 
       <div class="study-layout">
         <div class="study-topline">
@@ -67,7 +72,10 @@
             <button class="mode-button" id="flashcard-mode" type="button" aria-pressed="true">Flashcards</button>
             <button class="mode-button" id="question-mode" type="button" aria-pressed="false">Questions</button>
           </nav>
-          <div class="topline-actions">
+          <button class="study-next" id="study-next" type="button" disabled>
+            <span id="study-next-label">Study next</span><span id="study-next-count"></span>
+          </button>
+          <div class="topline-actions" id="topline-actions">
             <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
               <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
               <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -82,12 +90,7 @@
         <div class="deck-view" id="deck-view">
           <header class="study-header">
             <p class="position" id="collection-label">Revision</p>
-            <div class="study-title">
-              <h1 id="deck-title">Differentiation</h1>
-              <button class="study-next" id="study-next" type="button" disabled>
-                <span id="study-next-label">Study next</span><span id="study-next-count"></span>
-              </button>
-            </div>
+            <h1 id="deck-title">Differentiation</h1>
             <div class="review-filter" id="review-filter" hidden>
               <label for="review-topic">Topic</label>
               <select id="review-topic">
@@ -183,6 +186,12 @@
       </button>
     </header>
     <div id="mobile-library"></div>
+    <footer class="drawer-sources">
+      <span>Edexcel A level Pure Maths · 9MA0</span>
+      <a href="https://qualifications.pearson.com/content/dam/pdf/A%20Level/Mathematics/2017/specification-and-sample-assesment/a-level-l3-mathematics-specification-issue4.pdf">Specification</a>
+      <a href="https://qualifications.pearson.com/content/dam/pdf/A%20Level/Mathematics/2017/specification-and-sample-assesment/pearson-edexcel-l3-advanced-gce-mathematics-9ma0-enhanced-content-guidance-issue-2.pdf">Content guidance</a>
+      <a href="https://qualifications.pearson.com/content/dam/pdf/A%20Level/Mathematics/2017/specification-and-sample-assesment/pearson-edexcel-a-level-gce-in-mathematics-formulae-book.pdf">Formula booklet</a>
+    </footer>
   </dialog>
 
   <dialog class="account-dialog" id="account-dialog" aria-labelledby="account-title" aria-describedby="account-intro">
