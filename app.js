@@ -5,7 +5,8 @@ const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (ele
 const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", review: "To review", study: "Study next" };
 const topicHues = {
   differentiation: 155, sequences: 255, logarithms: 305, integration: 60, algebra: 20, modelling: 200,
-  triangles: 100, graphs: 230, identities: 330, angles: 40, equations: 175, "trig-calculus": 280,
+  identities: 330, compound: 40, double: 0, factor: 100, harmonic: 210, exact: 235,
+  inverse: 270, "small-angle": 80, triangles: 125, equations: 175, "trig-calculus": 295,
 };
 const topicsDialog = ui["topics-dialog"];
 const accountDialog = ui["account-dialog"];
@@ -324,7 +325,7 @@ function renderQuestion(card) {
     ui["question-prompt"].replaceChildren();
     appendMath(ui["question-prompt"], card.front, false);
     const visibleLength = (text) => text.replace(/\\[a-zA-Z]+/g, "x").replace(/[${}^_\\\s]/g, "").length;
-    optionList.classList.toggle("compact", attempt.options.every((option) => visibleLength(option.text) <= 14));
+    optionList.dataset.fit = attempt.options.every((option) => visibleLength(option.text) <= 24) ? "try" : "";
     optionList.replaceChildren(...attempt.options.map((option, index) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -341,6 +342,7 @@ function renderQuestion(card) {
       button.append(letter, text);
       return button;
     }));
+    fitOptions();
   }
 
   for (const [index, button] of Array.from(optionList.children).entries()) {
@@ -359,6 +361,15 @@ function renderQuestion(card) {
   ui["reveal-question"].hidden = Boolean(attempt.outcome);
   ui["question-explanation"].hidden = !attempt.outcome;
   if (attempt.outcome) ui["question-explanation"].replaceChildren(...mathLines(card.back, "answer-line"));
+}
+
+// On phones, short answers sit in a 2×2 grid, but only if every one fits on a single line.
+function fitOptions() {
+  const list = ui["question-options"];
+  list.classList.toggle("compact", list.dataset.fit === "try");
+  if (!list.classList.contains("compact")) return;
+  const overflowing = Array.from(list.querySelectorAll(".option-text")).some((text) => text.scrollWidth > text.clientWidth + 1);
+  if (overflowing) list.classList.remove("compact");
 }
 
 function answerQuestion(choiceIndex) {
@@ -797,6 +808,11 @@ topicsDialog.addEventListener("close", () => {
     if (!topicsDialog.open) ui.sidebar.append(ui.library);
   }, mobileLayout.matches ? 360 : 0);
 });
+let fitFrame = 0;
+window.addEventListener("resize", () => {
+  cancelAnimationFrame(fitFrame);
+  fitFrame = requestAnimationFrame(() => { if (questionMode) fitOptions(); });
+});
 mobileLayout.addEventListener("change", (event) => {
   if (!event.matches && topicsDialog.open) topicsDialog.close();
   placeHeaderActions();
@@ -845,6 +861,9 @@ document.addEventListener("keydown", (event) => {
 
 setupSwipe();
 placeHeaderActions();
+// Math fonts load lazily, so measure the answer choices again once they arrive.
+document.fonts?.ready.then(() => { if (questionMode) fitOptions(); });
+document.fonts?.addEventListener("loadingdone", () => { if (questionMode) fitOptions(); });
 renderTheme();
 const account = connectAccount(ui, useProgress, toast);
 start();

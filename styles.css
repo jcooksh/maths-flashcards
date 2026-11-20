@@ -1505,6 +1505,7 @@ body:has(dialog[open]) { overflow: hidden; }
   #question-prompt { font-size: clamp(1.25rem, 5.6vw, 1.6rem); line-height: 1.18; }
   .question-options { gap: 8px; }
   .question-options.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .question-options.compact .option-text { white-space: nowrap; }
   .question-option { min-height: 50px; padding: 7px 10px 7px 8px; gap: 10px; border-radius: 12px; }
   .option-letter { width: 28px; height: 28px; font-size: 0.8rem; }
   .question-feedback { min-height: 34px; }
@@ -1541,6 +1542,11 @@ body:has(dialog[open]) { overflow: hidden; }
   .pill { min-height: 46px; }
   .nav-button { height: 38px; min-width: 38px; }
   .question-option { min-height: 44px; }
+}
+
+@media (max-width: 420px) {
+  .mobile-header .brand-mark { display: none; }
+  .mobile-header { padding-left: 12px; }
 }
 
 @media (max-width: 380px) {

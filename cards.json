@@ -31,23 +31,48 @@
       "collection": "revision"
     },
     {
-      "id": "triangles",
-      "title": "Triangles and radians",
-      "collection": "trigonometry"
-    },
-    {
-      "id": "graphs",
-      "title": "Exact values and graphs",
-      "collection": "trigonometry"
-    },
-    {
       "id": "identities",
-      "title": "Core identities and approximations",
+      "title": "Reciprocal and Pythagorean",
       "collection": "trigonometry"
     },
     {
-      "id": "angles",
-      "title": "Compound and double angles",
+      "id": "compound",
+      "title": "Compound angles",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "double",
+      "title": "Double and half angles",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "factor",
+      "title": "Factor formulae",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "harmonic",
+      "title": "R cos(x ± α) form",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "exact",
+      "title": "Exact values and symmetries",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "inverse",
+      "title": "Reciprocal and inverse graphs",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "small-angle",
+      "title": "Small angle approximations",
+      "collection": "trigonometry"
+    },
+    {
+      "id": "triangles",
+      "title": "Triangles, arcs and sectors",
       "collection": "trigonometry"
     },
     {
@@ -63,22 +88,6 @@
   ],
   "cards": [
     {
-      "id": "first-principles-replace-x",
-      "topic": "differentiation",
-      "front": "When finding $f(x+h)$, what do you replace each $x$ with?",
-      "back": [
-        "In the original formula for $f(x)$, replace every $x$ with $(x+h)$ and keep any coefficients outside the brackets.",
-        "In $f(x+h)-f(x)$, the second term is the original $f(x)$.",
-        "For $f(x)=cx^2$, write $f(x+h)=c(x+h)^2$."
-      ],
-      "choices": [
-        "$(x+h)$",
-        "$(x-h)$",
-        "$xh$",
-        "$h$"
-      ]
-    },
-    {
       "id": "first-principles-limit",
       "topic": "differentiation",
       "front": "What is the first-principles formula for the derivative?",
@@ -92,37 +101,6 @@
         "$\\displaystyle\\lim_{h\\to0}\\frac{f(x-h)-f(x)}{h}$",
         "$\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)+f(x)}{h}$",
         "$\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(h)}{h}$"
-      ]
-    },
-    {
-      "id": "first-principles-square",
-      "topic": "differentiation",
-      "front": "How do you expand $(x+h)^2$?",
-      "back": [
-        "$(x+h)^2=x^2+2xh+h^2$",
-        "Keep the $h^2$ term through division. It becomes $h$, which tends to zero."
-      ],
-      "choices": [
-        "$x^2+2xh+h^2$",
-        "$x^2+h^2$",
-        "$x^2+xh+h^2$",
-        "$x^2+2xh-h^2$"
-      ]
-    },
-    {
-      "id": "power-rule",
-      "topic": "differentiation",
-      "front": "How do you differentiate $cx^n$?",
-      "back": [
-        "$\\dfrac{d}{dx}(cx^n)=cnx^{n-1}$",
-        "Multiply by the old power, then reduce it by one."
-      ],
-      "reference": "recall",
-      "choices": [
-        "$cnx^{n-1}$",
-        "$cx^{n-1}$",
-        "$cnx^{n+1}$",
-        "$c(n-1)x^{n-1}$"
       ]
     },
     {
@@ -189,20 +167,6 @@
       ]
     },
     {
-      "id": "stationary-points",
-      "topic": "differentiation",
-      "front": "Which expression do you set to zero for a stationary point?",
-      "back": [
-        "Set the derivative to zero. $f'(x)=0$ gives candidates for stationary points."
-      ],
-      "choices": [
-        "The first derivative, $f'(x)$.",
-        "The second derivative, $f''(x)$.",
-        "The original function, $f(x)$.",
-        "The independent variable, $x$."
-      ]
-    },
-    {
       "id": "minimum-test",
       "topic": "differentiation",
       "front": "How can the second derivative confirm a local minimum?",
@@ -260,20 +224,6 @@
       ]
     },
     {
-      "id": "sigma-starting-term",
-      "topic": "sequences",
-      "front": "How do you find the first included term in $\\displaystyle\\sum_{n=m}^{N}u_n$?",
-      "back": [
-        "Substitute the lower limit $m$ into $u_n$. The first included term is $u_m$."
-      ],
-      "choices": [
-        "Use $u_m$, the term at the lower limit.",
-        "Use $u_1$, whatever the lower limit.",
-        "Use $u_{m+1}$, the term after the lower limit.",
-        "Use $u_N$, the term at the upper limit."
-      ]
-    },
-    {
       "id": "sigma-term-count",
       "topic": "sequences",
       "front": "How many terms are in $\\displaystyle\\sum_{n=m}^{N}u_n$?",
@@ -289,21 +239,6 @@
       ]
     },
     {
-      "id": "sigma-sum-meaning",
-      "topic": "sequences",
-      "front": "What does $\\displaystyle\\sum_{n=1}^{N}u_n$ ask you to find?",
-      "back": [
-        "$u_1+u_2+\\cdots+u_N$",
-        "Add every term from the first through the $N$th."
-      ],
-      "choices": [
-        "$u_1+u_2+\\cdots+u_N$",
-        "$u_1u_2\\cdots u_N$",
-        "$u_1+u_N$",
-        "$u_N$"
-      ]
-    },
-    {
       "id": "shifted-exponent-ratio",
       "topic": "sequences",
       "front": "What is the common ratio when the term is $Cb^{kn+c}$?",
@@ -316,21 +251,6 @@
         "$b^{k+c}$",
         "$Cb^k$",
         "$b^c$"
-      ]
-    },
-    {
-      "id": "geometric-ratio",
-      "topic": "sequences",
-      "front": "How do you find a geometric series’ common ratio?",
-      "back": [
-        "$r=\\dfrac{u_{n+1}}{u_n}$",
-        "Divide the next term by the previous term."
-      ],
-      "choices": [
-        "$r=\\dfrac{u_{n+1}}{u_n}$",
-        "$\\dfrac{u_n}{u_{n+1}}$",
-        "$u_{n+1}-u_n$",
-        "$u_{n+1}+u_n$"
       ]
     },
     {
@@ -394,21 +314,6 @@
         "$\\dfrac{a(1-r^n)}{1-r}$",
         "$\\dfrac{ar^{n-1}}{1-r}$",
         "$\\dfrac{ar^{n+1}}{1-r}$"
-      ]
-    },
-    {
-      "id": "arithmetic-difference",
-      "topic": "sequences",
-      "front": "How do you find the common difference in an arithmetic sequence?",
-      "back": [
-        "$d=u_{n+1}-u_n$",
-        "Subtract the previous term from the next term."
-      ],
-      "choices": [
-        "$d=u_{n+1}-u_n$",
-        "$d=u_n-u_{n+1}$",
-        "$d=\\dfrac{u_{n+1}}{u_n}$",
-        "$d=u_{n+1}+u_n$"
       ]
     },
     {
@@ -547,20 +452,6 @@
       ]
     },
     {
-      "id": "equal-logs",
-      "topic": "logarithms",
-      "front": "If $\\log_b A=\\log_b B$, what can you conclude?",
-      "back": [
-        "$A=B$, provided both log arguments are positive and the base is valid."
-      ],
-      "choices": [
-        "$A=B$ for valid logarithms.",
-        "$A=-B$ because the logs cancel.",
-        "$AB=1$ because the logs have the same base.",
-        "$A+B=b$ because the sums of the arguments match."
-      ]
-    },
-    {
       "id": "solve-exponential",
       "topic": "logarithms",
       "front": "How do you solve $b^x=A$ using logarithms?",
@@ -620,20 +511,6 @@
       ]
     },
     {
-      "id": "exponential-graph",
-      "topic": "logarithms",
-      "front": "What features should you mark on a sketch of $y=b^x$?",
-      "back": [
-        "For $b>0$ and $b\\ne1$, the graph passes through $(0,1)$ and stays above the horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$."
-      ],
-      "choices": [
-        "It crosses the $y$-axis at $(0,1)$, with horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$.",
-        "It crosses the $y$-axis at $(0,b)$, with horizontal asymptote $y=0$. It rises for $b>1$ and falls for $0<b<1$.",
-        "It crosses the $y$-axis at $(0,1)$, with horizontal asymptote $y=1$. It rises for $b>1$ and falls for $0<b<1$.",
-        "It crosses the $y$-axis at $(0,1)$, with horizontal asymptote $y=0$. It falls for $b>1$ and rises for $0<b<1$."
-      ]
-    },
-    {
       "id": "exponential-multiplier",
       "topic": "logarithms",
       "front": "How do you find the multiplier in an exponential model?",
@@ -660,21 +537,6 @@
         "$b$ is the starting value and $A$ is the multiplier per time step.",
         "$A$ is the starting value and $b$ is added at every time step.",
         "$A$ is the percentage change and $b$ is the starting value."
-      ]
-    },
-    {
-      "id": "definite-integral-bounds",
-      "topic": "integration",
-      "front": "Which way round do you use the bounds in a definite integral?",
-      "back": [
-        "$\\int_a^b f(x)\\,dx=F(b)-F(a)$",
-        "Put the upper bound into every term of the antiderivative, then subtract the whole lower-bound result."
-      ],
-      "choices": [
-        "$F(b)-F(a)$",
-        "$F(a)-F(b)$",
-        "$F(a)+F(b)$",
-        "$F(b-a)$"
       ]
     },
     {
@@ -850,20 +712,6 @@
       ]
     },
     {
-      "id": "elimination",
-      "topic": "algebra",
-      "front": "How do you eliminate a variable from simultaneous equations?",
-      "back": [
-        "Multiply the equations as needed to match the variable’s coefficients. Subtract if the coefficients have the same sign, or add if they have opposite signs."
-      ],
-      "choices": [
-        "Match the size of the chosen coefficients, then subtract for matching signs or add for opposite signs.",
-        "Match the size of the chosen coefficients, then add for matching signs or subtract for opposite signs.",
-        "Match only the constants on the right, then subtract to eliminate the chosen variable.",
-        "Multiply the two equations together so the chosen variable cancels."
-      ]
-    },
-    {
       "id": "parametric-crossing",
       "topic": "algebra",
       "front": "How do you find where a parametric curve meets a Cartesian curve?",
@@ -892,35 +740,6 @@
       ]
     },
     {
-      "id": "break-even",
-      "topic": "modelling",
-      "front": "How do you set up a break-even equation?",
-      "back": [
-        "$\\text{Revenue}=\\text{Total cost}$",
-        "For positive profit, revenue must be greater than total cost."
-      ],
-      "choices": [
-        "Total revenue equals total cost.",
-        "Total revenue equals zero.",
-        "Profit per unit equals selling price.",
-        "Fixed cost equals variable cost."
-      ]
-    },
-    {
-      "id": "cost-model",
-      "topic": "modelling",
-      "front": "What do $c$ and $m$ mean in a total-cost model $C=c+mx$?",
-      "back": [
-        "$c$ is the fixed cost and $m$ is the extra cost per unit. Extra profit per unit is selling price minus $m$."
-      ],
-      "choices": [
-        "$c$ is fixed cost and $m$ is the additional cost per unit.",
-        "$m$ is fixed cost and $c$ is the additional cost per unit.",
-        "$c$ is selling price and $m$ is profit per unit.",
-        "$c$ is the number of units and $m$ is total cost."
-      ]
-    },
-    {
       "id": "optimisation-constraint",
       "topic": "modelling",
       "front": "How do you get a formula in one variable for an optimisation problem?",
@@ -932,20 +751,6 @@
         "Set both variables equal to one another and substitute into the quantity you’re optimising.",
         "Set the quantity you’re optimising to zero and ignore the constraint.",
         "Differentiate the constraint and set it to zero instead of using it to eliminate a variable."
-      ]
-    },
-    {
-      "id": "distance-speed-graph",
-      "topic": "modelling",
-      "front": "What does the area under a speed–time graph represent?",
-      "back": [
-        "Distance travelled."
-      ],
-      "choices": [
-        "Distance travelled.",
-        "The change in speed.",
-        "Average acceleration.",
-        "Final speed."
       ]
     },
     {
@@ -963,59 +768,2128 @@
       ]
     },
     {
-      "id": "sohcahtoa-sine",
-      "topic": "triangles",
-      "front": "What is sine in a right-angled triangle?",
+      "id": "sec-definition",
+      "topic": "identities",
+      "front": "Which expression is $\\sec\\theta$?",
       "back": [
-        "$\\sin\\theta=\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$"
+        "$\\sec\\theta\\equiv\\dfrac{1}{\\cos\\theta}$",
+        "Not $\\cos^{-1}\\theta$, which means $\\arccos\\theta$."
       ],
+      "reference": "recall",
       "choices": [
-        "$\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$",
-        "$\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$",
-        "$\\dfrac{\\text{opposite}}{\\text{adjacent}}$",
-        "$\\dfrac{\\text{hypotenuse}}{\\text{opposite}}$"
+        "$\\dfrac{1}{\\cos\\theta}$",
+        "$\\dfrac{1}{\\sin\\theta}$",
+        "$\\cos^{-1}\\theta$",
+        "$\\dfrac{\\cos\\theta}{\\sin\\theta}$"
       ]
     },
     {
-      "id": "sohcahtoa-cosine",
-      "topic": "triangles",
-      "front": "What is cosine in a right-angled triangle?",
+      "id": "cosec-definition",
+      "topic": "identities",
+      "front": "Which expression is $\\cosec\\theta$?",
       "back": [
-        "$\\cos\\theta=\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$"
+        "$\\cosec\\theta\\equiv\\dfrac{1}{\\sin\\theta}$",
+        "Not $\\sin^{-1}\\theta$, which means $\\arcsin\\theta$."
       ],
+      "reference": "recall",
       "choices": [
-        "$\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$",
-        "$\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$",
-        "$\\dfrac{\\text{opposite}}{\\text{adjacent}}$",
-        "$\\dfrac{\\text{hypotenuse}}{\\text{adjacent}}$"
+        "$\\dfrac{1}{\\sin\\theta}$",
+        "$\\dfrac{1}{\\cos\\theta}$",
+        "$\\sin^{-1}\\theta$",
+        "$\\dfrac{\\sin\\theta}{\\cos\\theta}$"
       ]
     },
     {
-      "id": "sohcahtoa-tangent",
-      "topic": "triangles",
-      "front": "What is tangent in a right-angled triangle?",
+      "id": "cot-definition",
+      "topic": "identities",
+      "front": "Which expression is $\\cot\\theta$?",
       "back": [
-        "$\\tan\\theta=\\dfrac{\\text{opposite}}{\\text{adjacent}}$"
+        "$\\cot\\theta\\equiv\\dfrac{\\cos\\theta}{\\sin\\theta}\\equiv\\dfrac{1}{\\tan\\theta}$",
+        "Not $\\tan^{-1}\\theta$, which means $\\arctan\\theta$."
       ],
+      "reference": "recall",
       "choices": [
-        "$\\dfrac{\\text{opposite}}{\\text{adjacent}}$",
-        "$\\dfrac{\\text{adjacent}}{\\text{opposite}}$",
-        "$\\dfrac{\\text{opposite}}{\\text{hypotenuse}}$",
-        "$\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$"
+        "$\\dfrac{\\cos\\theta}{\\sin\\theta}$",
+        "$\\dfrac{\\sin\\theta}{\\cos\\theta}$",
+        "$\\tan^{-1}\\theta$",
+        "$\\dfrac{1}{\\cos\\theta}$"
       ]
     },
     {
-      "id": "unit-circle",
-      "topic": "triangles",
-      "front": "What are the coordinates at angle $\\theta$ on the unit circle?",
+      "id": "sin-cos-pythagorean",
+      "topic": "identities",
+      "front": "Write $\\cos^2\\theta$ in terms of $\\sin\\theta$.",
       "back": [
-        "$(x,y)=(\\cos\\theta,\\sin\\theta)$"
+        "$\\cos^2\\theta\\equiv1-\\sin^2\\theta$",
+        "Rearranged from $\\sin^2\\theta+\\cos^2\\theta\\equiv1$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$1-\\sin^2\\theta$",
+        "$\\sin^2\\theta-1$",
+        "$1-\\sin\\theta$",
+        "$1+\\sin^2\\theta$"
+      ]
+    },
+    {
+      "id": "sec-tan-pythagorean",
+      "topic": "identities",
+      "front": "Divide $\\sin^2\\theta+\\cos^2\\theta\\equiv1$ by $\\cos^2\\theta$. What identity do you get?",
+      "back": [
+        "$\\tan^2\\theta+1\\equiv\\sec^2\\theta$",
+        "Every term is divided by $\\cos^2\\theta$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\tan^2\\theta+1\\equiv\\sec^2\\theta$",
+        "$\\tan^2\\theta+1\\equiv\\cosec^2\\theta$",
+        "$1+\\cot^2\\theta\\equiv\\sec^2\\theta$",
+        "$\\tan^2\\theta-1\\equiv\\sec^2\\theta$"
+      ]
+    },
+    {
+      "id": "cosec-cot-pythagorean",
+      "topic": "identities",
+      "front": "Divide $\\sin^2\\theta+\\cos^2\\theta\\equiv1$ by $\\sin^2\\theta$. What identity do you get?",
+      "back": [
+        "$1+\\cot^2\\theta\\equiv\\cosec^2\\theta$",
+        "Every term is divided by $\\sin^2\\theta$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$1+\\cot^2\\theta\\equiv\\cosec^2\\theta$",
+        "$1+\\tan^2\\theta\\equiv\\cosec^2\\theta$",
+        "$1+\\cot^2\\theta\\equiv\\sec^2\\theta$",
+        "$\\cot^2\\theta-1\\equiv\\cosec^2\\theta$"
+      ]
+    },
+    {
+      "id": "tan-squared-from-sec",
+      "topic": "identities",
+      "front": "Write $\\tan^2\\theta$ in terms of $\\sec\\theta$.",
+      "back": [
+        "$\\tan^2\\theta\\equiv\\sec^2\\theta-1$",
+        "Use it to turn a mix of $\\tan^2\\theta$ and $\\sec\\theta$ into a quadratic in $\\sec\\theta$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\sec^2\\theta-1$",
+        "$1-\\sec^2\\theta$",
+        "$\\sec^2\\theta+1$",
+        "$\\cosec^2\\theta-1$"
+      ]
+    },
+    {
+      "id": "cot-squared-from-cosec",
+      "topic": "identities",
+      "front": "Write $\\cot^2\\theta$ in terms of $\\cosec\\theta$.",
+      "back": [
+        "$\\cot^2\\theta\\equiv\\cosec^2\\theta-1$",
+        "Use it to turn a mix of $\\cot^2\\theta$ and $\\cosec\\theta$ into a quadratic in $\\cosec\\theta$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\cosec^2\\theta-1$",
+        "$1-\\cosec^2\\theta$",
+        "$\\cosec^2\\theta+1$",
+        "$\\sec^2\\theta-1$"
+      ]
+    },
+    {
+      "id": "sec-tan-difference-of-squares",
+      "topic": "identities",
+      "front": "Simplify $(\\sec\\theta-\\tan\\theta)(\\sec\\theta+\\tan\\theta)$.",
+      "back": [
+        "$\\sec^2\\theta-\\tan^2\\theta\\equiv1$",
+        "Difference of two squares, then use $1+\\tan^2\\theta\\equiv\\sec^2\\theta$."
       ],
       "choices": [
-        "$(x,y)=(\\cos\\theta,\\sin\\theta)$",
-        "$(x,y)=(\\sin\\theta,\\cos\\theta)$",
-        "$(x,y)=(\\cos\\theta,-\\sin\\theta)$",
-        "$(x,y)=(-\\cos\\theta,\\sin\\theta)$"
+        "$1$",
+        "$-1$",
+        "$\\sec^2\\theta+\\tan^2\\theta$",
+        "$\\cos2\\theta$"
+      ]
+    },
+    {
+      "id": "sin-cot",
+      "topic": "identities",
+      "front": "Simplify $\\sin\\theta\\cot\\theta$.",
+      "back": [
+        "$\\sin\\theta\\cdot\\dfrac{\\cos\\theta}{\\sin\\theta}\\equiv\\cos\\theta$"
+      ],
+      "choices": [
+        "$\\cos\\theta$",
+        "$\\tan\\theta$",
+        "$\\dfrac{\\sin^2\\theta}{\\cos\\theta}$",
+        "$\\sec\\theta$"
+      ]
+    },
+    {
+      "id": "sec-minus-cos",
+      "topic": "identities",
+      "front": "Simplify $\\sec\\theta-\\cos\\theta$.",
+      "back": [
+        "$\\dfrac{1-\\cos^2\\theta}{\\cos\\theta}\\equiv\\dfrac{\\sin^2\\theta}{\\cos\\theta}\\equiv\\sin\\theta\\tan\\theta$"
+      ],
+      "choices": [
+        "$\\sin\\theta\\tan\\theta$",
+        "$\\cos\\theta\\tan\\theta$",
+        "$\\tan^2\\theta$",
+        "$\\sin\\theta\\cot\\theta$"
+      ]
+    },
+    {
+      "id": "cosec-minus-sin",
+      "topic": "identities",
+      "front": "Simplify $\\cosec\\theta-\\sin\\theta$.",
+      "back": [
+        "$\\dfrac{1-\\sin^2\\theta}{\\sin\\theta}\\equiv\\dfrac{\\cos^2\\theta}{\\sin\\theta}\\equiv\\cos\\theta\\cot\\theta$"
+      ],
+      "choices": [
+        "$\\cos\\theta\\cot\\theta$",
+        "$\\sin\\theta\\cot\\theta$",
+        "$\\cot^2\\theta$",
+        "$\\cos\\theta\\tan\\theta$"
+      ]
+    },
+    {
+      "id": "tan-plus-cot",
+      "topic": "identities",
+      "front": "Simplify $\\tan\\theta+\\cot\\theta$.",
+      "back": [
+        "$\\dfrac{\\sin^2\\theta+\\cos^2\\theta}{\\sin\\theta\\cos\\theta}\\equiv\\sec\\theta\\cosec\\theta$",
+        "This also equals $2\\cosec2\\theta$."
+      ],
+      "choices": [
+        "$\\sec\\theta\\cosec\\theta$",
+        "$1$",
+        "$\\sin\\theta\\cos\\theta$",
+        "$\\sec^2\\theta$"
+      ]
+    },
+    {
+      "id": "sec-squared-plus-cosec-squared",
+      "topic": "identities",
+      "front": "Simplify $\\sec^2\\theta+\\cosec^2\\theta$.",
+      "back": [
+        "$\\dfrac{\\sin^2\\theta+\\cos^2\\theta}{\\sin^2\\theta\\cos^2\\theta}\\equiv\\sec^2\\theta\\cosec^2\\theta$"
+      ],
+      "choices": [
+        "$\\sec^2\\theta\\cosec^2\\theta$",
+        "$1$",
+        "$\\tan^2\\theta+\\cot^2\\theta$",
+        "$2$"
+      ]
+    },
+    {
+      "id": "one-over-one-plus-minus-sin",
+      "topic": "identities",
+      "front": "Simplify $\\dfrac{1}{1-\\sin\\theta}+\\dfrac{1}{1+\\sin\\theta}$.",
+      "back": [
+        "$\\dfrac{(1+\\sin\\theta)+(1-\\sin\\theta)}{1-\\sin^2\\theta}\\equiv\\dfrac{2}{\\cos^2\\theta}\\equiv2\\sec^2\\theta$"
+      ],
+      "choices": [
+        "$2\\sec^2\\theta$",
+        "$2\\cosec^2\\theta$",
+        "$\\sec^2\\theta$",
+        "$2\\tan^2\\theta$"
+      ]
+    },
+    {
+      "id": "cos-over-one-minus-sin",
+      "topic": "identities",
+      "front": "Simplify $\\dfrac{\\cos\\theta}{1-\\sin\\theta}$.",
+      "back": [
+        "Multiply the top and bottom by $1+\\sin\\theta$:",
+        "$\\dfrac{\\cos\\theta(1+\\sin\\theta)}{\\cos^2\\theta}\\equiv\\dfrac{1+\\sin\\theta}{\\cos\\theta}\\equiv\\sec\\theta+\\tan\\theta$"
+      ],
+      "choices": [
+        "$\\sec\\theta+\\tan\\theta$",
+        "$\\sec\\theta-\\tan\\theta$",
+        "$\\cosec\\theta+\\cot\\theta$",
+        "$1+\\tan\\theta$"
+      ]
+    },
+    {
+      "id": "choose-root-sign",
+      "topic": "identities",
+      "front": "$\\sin\\theta=\\tfrac35$ and $\\theta$ is obtuse. Find $\\cos\\theta$.",
+      "back": [
+        "$\\cos^2\\theta=1-\\tfrac{9}{25}=\\tfrac{16}{25}$",
+        "Cosine is negative for an obtuse angle, so $\\cos\\theta=-\\tfrac45$."
+      ],
+      "choices": [
+        "$-\\tfrac45$",
+        "$\\tfrac45$",
+        "$-\\tfrac34$",
+        "$\\tfrac34$"
+      ]
+    },
+    {
+      "id": "tan-from-cos-quadrant",
+      "topic": "identities",
+      "front": "$\\cos\\theta=-\\tfrac{5}{13}$ and $\\pi<\\theta<\\tfrac{3\\pi}{2}$. Find $\\tan\\theta$.",
+      "back": [
+        "$\\sin^2\\theta=1-\\tfrac{25}{169}=\\tfrac{144}{169}$. Sine is negative here, so $\\sin\\theta=-\\tfrac{12}{13}$.",
+        "$\\tan\\theta=\\dfrac{-12/13}{-5/13}=\\tfrac{12}{5}$"
+      ],
+      "choices": [
+        "$\\tfrac{12}{5}$",
+        "$-\\tfrac{12}{5}$",
+        "$\\tfrac{5}{12}$",
+        "$-\\tfrac{5}{12}$"
+      ]
+    },
+    {
+      "id": "sec-from-tan-quadrant",
+      "topic": "identities",
+      "front": "$\\tan\\theta=-\\tfrac34$ and $\\tfrac{\\pi}{2}<\\theta<\\pi$. Find $\\sec\\theta$.",
+      "back": [
+        "$\\sec^2\\theta=1+\\tan^2\\theta=\\tfrac{25}{16}$",
+        "Cosine is negative in the second quadrant, so $\\sec\\theta=-\\tfrac54$."
+      ],
+      "choices": [
+        "$-\\tfrac54$",
+        "$\\tfrac54$",
+        "$-\\tfrac45$",
+        "$\\tfrac53$"
+      ]
+    },
+    {
+      "id": "cosec-from-cot",
+      "topic": "identities",
+      "front": "$\\cot\\theta=2$ and $\\theta$ is acute. Find $\\cosec\\theta$.",
+      "back": [
+        "$\\cosec^2\\theta=1+\\cot^2\\theta=5$",
+        "$\\theta$ is acute, so $\\cosec\\theta=\\sqrt5$."
+      ],
+      "choices": [
+        "$\\sqrt5$",
+        "$\\sqrt3$",
+        "$\\dfrac{\\sqrt5}{2}$",
+        "$\\dfrac{1}{\\sqrt5}$"
+      ]
+    },
+    {
+      "id": "sine-compound-plus",
+      "topic": "compound",
+      "front": "Expand $\\sin(A+B)$.",
+      "back": [
+        "$\\sin(A+B)\\equiv\\sin A\\cos B+\\cos A\\sin B$",
+        "Sine mixes the functions and keeps the sign."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\sin A\\cos B+\\cos A\\sin B$",
+        "$\\sin A\\cos B-\\cos A\\sin B$",
+        "$\\cos A\\cos B-\\sin A\\sin B$",
+        "$\\sin A\\sin B+\\cos A\\cos B$"
+      ]
+    },
+    {
+      "id": "sine-compound-minus",
+      "topic": "compound",
+      "front": "Expand $\\sin(A-B)$.",
+      "back": [
+        "$\\sin(A-B)\\equiv\\sin A\\cos B-\\cos A\\sin B$",
+        "The $\\sin A\\cos B$ term comes first, so the order matters."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\sin A\\cos B-\\cos A\\sin B$",
+        "$\\cos A\\sin B-\\sin A\\cos B$",
+        "$\\sin A\\cos B+\\cos A\\sin B$",
+        "$\\cos A\\cos B+\\sin A\\sin B$"
+      ]
+    },
+    {
+      "id": "cosine-compound-plus",
+      "topic": "compound",
+      "front": "Expand $\\cos(A+B)$.",
+      "back": [
+        "$\\cos(A+B)\\equiv\\cos A\\cos B-\\sin A\\sin B$",
+        "Cosine keeps the functions together and flips the sign."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\cos A\\cos B-\\sin A\\sin B$",
+        "$\\cos A\\cos B+\\sin A\\sin B$",
+        "$\\sin A\\cos B-\\cos A\\sin B$",
+        "$\\sin A\\sin B-\\cos A\\cos B$"
+      ]
+    },
+    {
+      "id": "cosine-compound-minus",
+      "topic": "compound",
+      "front": "Expand $\\cos(A-B)$.",
+      "back": [
+        "$\\cos(A-B)\\equiv\\cos A\\cos B+\\sin A\\sin B$",
+        "Cosine flips the sign: minus inside, plus outside."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\cos A\\cos B+\\sin A\\sin B$",
+        "$\\cos A\\cos B-\\sin A\\sin B$",
+        "$\\sin A\\cos B+\\cos A\\sin B$",
+        "$\\sin A\\sin B-\\cos A\\cos B$"
+      ]
+    },
+    {
+      "id": "tangent-compound-plus",
+      "topic": "compound",
+      "front": "Expand $\\tan(A+B)$.",
+      "back": [
+        "$\\tan(A+B)\\equiv\\dfrac{\\tan A+\\tan B}{1-\\tan A\\tan B}$",
+        "Same sign on top, opposite sign underneath."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{\\tan A+\\tan B}{1-\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A+\\tan B}{1+\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A-\\tan B}{1+\\tan A\\tan B}$",
+        "$\\dfrac{1-\\tan A\\tan B}{\\tan A+\\tan B}$"
+      ]
+    },
+    {
+      "id": "tangent-compound-minus",
+      "topic": "compound",
+      "front": "Expand $\\tan(A-B)$.",
+      "back": [
+        "$\\tan(A-B)\\equiv\\dfrac{\\tan A-\\tan B}{1+\\tan A\\tan B}$",
+        "Same sign on top, opposite sign underneath."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{\\tan A-\\tan B}{1+\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A-\\tan B}{1-\\tan A\\tan B}$",
+        "$\\dfrac{\\tan A+\\tan B}{1-\\tan A\\tan B}$",
+        "$\\dfrac{\\tan B-\\tan A}{1+\\tan A\\tan B}$"
+      ]
+    },
+    {
+      "id": "tangent-compound-condition",
+      "topic": "compound",
+      "front": "The booklet gives $\\tan(A\\pm B)\\equiv\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$. When does it apply?",
+      "back": [
+        "When $A\\pm B\\ne(k+\\tfrac12)\\pi$ for any integer $k$.",
+        "At those angles $\\tan(A\\pm B)$ is undefined."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$A\\pm B\\ne(k+\\tfrac12)\\pi$",
+        "$A\\pm B\\ne k\\pi$",
+        "$\\tan A\\tan B\\ne0$",
+        "$A\\pm B\\ne2k\\pi$"
+      ]
+    },
+    {
+      "id": "compound-reverse-sin",
+      "topic": "compound",
+      "front": "Write $\\sin3x\\cos x-\\cos3x\\sin x$ as a single trig function.",
+      "back": [
+        "This is $\\sin(3x-x)\\equiv\\sin2x$."
+      ],
+      "choices": [
+        "$\\sin2x$",
+        "$\\sin4x$",
+        "$\\cos2x$",
+        "$-\\sin2x$"
+      ]
+    },
+    {
+      "id": "compound-reverse-cos-plus",
+      "topic": "compound",
+      "front": "Write $\\cos5\\theta\\cos2\\theta+\\sin5\\theta\\sin2\\theta$ as a single trig function.",
+      "back": [
+        "$\\cos A\\cos B+\\sin A\\sin B\\equiv\\cos(A-B)$, so this is $\\cos3\\theta$."
+      ],
+      "choices": [
+        "$\\cos3\\theta$",
+        "$\\cos7\\theta$",
+        "$\\sin3\\theta$",
+        "$\\sin7\\theta$"
+      ]
+    },
+    {
+      "id": "compound-reverse-cos-minus",
+      "topic": "compound",
+      "front": "Write $\\cos x\\cos2x-\\sin x\\sin2x$ as a single trig function.",
+      "back": [
+        "$\\cos A\\cos B-\\sin A\\sin B\\equiv\\cos(A+B)$, so this is $\\cos3x$."
+      ],
+      "choices": [
+        "$\\cos3x$",
+        "$\\cos x$",
+        "$\\sin3x$",
+        "$-\\cos x$"
+      ]
+    },
+    {
+      "id": "compound-reverse-tan",
+      "topic": "compound",
+      "front": "Write $\\dfrac{\\tan3A-\\tan A}{1+\\tan3A\\tan A}$ as a single trig function.",
+      "back": [
+        "This is $\\tan(3A-A)\\equiv\\tan2A$."
+      ],
+      "choices": [
+        "$\\tan2A$",
+        "$\\tan4A$",
+        "$\\cot2A$",
+        "$-\\tan2A$"
+      ]
+    },
+    {
+      "id": "tan-plus-quarter-pi",
+      "topic": "compound",
+      "front": "Expand $\\tan\\!\\left(\\theta+\\dfrac{\\pi}{4}\\right)$.",
+      "back": [
+        "Use $\\tan\\dfrac{\\pi}{4}=1$:",
+        "$\\tan\\!\\left(\\theta+\\dfrac{\\pi}{4}\\right)\\equiv\\dfrac{1+\\tan\\theta}{1-\\tan\\theta}$"
+      ],
+      "choices": [
+        "$\\dfrac{1+\\tan\\theta}{1-\\tan\\theta}$",
+        "$\\dfrac{1-\\tan\\theta}{1+\\tan\\theta}$",
+        "$\\dfrac{\\tan\\theta+1}{\\tan\\theta-1}$",
+        "$1+\\tan\\theta$"
+      ]
+    },
+    {
+      "id": "cos-plus-third-pi",
+      "topic": "compound",
+      "front": "Expand $\\cos\\!\\left(\\theta+\\dfrac{\\pi}{3}\\right)$.",
+      "back": [
+        "$\\cos\\theta\\cos\\dfrac{\\pi}{3}-\\sin\\theta\\sin\\dfrac{\\pi}{3}\\equiv\\tfrac12\\cos\\theta-\\tfrac{\\sqrt3}{2}\\sin\\theta$"
+      ],
+      "choices": [
+        "$\\tfrac12\\cos\\theta-\\tfrac{\\sqrt3}{2}\\sin\\theta$",
+        "$\\tfrac12\\cos\\theta+\\tfrac{\\sqrt3}{2}\\sin\\theta$",
+        "$\\tfrac{\\sqrt3}{2}\\cos\\theta-\\tfrac12\\sin\\theta$",
+        "$\\tfrac{\\sqrt3}{2}\\cos\\theta+\\tfrac12\\sin\\theta$"
+      ]
+    },
+    {
+      "id": "sin-minus-sixth-pi",
+      "topic": "compound",
+      "front": "Expand $\\sin\\!\\left(\\theta-\\dfrac{\\pi}{6}\\right)$.",
+      "back": [
+        "$\\sin\\theta\\cos\\dfrac{\\pi}{6}-\\cos\\theta\\sin\\dfrac{\\pi}{6}\\equiv\\tfrac{\\sqrt3}{2}\\sin\\theta-\\tfrac12\\cos\\theta$"
+      ],
+      "choices": [
+        "$\\tfrac{\\sqrt3}{2}\\sin\\theta-\\tfrac12\\cos\\theta$",
+        "$\\tfrac{\\sqrt3}{2}\\sin\\theta+\\tfrac12\\cos\\theta$",
+        "$\\tfrac12\\sin\\theta-\\tfrac{\\sqrt3}{2}\\cos\\theta$",
+        "$\\tfrac12\\cos\\theta-\\tfrac{\\sqrt3}{2}\\sin\\theta$"
+      ]
+    },
+    {
+      "id": "exact-sin-75",
+      "topic": "compound",
+      "front": "Find the exact value of $\\sin75^\\circ$.",
+      "back": [
+        "$\\sin(45^\\circ+30^\\circ)=\\tfrac{\\sqrt2}{2}\\cdot\\tfrac{\\sqrt3}{2}+\\tfrac{\\sqrt2}{2}\\cdot\\tfrac12$",
+        "$=\\dfrac{\\sqrt6+\\sqrt2}{4}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+        "$\\dfrac{\\sqrt6-\\sqrt2}{4}$",
+        "$\\dfrac{\\sqrt3+1}{4}$",
+        "$\\dfrac{\\sqrt6+\\sqrt2}{2}$"
+      ]
+    },
+    {
+      "id": "exact-cos-75",
+      "topic": "compound",
+      "front": "Find the exact value of $\\cos75^\\circ$.",
+      "back": [
+        "$\\cos(45^\\circ+30^\\circ)=\\tfrac{\\sqrt2}{2}\\cdot\\tfrac{\\sqrt3}{2}-\\tfrac{\\sqrt2}{2}\\cdot\\tfrac12$",
+        "$=\\dfrac{\\sqrt6-\\sqrt2}{4}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\sqrt6-\\sqrt2}{4}$",
+        "$\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+        "$\\dfrac{\\sqrt3-1}{4}$",
+        "$\\dfrac{\\sqrt2-\\sqrt6}{4}$"
+      ]
+    },
+    {
+      "id": "exact-tan-15",
+      "topic": "compound",
+      "front": "Find the exact value of $\\tan15^\\circ$.",
+      "back": [
+        "$\\tan(45^\\circ-30^\\circ)=\\dfrac{1-\\frac{1}{\\sqrt3}}{1+\\frac{1}{\\sqrt3}}=\\dfrac{\\sqrt3-1}{\\sqrt3+1}$",
+        "Rationalise the denominator: $\\tan15^\\circ=2-\\sqrt3$."
+      ],
+      "choices": [
+        "$2-\\sqrt3$",
+        "$2+\\sqrt3$",
+        "$\\sqrt3-2$",
+        "$\\dfrac{\\sqrt3-1}{2}$"
+      ]
+    },
+    {
+      "id": "exact-tan-105",
+      "topic": "compound",
+      "front": "Find the exact value of $\\tan105^\\circ$.",
+      "back": [
+        "$\\tan(60^\\circ+45^\\circ)=\\dfrac{\\sqrt3+1}{1-\\sqrt3}$",
+        "Rationalise the denominator: $\\tan105^\\circ=-2-\\sqrt3$."
+      ],
+      "choices": [
+        "$-2-\\sqrt3$",
+        "$2+\\sqrt3$",
+        "$-2+\\sqrt3$",
+        "$2-\\sqrt3$"
+      ]
+    },
+    {
+      "id": "compound-from-ratios",
+      "topic": "compound",
+      "front": "$\\sin A=\\tfrac35$ and $\\cos B=\\tfrac{5}{13}$, with $A$ and $B$ acute. Find $\\sin(A+B)$.",
+      "back": [
+        "$\\cos A=\\tfrac45$ and $\\sin B=\\tfrac{12}{13}$.",
+        "$\\sin(A+B)=\\tfrac35\\cdot\\tfrac{5}{13}+\\tfrac45\\cdot\\tfrac{12}{13}=\\tfrac{63}{65}$"
+      ],
+      "choices": [
+        "$\\tfrac{63}{65}$",
+        "$\\tfrac{33}{65}$",
+        "$-\\tfrac{16}{65}$",
+        "$\\tfrac{56}{65}$"
+      ]
+    },
+    {
+      "id": "product-to-sum-sin-cos",
+      "topic": "compound",
+      "front": "Simplify $\\sin(A+B)+\\sin(A-B)$.",
+      "back": [
+        "The $\\cos A\\sin B$ terms cancel:",
+        "$\\sin(A+B)+\\sin(A-B)\\equiv2\\sin A\\cos B$"
+      ],
+      "choices": [
+        "$2\\sin A\\cos B$",
+        "$2\\cos A\\sin B$",
+        "$2\\sin A\\sin B$",
+        "$2\\cos A\\cos B$"
+      ]
+    },
+    {
+      "id": "product-to-sum-cos-difference",
+      "topic": "compound",
+      "front": "Simplify $\\cos(A-B)-\\cos(A+B)$.",
+      "back": [
+        "The $\\cos A\\cos B$ terms cancel:",
+        "$\\cos(A-B)-\\cos(A+B)\\equiv2\\sin A\\sin B$"
+      ],
+      "choices": [
+        "$2\\sin A\\sin B$",
+        "$-2\\sin A\\sin B$",
+        "$2\\cos A\\cos B$",
+        "$2\\sin A\\cos B$"
+      ]
+    },
+    {
+      "id": "product-to-sum-cos-sum",
+      "topic": "compound",
+      "front": "Simplify $\\cos(A+B)+\\cos(A-B)$.",
+      "back": [
+        "The $\\sin A\\sin B$ terms cancel:",
+        "$\\cos(A+B)+\\cos(A-B)\\equiv2\\cos A\\cos B$"
+      ],
+      "choices": [
+        "$2\\cos A\\cos B$",
+        "$2\\sin A\\sin B$",
+        "$-2\\sin A\\sin B$",
+        "$2\\cos A\\sin B$"
+      ]
+    },
+    {
+      "id": "cosine-geometric-proof",
+      "topic": "compound",
+      "front": "How can you prove the cosine difference formula using the unit circle?",
+      "back": [
+        "Take $P=(\\cos A,\\sin A)$ and $Q=(\\cos B,\\sin B)$. Find $PQ^2$ using the distance formula and again using the triangle cosine rule. Equate the results and use the fact that cosine is even."
+      ],
+      "choices": [
+        "Find the chord’s squared length using coordinates and the cosine rule, then equate the two expressions.",
+        "Equate the lengths of the two radii and set $\\cos(A-B)=1$.",
+        "Add the two $x$-coordinates and call their sum $\\cos(A-B)$.",
+        "Use the angle sum $A+B$ as the angle between the radii for points at $A$ and $B$."
+      ]
+    },
+    {
+      "id": "compound-from-cosine",
+      "topic": "compound",
+      "front": "How can you get sine and tangent compound-angle formulas from cosine?",
+      "back": [
+        "For sine, use $\\sin x=\\cos(\\pi/2-x)$ and expand with the cosine compound-angle formula. For tangent, divide the sine expansion by the cosine expansion."
+      ],
+      "choices": [
+        "Use $\\sin x=\\cos(\\pi/2-x)$, then divide the sine expansion by the cosine expansion for tangent.",
+        "Use $\\sin x=\\cos(\\pi-x)$, then divide the sine expansion by the cosine expansion for tangent.",
+        "Use $\\sin x=1-\\cos x$, then multiply the sine and cosine expansions for tangent.",
+        "Use $\\sin x=\\cos(\\pi/2-x)$, then divide the cosine expansion by the sine expansion for tangent."
+      ]
+    },
+    {
+      "id": "sine-double-angle",
+      "topic": "double",
+      "front": "Expand $\\sin2A$.",
+      "back": [
+        "$\\sin2A\\equiv2\\sin A\\cos A$",
+        "Put $B=A$ in $\\sin(A+B)$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$2\\sin A\\cos A$",
+        "$2\\sin A$",
+        "$\\sin^2A-\\cos^2A$",
+        "$\\sin A\\cos A$"
+      ]
+    },
+    {
+      "id": "cos-double-sin-cos",
+      "topic": "double",
+      "front": "Write $\\cos2A$ using both $\\cos A$ and $\\sin A$.",
+      "back": [
+        "$\\cos2A\\equiv\\cos^2A-\\sin^2A$",
+        "Put $B=A$ in $\\cos(A+B)$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\cos^2A-\\sin^2A$",
+        "$\\sin^2A-\\cos^2A$",
+        "$2\\sin A\\cos A$",
+        "$\\cos^2A+\\sin^2A$"
+      ]
+    },
+    {
+      "id": "cos-double-cos-only",
+      "topic": "double",
+      "front": "Write $\\cos2A$ in terms of $\\cos A$ only.",
+      "back": [
+        "$\\cos2A\\equiv2\\cos^2A-1$",
+        "Replace $\\sin^2A$ with $1-\\cos^2A$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$2\\cos^2A-1$",
+        "$1-2\\cos^2A$",
+        "$2\\cos^2A+1$",
+        "$\\cos^2A-1$"
+      ]
+    },
+    {
+      "id": "cos-double-sin-only",
+      "topic": "double",
+      "front": "Write $\\cos2A$ in terms of $\\sin A$ only.",
+      "back": [
+        "$\\cos2A\\equiv1-2\\sin^2A$",
+        "Replace $\\cos^2A$ with $1-\\sin^2A$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$1-2\\sin^2A$",
+        "$2\\sin^2A-1$",
+        "$1+2\\sin^2A$",
+        "$1-\\sin^2A$"
+      ]
+    },
+    {
+      "id": "tangent-double-angle",
+      "topic": "double",
+      "front": "Expand $\\tan2A$.",
+      "back": [
+        "$\\tan2A\\equiv\\dfrac{2\\tan A}{1-\\tan^2A}$",
+        "Put $B=A$ in $\\tan(A+B)$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{2\\tan A}{1-\\tan^2A}$",
+        "$\\dfrac{2\\tan A}{1+\\tan^2A}$",
+        "$\\dfrac{1-\\tan^2A}{2\\tan A}$",
+        "$\\dfrac{\\tan A}{1-\\tan^2A}$"
+      ]
+    },
+    {
+      "id": "half-sin-two-theta",
+      "topic": "double",
+      "front": "Write $\\sin\\theta\\cos\\theta$ in terms of $\\sin2\\theta$.",
+      "back": [
+        "$\\sin\\theta\\cos\\theta\\equiv\\tfrac12\\sin2\\theta$"
+      ],
+      "choices": [
+        "$\\tfrac12\\sin2\\theta$",
+        "$\\sin2\\theta$",
+        "$2\\sin2\\theta$",
+        "$\\tfrac12\\cos2\\theta$"
+      ]
+    },
+    {
+      "id": "double-angle-reverse-half",
+      "topic": "double",
+      "front": "Simplify $1-2\\sin^2\\dfrac{x}{2}$.",
+      "back": [
+        "Use $\\cos2A\\equiv1-2\\sin^2A$ with $A=\\dfrac{x}{2}$:",
+        "$1-2\\sin^2\\dfrac{x}{2}\\equiv\\cos x$"
+      ],
+      "choices": [
+        "$\\cos x$",
+        "$\\cos\\dfrac{x}{2}$",
+        "$\\cos2x$",
+        "$-\\cos x$"
+      ]
+    },
+    {
+      "id": "double-angle-reverse-cos",
+      "topic": "double",
+      "front": "Simplify $2\\cos^23\\theta-1$.",
+      "back": [
+        "Use $2\\cos^2A-1\\equiv\\cos2A$ with $A=3\\theta$:",
+        "$2\\cos^23\\theta-1\\equiv\\cos6\\theta$"
+      ],
+      "choices": [
+        "$\\cos6\\theta$",
+        "$\\cos3\\theta$",
+        "$\\cos9\\theta$",
+        "$-\\cos6\\theta$"
+      ]
+    },
+    {
+      "id": "double-angle-reverse-sin-half",
+      "topic": "double",
+      "front": "Simplify $2\\sin\\dfrac{x}{2}\\cos\\dfrac{x}{2}$.",
+      "back": [
+        "Use $2\\sin A\\cos A\\equiv\\sin2A$ with $A=\\dfrac{x}{2}$:",
+        "$2\\sin\\dfrac{x}{2}\\cos\\dfrac{x}{2}\\equiv\\sin x$"
+      ],
+      "choices": [
+        "$\\sin x$",
+        "$\\sin\\dfrac{x}{4}$",
+        "$\\sin2x$",
+        "$\\cos x$"
+      ]
+    },
+    {
+      "id": "sine-half-angle-square",
+      "topic": "double",
+      "front": "Write $\\sin^2A$ in terms of $\\cos2A$.",
+      "back": [
+        "$\\sin^2A\\equiv\\dfrac{1-\\cos2A}{2}$",
+        "Rearranged from $\\cos2A\\equiv1-2\\sin^2A$. Use it to integrate $\\sin^2x$."
+      ],
+      "choices": [
+        "$\\dfrac{1-\\cos2A}{2}$",
+        "$\\dfrac{1+\\cos2A}{2}$",
+        "$\\dfrac{\\cos2A-1}{2}$",
+        "$1-\\cos2A$"
+      ]
+    },
+    {
+      "id": "cosine-half-angle-square",
+      "topic": "double",
+      "front": "Write $\\cos^2A$ in terms of $\\cos2A$.",
+      "back": [
+        "$\\cos^2A\\equiv\\dfrac{1+\\cos2A}{2}$",
+        "Rearranged from $\\cos2A\\equiv2\\cos^2A-1$. Use it to integrate $\\cos^2x$."
+      ],
+      "choices": [
+        "$\\dfrac{1+\\cos2A}{2}$",
+        "$\\dfrac{1-\\cos2A}{2}$",
+        "$\\dfrac{\\cos2A-1}{2}$",
+        "$1+\\cos2A$"
+      ]
+    },
+    {
+      "id": "one-plus-cos-two",
+      "topic": "double",
+      "front": "Simplify $1+\\cos2A$.",
+      "back": [
+        "$1+(2\\cos^2A-1)\\equiv2\\cos^2A$"
+      ],
+      "choices": [
+        "$2\\cos^2A$",
+        "$2\\sin^2A$",
+        "$\\cos^2A$",
+        "$1+2\\cos^2A$"
+      ]
+    },
+    {
+      "id": "one-minus-cos-two",
+      "topic": "double",
+      "front": "Simplify $1-\\cos2A$.",
+      "back": [
+        "$1-(1-2\\sin^2A)\\equiv2\\sin^2A$"
+      ],
+      "choices": [
+        "$2\\sin^2A$",
+        "$2\\cos^2A$",
+        "$\\sin^2A$",
+        "$-2\\sin^2A$"
+      ]
+    },
+    {
+      "id": "one-minus-cos-over-sin-double",
+      "topic": "double",
+      "front": "Simplify $\\dfrac{1-\\cos2\\theta}{\\sin2\\theta}$.",
+      "back": [
+        "$\\dfrac{2\\sin^2\\theta}{2\\sin\\theta\\cos\\theta}\\equiv\\tan\\theta$"
+      ],
+      "choices": [
+        "$\\tan\\theta$",
+        "$\\cot\\theta$",
+        "$\\tan2\\theta$",
+        "$\\sec\\theta$"
+      ]
+    },
+    {
+      "id": "sin-double-over-one-plus-cos",
+      "topic": "double",
+      "front": "Simplify $\\dfrac{\\sin2\\theta}{1+\\cos2\\theta}$.",
+      "back": [
+        "$\\dfrac{2\\sin\\theta\\cos\\theta}{2\\cos^2\\theta}\\equiv\\tan\\theta$"
+      ],
+      "choices": [
+        "$\\tan\\theta$",
+        "$\\cot\\theta$",
+        "$\\sin\\theta$",
+        "$\\tan2\\theta$"
+      ]
+    },
+    {
+      "id": "cos-fourth-minus-sin-fourth",
+      "topic": "double",
+      "front": "Simplify $\\cos^4\\theta-\\sin^4\\theta$.",
+      "back": [
+        "$(\\cos^2\\theta-\\sin^2\\theta)(\\cos^2\\theta+\\sin^2\\theta)\\equiv\\cos2\\theta$"
+      ],
+      "choices": [
+        "$\\cos2\\theta$",
+        "$1$",
+        "$-\\cos2\\theta$",
+        "$\\cos^22\\theta$"
+      ]
+    },
+    {
+      "id": "sin-plus-cos-squared",
+      "topic": "double",
+      "front": "Simplify $(\\sin\\theta+\\cos\\theta)^2$.",
+      "back": [
+        "$\\sin^2\\theta+\\cos^2\\theta+2\\sin\\theta\\cos\\theta\\equiv1+\\sin2\\theta$"
+      ],
+      "choices": [
+        "$1+\\sin2\\theta$",
+        "$1$",
+        "$1+\\cos2\\theta$",
+        "$1-\\sin2\\theta$"
+      ]
+    },
+    {
+      "id": "sin-double-in-tan",
+      "topic": "double",
+      "front": "Write $\\sin2\\theta$ in terms of $t=\\tan\\theta$.",
+      "back": [
+        "$\\sin2\\theta=2\\tan\\theta\\cos^2\\theta=\\dfrac{2\\tan\\theta}{\\sec^2\\theta}$",
+        "$\\sin2\\theta\\equiv\\dfrac{2t}{1+t^2}$"
+      ],
+      "choices": [
+        "$\\dfrac{2t}{1+t^2}$",
+        "$\\dfrac{2t}{1-t^2}$",
+        "$\\dfrac{1-t^2}{1+t^2}$",
+        "$\\dfrac{t}{1+t^2}$"
+      ]
+    },
+    {
+      "id": "cos-double-in-tan",
+      "topic": "double",
+      "front": "Write $\\cos2\\theta$ in terms of $t=\\tan\\theta$.",
+      "back": [
+        "Divide $\\cos^2\\theta-\\sin^2\\theta$ and $\\cos^2\\theta+\\sin^2\\theta$ by $\\cos^2\\theta$:",
+        "$\\cos2\\theta\\equiv\\dfrac{\\cos^2\\theta-\\sin^2\\theta}{\\cos^2\\theta+\\sin^2\\theta}\\equiv\\dfrac{1-t^2}{1+t^2}$"
+      ],
+      "choices": [
+        "$\\dfrac{1-t^2}{1+t^2}$",
+        "$\\dfrac{1+t^2}{1-t^2}$",
+        "$\\dfrac{2t}{1+t^2}$",
+        "$\\dfrac{t^2-1}{1+t^2}$"
+      ]
+    },
+    {
+      "id": "cot-minus-tan",
+      "topic": "double",
+      "front": "Simplify $\\cot\\theta-\\tan\\theta$.",
+      "back": [
+        "$\\dfrac{\\cos^2\\theta-\\sin^2\\theta}{\\sin\\theta\\cos\\theta}\\equiv\\dfrac{\\cos2\\theta}{\\frac12\\sin2\\theta}\\equiv2\\cot2\\theta$"
+      ],
+      "choices": [
+        "$2\\cot2\\theta$",
+        "$\\cot2\\theta$",
+        "$2\\tan2\\theta$",
+        "$\\tfrac12\\cot2\\theta$"
+      ]
+    },
+    {
+      "id": "tan-plus-cot-double",
+      "topic": "double",
+      "front": "Write $\\tan\\theta+\\cot\\theta$ in terms of $2\\theta$.",
+      "back": [
+        "$\\dfrac{\\sin^2\\theta+\\cos^2\\theta}{\\sin\\theta\\cos\\theta}\\equiv\\dfrac{1}{\\frac12\\sin2\\theta}\\equiv2\\cosec2\\theta$"
+      ],
+      "choices": [
+        "$2\\cosec2\\theta$",
+        "$\\cosec2\\theta$",
+        "$2\\sec2\\theta$",
+        "$\\tfrac12\\cosec2\\theta$"
+      ]
+    },
+    {
+      "id": "cos-double-over-cos-plus-sin",
+      "topic": "double",
+      "front": "Simplify $\\dfrac{\\cos2\\theta}{\\cos\\theta+\\sin\\theta}$.",
+      "back": [
+        "$\\dfrac{(\\cos\\theta-\\sin\\theta)(\\cos\\theta+\\sin\\theta)}{\\cos\\theta+\\sin\\theta}\\equiv\\cos\\theta-\\sin\\theta$"
+      ],
+      "choices": [
+        "$\\cos\\theta-\\sin\\theta$",
+        "$\\cos\\theta+\\sin\\theta$",
+        "$\\sin\\theta-\\cos\\theta$",
+        "$1$"
+      ]
+    },
+    {
+      "id": "sin-four-x",
+      "topic": "double",
+      "front": "Write $\\sin4x$ as a double angle of $2x$.",
+      "back": [
+        "$\\sin4x\\equiv2\\sin2x\\cos2x$"
+      ],
+      "choices": [
+        "$2\\sin2x\\cos2x$",
+        "$4\\sin x\\cos x$",
+        "$2\\sin2x\\cos x$",
+        "$\\cos^22x-\\sin^22x$"
+      ]
+    },
+    {
+      "id": "sin-triple",
+      "topic": "double",
+      "front": "Write $\\sin3A$ in terms of $\\sin A$.",
+      "back": [
+        "Expand $\\sin(2A+A)$, then use $\\cos2A\\equiv1-2\\sin^2A$ and $\\cos^2A\\equiv1-\\sin^2A$:",
+        "$\\sin3A\\equiv3\\sin A-4\\sin^3A$"
+      ],
+      "choices": [
+        "$3\\sin A-4\\sin^3A$",
+        "$4\\sin^3A-3\\sin A$",
+        "$3\\sin A+4\\sin^3A$",
+        "$3\\sin A-\\sin^3A$"
+      ]
+    },
+    {
+      "id": "cos-triple",
+      "topic": "double",
+      "front": "Write $\\cos3A$ in terms of $\\cos A$.",
+      "back": [
+        "Expand $\\cos(2A+A)$, then use $\\cos2A\\equiv2\\cos^2A-1$ and $\\sin^2A\\equiv1-\\cos^2A$:",
+        "$\\cos3A\\equiv4\\cos^3A-3\\cos A$"
+      ],
+      "choices": [
+        "$4\\cos^3A-3\\cos A$",
+        "$3\\cos A-4\\cos^3A$",
+        "$4\\cos^3A+3\\cos A$",
+        "$\\cos^3A-3\\cos A$"
+      ]
+    },
+    {
+      "id": "cosine-double-angle",
+      "topic": "double",
+      "front": "What are the three forms of $\\cos 2A$?",
+      "back": [
+        "$\\cos 2A=\\cos^2 A-\\sin^2 A$",
+        "$\\cos 2A=2\\cos^2 A-1$",
+        "$\\cos 2A=1-2\\sin^2 A$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\cos^2 A-\\sin^2 A$, $2\\cos^2 A-1$, and $1-2\\sin^2 A$",
+        "$\\sin^2 A-\\cos^2 A$, $2\\sin^2 A-1$, and $1-2\\cos^2 A$",
+        "$\\cos^2 A+\\sin^2 A$, $2\\cos^2 A$, and $2\\sin^2 A$",
+        "$2\\sin A\\cos A$, $2\\cos^2 A+1$, and $1+2\\sin^2 A$"
+      ]
+    },
+    {
+      "id": "half-angle-signs",
+      "topic": "double",
+      "front": "How do you find $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$ from $\\cos\\theta$?",
+      "back": [
+        "$\\sin(\\theta/2)=\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$",
+        "$\\cos(\\theta/2)=\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$",
+        "Choose each sign using the quadrant of the half angle."
+      ],
+      "choices": [
+        "For sine, $\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. For cosine, $\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. Use the quadrant for the signs.",
+        "For sine, $\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. For cosine, $\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. Use the quadrant for the signs.",
+        "For sine, $\\dfrac{1-\\cos\\theta}{2}$. For cosine, $\\dfrac{1+\\cos\\theta}{2}$.",
+        "For sine, $\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. For cosine, $\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. Both are always positive."
+      ]
+    },
+    {
+      "id": "factor-apply-sin-sum",
+      "topic": "factor",
+      "front": "Factorise $\\sin5x+\\sin3x$.",
+      "back": [
+        "$2\\sin\\dfrac{5x+3x}{2}\\cos\\dfrac{5x-3x}{2}\\equiv2\\sin4x\\cos x$"
+      ],
+      "choices": [
+        "$2\\sin4x\\cos x$",
+        "$2\\cos4x\\sin x$",
+        "$2\\sin4x\\sin x$",
+        "$2\\sin8x\\cos2x$"
+      ]
+    },
+    {
+      "id": "factor-apply-cos-difference",
+      "topic": "factor",
+      "front": "Factorise $\\cos3x-\\cos x$.",
+      "back": [
+        "$-2\\sin\\dfrac{3x+x}{2}\\sin\\dfrac{3x-x}{2}\\equiv-2\\sin2x\\sin x$"
+      ],
+      "choices": [
+        "$-2\\sin2x\\sin x$",
+        "$2\\sin2x\\sin x$",
+        "$-2\\cos2x\\cos x$",
+        "$2\\cos2x\\sin x$"
+      ]
+    },
+    {
+      "id": "factor-apply-cos-sum",
+      "topic": "factor",
+      "front": "Factorise $\\cos7\\theta+\\cos3\\theta$.",
+      "back": [
+        "$2\\cos\\dfrac{7\\theta+3\\theta}{2}\\cos\\dfrac{7\\theta-3\\theta}{2}\\equiv2\\cos5\\theta\\cos2\\theta$"
+      ],
+      "choices": [
+        "$2\\cos5\\theta\\cos2\\theta$",
+        "$2\\cos10\\theta\\cos4\\theta$",
+        "$2\\sin5\\theta\\sin2\\theta$",
+        "$-2\\sin5\\theta\\sin2\\theta$"
+      ]
+    },
+    {
+      "id": "factor-apply-sin-difference",
+      "topic": "factor",
+      "front": "Factorise $\\sin3x-\\sin x$.",
+      "back": [
+        "$2\\cos\\dfrac{3x+x}{2}\\sin\\dfrac{3x-x}{2}\\equiv2\\cos2x\\sin x$"
+      ],
+      "choices": [
+        "$2\\cos2x\\sin x$",
+        "$2\\sin2x\\cos x$",
+        "$-2\\cos2x\\sin x$",
+        "$2\\sin2x\\sin x$"
+      ]
+    },
+    {
+      "id": "product-to-sum-reverse",
+      "topic": "factor",
+      "front": "Write $2\\cos3x\\sin x$ as a difference of two sines.",
+      "back": [
+        "Match $\\sin P-\\sin Q\\equiv2\\cos\\dfrac{P+Q}{2}\\sin\\dfrac{P-Q}{2}$ with $\\dfrac{P+Q}{2}=3x$ and $\\dfrac{P-Q}{2}=x$.",
+        "So $P=4x$ and $Q=2x$: $2\\cos3x\\sin x\\equiv\\sin4x-\\sin2x$"
+      ],
+      "choices": [
+        "$\\sin4x-\\sin2x$",
+        "$\\sin2x-\\sin4x$",
+        "$\\sin4x+\\sin2x$",
+        "$\\cos2x-\\cos4x$"
+      ]
+    },
+    {
+      "id": "factor-exact-sin",
+      "topic": "factor",
+      "front": "Find the exact value of $\\sin75^\\circ+\\sin15^\\circ$.",
+      "back": [
+        "$2\\sin45^\\circ\\cos30^\\circ=2\\cdot\\tfrac{\\sqrt2}{2}\\cdot\\tfrac{\\sqrt3}{2}=\\dfrac{\\sqrt6}{2}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\sqrt6}{2}$",
+        "$\\dfrac{\\sqrt2}{2}$",
+        "$\\dfrac{\\sqrt3}{2}$",
+        "$\\sqrt2$"
+      ]
+    },
+    {
+      "id": "factor-exact-cos",
+      "topic": "factor",
+      "front": "Find the exact value of $\\cos15^\\circ-\\cos75^\\circ$.",
+      "back": [
+        "$-2\\sin45^\\circ\\sin(-30^\\circ)=2\\cdot\\tfrac{\\sqrt2}{2}\\cdot\\tfrac12=\\dfrac{\\sqrt2}{2}$"
+      ],
+      "choices": [
+        "$\\dfrac{\\sqrt2}{2}$",
+        "$-\\dfrac{\\sqrt2}{2}$",
+        "$\\dfrac{\\sqrt6}{2}$",
+        "$\\dfrac12$"
+      ]
+    },
+    {
+      "id": "sine-sum-to-product",
+      "topic": "factor",
+      "front": "How do you write $\\sin A+\\sin B$ as a product?",
+      "back": [
+        "$\\sin A+\\sin B=$",
+        "$2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
+    },
+    {
+      "id": "sine-difference-to-product",
+      "topic": "factor",
+      "front": "How do you write $\\sin A-\\sin B$ as a product?",
+      "back": [
+        "$\\sin A-\\sin B=$",
+        "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$-2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
+    },
+    {
+      "id": "cosine-sum-to-product",
+      "topic": "factor",
+      "front": "How do you write $\\cos A+\\cos B$ as a product?",
+      "back": [
+        "$\\cos A+\\cos B=$",
+        "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$-2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
+    },
+    {
+      "id": "cosine-difference-to-product",
+      "topic": "factor",
+      "front": "How do you write $\\cos A-\\cos B$ as a product?",
+      "back": [
+        "$\\cos A-\\cos B=$",
+        "$-2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$-2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
+        "$-2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
+      ]
+    },
+    {
+      "id": "r-cos-plus-form",
+      "topic": "harmonic",
+      "front": "For $a,b>0$, write $a\\cos x-b\\sin x$ as $R\\cos(x+\\alpha)$. What are $R$ and $\\tan\\alpha$?",
+      "back": [
+        "$R\\cos(x+\\alpha)\\equiv R\\cos x\\cos\\alpha-R\\sin x\\sin\\alpha$",
+        "So $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$: $R=\\sqrt{a^2+b^2}$ and $\\tan\\alpha=\\dfrac{b}{a}$."
+      ],
+      "choices": [
+        "$R=\\sqrt{a^2+b^2}$, $\\tan\\alpha=\\dfrac{b}{a}$",
+        "$R=\\sqrt{a^2+b^2}$, $\\tan\\alpha=\\dfrac{a}{b}$",
+        "$R=\\sqrt{a^2-b^2}$, $\\tan\\alpha=\\dfrac{b}{a}$",
+        "$R=a+b$, $\\tan\\alpha=\\dfrac{b}{a}$"
+      ]
+    },
+    {
+      "id": "r-sin-minus-form",
+      "topic": "harmonic",
+      "front": "For $a,b>0$, write $a\\sin x-b\\cos x$ as $R\\sin(x-\\alpha)$. What are $R$ and $\\tan\\alpha$?",
+      "back": [
+        "$R\\sin(x-\\alpha)\\equiv R\\sin x\\cos\\alpha-R\\cos x\\sin\\alpha$",
+        "So $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$: $R=\\sqrt{a^2+b^2}$ and $\\tan\\alpha=\\dfrac{b}{a}$."
+      ],
+      "choices": [
+        "$R=\\sqrt{a^2+b^2}$, $\\tan\\alpha=\\dfrac{b}{a}$",
+        "$R=\\sqrt{a^2+b^2}$, $\\tan\\alpha=\\dfrac{a}{b}$",
+        "$R=\\sqrt{a^2-b^2}$, $\\tan\\alpha=\\dfrac{a}{b}$",
+        "$R=a-b$, $\\tan\\alpha=\\dfrac{b}{a}$"
+      ]
+    },
+    {
+      "id": "r-numeric-3-4",
+      "topic": "harmonic",
+      "front": "Write $3\\sin x+4\\cos x$ as $R\\sin(x+\\alpha)$, with $\\alpha$ in radians to 3 s.f.",
+      "back": [
+        "$R=\\sqrt{3^2+4^2}=5$, with $R\\cos\\alpha=3$ and $R\\sin\\alpha=4$.",
+        "$\\tan\\alpha=\\tfrac43$, so $3\\sin x+4\\cos x\\equiv5\\sin(x+0.927)$."
+      ],
+      "choices": [
+        "$5\\sin(x+0.927)$",
+        "$5\\sin(x+0.644)$",
+        "$7\\sin(x+0.927)$",
+        "$5\\sin(x-0.927)$"
+      ]
+    },
+    {
+      "id": "r-numeric-root3",
+      "topic": "harmonic",
+      "front": "Write $\\sqrt3\\sin x+\\cos x$ as $R\\sin(x+\\alpha)$.",
+      "back": [
+        "$R=\\sqrt{3+1}=2$ and $\\tan\\alpha=\\dfrac{1}{\\sqrt3}$, so $\\alpha=\\dfrac{\\pi}{6}$.",
+        "$\\sqrt3\\sin x+\\cos x\\equiv2\\sin\\!\\left(x+\\dfrac{\\pi}{6}\\right)$"
+      ],
+      "choices": [
+        "$2\\sin\\!\\left(x+\\dfrac{\\pi}{6}\\right)$",
+        "$2\\sin\\!\\left(x+\\dfrac{\\pi}{3}\\right)$",
+        "$4\\sin\\!\\left(x+\\dfrac{\\pi}{6}\\right)$",
+        "$2\\sin\\!\\left(x-\\dfrac{\\pi}{6}\\right)$"
+      ]
+    },
+    {
+      "id": "r-numeric-sin-plus-cos",
+      "topic": "harmonic",
+      "front": "Write $\\sin x+\\cos x$ as $R\\sin(x+\\alpha)$.",
+      "back": [
+        "$R=\\sqrt2$ and $\\tan\\alpha=1$, so $\\alpha=\\dfrac{\\pi}{4}$.",
+        "$\\sin x+\\cos x\\equiv\\sqrt2\\sin\\!\\left(x+\\dfrac{\\pi}{4}\\right)$"
+      ],
+      "choices": [
+        "$\\sqrt2\\sin\\!\\left(x+\\dfrac{\\pi}{4}\\right)$",
+        "$\\sqrt2\\sin\\!\\left(x-\\dfrac{\\pi}{4}\\right)$",
+        "$2\\sin\\!\\left(x+\\dfrac{\\pi}{4}\\right)$",
+        "$\\sin\\!\\left(x+\\dfrac{\\pi}{4}\\right)$"
+      ]
+    },
+    {
+      "id": "r-numeric-cos-minus-sin",
+      "topic": "harmonic",
+      "front": "Write $\\cos x-\\sin x$ as $R\\cos(x+\\alpha)$.",
+      "back": [
+        "$R\\cos\\alpha=1$ and $R\\sin\\alpha=1$, so $R=\\sqrt2$ and $\\alpha=\\dfrac{\\pi}{4}$.",
+        "$\\cos x-\\sin x\\equiv\\sqrt2\\cos\\!\\left(x+\\dfrac{\\pi}{4}\\right)$"
+      ],
+      "choices": [
+        "$\\sqrt2\\cos\\!\\left(x+\\dfrac{\\pi}{4}\\right)$",
+        "$\\sqrt2\\cos\\!\\left(x-\\dfrac{\\pi}{4}\\right)$",
+        "$2\\cos\\!\\left(x+\\dfrac{\\pi}{4}\\right)$",
+        "$\\sqrt2\\cos\\!\\left(x+\\dfrac{3\\pi}{4}\\right)$"
+      ]
+    },
+    {
+      "id": "r-max-value",
+      "topic": "harmonic",
+      "front": "Find the maximum value of $5-2(3\\sin x+4\\cos x)$.",
+      "back": [
+        "$3\\sin x+4\\cos x\\equiv5\\sin(x+\\alpha)$, which takes values from $-5$ to $5$.",
+        "The maximum is $5-2(-5)=15$."
+      ],
+      "choices": [
+        "$15$",
+        "$10$",
+        "$7$",
+        "$-5$"
+      ]
+    },
+    {
+      "id": "r-max-reciprocal",
+      "topic": "harmonic",
+      "front": "Find the maximum value of $\\dfrac{10}{7+3\\sin(x+\\alpha)}$.",
+      "back": [
+        "The fraction is largest when the denominator is smallest.",
+        "$7+3\\sin(x+\\alpha)\\ge4$, so the maximum is $\\dfrac{10}{4}=\\dfrac52$."
+      ],
+      "choices": [
+        "$\\dfrac52$",
+        "$1$",
+        "$\\dfrac{10}{7}$",
+        "$\\dfrac{10}{3}$"
+      ]
+    },
+    {
+      "id": "r-cos-form",
+      "topic": "harmonic",
+      "front": "How do you match $a\\cos x+b\\sin x$ to $R\\cos(x-\\alpha)$?",
+      "back": [
+        "$R=\\sqrt{a^2+b^2}$",
+        "$R\\cos\\alpha=a,\\qquad R\\sin\\alpha=b$",
+        "Choose the quadrant of $\\alpha$ using both signs."
+      ],
+      "choices": [
+        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=-b$.",
+        "$R=a+b$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$."
+      ]
+    },
+    {
+      "id": "r-sin-form",
+      "topic": "harmonic",
+      "front": "How do you match $a\\cos x+b\\sin x$ to $R\\sin(x+\\alpha)$?",
+      "back": [
+        "$R=\\sqrt{a^2+b^2}$",
+        "$R\\sin\\alpha=a,\\qquad R\\cos\\alpha=b$",
+        "Choose the quadrant of $\\alpha$ using both signs."
+      ],
+      "choices": [
+        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$.",
+        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=-a$ and $R\\cos\\alpha=b$.",
+        "$R=a+b$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$."
+      ]
+    },
+    {
+      "id": "exact-sin-4pi-3",
+      "topic": "exact",
+      "front": "Find the exact value of $\\sin\\dfrac{4\\pi}{3}$.",
+      "back": [
+        "$\\dfrac{4\\pi}{3}=\\pi+\\dfrac{\\pi}{3}$ is in the third quadrant, where sine is negative.",
+        "$\\sin\\dfrac{4\\pi}{3}=-\\dfrac{\\sqrt3}{2}$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-\\dfrac{\\sqrt3}{2}$",
+        "$\\dfrac{\\sqrt3}{2}$",
+        "$-\\dfrac12$",
+        "$\\dfrac12$"
+      ]
+    },
+    {
+      "id": "exact-cos-5pi-6",
+      "topic": "exact",
+      "front": "Find the exact value of $\\cos\\dfrac{5\\pi}{6}$.",
+      "back": [
+        "$\\dfrac{5\\pi}{6}=\\pi-\\dfrac{\\pi}{6}$ is in the second quadrant, where cosine is negative.",
+        "$\\cos\\dfrac{5\\pi}{6}=-\\dfrac{\\sqrt3}{2}$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-\\dfrac{\\sqrt3}{2}$",
+        "$\\dfrac{\\sqrt3}{2}$",
+        "$-\\dfrac12$",
+        "$\\dfrac12$"
+      ]
+    },
+    {
+      "id": "exact-sin-neg-2pi-3",
+      "topic": "exact",
+      "front": "Find the exact value of $\\sin\\left(-\\dfrac{2\\pi}{3}\\right)$.",
+      "back": [
+        "Sine is odd, so $\\sin\\left(-\\dfrac{2\\pi}{3}\\right)=-\\sin\\dfrac{2\\pi}{3}$.",
+        "$\\sin\\left(-\\dfrac{2\\pi}{3}\\right)=-\\dfrac{\\sqrt3}{2}$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-\\dfrac{\\sqrt3}{2}$",
+        "$\\dfrac{\\sqrt3}{2}$",
+        "$-\\dfrac12$",
+        "$\\dfrac12$"
+      ]
+    },
+    {
+      "id": "exact-sin-11pi-6",
+      "topic": "exact",
+      "front": "Find the exact value of $\\sin\\dfrac{11\\pi}{6}$.",
+      "back": [
+        "$\\dfrac{11\\pi}{6}=2\\pi-\\dfrac{\\pi}{6}$ is in the fourth quadrant, where sine is negative.",
+        "$\\sin\\dfrac{11\\pi}{6}=-\\dfrac12$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-\\dfrac12$",
+        "$\\dfrac12$",
+        "$-\\dfrac{\\sqrt3}{2}$",
+        "$\\dfrac{\\sqrt3}{2}$"
+      ]
+    },
+    {
+      "id": "exact-cos-7pi-4",
+      "topic": "exact",
+      "front": "Find the exact value of $\\cos\\dfrac{7\\pi}{4}$.",
+      "back": [
+        "$\\dfrac{7\\pi}{4}=2\\pi-\\dfrac{\\pi}{4}$ is in the fourth quadrant, where cosine is positive.",
+        "$\\cos\\dfrac{7\\pi}{4}=\\dfrac{\\sqrt2}{2}$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{\\sqrt2}{2}$",
+        "$-\\dfrac{\\sqrt2}{2}$",
+        "$\\dfrac12$",
+        "$-\\dfrac12$"
+      ]
+    },
+    {
+      "id": "exact-tan-7pi-6",
+      "topic": "exact",
+      "front": "Find the exact value of $\\tan\\dfrac{7\\pi}{6}$.",
+      "back": [
+        "Tangent has period $\\pi$, so $\\tan\\dfrac{7\\pi}{6}=\\tan\\dfrac{\\pi}{6}$.",
+        "$\\tan\\dfrac{7\\pi}{6}=\\dfrac{1}{\\sqrt3}$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{1}{\\sqrt3}$",
+        "$-\\dfrac{1}{\\sqrt3}$",
+        "$\\sqrt3$",
+        "$-\\sqrt3$"
+      ]
+    },
+    {
+      "id": "exact-tan-5pi-3",
+      "topic": "exact",
+      "front": "Find the exact value of $\\tan\\dfrac{5\\pi}{3}$.",
+      "back": [
+        "$\\dfrac{5\\pi}{3}=2\\pi-\\dfrac{\\pi}{3}$ is in the fourth quadrant, where tangent is negative.",
+        "$\\tan\\dfrac{5\\pi}{3}=-\\sqrt3$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-\\sqrt3$",
+        "$\\sqrt3$",
+        "$-\\dfrac{1}{\\sqrt3}$",
+        "$\\dfrac{1}{\\sqrt3}$"
+      ]
+    },
+    {
+      "id": "exact-sec-pi-6",
+      "topic": "exact",
+      "front": "Find the exact value of $\\sec\\dfrac{\\pi}{6}$.",
+      "back": [
+        "$\\sec\\dfrac{\\pi}{6}=\\dfrac{1}{\\cos\\frac{\\pi}{6}}=\\dfrac{2}{\\sqrt3}=\\dfrac{2\\sqrt3}{3}$"
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{2}{\\sqrt3}$",
+        "$2$",
+        "$\\dfrac{\\sqrt3}{2}$",
+        "$\\sqrt2$"
+      ]
+    },
+    {
+      "id": "exact-sec-4pi-3",
+      "topic": "exact",
+      "front": "Find the exact value of $\\sec\\dfrac{4\\pi}{3}$.",
+      "back": [
+        "$\\cos\\dfrac{4\\pi}{3}=-\\dfrac12$, so $\\sec\\dfrac{4\\pi}{3}=-2$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-2$",
+        "$2$",
+        "$-\\dfrac{2}{\\sqrt3}$",
+        "$\\dfrac{2}{\\sqrt3}$"
+      ]
+    },
+    {
+      "id": "exact-cosec-3pi-4",
+      "topic": "exact",
+      "front": "Find the exact value of $\\cosec\\dfrac{3\\pi}{4}$.",
+      "back": [
+        "$\\sin\\dfrac{3\\pi}{4}=\\dfrac{\\sqrt2}{2}$, so $\\cosec\\dfrac{3\\pi}{4}=\\sqrt2$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\sqrt2$",
+        "$-\\sqrt2$",
+        "$\\dfrac{\\sqrt2}{2}$",
+        "$-\\dfrac{\\sqrt2}{2}$"
+      ]
+    },
+    {
+      "id": "exact-cot-2pi-3",
+      "topic": "exact",
+      "front": "Find the exact value of $\\cot\\dfrac{2\\pi}{3}$.",
+      "back": [
+        "$\\tan\\dfrac{2\\pi}{3}=-\\sqrt3$, so $\\cot\\dfrac{2\\pi}{3}=-\\dfrac{1}{\\sqrt3}$."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$-\\dfrac{1}{\\sqrt3}$",
+        "$\\dfrac{1}{\\sqrt3}$",
+        "$-\\sqrt3$",
+        "$\\sqrt3$"
+      ]
+    },
+    {
+      "id": "shift-sin-plus-half-pi",
+      "topic": "exact",
+      "front": "Simplify $\\sin\\!\\left(x+\\dfrac{\\pi}{2}\\right)$.",
+      "back": [
+        "$\\sin x\\cos\\dfrac{\\pi}{2}+\\cos x\\sin\\dfrac{\\pi}{2}=\\cos x$"
+      ],
+      "choices": [
+        "$\\cos x$",
+        "$-\\cos x$",
+        "$\\sin x$",
+        "$-\\sin x$"
+      ]
+    },
+    {
+      "id": "shift-cos-plus-half-pi",
+      "topic": "exact",
+      "front": "Simplify $\\cos\\!\\left(x+\\dfrac{\\pi}{2}\\right)$.",
+      "back": [
+        "$\\cos x\\cos\\dfrac{\\pi}{2}-\\sin x\\sin\\dfrac{\\pi}{2}=-\\sin x$"
+      ],
+      "choices": [
+        "$-\\sin x$",
+        "$\\sin x$",
+        "$\\cos x$",
+        "$-\\cos x$"
+      ]
+    },
+    {
+      "id": "shift-sin-pi-plus",
+      "topic": "exact",
+      "front": "Simplify $\\sin(\\pi+x)$.",
+      "back": [
+        "$\\sin\\pi\\cos x+\\cos\\pi\\sin x=-\\sin x$"
+      ],
+      "choices": [
+        "$-\\sin x$",
+        "$\\sin x$",
+        "$-\\cos x$",
+        "$\\cos x$"
+      ]
+    },
+    {
+      "id": "shift-cos-pi-plus",
+      "topic": "exact",
+      "front": "Simplify $\\cos(\\pi+x)$.",
+      "back": [
+        "$\\cos\\pi\\cos x-\\sin\\pi\\sin x=-\\cos x$"
+      ],
+      "choices": [
+        "$-\\cos x$",
+        "$\\cos x$",
+        "$-\\sin x$",
+        "$\\sin x$"
+      ]
+    },
+    {
+      "id": "shift-tan-half-pi-minus",
+      "topic": "exact",
+      "front": "Simplify $\\tan\\!\\left(\\dfrac{\\pi}{2}-x\\right)$.",
+      "back": [
+        "$\\dfrac{\\sin\\left(\\frac{\\pi}{2}-x\\right)}{\\cos\\left(\\frac{\\pi}{2}-x\\right)}=\\dfrac{\\cos x}{\\sin x}=\\cot x$"
+      ],
+      "choices": [
+        "$\\cot x$",
+        "$-\\cot x$",
+        "$\\tan x$",
+        "$-\\tan x$"
+      ]
+    },
+    {
+      "id": "sine-symmetry",
+      "topic": "exact",
+      "front": "How do $\\sin(-x)$ and $\\sin(\\pi-x)$ relate to $\\sin x$?",
+      "back": [
+        "$\\sin(-x)=-\\sin x$",
+        "$\\sin(\\pi-x)=\\sin x$"
+      ],
+      "choices": [
+        "$-\\sin x$ and $\\sin x$, respectively.",
+        "$\\sin x$ and $-\\sin x$, respectively.",
+        "$-\\sin x$ and $-\\sin x$, respectively.",
+        "$\\sin x$ and $\\sin x$, respectively."
+      ]
+    },
+    {
+      "id": "cosine-symmetry",
+      "topic": "exact",
+      "front": "How do $\\cos(-x)$ and $\\cos(\\pi-x)$ relate to $\\cos x$?",
+      "back": [
+        "$\\cos(-x)=\\cos x$",
+        "$\\cos(\\pi-x)=-\\cos x$"
+      ],
+      "choices": [
+        "$\\cos x$ and $-\\cos x$, respectively.",
+        "$-\\cos x$ and $\\cos x$, respectively.",
+        "$-\\cos x$ and $-\\cos x$, respectively.",
+        "$\\cos x$ and $\\cos x$, respectively."
+      ]
+    },
+    {
+      "id": "tangent-symmetry",
+      "topic": "exact",
+      "front": "How do $\\tan(-x)$ and $\\tan(\\pi-x)$ relate to $\\tan x$?",
+      "back": [
+        "$\\tan(-x)=-\\tan x$",
+        "$\\tan(\\pi-x)=-\\tan x$"
+      ],
+      "choices": [
+        "$-\\tan x$ and $-\\tan x$, respectively.",
+        "$\\tan x$ and $-\\tan x$, respectively.",
+        "$-\\tan x$ and $\\tan x$, respectively.",
+        "$\\tan x$ and $\\tan x$, respectively."
+      ]
+    },
+    {
+      "id": "sine-cosine-complement",
+      "topic": "exact",
+      "front": "How do sine and cosine link for complementary angles?",
+      "back": [
+        "$\\sin(\\pi/2-x)=\\cos x$",
+        "$\\cos(\\pi/2-x)=\\sin x$"
+      ],
+      "choices": [
+        "$\\sin(\\pi/2-x)=\\cos x$ and $\\cos(\\pi/2-x)=\\sin x$.",
+        "$\\sin(\\pi/2-x)=\\sin x$ and $\\cos(\\pi/2-x)=\\cos x$.",
+        "$\\sin(\\pi/2-x)=-\\cos x$ and $\\cos(\\pi/2-x)=\\sin x$.",
+        "$\\sin(\\pi/2-x)=\\cos x$ and $\\cos(\\pi/2-x)=-\\sin x$."
+      ]
+    },
+    {
+      "id": "arcsin-plus-arccos",
+      "topic": "inverse",
+      "front": "Simplify $\\arcsin x+\\arccos x$ for $-1\\le x\\le1$.",
+      "back": [
+        "$\\arcsin x+\\arccos x=\\dfrac{\\pi}{2}$",
+        "If $\\sin\\theta=x$, then $\\cos\\left(\\dfrac{\\pi}{2}-\\theta\\right)=x$ too."
+      ],
+      "choices": [
+        "$\\dfrac{\\pi}{2}$",
+        "$\\pi$",
+        "$0$",
+        "$\\dfrac{\\pi}{4}$"
+      ]
+    },
+    {
+      "id": "sin-arccos",
+      "topic": "inverse",
+      "front": "Simplify $\\sin(\\arccos x)$ for $-1\\le x\\le1$.",
+      "back": [
+        "Let $\\theta=\\arccos x$, so $\\cos\\theta=x$ and $0\\le\\theta\\le\\pi$.",
+        "Sine is not negative on that interval, so $\\sin\\theta=\\sqrt{1-x^2}$."
+      ],
+      "choices": [
+        "$\\sqrt{1-x^2}$",
+        "$1-x^2$",
+        "$\\dfrac{x}{\\sqrt{1-x^2}}$",
+        "$\\sqrt{1+x^2}$"
+      ]
+    },
+    {
+      "id": "tan-arcsin",
+      "topic": "inverse",
+      "front": "Simplify $\\tan(\\arcsin x)$ for $-1<x<1$.",
+      "back": [
+        "Let $\\theta=\\arcsin x$, so $\\sin\\theta=x$ and $\\cos\\theta=\\sqrt{1-x^2}$.",
+        "$\\tan(\\arcsin x)=\\dfrac{x}{\\sqrt{1-x^2}}$"
+      ],
+      "choices": [
+        "$\\dfrac{x}{\\sqrt{1-x^2}}$",
+        "$\\dfrac{\\sqrt{1-x^2}}{x}$",
+        "$\\dfrac{x}{\\sqrt{1+x^2}}$",
+        "$\\dfrac{x}{1-x^2}$"
+      ]
+    },
+    {
+      "id": "sec-arctan",
+      "topic": "inverse",
+      "front": "Simplify $\\sec(\\arctan x)$.",
+      "back": [
+        "Let $\\theta=\\arctan x$, so $\\tan\\theta=x$ and $-\\dfrac{\\pi}{2}<\\theta<\\dfrac{\\pi}{2}$.",
+        "$\\sec^2\\theta=1+x^2$ and $\\sec\\theta>0$ there, so $\\sec(\\arctan x)=\\sqrt{1+x^2}$."
+      ],
+      "choices": [
+        "$\\sqrt{1+x^2}$",
+        "$\\dfrac{1}{\\sqrt{1+x^2}}$",
+        "$\\sqrt{1-x^2}$",
+        "$1+x^2$"
+      ]
+    },
+    {
+      "id": "arccos-negative",
+      "topic": "inverse",
+      "front": "Simplify $\\arccos(-x)$ for $-1\\le x\\le1$.",
+      "back": [
+        "$\\arccos(-x)=\\pi-\\arccos x$",
+        "Changing $x$ to $-x$ reflects the angle in $\\theta=\\dfrac{\\pi}{2}$."
+      ],
+      "choices": [
+        "$\\pi-\\arccos x$",
+        "$-\\arccos x$",
+        "$\\arccos x$",
+        "$\\pi+\\arccos x$"
+      ]
+    },
+    {
+      "id": "arcsin-negative",
+      "topic": "inverse",
+      "front": "Simplify $\\arcsin(-x)$ for $-1\\le x\\le1$.",
+      "back": [
+        "$\\arcsin(-x)=-\\arcsin x$",
+        "Inverse sine is an odd function."
+      ],
+      "choices": [
+        "$-\\arcsin x$",
+        "$\\pi-\\arcsin x$",
+        "$\\arcsin x$",
+        "$\\dfrac{\\pi}{2}-\\arcsin x$"
+      ]
+    },
+    {
+      "id": "arctan-reciprocal",
+      "topic": "inverse",
+      "front": "For $x>0$, simplify $\\arctan x+\\arctan\\dfrac{1}{x}$.",
+      "back": [
+        "$\\arctan x+\\arctan\\dfrac1x=\\dfrac{\\pi}{2}$",
+        "The two angles are the acute angles of the same right-angled triangle."
+      ],
+      "choices": [
+        "$\\dfrac{\\pi}{2}$",
+        "$\\pi$",
+        "$\\dfrac{\\pi}{4}$",
+        "$0$"
+      ]
+    },
+    {
+      "id": "exact-arccos-neg-half",
+      "topic": "inverse",
+      "front": "Find $\\arccos\\left(-\\dfrac12\\right)$.",
+      "back": [
+        "$\\arccos$ gives an angle in $[0,\\pi]$.",
+        "$\\cos\\dfrac{2\\pi}{3}=-\\dfrac12$, so $\\arccos\\left(-\\dfrac12\\right)=\\dfrac{2\\pi}{3}$."
+      ],
+      "choices": [
+        "$\\dfrac{2\\pi}{3}$",
+        "$-\\dfrac{\\pi}{3}$",
+        "$\\dfrac{4\\pi}{3}$",
+        "$\\dfrac{\\pi}{3}$"
+      ]
+    },
+    {
+      "id": "exact-arcsin-neg-root3",
+      "topic": "inverse",
+      "front": "Find $\\arcsin\\left(-\\dfrac{\\sqrt3}{2}\\right)$.",
+      "back": [
+        "$\\arcsin$ gives an angle in $\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$.",
+        "So $\\arcsin\\left(-\\dfrac{\\sqrt3}{2}\\right)=-\\dfrac{\\pi}{3}$."
+      ],
+      "choices": [
+        "$-\\dfrac{\\pi}{3}$",
+        "$\\dfrac{4\\pi}{3}$",
+        "$-\\dfrac{\\pi}{6}$",
+        "$\\dfrac{5\\pi}{3}$"
+      ]
+    },
+    {
+      "id": "exact-arctan-neg-root3",
+      "topic": "inverse",
+      "front": "Find $\\arctan\\left(-\\dfrac{1}{\\sqrt3}\\right)$.",
+      "back": [
+        "$\\arctan$ gives an angle in $\\left(-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right)$.",
+        "So $\\arctan\\left(-\\dfrac{1}{\\sqrt3}\\right)=-\\dfrac{\\pi}{6}$."
+      ],
+      "choices": [
+        "$-\\dfrac{\\pi}{6}$",
+        "$\\dfrac{5\\pi}{6}$",
+        "$-\\dfrac{\\pi}{3}$",
+        "$\\dfrac{11\\pi}{6}$"
+      ]
+    },
+    {
+      "id": "sec-graph",
+      "topic": "inverse",
+      "front": "Where is secant undefined, and what values can it take?",
+      "back": [
+        "Where $\\cos x=0$, at $x=\\pi/2+k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
+      ],
+      "choices": [
+        "Undefined where $\\cos x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\cos x=0$. Values satisfy $|y|\\le1$.",
+        "Undefined where $\\cos x=0$. Values satisfy $y\\ge1$."
+      ]
+    },
+    {
+      "id": "cosec-graph",
+      "topic": "inverse",
+      "front": "Where is cosecant undefined, and what values can it take?",
+      "back": [
+        "Where $\\sin x=0$, at $x=k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
+      ],
+      "choices": [
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\cos x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\le1$.",
+        "Undefined where $\\sin x=0$. Values satisfy $y\\ge1$."
+      ]
+    },
+    {
+      "id": "cot-graph",
+      "topic": "inverse",
+      "front": "Where is cotangent undefined, and what values can it take?",
+      "back": [
+        "Where $\\sin x=0$, at $x=k\\pi$. The period is $\\pi$ and the range is $\\mathbb{R}$. On each branch it falls through zero at $x=\\pi/2+k\\pi$."
+      ],
+      "choices": [
+        "Undefined where $\\sin x=0$. Its range is all real numbers.",
+        "Undefined where $\\cos x=0$. Its range is all real numbers.",
+        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
+        "Undefined where $\\cos x=0$. Values lie in $[-1,1]$."
+      ]
+    },
+    {
+      "id": "arcsin-range",
+      "topic": "inverse",
+      "front": "What is the input domain and output range of inverse sine?",
+      "back": [
+        "$\\arcsin x$ takes inputs in $[-1,1]$ and returns angles in $[-\\pi/2,\\pi/2]$."
+      ],
+      "choices": [
+        "Input $[-1,1]$. Output $[-\\pi/2,\\pi/2]$.",
+        "Input $[-1,1]$. Output $[0,\\pi]$.",
+        "Input $\\mathbb{R}$. Output $(-\\pi/2,\\pi/2)$.",
+        "Input $[-\\pi/2,\\pi/2]$. Output $[-1,1]$."
+      ]
+    },
+    {
+      "id": "arccos-range",
+      "topic": "inverse",
+      "front": "What is the input domain and output range of inverse cosine?",
+      "back": [
+        "$\\arccos x$ takes inputs in $[-1,1]$ and returns angles in $[0,\\pi]$."
+      ],
+      "choices": [
+        "Input $[-1,1]$. Output $[0,\\pi]$.",
+        "Input $[-1,1]$. Output $[-\\pi/2,\\pi/2]$.",
+        "Input $[0,\\pi]$. Output $[-1,1]$.",
+        "Input $\\mathbb{R}$. Output $[0,\\pi]$."
+      ]
+    },
+    {
+      "id": "arctan-range",
+      "topic": "inverse",
+      "front": "What is the input domain and output range of inverse tangent?",
+      "back": [
+        "$\\arctan x$ takes any real input and returns angles in $(-\\pi/2,\\pi/2)$."
+      ],
+      "choices": [
+        "Input $\\mathbb{R}$. Output $(-\\pi/2,\\pi/2)$.",
+        "Input $\\mathbb{R}$. Output $[-\\pi/2,\\pi/2]$.",
+        "Input $[-1,1]$. Output $[0,\\pi]$.",
+        "Input $(-\\pi/2,\\pi/2)$. Output $\\mathbb{R}$."
+      ]
+    },
+    {
+      "id": "inverse-trig-graph",
+      "topic": "inverse",
+      "front": "How do you sketch an inverse trig graph?",
+      "back": [
+        "Choose the branch that gives exactly one angle for each allowable input, then reflect that branch in $y=x$. The restricted trig graph’s range and domain swap roles."
+      ],
+      "choices": [
+        "Choose a one-to-one branch and reflect it in $y=x$.",
+        "Reflect the entire trig graph in $y=x$ without restricting its domain.",
+        "Choose a one-to-one branch and reflect it in the $x$-axis.",
+        "Take the reciprocal of every height on the original graph."
+      ]
+    },
+    {
+      "id": "small-angle-cos-double",
+      "topic": "small-angle",
+      "front": "For small $\\theta$, approximate $\\cos2\\theta$.",
+      "back": [
+        "Use $\\cos x\\approx1-\\dfrac{x^2}{2}$ with $x=2\\theta$:",
+        "$\\cos2\\theta\\approx1-\\dfrac{(2\\theta)^2}{2}=1-2\\theta^2$"
+      ],
+      "choices": [
+        "$1-2\\theta^2$",
+        "$1-\\theta^2$",
+        "$1-4\\theta^2$",
+        "$1-\\dfrac{\\theta^2}{2}$"
+      ]
+    },
+    {
+      "id": "small-angle-ratio",
+      "topic": "small-angle",
+      "front": "For small $\\theta$, approximate $\\dfrac{1-\\cos4\\theta}{\\theta\\sin\\theta}$.",
+      "back": [
+        "$1-\\cos4\\theta\\approx\\dfrac{(4\\theta)^2}{2}=8\\theta^2$ and $\\theta\\sin\\theta\\approx\\theta^2$",
+        "So the expression is approximately $8$."
+      ],
+      "choices": [
+        "$8$",
+        "$4$",
+        "$16$",
+        "$2$"
+      ]
+    },
+    {
+      "id": "small-angle-sum",
+      "topic": "small-angle",
+      "front": "For small $\\theta$, approximate $\\cos\\theta+\\sin2\\theta$.",
+      "back": [
+        "$\\cos\\theta\\approx1-\\dfrac{\\theta^2}{2}$ and $\\sin2\\theta\\approx2\\theta$",
+        "$\\cos\\theta+\\sin2\\theta\\approx1+2\\theta-\\dfrac{\\theta^2}{2}$"
+      ],
+      "choices": [
+        "$1+2\\theta-\\dfrac{\\theta^2}{2}$",
+        "$1+2\\theta+\\dfrac{\\theta^2}{2}$",
+        "$1+\\theta-\\dfrac{\\theta^2}{2}$",
+        "$1-2\\theta-\\dfrac{\\theta^2}{2}$"
+      ]
+    },
+    {
+      "id": "small-angle-product",
+      "topic": "small-angle",
+      "front": "For small $x$, approximate $\\dfrac{\\sin2x\\tan3x}{1-\\cos x}$.",
+      "back": [
+        "$\\sin2x\\approx2x$, $\\tan3x\\approx3x$ and $1-\\cos x\\approx\\dfrac{x^2}{2}$",
+        "So the expression is approximately $\\dfrac{6x^2}{x^2/2}=12$."
+      ],
+      "choices": [
+        "$12$",
+        "$6$",
+        "$3$",
+        "$24$"
+      ]
+    },
+    {
+      "id": "small-angle-degrees",
+      "topic": "small-angle",
+      "front": "What must you do before using $\\sin\\theta\\approx\\theta$ for an angle of $2^\\circ$?",
+      "back": [
+        "The approximation only works in radians: $2^\\circ=\\dfrac{\\pi}{90}$.",
+        "So $\\sin2^\\circ\\approx\\dfrac{\\pi}{90}$."
+      ],
+      "choices": [
+        "Convert it to radians, so $\\sin2^\\circ\\approx\\dfrac{\\pi}{90}$.",
+        "Nothing, so $\\sin2^\\circ\\approx2$.",
+        "Divide by $180$, so $\\sin2^\\circ\\approx\\dfrac{1}{90}$.",
+        "Convert it to radians, so $\\sin2^\\circ\\approx\\dfrac{90}{\\pi}$."
+      ]
+    },
+    {
+      "id": "small-angle-sine",
+      "topic": "small-angle",
+      "front": "What is the small-angle approximation for sine?",
+      "back": [
+        "$\\sin\\theta\\approx\\theta$",
+        "The angle $\\theta$ must be small and in radians."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\sin\\theta\\approx\\theta$",
+        "$\\sin\\theta\\approx\\theta^2$",
+        "$\\sin\\theta\\approx1-\\dfrac{\\theta^2}{2}$",
+        "$\\sin\\theta\\approx1+\\theta$"
+      ]
+    },
+    {
+      "id": "small-angle-cosine",
+      "topic": "small-angle",
+      "front": "What is the small-angle approximation for cosine?",
+      "back": [
+        "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
+        "The angle $\\theta$ must be small and in radians."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
+        "$\\cos\\theta\\approx1+\\dfrac{\\theta^2}{2}$",
+        "$\\cos\\theta\\approx1-\\theta$",
+        "$\\cos\\theta\\approx\\theta$"
+      ]
+    },
+    {
+      "id": "small-angle-tangent",
+      "topic": "small-angle",
+      "front": "What is the small-angle approximation for tangent?",
+      "back": [
+        "$\\tan\\theta\\approx\\theta$",
+        "The angle $\\theta$ must be small and in radians."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\tan\\theta\\approx\\theta$",
+        "$\\tan\\theta\\approx\\theta^2$",
+        "$\\tan\\theta\\approx1-\\theta$",
+        "$\\tan\\theta\\approx\\dfrac1{\\theta}$"
+      ]
+    },
+    {
+      "id": "small-angle-inner",
+      "topic": "small-angle",
+      "front": "Which part of the expression do you use as the angle in a small-angle approximation?",
+      "back": [
+        "Use the whole argument. If $kx$ is small and in radians, $\\sin(kx)\\approx kx$."
+      ],
+      "choices": [
+        "Use the whole argument, so $\\sin(kx)\\approx kx$ for small $kx$ in radians.",
+        "Use only the variable, so $\\sin(kx)\\approx x$ for any $k$.",
+        "Use only the coefficient, so $\\sin(kx)\\approx k$ for any small $x$.",
+        "Change the argument to degrees before applying the radian approximation."
+      ]
+    },
+    {
+      "id": "small-angle-gradient",
+      "topic": "small-angle",
+      "front": "How can a small-angle approximation give the gradient near the origin?",
+      "back": [
+        "Use the approximation to simplify the relation, then put $y$ on the left. If $y\\approx mx$ near the origin, the coefficient $m$ is the gradient there."
+      ],
+      "choices": [
+        "Simplify the relation and write it as $y\\approx mx$. Then read off $m$.",
+        "Simplify the relation, then read off its $y$-intercept as the gradient.",
+        "Set $x=0$, then use the value of $y$ as the gradient.",
+        "Write it as $x\\approx my$, then use $m$ directly as $dy/dx$."
+      ]
+    },
+    {
+      "id": "sector-perimeter",
+      "topic": "triangles",
+      "front": "Find the perimeter of a sector with radius $r$ and angle $\\theta$ radians.",
+      "back": [
+        "Two radii plus the arc: $2r+r\\theta=r(2+\\theta)$"
+      ],
+      "choices": [
+        "$r(2+\\theta)$",
+        "$2r\\theta$",
+        "$r(1+\\theta)$",
+        "$2r+\\theta$"
+      ]
+    },
+    {
+      "id": "segment-area",
+      "topic": "triangles",
+      "front": "What is the area of the minor segment cut off by a chord that subtends $\\theta$ radians at the centre?",
+      "back": [
+        "Sector minus triangle: $\\dfrac12r^2\\theta-\\dfrac12r^2\\sin\\theta$",
+        "$A=\\dfrac12r^2(\\theta-\\sin\\theta)$"
+      ],
+      "choices": [
+        "$\\dfrac12r^2(\\theta-\\sin\\theta)$",
+        "$\\dfrac12r^2(\\sin\\theta-\\theta)$",
+        "$\\dfrac12r^2\\theta-\\sin\\theta$",
+        "$r^2(\\theta-\\sin\\theta)$"
+      ]
+    },
+    {
+      "id": "sine-rule-angle-form",
+      "topic": "triangles",
+      "front": "Which form of the sine rule is best for finding an angle?",
+      "back": [
+        "$\\dfrac{\\sin A}{a}=\\dfrac{\\sin B}{b}=\\dfrac{\\sin C}{c}$",
+        "Put the unknown angle on top."
+      ],
+      "reference": "recall",
+      "choices": [
+        "$\\dfrac{\\sin A}{a}=\\dfrac{\\sin B}{b}$",
+        "$\\dfrac{\\sin A}{b}=\\dfrac{\\sin B}{a}$",
+        "$a\\sin A=b\\sin B$",
+        "$\\dfrac{\\sin A}{\\sin B}=\\dfrac{b}{a}$"
       ]
     },
     {
@@ -1096,34 +2970,6 @@
       ]
     },
     {
-      "id": "degree-to-radians",
-      "topic": "triangles",
-      "front": "How do you convert degrees to radians?",
-      "back": [
-        "Multiply by $\\dfrac{\\pi}{180}$. A full turn is $360^\\circ=2\\pi$ radians."
-      ],
-      "choices": [
-        "Multiply by $\\dfrac{\\pi}{180}$.",
-        "Multiply by $\\dfrac{180}{\\pi}$.",
-        "Multiply by $\\dfrac{\\pi}{360}$.",
-        "Multiply by $\\dfrac{90}{\\pi}$."
-      ]
-    },
-    {
-      "id": "radians-to-degrees",
-      "topic": "triangles",
-      "front": "How do you convert radians to degrees?",
-      "back": [
-        "Multiply by $\\dfrac{180}{\\pi}$."
-      ],
-      "choices": [
-        "Multiply by $\\dfrac{180}{\\pi}$.",
-        "Multiply by $\\dfrac{\\pi}{180}$.",
-        "Multiply by $\\dfrac{360}{\\pi}$.",
-        "Multiply by $\\dfrac{\\pi}{360}$."
-      ]
-    },
-    {
       "id": "arc-length",
       "topic": "triangles",
       "front": "What is the arc length formula with an angle in radians?",
@@ -1155,779 +3001,107 @@
       ]
     },
     {
-      "id": "segment-area",
-      "topic": "triangles",
-      "front": "How do you find the area of the smaller circular segment?",
+      "id": "eq-cos-double-form",
+      "topic": "equations",
+      "front": "To solve $\\cos2x=3\\sin x-1$, which form of $\\cos2x$ should you use?",
       "back": [
-        "Subtract the triangle from the sector. For a central angle $\\theta$ in radians,",
-        "$A=\\dfrac12 r^2(\\theta-\\sin\\theta)$"
+        "Use $\\cos2x\\equiv1-2\\sin^2x$ to get a quadratic in $\\sin x$:",
+        "$2\\sin^2x+3\\sin x-2=0$, so $(2\\sin x-1)(\\sin x+2)=0$."
       ],
       "choices": [
-        "Subtract the triangle’s area from the sector’s area.",
-        "Subtract the sector’s area from the whole circle’s area.",
-        "Add the triangle’s area to the sector’s area.",
-        "Take half of the sector’s area regardless of the angle."
+        "$1-2\\sin^2x$",
+        "$2\\cos^2x-1$",
+        "$\\cos^2x-\\sin^2x$",
+        "$2\\sin x\\cos x$"
       ]
     },
     {
-      "id": "exact-0",
-      "topic": "graphs",
-      "front": "What are the exact trig values at $0^\\circ$?",
+      "id": "eq-sin-double-cos",
+      "topic": "equations",
+      "front": "What's the safest first step for solving $\\sin2x=\\cos x$?",
       "back": [
-        "$\\sin 0=0$",
-        "$\\cos 0=1$",
-        "$\\tan 0=0$"
+        "Write $2\\sin x\\cos x-\\cos x=0$, so $\\cos x(2\\sin x-1)=0$.",
+        "Dividing by $\\cos x$ would lose the solutions where $\\cos x=0$."
       ],
-      "reference": "recall",
       "choices": [
-        "Sine $0$, cosine $1$, tangent $0$.",
-        "Sine $1$, cosine $0$, tangent undefined.",
-        "Sine $0$, cosine $-1$, tangent $0$.",
-        "Sine $0$, cosine $1$, tangent undefined."
+        "Write $2\\sin x\\cos x-\\cos x=0$ and factorise.",
+        "Divide both sides by $\\cos x$.",
+        "Square both sides.",
+        "Replace $\\sin2x$ with $2\\sin x$."
       ]
     },
     {
-      "id": "exact-30",
-      "topic": "graphs",
-      "front": "What are the exact trig values at $30^\\circ$ ($\\pi/6$ radians)?",
+      "id": "eq-sec-squared-tan",
+      "topic": "equations",
+      "front": "Which quadratic comes from $\\sec^2x=3\\tan x-1$?",
       "back": [
-        "$\\sin 30^\\circ=\\tfrac12$",
-        "$\\cos 30^\\circ=\\tfrac{\\sqrt3}{2}$",
-        "$\\tan 30^\\circ=\\tfrac{1}{\\sqrt3}$"
+        "Replace $\\sec^2x$ with $1+\\tan^2x$:",
+        "$1+\\tan^2x=3\\tan x-1$, so $\\tan^2x-3\\tan x+2=0$."
       ],
-      "reference": "recall",
       "choices": [
-        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\tfrac1{\\sqrt3}$.",
-        "Sine $\\tfrac{\\sqrt3}{2}$, cosine $\\tfrac12$, tangent $\\sqrt3$.",
-        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\sqrt3$.",
-        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $1$."
+        "$\\tan^2x-3\\tan x+2=0$",
+        "$\\tan^2x-3\\tan x=0$",
+        "$\\tan^2x+3\\tan x-2=0$",
+        "$\\tan^2x-3\\tan x-2=0$"
       ]
     },
     {
-      "id": "exact-45",
-      "topic": "graphs",
-      "front": "What are the exact trig values at $45^\\circ$ ($\\pi/4$ radians)?",
+      "id": "eq-count-multiple-angle",
+      "topic": "equations",
+      "front": "How many solutions does $\\sin3x=\\dfrac12$ have for $0\\le x<2\\pi$?",
       "back": [
-        "$\\sin 45^\\circ=\\cos 45^\\circ=\\tfrac{1}{\\sqrt2}$",
-        "$\\tan 45^\\circ=1$"
+        "Let $u=3x$. Then $0\\le u<6\\pi$, which is three full periods.",
+        "Each period has two solutions, so there are $6$."
       ],
-      "reference": "recall",
       "choices": [
-        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $1$.",
-        "Sine $\\tfrac12$, cosine $\\tfrac12$, tangent $1$.",
-        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $0$.",
-        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\tfrac1{\\sqrt3}$."
+        "$6$",
+        "$2$",
+        "$3$",
+        "$4$"
       ]
     },
     {
-      "id": "exact-60",
-      "topic": "graphs",
-      "front": "What are the exact trig values at $60^\\circ$ ($\\pi/3$ radians)?",
+      "id": "eq-cosec",
+      "topic": "equations",
+      "front": "Solve $\\cosec x=2$ for $0<x<2\\pi$.",
       "back": [
-        "$\\sin 60^\\circ=\\tfrac{\\sqrt3}{2}$",
-        "$\\cos 60^\\circ=\\tfrac12$",
-        "$\\tan 60^\\circ=\\sqrt3$"
+        "$\\sin x=\\dfrac12$, so $x=\\dfrac{\\pi}{6}$ or $x=\\pi-\\dfrac{\\pi}{6}=\\dfrac{5\\pi}{6}$."
       ],
-      "reference": "recall",
       "choices": [
-        "Sine $\\tfrac{\\sqrt3}{2}$, cosine $\\tfrac12$, tangent $\\sqrt3$.",
-        "Sine $\\tfrac12$, cosine $\\tfrac{\\sqrt3}{2}$, tangent $\\tfrac1{\\sqrt3}$.",
-        "Sine $\\tfrac{\\sqrt3}{2}$, cosine $\\tfrac12$, tangent $\\tfrac1{\\sqrt3}$.",
-        "Sine $\\tfrac1{\\sqrt2}$, cosine $\\tfrac1{\\sqrt2}$, tangent $1$."
+        "$\\dfrac{\\pi}{6},\\ \\dfrac{5\\pi}{6}$",
+        "$\\dfrac{\\pi}{3},\\ \\dfrac{5\\pi}{3}$",
+        "$\\dfrac{\\pi}{6},\\ \\dfrac{7\\pi}{6}$",
+        "$\\dfrac{\\pi}{6},\\ \\dfrac{11\\pi}{6}$"
       ]
     },
     {
-      "id": "exact-90",
-      "topic": "graphs",
-      "front": "What are the exact trig values at $90^\\circ$ ($\\pi/2$ radians)?",
+      "id": "eq-cot",
+      "topic": "equations",
+      "front": "Solve $\\cot x=-1$ for $0<x<2\\pi$.",
       "back": [
-        "$\\sin 90^\\circ=1,\\quad \\cos 90^\\circ=0$",
-        "$\\tan 90^\\circ$ is undefined because the cosine is zero."
+        "$\\tan x=-1$, and tangent has period $\\pi$.",
+        "$x=\\dfrac{3\\pi}{4}$ or $x=\\dfrac{7\\pi}{4}$."
       ],
-      "reference": "recall",
       "choices": [
-        "Sine $1$, cosine $0$, tangent undefined.",
-        "Sine $1$, cosine $0$, tangent $0$.",
-        "Sine $0$, cosine $-1$, tangent $0$.",
-        "Sine $0$, cosine $1$, tangent undefined."
+        "$\\dfrac{3\\pi}{4},\\ \\dfrac{7\\pi}{4}$",
+        "$\\dfrac{\\pi}{4},\\ \\dfrac{5\\pi}{4}$",
+        "$\\dfrac{3\\pi}{4},\\ \\dfrac{5\\pi}{4}$",
+        "$\\dfrac{5\\pi}{4},\\ \\dfrac{7\\pi}{4}$"
       ]
     },
     {
-      "id": "exact-180",
-      "topic": "graphs",
-      "front": "What are the exact trig values at $180^\\circ$ ($\\pi$ radians)?",
+      "id": "eq-sec-double",
+      "topic": "equations",
+      "front": "Solve $\\sec2x=2$ for $0\\le x<\\pi$.",
       "back": [
-        "$\\sin 180^\\circ=0$",
-        "$\\cos 180^\\circ=-1$",
-        "$\\tan 180^\\circ=0$"
-      ],
-      "reference": "recall",
-      "choices": [
-        "Sine $0$, cosine $-1$, tangent $0$.",
-        "Sine $0$, cosine $1$, tangent $0$.",
-        "Sine $-1$, cosine $0$, tangent undefined.",
-        "Sine $0$, cosine $-1$, tangent undefined."
-      ]
-    },
-    {
-      "id": "exact-angle-quadrants",
-      "topic": "graphs",
-      "front": "Which trig functions are positive in each quadrant?",
-      "back": [
-        "I — sine, cosine and tangent. II — sine. III — tangent. IV — cosine.",
-        "Use the acute reference angle for the size of the value, then apply the quadrant sign."
+        "$\\cos2x=\\dfrac12$ with $0\\le2x<2\\pi$, so $2x=\\dfrac{\\pi}{3}$ or $\\dfrac{5\\pi}{3}$.",
+        "$x=\\dfrac{\\pi}{6}$ or $x=\\dfrac{5\\pi}{6}$."
       ],
       "choices": [
-        "I — all. II — sine. III — tangent. IV — cosine.",
-        "I — all. II — tangent. III — sine. IV — cosine.",
-        "I — all. II — cosine. III — tangent. IV — sine.",
-        "I — all. II — sine. III — cosine. IV — tangent."
-      ]
-    },
-    {
-      "id": "angle-calculator-mode",
-      "topic": "graphs",
-      "front": "How do you choose the angle mode on your calculator?",
-      "back": [
-        "Use degrees for angles written with $^\\circ$ and radians for angles given as radians or in terms of $\\pi$. Check the interval uses the same units."
-      ],
-      "choices": [
-        "Use degree mode for angles marked ° and radian mode for angles given in radians.",
-        "Use degree mode when an angle involves $\\pi$ and radian mode when it is marked °.",
-        "Use degree mode for whole numbers and radian mode for decimals.",
-        "Use degree mode for sine and cosine and radian mode for tangent."
-      ]
-    },
-    {
-      "id": "sine-symmetry",
-      "topic": "graphs",
-      "front": "How do $\\sin(-x)$ and $\\sin(\\pi-x)$ relate to $\\sin x$?",
-      "back": [
-        "$\\sin(-x)=-\\sin x$",
-        "$\\sin(\\pi-x)=\\sin x$"
-      ],
-      "choices": [
-        "$-\\sin x$ and $\\sin x$, respectively.",
-        "$\\sin x$ and $-\\sin x$, respectively.",
-        "$-\\sin x$ and $-\\sin x$, respectively.",
-        "$\\sin x$ and $\\sin x$, respectively."
-      ]
-    },
-    {
-      "id": "cosine-symmetry",
-      "topic": "graphs",
-      "front": "How do $\\cos(-x)$ and $\\cos(\\pi-x)$ relate to $\\cos x$?",
-      "back": [
-        "$\\cos(-x)=\\cos x$",
-        "$\\cos(\\pi-x)=-\\cos x$"
-      ],
-      "choices": [
-        "$\\cos x$ and $-\\cos x$, respectively.",
-        "$-\\cos x$ and $\\cos x$, respectively.",
-        "$-\\cos x$ and $-\\cos x$, respectively.",
-        "$\\cos x$ and $\\cos x$, respectively."
-      ]
-    },
-    {
-      "id": "tangent-symmetry",
-      "topic": "graphs",
-      "front": "How do $\\tan(-x)$ and $\\tan(\\pi-x)$ relate to $\\tan x$?",
-      "back": [
-        "$\\tan(-x)=-\\tan x$",
-        "$\\tan(\\pi-x)=-\\tan x$"
-      ],
-      "choices": [
-        "$-\\tan x$ and $-\\tan x$, respectively.",
-        "$\\tan x$ and $-\\tan x$, respectively.",
-        "$-\\tan x$ and $\\tan x$, respectively.",
-        "$\\tan x$ and $\\tan x$, respectively."
-      ]
-    },
-    {
-      "id": "sine-cosine-complement",
-      "topic": "graphs",
-      "front": "How do sine and cosine link for complementary angles?",
-      "back": [
-        "$\\sin(\\pi/2-x)=\\cos x$",
-        "$\\cos(\\pi/2-x)=\\sin x$"
-      ],
-      "choices": [
-        "$\\sin(\\pi/2-x)=\\cos x$ and $\\cos(\\pi/2-x)=\\sin x$.",
-        "$\\sin(\\pi/2-x)=\\sin x$ and $\\cos(\\pi/2-x)=\\cos x$.",
-        "$\\sin(\\pi/2-x)=-\\cos x$ and $\\cos(\\pi/2-x)=\\sin x$.",
-        "$\\sin(\\pi/2-x)=\\cos x$ and $\\cos(\\pi/2-x)=-\\sin x$."
-      ]
-    },
-    {
-      "id": "sin-cos-period",
-      "topic": "graphs",
-      "front": "What are the period and range of sine and cosine?",
-      "back": [
-        "Both repeat every $2\\pi$ radians ($360^\\circ$), have range $[-1,1]$, and are defined for every real angle."
-      ],
-      "choices": [
-        "Period $2\\pi$ and range $[-1,1]$ for both.",
-        "Period $\\pi$ and range $[-1,1]$ for both.",
-        "Period $2\\pi$ and range $[0,1]$ for both.",
-        "Period $\\pi$ and range $\\mathbb{R}$ for both."
-      ]
-    },
-    {
-      "id": "tan-period",
-      "topic": "graphs",
-      "front": "What are the period, range and vertical asymptotes of tangent?",
-      "back": [
-        "Period $\\pi$ ($180^\\circ$), range $\\mathbb{R}$, and asymptotes at $x=\\pi/2+k\\pi$ for integer $k$."
-      ],
-      "choices": [
-        "Period $\\pi$, range $\\mathbb{R}$, asymptotes at $\\pi/2+k\\pi$.",
-        "Period $\\pi/2$, range $\\mathbb{R}$, asymptotes at $\\pi/2+k\\pi$.",
-        "Period $\\pi$, range $[-1,1]$, asymptotes at $\\pi/2+k\\pi$.",
-        "Period $\\pi$, range $\\mathbb{R}$, asymptotes at $k\\pi$."
-      ]
-    },
-    {
-      "id": "sin-cos-zeros",
-      "topic": "graphs",
-      "front": "Where do the sine and cosine graphs cross the x-axis?",
-      "back": [
-        "Sine at $x=k\\pi$. Cosine at $x=\\pi/2+k\\pi$. Here $k$ is any integer."
-      ],
-      "choices": [
-        "Sine at $k\\pi$. Cosine at $\\pi/2+k\\pi$.",
-        "Sine at $\\pi/2+k\\pi$. Cosine at $k\\pi$.",
-        "Sine at $\\pi/2+2k\\pi$. Cosine at $2k\\pi$.",
-        "Both at $k\\pi$."
-      ]
-    },
-    {
-      "id": "sec-graph",
-      "topic": "graphs",
-      "front": "Where is secant undefined, and what values can it take?",
-      "back": [
-        "Where $\\cos x=0$, at $x=\\pi/2+k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
-      ],
-      "choices": [
-        "Undefined where $\\cos x=0$. Values satisfy $|y|\\ge1$.",
-        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
-        "Undefined where $\\cos x=0$. Values satisfy $|y|\\le1$.",
-        "Undefined where $\\cos x=0$. Values satisfy $y\\ge1$."
-      ]
-    },
-    {
-      "id": "cosec-graph",
-      "topic": "graphs",
-      "front": "Where is cosecant undefined, and what values can it take?",
-      "back": [
-        "Where $\\sin x=0$, at $x=k\\pi$. Its range is $(-\\infty,-1]\\cup[1,\\infty)$ and its period is $2\\pi$."
-      ],
-      "choices": [
-        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
-        "Undefined where $\\cos x=0$. Values satisfy $|y|\\ge1$.",
-        "Undefined where $\\sin x=0$. Values satisfy $|y|\\le1$.",
-        "Undefined where $\\sin x=0$. Values satisfy $y\\ge1$."
-      ]
-    },
-    {
-      "id": "cot-graph",
-      "topic": "graphs",
-      "front": "Where is cotangent undefined, and what values can it take?",
-      "back": [
-        "Where $\\sin x=0$, at $x=k\\pi$. The period is $\\pi$ and the range is $\\mathbb{R}$. On each branch it falls through zero at $x=\\pi/2+k\\pi$."
-      ],
-      "choices": [
-        "Undefined where $\\sin x=0$. Its range is all real numbers.",
-        "Undefined where $\\cos x=0$. Its range is all real numbers.",
-        "Undefined where $\\sin x=0$. Values satisfy $|y|\\ge1$.",
-        "Undefined where $\\cos x=0$. Values lie in $[-1,1]$."
-      ]
-    },
-    {
-      "id": "arcsin-range",
-      "topic": "graphs",
-      "front": "What is the input domain and output range of inverse sine?",
-      "back": [
-        "$\\arcsin x$ takes inputs in $[-1,1]$ and returns angles in $[-\\pi/2,\\pi/2]$."
-      ],
-      "choices": [
-        "Input $[-1,1]$. Output $[-\\pi/2,\\pi/2]$.",
-        "Input $[-1,1]$. Output $[0,\\pi]$.",
-        "Input $\\mathbb{R}$. Output $(-\\pi/2,\\pi/2)$.",
-        "Input $[-\\pi/2,\\pi/2]$. Output $[-1,1]$."
-      ]
-    },
-    {
-      "id": "arccos-range",
-      "topic": "graphs",
-      "front": "What is the input domain and output range of inverse cosine?",
-      "back": [
-        "$\\arccos x$ takes inputs in $[-1,1]$ and returns angles in $[0,\\pi]$."
-      ],
-      "choices": [
-        "Input $[-1,1]$. Output $[0,\\pi]$.",
-        "Input $[-1,1]$. Output $[-\\pi/2,\\pi/2]$.",
-        "Input $[0,\\pi]$. Output $[-1,1]$.",
-        "Input $\\mathbb{R}$. Output $[0,\\pi]$."
-      ]
-    },
-    {
-      "id": "arctan-range",
-      "topic": "graphs",
-      "front": "What is the input domain and output range of inverse tangent?",
-      "back": [
-        "$\\arctan x$ takes any real input and returns angles in $(-\\pi/2,\\pi/2)$."
-      ],
-      "choices": [
-        "Input $\\mathbb{R}$. Output $(-\\pi/2,\\pi/2)$.",
-        "Input $\\mathbb{R}$. Output $[-\\pi/2,\\pi/2]$.",
-        "Input $[-1,1]$. Output $[0,\\pi]$.",
-        "Input $(-\\pi/2,\\pi/2)$. Output $\\mathbb{R}$."
-      ]
-    },
-    {
-      "id": "inverse-trig-graph",
-      "topic": "graphs",
-      "front": "How do you sketch an inverse trig graph?",
-      "back": [
-        "Choose the branch that gives exactly one angle for each allowable input, then reflect that branch in $y=x$. The restricted trig graph’s range and domain swap roles."
-      ],
-      "choices": [
-        "Choose a one-to-one branch and reflect it in $y=x$.",
-        "Reflect the entire trig graph in $y=x$ without restricting its domain.",
-        "Choose a one-to-one branch and reflect it in the $x$-axis.",
-        "Take the reciprocal of every height on the original graph."
-      ]
-    },
-    {
-      "id": "tangent-quotient",
-      "topic": "identities",
-      "front": "What does $\\tan A$ equal in terms of sine and cosine?",
-      "back": [
-        "$\\tan A=\\dfrac{\\sin A}{\\cos A}$",
-        "Valid where $\\cos A\\ne0$."
-      ],
-      "choices": [
-        "$\\dfrac{\\sin A}{\\cos A}$",
-        "$\\dfrac{\\cos A}{\\sin A}$",
-        "$\\sin A\\cos A$",
-        "$\\sin A-\\cos A$"
-      ]
-    },
-    {
-      "id": "sec-definition",
-      "topic": "identities",
-      "front": "What does $\\sec A$ equal?",
-      "back": [
-        "$\\sec A=\\dfrac{1}{\\cos A}$"
-      ],
-      "choices": [
-        "$\\dfrac1{\\cos A}$",
-        "$\\dfrac1{\\sin A}$",
-        "$\\dfrac1{\\tan A}$",
-        "$\\cos^2 A$"
-      ]
-    },
-    {
-      "id": "cosec-definition",
-      "topic": "identities",
-      "front": "What does $\\cosec A$ equal?",
-      "back": [
-        "$\\cosec A=\\dfrac{1}{\\sin A}$"
-      ],
-      "choices": [
-        "$\\dfrac1{\\sin A}$",
-        "$\\dfrac1{\\cos A}$",
-        "$\\dfrac1{\\tan A}$",
-        "$\\sin^2 A$"
-      ]
-    },
-    {
-      "id": "cot-definition",
-      "topic": "identities",
-      "front": "What does $\\cot A$ equal?",
-      "back": [
-        "$\\cot A=\\dfrac{\\cos A}{\\sin A}$",
-        "Also $1/\\tan A$ where that expression is defined."
-      ],
-      "choices": [
-        "$\\dfrac{\\cos A}{\\sin A}$",
-        "$\\dfrac{\\sin A}{\\cos A}$",
-        "$\\dfrac1{\\cos A}$",
-        "$\\dfrac1{\\sin A}$"
-      ]
-    },
-    {
-      "id": "sin-cos-pythagorean",
-      "topic": "identities",
-      "front": "What identity links sine squared and cosine squared?",
-      "back": [
-        "$\\sin^2 A+\\cos^2 A=1$",
-        "On the unit circle this is Pythagoras’ theorem."
-      ],
-      "reference": "recall",
-      "choices": [
-        "$\\sin^2 A+\\cos^2 A=1$",
-        "$\\sin^2 A-\\cos^2 A=1$",
-        "$\\sin A+\\cos A=1$",
-        "$\\sin^2 A+\\cos^2 A=2$"
-      ]
-    },
-    {
-      "id": "sec-tan-pythagorean",
-      "topic": "identities",
-      "front": "What identity links secant squared and tangent squared?",
-      "back": [
-        "$\\sec^2 A=1+\\tan^2 A$",
-        "Divide $\\sin^2 A+\\cos^2 A=1$ by $\\cos^2 A$."
-      ],
-      "reference": "recall",
-      "choices": [
-        "$\\sec^2 A=1+\\tan^2 A$",
-        "$\\sec^2 A=1-\\tan^2 A$",
-        "$\\tan^2 A=1+\\sec^2 A$",
-        "$\\sec^2 A=1+\\tan A$"
-      ]
-    },
-    {
-      "id": "cosec-cot-pythagorean",
-      "topic": "identities",
-      "front": "What identity links cosecant squared and cotangent squared?",
-      "back": [
-        "$\\cosec^2 A=1+\\cot^2 A$",
-        "Divide $\\sin^2 A+\\cos^2 A=1$ by $\\sin^2 A$."
-      ],
-      "reference": "recall",
-      "choices": [
-        "$\\cosec^2 A=1+\\cot^2 A$",
-        "$\\cosec^2 A=1-\\cot^2 A$",
-        "$\\cot^2 A=1+\\cosec^2 A$",
-        "$\\cosec^2 A=1+\\cot A$"
-      ]
-    },
-    {
-      "id": "choose-root-sign",
-      "topic": "identities",
-      "front": "How do you recover cosine if you know sine and the angle’s interval?",
-      "back": [
-        "$\\cos\\theta=\\pm\\sqrt{1-\\sin^2\\theta}$",
-        "Choose the sign from the quadrant or the stated interval. This lets you replace a cosine when the equation gives you the sine."
-      ],
-      "choices": [
-        "Use $\\pm\\sqrt{1-\\sin^2\\theta}$ and choose the sign from the given interval.",
-        "Always use $+\\sqrt{1-\\sin^2\\theta}$.",
-        "Always use $-\\sqrt{1-\\sin^2\\theta}$.",
-        "Use $\\pm\\sqrt{1-\\sin\\theta}$ and choose the sign from the given interval."
-      ]
-    },
-    {
-      "id": "small-angle-sine",
-      "topic": "identities",
-      "front": "What is the small-angle approximation for sine?",
-      "back": [
-        "$\\sin\\theta\\approx\\theta$",
-        "The angle $\\theta$ must be small and in radians."
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\sin\\theta\\approx\\theta$",
-        "$\\sin\\theta\\approx\\theta^2$",
-        "$\\sin\\theta\\approx1-\\dfrac{\\theta^2}{2}$",
-        "$\\sin\\theta\\approx1+\\theta$"
-      ]
-    },
-    {
-      "id": "small-angle-cosine",
-      "topic": "identities",
-      "front": "What is the small-angle approximation for cosine?",
-      "back": [
-        "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
-        "The angle $\\theta$ must be small and in radians."
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\cos\\theta\\approx 1-\\dfrac{\\theta^2}{2}$",
-        "$\\cos\\theta\\approx1+\\dfrac{\\theta^2}{2}$",
-        "$\\cos\\theta\\approx1-\\theta$",
-        "$\\cos\\theta\\approx\\theta$"
-      ]
-    },
-    {
-      "id": "small-angle-tangent",
-      "topic": "identities",
-      "front": "What is the small-angle approximation for tangent?",
-      "back": [
-        "$\\tan\\theta\\approx\\theta$",
-        "The angle $\\theta$ must be small and in radians."
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\tan\\theta\\approx\\theta$",
-        "$\\tan\\theta\\approx\\theta^2$",
-        "$\\tan\\theta\\approx1-\\theta$",
-        "$\\tan\\theta\\approx\\dfrac1{\\theta}$"
-      ]
-    },
-    {
-      "id": "small-angle-inner",
-      "topic": "identities",
-      "front": "Which part of the expression do you use as the angle in a small-angle approximation?",
-      "back": [
-        "Use the whole argument. If $kx$ is small and in radians, $\\sin(kx)\\approx kx$."
-      ],
-      "choices": [
-        "Use the whole argument, so $\\sin(kx)\\approx kx$ for small $kx$ in radians.",
-        "Use only the variable, so $\\sin(kx)\\approx x$ for any $k$.",
-        "Use only the coefficient, so $\\sin(kx)\\approx k$ for any small $x$.",
-        "Change the argument to degrees before applying the radian approximation."
-      ]
-    },
-    {
-      "id": "small-angle-gradient",
-      "topic": "identities",
-      "front": "How can a small-angle approximation give the gradient near the origin?",
-      "back": [
-        "Use the approximation to simplify the relation, then put $y$ on the left. If $y\\approx mx$ near the origin, the coefficient $m$ is the gradient there."
-      ],
-      "choices": [
-        "Simplify the relation and write it as $y\\approx mx$. Then read off $m$.",
-        "Simplify the relation, then read off its $y$-intercept as the gradient.",
-        "Set $x=0$, then use the value of $y$ as the gradient.",
-        "Write it as $x\\approx my$, then use $m$ directly as $dy/dx$."
-      ]
-    },
-    {
-      "id": "sine-double-angle",
-      "topic": "angles",
-      "front": "What does $\\sin 2A$ equal?",
-      "back": [
-        "$\\sin 2A=2\\sin A\\cos A$"
-      ],
-      "reference": "recall",
-      "choices": [
-        "$2\\sin A\\cos A$",
-        "$2\\sin A$",
-        "$\\sin^2 A+\\cos^2 A$",
-        "$\\cos^2 A-\\sin^2 A$"
-      ]
-    },
-    {
-      "id": "cosine-double-angle",
-      "topic": "angles",
-      "front": "What are the three forms of $\\cos 2A$?",
-      "back": [
-        "$\\cos 2A=\\cos^2 A-\\sin^2 A$",
-        "$\\cos 2A=2\\cos^2 A-1$",
-        "$\\cos 2A=1-2\\sin^2 A$"
-      ],
-      "reference": "recall",
-      "choices": [
-        "$\\cos^2 A-\\sin^2 A$, $2\\cos^2 A-1$, and $1-2\\sin^2 A$",
-        "$\\sin^2 A-\\cos^2 A$, $2\\sin^2 A-1$, and $1-2\\cos^2 A$",
-        "$\\cos^2 A+\\sin^2 A$, $2\\cos^2 A$, and $2\\sin^2 A$",
-        "$2\\sin A\\cos A$, $2\\cos^2 A+1$, and $1+2\\sin^2 A$"
-      ]
-    },
-    {
-      "id": "tangent-double-angle",
-      "topic": "angles",
-      "front": "What does $\\tan 2A$ equal?",
-      "back": [
-        "$\\tan 2A=\\dfrac{2\\tan A}{1-\\tan^2 A}$"
-      ],
-      "reference": "recall",
-      "choices": [
-        "$\\dfrac{2\\tan A}{1-\\tan^2 A}$",
-        "$\\dfrac{2\\tan A}{1+\\tan^2 A}$",
-        "$\\dfrac{\\tan A}{1-\\tan^2 A}$",
-        "$\\dfrac{1-\\tan^2 A}{2\\tan A}$"
-      ]
-    },
-    {
-      "id": "sine-compound",
-      "topic": "angles",
-      "front": "What does $\\sin(A\\pm B)$ equal?",
-      "back": [
-        "$\\sin(A\\pm B)=$",
-        "$\\sin A\\cos B\\pm\\cos A\\sin B$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\sin A\\cos B\\pm\\cos A\\sin B$",
-        "$\\sin A\\cos B\\mp\\cos A\\sin B$",
-        "$\\sin A\\sin B\\pm\\cos A\\cos B$",
-        "$\\sin A\\pm\\sin B$"
-      ]
-    },
-    {
-      "id": "cosine-compound",
-      "topic": "angles",
-      "front": "What does $\\cos(A\\pm B)$ equal?",
-      "back": [
-        "$\\cos(A\\pm B)=$",
-        "$\\cos A\\cos B\\mp\\sin A\\sin B$",
-        "Cosine uses the opposite sign between the two products."
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\cos A\\cos B\\mp\\sin A\\sin B$",
-        "$\\cos A\\cos B\\pm\\sin A\\sin B$",
-        "$\\cos A\\sin B\\mp\\sin A\\cos B$",
-        "$\\cos A\\mp\\cos B$"
-      ]
-    },
-    {
-      "id": "tangent-compound",
-      "topic": "angles",
-      "front": "What does $\\tan(A\\pm B)$ equal?",
-      "back": [
-        "$\\tan(A\\pm B)=$",
-        "$\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$",
-        "The numerator follows the sign in the angle. The denominator uses the opposite sign."
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$",
-        "$\\dfrac{\\tan A\\pm\\tan B}{1\\pm\\tan A\\tan B}$",
-        "$\\dfrac{\\tan A\\mp\\tan B}{1\\mp\\tan A\\tan B}$",
-        "$\\dfrac{\\tan A\\tan B}{1\\mp\\tan A\\tan B}$"
-      ]
-    },
-    {
-      "id": "sine-half-angle-square",
-      "topic": "angles",
-      "front": "How can you write $\\sin^2 A$ in terms of $\\cos 2A$?",
-      "back": [
-        "$\\sin^2 A=\\dfrac{1-\\cos 2A}{2}$",
-        "This follows from $\\cos 2A=1-2\\sin^2 A$."
-      ],
-      "choices": [
-        "$\\dfrac{1-\\cos 2A}{2}$",
-        "$\\dfrac{1+\\cos 2A}{2}$",
-        "$1-\\cos 2A$",
-        "$\\dfrac{\\cos 2A-1}{2}$"
-      ]
-    },
-    {
-      "id": "cosine-half-angle-square",
-      "topic": "angles",
-      "front": "How can you write $\\cos^2 A$ in terms of $\\cos 2A$?",
-      "back": [
-        "$\\cos^2 A=\\dfrac{1+\\cos 2A}{2}$",
-        "This follows from $\\cos 2A=2\\cos^2 A-1$."
-      ],
-      "choices": [
-        "$\\dfrac{1+\\cos 2A}{2}$",
-        "$\\dfrac{1-\\cos 2A}{2}$",
-        "$1+\\cos 2A$",
-        "$\\dfrac{\\cos 2A-1}{2}$"
-      ]
-    },
-    {
-      "id": "half-angle-signs",
-      "topic": "angles",
-      "front": "How do you find $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$ from $\\cos\\theta$?",
-      "back": [
-        "$\\sin(\\theta/2)=\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$",
-        "$\\cos(\\theta/2)=\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$",
-        "Choose each sign using the quadrant of the half angle."
-      ],
-      "choices": [
-        "For sine, $\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. For cosine, $\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. Use the quadrant for the signs.",
-        "For sine, $\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. For cosine, $\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. Use the quadrant for the signs.",
-        "For sine, $\\dfrac{1-\\cos\\theta}{2}$. For cosine, $\\dfrac{1+\\cos\\theta}{2}$.",
-        "For sine, $\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$. For cosine, $\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$. Both are always positive."
-      ]
-    },
-    {
-      "id": "sine-sum-to-product",
-      "topic": "angles",
-      "front": "How do you write $\\sin A+\\sin B$ as a product?",
-      "back": [
-        "$\\sin A+\\sin B=$",
-        "$2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
-      ]
-    },
-    {
-      "id": "sine-difference-to-product",
-      "topic": "angles",
-      "front": "How do you write $\\sin A-\\sin B$ as a product?",
-      "back": [
-        "$\\sin A-\\sin B=$",
-        "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$-2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$"
-      ]
-    },
-    {
-      "id": "cosine-sum-to-product",
-      "topic": "angles",
-      "front": "How do you write $\\cos A+\\cos B$ as a product?",
-      "back": [
-        "$\\cos A+\\cos B=$",
-        "$2\\cos\\!\\left(\\dfrac{A+B}{2}\\right)\\cos\\!\\left(\\dfrac{A-B}{2}\\right)$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$-2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
-      ]
-    },
-    {
-      "id": "cosine-difference-to-product",
-      "topic": "angles",
-      "front": "How do you write $\\cos A-\\cos B$ as a product?",
-      "back": [
-        "$\\cos A-\\cos B=$",
-        "$-2\\sin\\!\\left(\\dfrac{A+B}{2}\\right)\\sin\\!\\left(\\dfrac{A-B}{2}\\right)$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$-2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\sin\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$2\\cos\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$",
-        "$-2\\sin\\!\\left(\\frac{A+B}{2}\\right)\\cos\\!\\left(\\frac{A-B}{2}\\right)$"
-      ]
-    },
-    {
-      "id": "cosine-geometric-proof",
-      "topic": "angles",
-      "front": "How can you prove the cosine difference formula using the unit circle?",
-      "back": [
-        "Take $P=(\\cos A,\\sin A)$ and $Q=(\\cos B,\\sin B)$. Find $PQ^2$ using the distance formula and again using the triangle cosine rule. Equate the results and use the fact that cosine is even."
-      ],
-      "choices": [
-        "Find the chord’s squared length using coordinates and the cosine rule, then equate the two expressions.",
-        "Equate the lengths of the two radii and set $\\cos(A-B)=1$.",
-        "Add the two $x$-coordinates and call their sum $\\cos(A-B)$.",
-        "Use the angle sum $A+B$ as the angle between the radii for points at $A$ and $B$."
-      ]
-    },
-    {
-      "id": "compound-from-cosine",
-      "topic": "angles",
-      "front": "How can you get sine and tangent compound-angle formulas from cosine?",
-      "back": [
-        "For sine, use $\\sin x=\\cos(\\pi/2-x)$ and expand with the cosine compound-angle formula. For tangent, divide the sine expansion by the cosine expansion."
-      ],
-      "choices": [
-        "Use $\\sin x=\\cos(\\pi/2-x)$, then divide the sine expansion by the cosine expansion for tangent.",
-        "Use $\\sin x=\\cos(\\pi-x)$, then divide the sine expansion by the cosine expansion for tangent.",
-        "Use $\\sin x=1-\\cos x$, then multiply the sine and cosine expansions for tangent.",
-        "Use $\\sin x=\\cos(\\pi/2-x)$, then divide the cosine expansion by the sine expansion for tangent."
+        "$\\dfrac{\\pi}{6},\\ \\dfrac{5\\pi}{6}$",
+        "$\\dfrac{\\pi}{3},\\ \\dfrac{5\\pi}{3}$",
+        "$\\dfrac{\\pi}{12},\\ \\dfrac{5\\pi}{12}$",
+        "$\\dfrac{\\pi}{6},\\ \\dfrac{2\\pi}{3}$"
       ]
     },
     {
@@ -2032,38 +3206,6 @@
       ]
     },
     {
-      "id": "r-cos-form",
-      "topic": "equations",
-      "front": "How do you match $a\\cos x+b\\sin x$ to $R\\cos(x-\\alpha)$?",
-      "back": [
-        "$R=\\sqrt{a^2+b^2}$",
-        "$R\\cos\\alpha=a,\\qquad R\\sin\\alpha=b$",
-        "Choose the quadrant of $\\alpha$ using both signs."
-      ],
-      "choices": [
-        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$.",
-        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$.",
-        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=-b$.",
-        "$R=a+b$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$."
-      ]
-    },
-    {
-      "id": "r-sin-form",
-      "topic": "equations",
-      "front": "How do you match $a\\cos x+b\\sin x$ to $R\\sin(x+\\alpha)$?",
-      "back": [
-        "$R=\\sqrt{a^2+b^2}$",
-        "$R\\sin\\alpha=a,\\qquad R\\cos\\alpha=b$",
-        "Choose the quadrant of $\\alpha$ using both signs."
-      ],
-      "choices": [
-        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$.",
-        "$R=\\sqrt{a^2+b^2}$ with $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$.",
-        "$R=\\sqrt{a^2+b^2}$ with $R\\sin\\alpha=-a$ and $R\\cos\\alpha=b$.",
-        "$R=a+b$ with $R\\sin\\alpha=a$ and $R\\cos\\alpha=b$."
-      ]
-    },
-    {
       "id": "trig-model-parameters",
       "topic": "equations",
       "front": "What are the amplitude, midline and period in $y=a\\sin(bx+c)+d$?",
@@ -2134,6 +3276,186 @@
         "Horizontal $R\\sin\\theta$, vertical $R\\cos\\theta$, for $\\theta$ measured from the positive horizontal.",
         "Horizontal $R\\cos\\theta$, vertical $-R\\sin\\theta$, for $\\theta$ measured from the positive horizontal.",
         "Horizontal $R\\tan\\theta$, vertical $R\\sin\\theta$, for $\\theta$ measured from the positive horizontal."
+      ]
+    },
+    {
+      "id": "integrate-tan",
+      "topic": "trig-calculus",
+      "front": "What is $\\displaystyle\\int\\tan(kx)\\,dx$ for $k\\ne0$?",
+      "back": [
+        "$\\displaystyle\\int\\tan kx\\,dx=\\frac1k\\ln|\\sec kx|+C$",
+        "Equivalently $-\\dfrac1k\\ln|\\cos kx|+C$."
+      ],
+      "reference": "booklet",
+      "choices": [
+        "$\\dfrac{1}{k}\\ln|\\sec kx|+C$",
+        "$-\\dfrac1k\\ln|\\sec kx|+C$",
+        "$\\dfrac1k\\ln|\\sin kx|+C$",
+        "$k\\ln|\\sec kx|+C$"
+      ]
+    },
+    {
+      "id": "integrate-sin-squared",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int\\sin^2x\\,dx$.",
+      "back": [
+        "Use $\\sin^2x\\equiv\\tfrac12(1-\\cos2x)$:",
+        "$\\displaystyle\\int\\sin^2x\\,dx=\\frac{x}{2}-\\frac{\\sin2x}{4}+C$"
+      ],
+      "choices": [
+        "$\\dfrac{x}{2}-\\dfrac{\\sin2x}{4}+C$",
+        "$\\dfrac{x}{2}+\\dfrac{\\sin2x}{4}+C$",
+        "$\\dfrac{\\sin^3x}{3}+C$",
+        "$\\dfrac{x}{2}-\\dfrac{\\sin2x}{2}+C$"
+      ]
+    },
+    {
+      "id": "integrate-cos-squared",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int\\cos^2x\\,dx$.",
+      "back": [
+        "Use $\\cos^2x\\equiv\\tfrac12(1+\\cos2x)$:",
+        "$\\displaystyle\\int\\cos^2x\\,dx=\\frac{x}{2}+\\frac{\\sin2x}{4}+C$"
+      ],
+      "choices": [
+        "$\\dfrac{x}{2}+\\dfrac{\\sin2x}{4}+C$",
+        "$\\dfrac{x}{2}-\\dfrac{\\sin2x}{4}+C$",
+        "$\\dfrac{\\cos^3x}{3}+C$",
+        "$\\dfrac{x}{2}+\\dfrac{\\sin2x}{2}+C$"
+      ]
+    },
+    {
+      "id": "integrate-tan-squared",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int\\tan^2x\\,dx$.",
+      "back": [
+        "Use $\\tan^2x\\equiv\\sec^2x-1$:",
+        "$\\displaystyle\\int\\tan^2x\\,dx=\\tan x-x+C$"
+      ],
+      "choices": [
+        "$\\tan x-x+C$",
+        "$\\tan x+x+C$",
+        "$\\dfrac{\\tan^3x}{3}+C$",
+        "$\\sec^2x-x+C$"
+      ]
+    },
+    {
+      "id": "integrate-cot-squared",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int\\cot^2x\\,dx$.",
+      "back": [
+        "Use $\\cot^2x\\equiv\\cosec^2x-1$:",
+        "$\\displaystyle\\int\\cot^2x\\,dx=-\\cot x-x+C$"
+      ],
+      "choices": [
+        "$-\\cot x-x+C$",
+        "$\\cot x-x+C$",
+        "$-\\cot x+x+C$",
+        "$-\\cosec x-x+C$"
+      ]
+    },
+    {
+      "id": "integrate-sin-cos",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int\\sin x\\cos x\\,dx$.",
+      "back": [
+        "Use $\\sin x\\cos x\\equiv\\tfrac12\\sin2x$:",
+        "$\\displaystyle\\int\\sin x\\cos x\\,dx=-\\frac14\\cos2x+C$",
+        "$\\tfrac12\\sin^2x+C$ is also right. It differs only by a constant."
+      ],
+      "choices": [
+        "$-\\dfrac14\\cos2x+C$",
+        "$\\dfrac14\\cos2x+C$",
+        "$-\\dfrac12\\cos2x+C$",
+        "$\\dfrac12\\sin2x+C$"
+      ]
+    },
+    {
+      "id": "integrate-x-cos",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int x\\cos x\\,dx$.",
+      "back": [
+        "By parts with $u=x$ and $\\dfrac{dv}{dx}=\\cos x$:",
+        "$x\\sin x-\\displaystyle\\int\\sin x\\,dx=x\\sin x+\\cos x+C$"
+      ],
+      "choices": [
+        "$x\\sin x+\\cos x+C$",
+        "$x\\sin x-\\cos x+C$",
+        "$-x\\sin x+\\cos x+C$",
+        "$\\dfrac{x^2}{2}\\sin x+C$"
+      ]
+    },
+    {
+      "id": "integrate-cos-over-one-plus-sin",
+      "topic": "trig-calculus",
+      "front": "Find $\\displaystyle\\int\\frac{\\cos x}{1+\\sin x}\\,dx$.",
+      "back": [
+        "The numerator is the derivative of the denominator:",
+        "$\\displaystyle\\int\\frac{\\cos x}{1+\\sin x}\\,dx=\\ln|1+\\sin x|+C$"
+      ],
+      "choices": [
+        "$\\ln|1+\\sin x|+C$",
+        "$-\\ln|1+\\sin x|+C$",
+        "$\\ln|\\cos x|+C$",
+        "$\\ln|1+\\cos x|+C$"
+      ]
+    },
+    {
+      "id": "differentiate-ln-sin",
+      "topic": "trig-calculus",
+      "front": "Differentiate $\\ln(\\sin x)$.",
+      "back": [
+        "$\\dfrac{d}{dx}\\ln(\\sin x)=\\dfrac{\\cos x}{\\sin x}=\\cot x$"
+      ],
+      "choices": [
+        "$\\cot x$",
+        "$\\tan x$",
+        "$\\cosec x$",
+        "$-\\cot x$"
+      ]
+    },
+    {
+      "id": "differentiate-sin-squared",
+      "topic": "trig-calculus",
+      "front": "Differentiate $\\sin^2x$.",
+      "back": [
+        "Chain rule: $2\\sin x\\cos x=\\sin2x$"
+      ],
+      "choices": [
+        "$\\sin2x$",
+        "$2\\cos x$",
+        "$\\cos2x$",
+        "$-\\sin2x$"
+      ]
+    },
+    {
+      "id": "differentiate-arcsin",
+      "topic": "trig-calculus",
+      "front": "If $y=\\arcsin x$, find $\\dfrac{dy}{dx}$.",
+      "back": [
+        "$x=\\sin y$, so $\\dfrac{dx}{dy}=\\cos y=\\sqrt{1-x^2}$, since $\\cos y\\ge0$ on the range of $\\arcsin$.",
+        "$\\dfrac{dy}{dx}=\\dfrac{1}{\\sqrt{1-x^2}}$"
+      ],
+      "choices": [
+        "$\\dfrac{1}{\\sqrt{1-x^2}}$",
+        "$-\\dfrac{1}{\\sqrt{1-x^2}}$",
+        "$\\dfrac{1}{1+x^2}$",
+        "$\\sqrt{1-x^2}$"
+      ]
+    },
+    {
+      "id": "differentiate-arctan",
+      "topic": "trig-calculus",
+      "front": "If $y=\\arctan x$, find $\\dfrac{dy}{dx}$.",
+      "back": [
+        "$x=\\tan y$, so $\\dfrac{dx}{dy}=\\sec^2y=1+x^2$.",
+        "$\\dfrac{dy}{dx}=\\dfrac{1}{1+x^2}$"
+      ],
+      "choices": [
+        "$\\dfrac{1}{1+x^2}$",
+        "$\\dfrac{1}{1-x^2}$",
+        "$\\sec^2x$",
+        "$\\dfrac{1}{\\sqrt{1+x^2}}$"
       ]
     },
     {
@@ -2272,22 +3594,6 @@
       ]
     },
     {
-      "id": "integrate-tan",
-      "topic": "trig-calculus",
-      "front": "What is $\\displaystyle\\int\\tan(kx)\\,dx$ for $k\\ne0$?",
-      "back": [
-        "$-\\dfrac{1}{k}\\ln|\\cos(kx)|+C$",
-        "The equivalent form in the booklet is $\\dfrac{1}{k}\\ln|\\sec(kx)|+C$."
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$-\\dfrac{1}{k}\\ln|\\cos(kx)|+C$",
-        "$\\dfrac1k\\ln|\\cos(kx)|+C$",
-        "$-\\dfrac1k\\ln|\\sin(kx)|+C$",
-        "$\\dfrac1k\\tan(kx)+C$"
-      ]
-    },
-    {
       "id": "integrate-cot",
       "topic": "trig-calculus",
       "front": "What is $\\displaystyle\\int\\cot(kx)\\,dx$ for $k\\ne0$?",
@@ -2300,36 +3606,6 @@
         "$-\\dfrac1k\\ln|\\sin(kx)|+C$",
         "$\\dfrac1k\\ln|\\cos(kx)|+C$",
         "$\\dfrac1k\\cot(kx)+C$"
-      ]
-    },
-    {
-      "id": "integrate-sec",
-      "topic": "trig-calculus",
-      "front": "What is $\\displaystyle\\int\\sec(kx)\\,dx$ for $k\\ne0$?",
-      "back": [
-        "$\\dfrac{1}{k}\\ln|\\sec(kx)+\\tan(kx)|+C$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$\\dfrac{1}{k}\\ln|\\sec(kx)+\\tan(kx)|+C$",
-        "$-\\dfrac1k\\ln|\\sec(kx)+\\tan(kx)|+C$",
-        "$\\dfrac1k\\ln|\\cos(kx)|+C$",
-        "$\\dfrac1k\\ln|\\sec(kx)|+C$"
-      ]
-    },
-    {
-      "id": "integrate-cosec",
-      "topic": "trig-calculus",
-      "front": "What is $\\displaystyle\\int\\cosec(kx)\\,dx$ for $k\\ne0$?",
-      "back": [
-        "$-\\dfrac{1}{k}\\ln|\\cosec kx+\\cot kx|+C$"
-      ],
-      "reference": "booklet",
-      "choices": [
-        "$-\\dfrac{1}{k}\\ln|\\cosec kx+\\cot kx|+C$",
-        "$\\dfrac1k\\ln|\\cosec(kx)+\\cot(kx)|+C$",
-        "$-\\dfrac1k\\ln|\\sin(kx)|+C$",
-        "$-\\dfrac1k\\ln|\\cosec(kx)|+C$"
       ]
     },
     {
@@ -2372,20 +3648,6 @@
         "$\\dfrac1k\\cosec(kx)+C$",
         "$-\\dfrac1k\\cot(kx)+C$",
         "$-\\dfrac1k\\sec(kx)+C$"
-      ]
-    },
-    {
-      "id": "integrate-trig-squared",
-      "topic": "trig-calculus",
-      "front": "What can you do before integrating sine squared, cosine squared or tangent squared?",
-      "back": [
-        "For sine and cosine, rewrite using $\\cos 2x$ and the double-angle formulas. For tangent, use $\\tan^2 x=\\sec^2 x-1$."
-      ],
-      "choices": [
-        "Use double-angle identities for sine and cosine. Use $\\tan^2 x=\\sec^2 x-1$ for tangent.",
-        "Treat each squared function as the square of its antiderivative.",
-        "Use $\\sin^2 x=\\sin(2x)$, $\\cos^2 x=\\cos(2x)$ and $\\tan^2 x=\\tan(2x)$.",
-        "Integrate each unsquared function first, then multiply its result by two."
       ]
     },
     {

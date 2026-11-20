@@ -6,6 +6,21 @@ Study next starts with missed cards and then cards due for review. When those ar
 
 Questions mode presents four shuffled answer choices for each supported flashcard. The first answer updates the same progress as flashcard practice. Revealing an answer also puts that card in review. You can open Questions directly with `?mode=questions`.
 
+## Trigonometry deck
+
+The trig rules cover every identity and formula in the 9MA0 trigonometry content, in both directions. You expand an identity and also recognise it in reverse. The topics are:
+
+- reciprocal and Pythagorean identities
+- compound angles, double and half angles, and the factor formulae
+- the R cos(x ± α) form
+- exact values and symmetries, and inverse trig
+- small angle approximations
+- triangles, arcs and sectors
+- trig equations
+- trig calculus
+
+Cards marked “In the formula booklet” are printed in Pearson’s booklet: compound angles, factor formulae, small angle approximations, and the tan, sec, cot and cosec derivatives and integrals. Cards marked “Recall for the exam” are not printed and must be learned. These include the Pythagorean identities, double angle formulae, sine and cosine rules, arc length and sector area, and the sin and cos derivatives and integrals. The wrong answers are near-misses: sign errors, swapped functions and missing factors.
+
 ## Controls
 
 - Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. Arrow keys move between cards.
