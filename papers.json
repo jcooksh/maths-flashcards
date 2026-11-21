@@ -1,6 +1,12 @@
 {
   "topics": [
     {
+      "id": "paper-2020-10",
+      "title": "October 2020",
+      "collection": "papers",
+      "hue": 80
+    },
+    {
       "id": "paper-2019-06",
       "title": "June 2019",
       "collection": "papers",
@@ -14,6 +20,735 @@
     }
   ],
   "cards": [
+    {
+      "id": "2020-10-p1-q01",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q1",
+      "front": [
+        "(a) Find the first four terms, in ascending powers of $x$, of the binomial expansion of $(1-6x)^{\\frac12}$.",
+        "(b) Explain how you could use $x=\\dfrac{1}{24}$ in the expansion to find an approximation for $\\sqrt3$. (You don't need to carry out the calculation.)"
+      ],
+      "back": [
+        "Spot: a fractional power of $(1+\\text{something})$ means the binomial series from the formula booklet.",
+        "Use: $(1+x)^n=1+nx+\\dfrac{n(n-1)}{2!}x^2+\\dfrac{n(n-1)(n-2)}{3!}x^3$, with $n=\\tfrac12$ and $x$ replaced by $-6x$.",
+        "(a) $1-3x-\\dfrac92x^2-\\dfrac{27}{2}x^3$",
+        "(b) $x=\\dfrac{1}{24}$ gives $\\sqrt{1-\\tfrac14}=\\dfrac{\\sqrt3}{2}$. Substitute it into the expansion and double the result. It's valid because $|6x|<1$."
+      ],
+      "choices": [
+        "Use the binomial series with $n=\\tfrac12$, replacing $x$ by $-6x$",
+        "Use the binomial series with $n=2$",
+        "Expand $(1-6x)^{\\frac12}$ as $1-(6x)^{\\frac12}$",
+        "Use Pascal's triangle"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q02",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q2",
+      "front": [
+        "By taking logarithms of both sides, solve $3^{2p+1}=7^{150}$, giving $p$ to one decimal place."
+      ],
+      "back": [
+        "Spot: the unknown is in a power, so take logs of both sides.",
+        "Use: $\\log a^n=n\\log a$.",
+        "Method: $(2p+1)\\ln3=150\\ln7\\Rightarrow2p+1=\\dfrac{150\\ln7}{\\ln3}\\approx265.69$",
+        "Answer: $p\\approx132.3$"
+      ],
+      "choices": [
+        "Take logs: $(2p+1)\\ln3=150\\ln7$",
+        "Divide both sides by 3",
+        "Write $7^{150}$ as $(3+4)^{150}$",
+        "Take logs to get $\\ln(2p+1)=\\ln150$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q03",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q3",
+      "front": [
+        "Relative to a fixed origin $O$, $A$ has position vector $3\\mathbf{i}+2\\mathbf{j}-5\\mathbf{k}$, $B$ has $5\\mathbf{i}-\\mathbf{j}-\\mathbf{k}$ and $C$ has $4\\mathbf{i}-6\\mathbf{j}+8\\mathbf{k}$.",
+        "(a) Find $\\overrightarrow{AB}$.",
+        "(b) Show that the quadrilateral $OABC$ is a trapezium, giving reasons."
+      ],
+      "back": [
+        "Spot: a trapezium has exactly one pair of parallel sides. Parallel vectors are scalar multiples of each other.",
+        "Use: $\\overrightarrow{AB}=\\mathbf{b}-\\mathbf{a}$, and compare $\\overrightarrow{OC}$ with $\\overrightarrow{AB}$.",
+        "(a) $\\overrightarrow{AB}=2\\mathbf{i}-3\\mathbf{j}+4\\mathbf{k}$",
+        "(b) $\\overrightarrow{OC}=2\\overrightarrow{AB}$, so $OC$ is parallel to $AB$. $\\overrightarrow{OA}$ and $\\overrightarrow{BC}=-\\mathbf{i}-5\\mathbf{j}+9\\mathbf{k}$ aren't parallel, so $OABC$ is a trapezium."
+      ],
+      "choices": [
+        "Find $\\overrightarrow{AB}$ and check whether $\\overrightarrow{OC}$ is a multiple of it",
+        "Show that all four sides have equal length",
+        "Show that $\\overrightarrow{OA}\\cdot\\overrightarrow{OB}=0$",
+        "Find the midpoint of $AC$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q04",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q4",
+      "front": [
+        "$f(x)=\\dfrac{2x+5}{x-3}$, $x\\in\\mathbb{R}$, $x\\ne3$",
+        "(a) Find $f^{-1}(4)$.",
+        "(b) Show that $ff(x)=\\dfrac{ax+b}{14-x}$, where $a$ and $b$ are integers to be found."
+      ],
+      "back": [
+        "Spot: $f^{-1}(4)$ is the input that $f$ sends to 4, so solve $f(x)=4$. For $ff(x)$, substitute $f(x)$ into $f$.",
+        "Use: multiply the top and bottom by $(x-3)$ to clear the fraction inside the fraction.",
+        "(a) $2x+5=4x-12\\Rightarrow x=\\dfrac{17}{2}$",
+        "(b) $ff(x)=\\dfrac{2\\left(\\frac{2x+5}{x-3}\\right)+5}{\\frac{2x+5}{x-3}-3}=\\dfrac{2(2x+5)+5(x-3)}{(2x+5)-3(x-3)}=\\dfrac{9x-5}{14-x}$",
+        "Answer: $a=9$ and $b=-5$"
+      ],
+      "choices": [
+        "Solve $f(x)=4$ for $x$",
+        "Work out $\\dfrac{1}{f(4)}$",
+        "Substitute $x=4$ into $f(x)$",
+        "Find $f'(4)$"
+      ],
+      "ask": "How do you find $f^{-1}(4)$ quickly?"
+    },
+    {
+      "id": "2020-10-p1-q05",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q5",
+      "front": [
+        "A bicycle has 7 gears. Its fastest speed is 12 km h$^{-1}$ in 1st gear and 42 km h$^{-1}$ in 7th gear.",
+        "(a) If the fastest speeds in successive gears form an arithmetic sequence, find the fastest speed in 3rd gear.",
+        "(b) If they form a geometric sequence instead, find the fastest speed in 5th gear."
+      ],
+      "back": [
+        "Spot: “arithmetic” means add a common difference $d$. “Geometric” means multiply by a common ratio $r$.",
+        "Use: $u_n=a+(n-1)d$ and $u_n=ar^{n-1}$, with $u_1=12$ and $u_7=42$.",
+        "(a) $12+6d=42\\Rightarrow d=5$, so $u_3=12+2(5)=22\\text{ km h}^{-1}$",
+        "(b) $12r^6=42\\Rightarrow r=3.5^{\\frac16}\\approx1.232$, so $u_5=12r^4\\approx27.7\\text{ km h}^{-1}$"
+      ],
+      "choices": [
+        "Use $u_7=u_1+6d$ to find $d$",
+        "Use $u_7=u_1+7d$ to find $d$",
+        "Divide 42 by 7",
+        "Use $S_n$ with $n=7$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q06",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q6",
+      "front": [
+        "(a) Express $2\\sin x+3\\cos x$ in the form $R\\sin(x+\\alpha)$, where $R>0$ and $0<\\alpha<\\dfrac{\\pi}{2}$. Give $R$ exactly and $\\alpha$ to 3 decimal places.",
+        "The temperature $\\theta\\,^\\circ$C in a room is modelled by $\\theta=12+2\\sin\\left(\\dfrac{\\pi t}{12}-2\\right)+3\\cos\\left(\\dfrac{\\pi t}{12}-2\\right)$, $0\\le t<24$, where $t$ is hours after midnight.",
+        "(b) Deduce the maximum temperature.",
+        "(c) Find the time of day when it occurs, to the nearest minute."
+      ],
+      "back": [
+        "Spot: $a\\sin x+b\\cos x$ means use the R-form, and the maximum is when the sine equals 1.",
+        "Use: $R\\cos\\alpha=2$, $R\\sin\\alpha=3$, so $R=\\sqrt{13}$ and $\\tan\\alpha=\\tfrac32$.",
+        "(a) $\\sqrt{13}\\sin(x+0.983)$",
+        "(b) $12+\\sqrt{13}\\approx15.6\\,^\\circ$C",
+        "(c) $\\dfrac{\\pi t}{12}-2+0.983=\\dfrac{\\pi}{2}\\Rightarrow t\\approx9.885$ hours",
+        "Answer: 9:53 am"
+      ],
+      "choices": [
+        "Use $R\\cos\\alpha=2$ and $R\\sin\\alpha=3$ to find $R$ and $\\alpha$",
+        "Use $R=2+3$ and $\\tan\\alpha=\\tfrac23$",
+        "Square both terms and add",
+        "Differentiate and set the result to zero"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q07",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q7",
+      "front": [
+        "A curve $C$ with equation $y=f(x)$, where $f$ is quadratic, has its minimum turning point at $(1,4)$.",
+        "A straight line $l$ meets $C$ at $(1,4)$ and $(3,12)$. The region $R$ lies between $C$ and $l$.",
+        "Use inequalities to define $R$."
+      ],
+      "back": [
+        "Spot: you know the vertex of a quadratic, so use vertex form $y=a(x-p)^2+q$. A region between two graphs means $\\text{lower}\\le y\\le\\text{upper}$.",
+        "Use: $f(x)=a(x-1)^2+4$, and substitute $(3,12)$ to find $a$.",
+        "Method: $4a+4=12\\Rightarrow a=2$, so $f(x)=2x^2-4x+6$. The line through $(1,4)$ and $(3,12)$ is $y=4x$.",
+        "Answer: $2x^2-4x+6\\le y\\le4x$ (which only holds for $1\\le x\\le3$)"
+      ],
+      "choices": [
+        "Write $f(x)=a(x-1)^2+4$ and use $(3,12)$ to find $a$",
+        "Use $f(x)=x^2+4$",
+        "Integrate between $x=1$ and $x=3$",
+        "Write $f(x)=a(x-3)(x-1)$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q08",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q8",
+      "front": [
+        "The number of followers $N$ of an account, $t$ days after it was set up, increases at a rate proportional to $\\sqrt N$.",
+        "Use this information to find a suitable equation for $N$ in terms of $t$."
+      ],
+      "back": [
+        "Spot: “rate of increase … proportional to $\\sqrt N$” translates to $\\dfrac{dN}{dt}=k\\sqrt N$. Then separate the variables.",
+        "Use: $\\displaystyle\\int N^{-\\frac12}\\,dN=2N^{\\frac12}$.",
+        "Method: $2\\sqrt N=kt+c\\Rightarrow\\sqrt N=\\dfrac{kt+c}{2}$",
+        "Answer: $N=(at+b)^2$ for constants $a$ and $b$"
+      ],
+      "choices": [
+        "Write $\\dfrac{dN}{dt}=k\\sqrt N$ and separate the variables",
+        "Write $N=k\\sqrt t$",
+        "Write $N=Ae^{kt}$",
+        "Write $\\dfrac{dN}{dt}=\\dfrac{k}{\\sqrt N}$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q09",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q9",
+      "front": [
+        "$f(x)=2(x^2-3)e^{-x}$, $x\\in\\mathbb{R}$",
+        "(a) Show that $f'(x)=2(3+2x-x^2)e^{-x}$.",
+        "(b) Hence find the exact coordinates of the stationary points.",
+        "$g(x)=3f(x)$ for $x\\in\\mathbb{R}$, and $h(x)=3f(x)-5$ for $x\\ge0$.",
+        "(c) Find the range of $g$ and the range of $h$."
+      ],
+      "back": [
+        "Spot: a polynomial times an exponential means the product rule, then factorise out $e^{-x}$.",
+        "Use: $\\dfrac{d}{dx}e^{-x}=-e^{-x}$, and $e^{-x}>0$, so set the quadratic to zero.",
+        "(a) $4xe^{-x}-2(x^2-3)e^{-x}=2(3+2x-x^2)e^{-x}$",
+        "(b) $x^2-2x-3=0\\Rightarrow x=3$ or $-1$: $(3,\\,12e^{-3})$ and $(-1,\\,-4e)$",
+        "(c) $f\\ge-4e$, so $g(x)\\ge-12e$. For $x\\ge0$: $f(0)=-6$ and the maximum is $12e^{-3}$, so $-23\\le h(x)\\le36e^{-3}-5$."
+      ],
+      "choices": [
+        "Use the product rule with $u=2(x^2-3)$ and $v=e^{-x}$",
+        "Differentiate $x^2-3$ and $e^{-x}$ separately and multiply",
+        "Use the quotient rule with denominator $e^{x}$, then set the denominator to zero",
+        "Take logs first"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q10",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q10",
+      "front": [
+        "(a) Use the substitution $x=u^2+1$ to show that $\\displaystyle\\int_5^{17}\\frac{2\\,dx}{(x-1)\\left(1+\\sqrt{x-1}\\right)}=\\int_p^q\\frac{4\\,du}{u(1+u)}$, where $p$ and $q$ are positive constants to be found.",
+        "(b) Hence, using algebraic integration, show that the integral equals $\\ln a$, where $a$ is a rational constant to be found."
+      ],
+      "back": [
+        "Spot: a given substitution means change the $x$s, the $dx$ and the limits. A fraction like $\\dfrac{4}{u(1+u)}$ means partial fractions.",
+        "Use: $dx=2u\\,du$, $\\sqrt{x-1}=u$, and $x=5\\to u=2$, $x=17\\to u=4$.",
+        "(a) $\\dfrac{2\\cdot2u\\,du}{u^2(1+u)}=\\dfrac{4\\,du}{u(1+u)}$ with $p=2$ and $q=4$",
+        "(b) $\\dfrac{4}{u(1+u)}=\\dfrac4u-\\dfrac{4}{1+u}$, so the integral is $\\left[4\\ln u-4\\ln(1+u)\\right]_2^4=4\\ln\\dfrac45-4\\ln\\dfrac23=4\\ln\\dfrac65$",
+        "Answer: $a=\\left(\\dfrac65\\right)^4=\\dfrac{1296}{625}$"
+      ],
+      "choices": [
+        "Replace $x$, $dx=2u\\,du$ and the limits using $x=u^2+1$",
+        "Replace $x$ with $u^2+1$ but keep $dx$ and the limits",
+        "Integrate with respect to $x$ first, then substitute",
+        "Use integration by parts"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q11",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q11",
+      "front": [
+        "Circle $C_1$ has equation $x^2+y^2=25$ and circle $C_2$ has equation $(x-8)^2+y^2=18$. They meet at $A$ and $B$.",
+        "(a) Show that angle $AOB=0.958$ radians to 3 s.f., where $O$ is the origin.",
+        "(b) The region inside both circles is shaded. Find its perimeter to 1 decimal place."
+      ],
+      "back": [
+        "Spot: two circles meeting means subtract their equations to get $x$ at the intersections. A perimeter made of arcs means $s=r\\theta$ for each arc.",
+        "Use: angles found from right-angled triangles. Each arc uses its own circle's radius and centre angle.",
+        "(a) $x^2-(x-8)^2=7\\Rightarrow16x=71\\Rightarrow x=4.4375$, $y=\\pm2.304$, so $\\angle AOB=2\\arctan\\dfrac{2.304}{4.4375}\\approx0.958$",
+        "(b) The angle at $C_2$'s centre is $2\\arctan\\dfrac{2.304}{3.5625}\\approx1.148$.",
+        "Perimeter $=5(0.958)+\\sqrt{18}(1.148)\\approx9.7$"
+      ],
+      "choices": [
+        "Subtract the circle equations to find the $x$-coordinate of $A$ and $B$",
+        "Add the two radii",
+        "Use the cosine rule with sides 25 and 18",
+        "Set the two $y$ values equal and solve a cubic"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q12",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q12",
+      "front": [
+        "(a) Show that $\\sec\\theta-\\cos\\theta\\equiv\\sin\\theta\\tan\\theta$, $\\theta\\ne(90+180n)^\\circ$.",
+        "(b) Hence, or otherwise, solve for $0<x<180^\\circ$: $\\sec x-\\cos x=\\sin x\\tan(3x-40^\\circ)$."
+      ],
+      "back": [
+        "Spot: “hence” means rewrite the left-hand side using (a). Then the same factor appears on both sides, so factorise instead of cancelling.",
+        "Use: $\\sec\\theta-\\cos\\theta=\\dfrac{1-\\cos^2\\theta}{\\cos\\theta}=\\dfrac{\\sin^2\\theta}{\\cos\\theta}$, and $\\tan A=\\tan B\\Rightarrow A=B+180n$.",
+        "(b) $\\sin x\\tan x=\\sin x\\tan(3x-40^\\circ)$. $\\sin x=0$ has no solutions in the interval, so $\\tan x=\\tan(3x-40^\\circ)$.",
+        "$3x-40=x+180n\\Rightarrow x=20+90n$",
+        "Answer: $x=20^\\circ,\\ 110^\\circ$"
+      ],
+      "choices": [
+        "Use (a) to replace the left side with $\\sin x\\tan x$, then compare",
+        "Divide both sides by $\\sin x$ and $\\cos x$ and stop there",
+        "Expand $\\tan(3x-40^\\circ)$ using the compound angle formula",
+        "Square both sides"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2020-10-p1-q13",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q13",
+      "front": [
+        "A sequence is defined by $a_{n+1}=\\dfrac{k(a_n+3)}{a_n}$, $n\\in\\mathbb{N}$, where $k$ is a constant. The sequence is periodic of order 3, and $a_1=3$.",
+        "(a) Show that $2k^2+3k-9=0$.",
+        "(b) Explain why $k\\ne\\dfrac32$.",
+        "(c) Find $\\displaystyle\\sum_{r=1}^{50}a_r$."
+      ],
+      "back": [
+        "Spot: “periodic of order 3” means $a_4=a_1$. Generate the terms in terms of $k$.",
+        "Use: $a_2=2k$, $a_3=\\dfrac{2k+3}{2}$, $a_4=\\dfrac{k(2k+9)}{2k+3}$.",
+        "(a) $\\dfrac{k(2k+9)}{2k+3}=3\\Rightarrow2k^2+9k=6k+9\\Rightarrow2k^2+3k-9=0$",
+        "(b) If $k=\\tfrac32$ then $a_2=3=a_1$, so the order would be 1, not 3.",
+        "(c) $k=-3$: $3,-6,-\\tfrac32,3,\\dots$. Sixteen full cycles give $16\\times(-4.5)=-72$, plus $a_{49}+a_{50}=3-6$.",
+        "Answer: $-75$"
+      ],
+      "choices": [
+        "Generate $a_2$, $a_3$, $a_4$ in terms of $k$ and set $a_4=a_1$",
+        "Set $a_2=a_1$",
+        "Use the arithmetic series formula",
+        "Set $a_3=0$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q14",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q14",
+      "front": [
+        "A spherical balloon is deflating. At time $t$ s, its radius is $r$ cm and its volume is $V\\text{ cm}^3$. The volume decreases at a constant rate.",
+        "(a) Show that $\\dfrac{dr}{dt}=-\\dfrac{k}{r^2}$, where $k$ is a positive constant.",
+        "The initial radius is 30 cm. After 4 seconds, the radius is 15 cm.",
+        "(b) Solve the differential equation to find an equation linking $r$ and $t$.",
+        "(c) Find the values of $t$ for which this equation is valid."
+      ],
+      "back": [
+        "Spot: a rate for $V$ and a question about $r$ means connect them with the chain rule, $\\dfrac{dV}{dt}=\\dfrac{dV}{dr}\\cdot\\dfrac{dr}{dt}$.",
+        "Use: $V=\\tfrac43\\pi r^3$, so $\\dfrac{dV}{dr}=4\\pi r^2$. Then separate the variables.",
+        "(a) $4\\pi r^2\\dfrac{dr}{dt}=-c\\Rightarrow\\dfrac{dr}{dt}=-\\dfrac{k}{r^2}$",
+        "(b) $\\dfrac{r^3}{3}=-kt+C$. Using $r=30$ at $t=0$ and $r=15$ at $t=4$: $r^3=27000-\\dfrac{23625}{4}t$",
+        "(c) It's valid until the balloon is empty, at $r=0$: $0\\le t\\le\\dfrac{32}{7}$"
+      ],
+      "choices": [
+        "Use $\\dfrac{dV}{dt}=4\\pi r^2\\dfrac{dr}{dt}$ with $\\dfrac{dV}{dt}$ a negative constant",
+        "Write $r=30-kt$",
+        "Use $\\dfrac{dr}{dt}=-k$",
+        "Differentiate $V=4\\pi r^2$"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q15",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q15",
+      "front": [
+        "The curve $C$ has equation $x^2\\tan y=4$, $0<y<\\dfrac{\\pi}{2}$.",
+        "(a) Show that $\\dfrac{dy}{dx}=\\dfrac{-8x}{x^4+16}$.",
+        "(b) Prove that $C$ has a point of inflection at $x=\\sqrt[4]{\\tfrac{16}{3}}$."
+      ],
+      "back": [
+        "Spot: $x$ and $y$ mixed together means implicit differentiation. A point of inflection means $\\dfrac{d^2y}{dx^2}=0$ and changes sign.",
+        "Use: $\\dfrac{d}{dx}(\\tan y)=\\sec^2y\\dfrac{dy}{dx}$, then $\\tan y=\\dfrac{4}{x^2}$ and $\\sec^2y=1+\\tan^2y$.",
+        "(a) $2x\\tan y+x^2\\sec^2y\\dfrac{dy}{dx}=0\\Rightarrow\\dfrac{dy}{dx}=\\dfrac{-2x\\cdot\\frac{4}{x^2}}{x^2\\left(1+\\frac{16}{x^4}\\right)}=\\dfrac{-8x}{x^4+16}$",
+        "(b) $\\dfrac{d^2y}{dx^2}=\\dfrac{-8(16-3x^4)}{(x^4+16)^2}$, which is $0$ at $x^4=\\dfrac{16}{3}$ and changes sign there."
+      ],
+      "choices": [
+        "Differentiate implicitly, using the product rule on $x^2\\tan y$",
+        "Rearrange to $y=\\arctan\\dfrac{4}{x^2}$ and stop",
+        "Differentiate $\\tan y$ as $\\sec^2y$ without $\\dfrac{dy}{dx}$",
+        "Take logs of both sides"
+      ]
+    },
+    {
+      "id": "2020-10-p1-q16",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 1 · Q16",
+      "front": [
+        "Prove by contradiction that there are no positive integers $p$ and $q$ such that $9p^2-q^2=16$."
+      ],
+      "back": [
+        "Spot: “prove by contradiction” means assume solutions exist, then factorise the difference of two squares.",
+        "Use: $9p^2-q^2=(3p-q)(3p+q)$, and the factor pairs of 16.",
+        "Method: $3p+q>3p-q>0$ and both are integers with product 16, so the pairs are $(1,16)$, $(2,8)$ or $(4,4)$.",
+        "$(1,16)$ gives $6p=17$ and $(2,8)$ gives $6p=10$, so $p$ isn't an integer. $(4,4)$ gives $q=0$, which isn't positive.",
+        "Every case gives a contradiction, so there are no such $p$ and $q$."
+      ],
+      "choices": [
+        "Assume there are solutions and factorise $(3p-q)(3p+q)=16$",
+        "Try $p=1,2,3$ and conclude",
+        "Assume $p$ and $q$ are both even",
+        "Use the quadratic formula on $9p^2=16+q^2$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q01",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q1",
+      "front": [
+        "The table shows values of $y=\\sqrt{\\dfrac{x}{x+3}}$ to 4 s.f.",
+        "$x$: 1, 1.5, 2, 2.5, 3. $y$: 0.5, 0.5774, 0.6325, 0.6742, 0.7071",
+        "(a) Use the trapezium rule with all of these values to estimate $\\displaystyle\\int_1^3\\sqrt{\\frac{x}{x+3}}\\,dx$ to 3 s.f.",
+        "(b) Deduce an estimate for $\\displaystyle\\int_1^3\\sqrt{\\frac{4x}{x+3}}\\,dx$.",
+        "(c) Given that the true value of the integral in (b) is 2.493 to 4 s.f., comment on the accuracy of your answer."
+      ],
+      "back": [
+        "Spot: “trapezium rule” with a table means the booklet formula with the strip width $h=0.5$.",
+        "Use: $\\dfrac{h}{2}\\left[y_0+y_n+2(y_1+\\dots+y_{n-1})\\right]$, and $\\sqrt{4}=2$ comes out as a factor.",
+        "(a) $0.25\\left[(0.5+0.7071)+2(0.5774+0.6325+0.6742)\\right]\\approx1.24$",
+        "(b) $\\sqrt{\\dfrac{4x}{x+3}}=2\\sqrt{\\dfrac{x}{x+3}}$, so the estimate is $2\\times1.2438\\approx2.49$",
+        "(c) It's a slight underestimate, but very close (an error of less than 0.5%)."
+      ],
+      "choices": [
+        "Use the trapezium rule with $h=0.5$",
+        "Add the $y$ values and multiply by $0.5$",
+        "Use the trapezium rule with $h=1$",
+        "Integrate $\\sqrt{\\dfrac{x}{x+3}}$ by substitution"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q02",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q2",
+      "front": [
+        "Points $P$, $Q$ and $R$ have position vectors $\\mathbf{p}$, $\\mathbf{q}$ and $\\mathbf{r}$, and lie on a straight line.",
+        "$Q$ lies two fifths of the way from $P$ to $R$. Show that $\\mathbf{q}=\\dfrac15(3\\mathbf{p}+2\\mathbf{r})$."
+      ],
+      "back": [
+        "Spot: “a fraction of the way from $P$ to $R$” means start at $P$ and add that fraction of $\\overrightarrow{PR}$.",
+        "Use: $\\overrightarrow{PR}=\\mathbf{r}-\\mathbf{p}$.",
+        "Method: $\\mathbf{q}=\\mathbf{p}+\\tfrac25(\\mathbf{r}-\\mathbf{p})=\\tfrac35\\mathbf{p}+\\tfrac25\\mathbf{r}=\\tfrac15(3\\mathbf{p}+2\\mathbf{r})$"
+      ],
+      "choices": [
+        "Write $\\mathbf{q}=\\mathbf{p}+\\tfrac25(\\mathbf{r}-\\mathbf{p})$",
+        "Write $\\mathbf{q}=\\tfrac25(\\mathbf{p}+\\mathbf{r})$",
+        "Write $\\mathbf{q}=\\mathbf{r}+\\tfrac25\\mathbf{p}$",
+        "Write $\\mathbf{q}=\\tfrac25\\mathbf{r}-\\mathbf{p}$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q03",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q3",
+      "front": [
+        "(a) Given that $2\\log(6-x)=\\log(x+14)$, show that $x^2-13x+22=0$.",
+        "(b)(i) Write down the roots of $x^2-13x+22=0$.",
+        "(ii) State which root is not a solution of the log equation, giving a reason."
+      ],
+      "back": [
+        "Spot: a log equation means use the laws of logs to get $\\log A=\\log B$, then $A=B$. Always check the answers in the original logs.",
+        "Use: $2\\log(6-x)=\\log(6-x)^2$.",
+        "(a) $(6-x)^2=x+14\\Rightarrow36-12x+x^2=x+14\\Rightarrow x^2-13x+22=0$",
+        "(b)(i) $x=2$ or $x=11$",
+        "(ii) $x=11$ is not a solution: $6-x=-5$, and you can't take the log of a negative number."
+      ],
+      "choices": [
+        "Use $2\\log(6-x)=\\log(6-x)^2$, then remove the logs",
+        "Use $2\\log(6-x)=\\log(12-2x)$",
+        "Divide both sides by $\\log$",
+        "Take $e$ to the power of each term separately"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q04",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q4",
+      "front": [
+        "In the binomial expansion of $(a+3x)^6$, where $a$ is a constant, the coefficient of $x^3$ is $-4320$.",
+        "Find the value of $a$."
+      ],
+      "back": [
+        "Spot: a single coefficient means use one general term, $\\binom{n}{r}a^{n-r}(bx)^r$.",
+        "Use: $\\binom63a^3(3x)^3$.",
+        "Method: $20\\times27\\times a^3=540a^3=-4320\\Rightarrow a^3=-8$",
+        "Answer: $a=-2$"
+      ],
+      "choices": [
+        "Use the $x^3$ term $\\binom63a^3(3x)^3$ and set its coefficient to $-4320$",
+        "Use the $x^3$ term $\\binom63a^3(3x)^3$ but forget to cube the 3",
+        "Expand $(1+3x)^6$ and multiply by $a$",
+        "Use $\\binom64a^4(3x)^2$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q05",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q5",
+      "front": [
+        "The curve $y=2\\times5^x$ meets the curve $y=24-5^{x+1}$ at the point $P$.",
+        "Find, using algebra, the exact $x$-coordinate of $P$."
+      ],
+      "back": [
+        "Spot: powers of the same base on both sides means write $5^{x+1}$ as $5\\times5^x$ and treat $5^x$ like a single unknown.",
+        "Use: $5^{x+1}=5\\cdot5^x$, then logs.",
+        "Method: $2\\cdot5^x=24-5\\cdot5^x\\Rightarrow7\\cdot5^x=24\\Rightarrow5^x=\\dfrac{24}{7}$",
+        "Answer: $x=\\dfrac{\\ln\\frac{24}{7}}{\\ln5}$"
+      ],
+      "choices": [
+        "Write $5^{x+1}=5\\times5^x$ and collect the $5^x$ terms",
+        "Take logs of each term separately",
+        "Write $5^{x+1}=5^x+5$",
+        "Square both sides"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q06",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q6",
+      "front": [
+        "(a) Given that $\\dfrac{2x^2+7x-1}{x+3}\\equiv Ax+B+\\dfrac{C}{x+3}$, find $A$, $B$ and $C$.",
+        "(b) Hence find the exact value of $\\displaystyle\\int_0^3\\frac{2x^2+7x-1}{x+3}\\,dx$, in the form $a+b\\ln2$, where $a$ and $b$ are integers."
+      ],
+      "back": [
+        "Spot: the top has a higher degree than the bottom, so divide first (algebraic division) to get a polynomial plus a proper fraction.",
+        "Use: $\\displaystyle\\int\\frac{C}{x+3}\\,dx=C\\ln|x+3|$.",
+        "(a) $2x^2+7x-1=(x+3)(2x+1)-4$, so $A=2$, $B=1$, $C=-4$.",
+        "(b) $\\left[x^2+x-4\\ln(x+3)\\right]_0^3=12-4\\ln6+4\\ln3$",
+        "Answer: $12-4\\ln2$"
+      ],
+      "choices": [
+        "Divide $2x^2+7x-1$ by $x+3$, then integrate term by term",
+        "Integrate the top and bottom separately",
+        "Use integration by parts",
+        "Write it as $\\ln(2x^2+7x-1)$ divided by $\\ln(x+3)$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q07",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q7",
+      "front": [
+        "The curve $C$ has equation $y=\\dfrac{9x^2+2x}{3\\sqrt x}-6\\ln x$, $x>0$.",
+        "(a) Show that $\\dfrac{dy}{dx}=\\dfrac{27x^2+2x-36\\sqrt x}{6x\\sqrt x}$.",
+        "(b) Show that the $x$-coordinate of the minimum point $P$ satisfies $x=\\left(\\dfrac43-\\dfrac{2\\sqrt x}{27}\\right)^{\\frac23}$.",
+        "(c) Use $x_{n+1}=\\left(\\dfrac43-\\dfrac{2\\sqrt{x_n}}{27}\\right)^{\\frac23}$ with $x_1=1$ to find $x_2$ to 5 d.p. and the $x$-coordinate of $P$ to 5 d.p."
+      ],
+      "back": [
+        "Spot: a fraction with $\\sqrt x$ underneath means split it into separate powers of $x$ before differentiating.",
+        "Use: $y=3x^{\\frac32}+\\tfrac23x^{\\frac12}-6\\ln x$.",
+        "(a) $\\dfrac{dy}{dx}=\\tfrac92x^{\\frac12}+\\tfrac13x^{-\\frac12}-\\dfrac6x$. Put this over the common denominator $6x\\sqrt x$.",
+        "(b) Set $27x^2+2x=36\\sqrt x$ and divide by $27\\sqrt x$: $x^{\\frac32}=\\dfrac43-\\dfrac{2\\sqrt x}{27}$",
+        "(c) $x_2=1.16612$, and the iterates converge to $x=1.16254$"
+      ],
+      "choices": [
+        "Split the fraction into powers of $x$, then differentiate term by term",
+        "Use the quotient rule on the whole of $y$",
+        "Differentiate the top and bottom separately",
+        "Use the chain rule on $\\ln x$ only"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q08",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q8",
+      "front": [
+        "A curve $C$ has equation $y=f(x)$, where $f'(x)=3x^2+ax-14$ for a constant $a$.",
+        "The $y$-intercept of $C$ is $8$, and $(x-2)$ is a factor of $f(x)$.",
+        "Find $f(x)$ in its simplest form."
+      ],
+      "back": [
+        "Spot: you're given $f'(x)$, so integrate. The $y$-intercept gives the constant, and the factor theorem gives $a$.",
+        "Use: $f(x)=x^3+\\dfrac a2x^2-14x+c$ with $c=8$, then $f(2)=0$.",
+        "Method: $f(2)=8+2a-28+8=2a-12=0\\Rightarrow a=6$",
+        "Answer: $f(x)=x^3+3x^2-14x+8$"
+      ],
+      "choices": [
+        "Integrate $f'(x)$, use the intercept for the constant, then $f(2)=0$",
+        "Differentiate $f'(x)$ again",
+        "Set $f'(2)=0$",
+        "Set $f'(0)=8$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q09",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q9",
+      "front": [
+        "The temperature $\\theta\\,^\\circ$C of some ethanol $t$ seconds after heating began is modelled by $\\theta=A-Be^{-0.05t}$.",
+        "The initial temperature was $20\\,^\\circ$C, and after 15 seconds it was $50\\,^\\circ$C.",
+        "(a) Find $A$ and $B$ to 3 s.f.",
+        "(b) Ethanol boils at about $78\\,^\\circ$C. Use this to evaluate the model."
+      ],
+      "back": [
+        "Spot: two pieces of data and two unknowns means two equations. Use $t=0$ first, because $e^0=1$.",
+        "Use: $A-B=20$ and $A-Be^{-0.75}=50$.",
+        "(a) $B(1-e^{-0.75})=30\\Rightarrow B\\approx56.9$ and $A\\approx76.9$",
+        "(b) As $t\\to\\infty$, $\\theta\\to A\\approx76.9\\,^\\circ$C, which is below $78\\,^\\circ$C. The model says the ethanol never boils, so it's unsuitable near boiling point."
+      ],
+      "choices": [
+        "Substitute $t=0$ to get $A-B=20$, then use $t=15$",
+        "Substitute $t=15$ only",
+        "Take logs of both sides straight away",
+        "Assume $A=78$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q10",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q10",
+      "front": [
+        "(a) Show that $\\sin3A\\equiv3\\sin A-4\\sin^3A$.",
+        "(b) Hence solve, for $0\\le x<360^\\circ$, $\\sin3x+\\cos^2x=1$."
+      ],
+      "back": [
+        "Spot: “hence” with $\\sin3x$ means replace it with the cubic in $\\sin x$. Use $1-\\cos^2x=\\sin^2x$ to get everything in $\\sin x$.",
+        "Use: $\\sin(2A+A)$, $\\sin2A\\equiv2\\sin A\\cos A$, $\\cos2A\\equiv1-2\\sin^2A$.",
+        "(b) $3\\sin x-4\\sin^3x=\\sin^2x\\Rightarrow\\sin x(4\\sin x-3)(\\sin x+1)=0$",
+        "$\\sin x=0,\\ \\tfrac34,\\ -1$",
+        "Answer: $x=0^\\circ,\\ 48.6^\\circ,\\ 131.4^\\circ,\\ 180^\\circ,\\ 270^\\circ$"
+      ],
+      "choices": [
+        "Write $\\sin3x=3\\sin x-4\\sin^3x$ and $1-\\cos^2x=\\sin^2x$, then factorise",
+        "Divide everything by $\\sin x$",
+        "Use $\\sin3x=3\\sin x$",
+        "Use the R-form"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2020-10-p2-q11",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q11",
+      "front": [
+        "The graph of $y=3|x-2|-4$ has its vertex at $P$.",
+        "(a) Find the coordinates of $P$.",
+        "(b) Solve $x+10=3|x-2|-4$.",
+        "(c) The line $y=ax$ meets the graph at least once. Find the possible values of $a$, in set notation."
+      ],
+      "back": [
+        "Spot: a modulus graph is a V. Split it into the two arms $x\\ge2$ and $x<2$, and check every answer against its condition.",
+        "Use: the arms $y=3x-10$ for $x\\ge2$ and $y=-3x+2$ for $x<2$.",
+        "(a) $P=(2,-4)$",
+        "(b) $x+10=3x-10\\Rightarrow x=10$, and $x+10=-3x+2\\Rightarrow x=-2$. Both are valid.",
+        "(c) The line through the origin and $P$ has gradient $-2$. A line steeper than the left arm (gradient below $-3$) also meets it.",
+        "Answer: $\\{a:a<-3\\}\\cup\\{a:a\\ge-2\\}$"
+      ],
+      "choices": [
+        "Split into $x\\ge2$ and $x<2$ and solve each linear equation",
+        "Square both sides immediately",
+        "Remove the modulus signs and solve once",
+        "Set $x-2=0$"
+      ],
+      "ask": "How do you solve part (b)?"
+    },
+    {
+      "id": "2020-10-p2-q12",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q12",
+      "front": [
+        "A curve has parametric equations $x=4\\sin t$, $y=3\\sin2t$, $0\\le t\\le\\dfrac{\\pi}{2}$. The region $R$ is bounded by the curve and the $x$-axis.",
+        "(a) Show that the area of $R$ is $\\displaystyle\\int_0^{\\frac{\\pi}{2}}24\\sin t\\cos^2t\\,dt$, and hence that it is exactly 8.",
+        "(b) Part of the curve models a dam whose vertical wall is 2.4 m high, with a horizontal walkway $MN$ along the top. Find the width of the walkway."
+      ],
+      "back": [
+        "Spot: area under a parametric curve means $\\displaystyle\\int y\\dfrac{dx}{dt}\\,dt$, with the limits in $t$.",
+        "Use: $\\dfrac{dx}{dt}=4\\cos t$ and $\\sin2t=2\\sin t\\cos t$. Then $\\displaystyle\\int\\sin t\\cos^2t\\,dt=-\\tfrac13\\cos^3t$.",
+        "(a) $\\displaystyle\\int3\\sin2t\\cdot4\\cos t\\,dt=\\int24\\sin t\\cos^2t\\,dt=\\left[-8\\cos^3t\\right]_0^{\\frac{\\pi}{2}}=8$",
+        "(b) $3\\sin2t=2.4\\Rightarrow\\sin2t=0.8$, so $\\sin t=\\dfrac{1}{\\sqrt5}$ or $\\dfrac{2}{\\sqrt5}$",
+        "$x_N-x_M=4\\left(\\dfrac{2}{\\sqrt5}-\\dfrac{1}{\\sqrt5}\\right)$",
+        "Answer: $\\dfrac{4}{\\sqrt5}\\approx1.79$ m"
+      ],
+      "choices": [
+        "Use area $=\\displaystyle\\int y\\frac{dx}{dt}\\,dt$",
+        "Use area $=\\displaystyle\\int y\\,dt$",
+        "Use area $=\\displaystyle\\int x\\frac{dy}{dt}\\,dt$",
+        "Eliminate $t$ first, then integrate"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q13",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q13",
+      "front": [
+        "$g(x)=\\dfrac{2\\ln x+5}{\\ln x+3}$, $x>0$, $x\\ne k$",
+        "(a) Deduce the value of $k$.",
+        "(b) Prove that $g'(x)>0$ for all $x$ in the domain.",
+        "(c) Find the values of $a$ for which $g(a)>0$."
+      ],
+      "back": [
+        "Spot: the excluded value is where the denominator is zero. To show $g'(x)>0$, use the quotient rule; the numerator simplifies to a constant.",
+        "Use: $\\dfrac{d}{dx}\\ln x=\\dfrac1x$.",
+        "(a) $\\ln k+3=0\\Rightarrow k=e^{-3}$",
+        "(b) $g'(x)=\\dfrac{\\frac2x(\\ln x+3)-\\frac1x(2\\ln x+5)}{(\\ln x+3)^2}=\\dfrac{1}{x(\\ln x+3)^2}>0$",
+        "(c) The top and bottom must have the same sign: $0<a<e^{-3}$ or $a>e^{-\\frac52}$"
+      ],
+      "choices": [
+        "Use the quotient rule and simplify the numerator",
+        "Use the product rule on $(2\\ln x+5)(\\ln x+3)$",
+        "Differentiate the top and bottom separately",
+        "Let $u=\\ln x$ and integrate"
+      ],
+      "ask": "How do you prove part (b)?"
+    },
+    {
+      "id": "2020-10-p2-q14",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q14",
+      "front": [
+        "A circle $C$ of radius $r$ lies only in the first quadrant and touches both axes. The line $l$ has equation $x+3y=12$.",
+        "(a) Show that the $y$-coordinates of the intersections of $l$ and $C$ satisfy $10y^2+(4r-72)y+(r^2-24r+144)=0$.",
+        "(b) Given that $l$ is a tangent to $C$, find the two possible values of $r$ as simplified surds."
+      ],
+      "back": [
+        "Spot: a circle touching both axes in the first quadrant has centre $(r,r)$. “Tangent” means a repeated root, so the discriminant is $0$.",
+        "Use: $(x-r)^2+(y-r)^2=r^2$ with $x=12-3y$, then $b^2-4ac=0$.",
+        "(a) $(12-3y-r)^2+(y-r)^2=r^2$ expands to the quadratic shown.",
+        "(b) $(4r-72)^2-40(r^2-24r+144)=0\\Rightarrow r^2-16r+24=0$",
+        "Answer: $r=8\\pm2\\sqrt{10}$"
+      ],
+      "choices": [
+        "Write the circle as $(x-r)^2+(y-r)^2=r^2$ and substitute $x=12-3y$",
+        "Write the circle as $x^2+y^2=r^2$",
+        "Set the gradient of $l$ equal to the radius",
+        "Use the distance from the origin to $l$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q15",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q15",
+      "front": [
+        "A geometric series has first term $a$ and common ratio $r$, with $r\\ne1$ and $a\\ne0$.",
+        "(a) Prove that $S_n=\\dfrac{a(1-r^n)}{1-r}$.",
+        "(b) Given that $S_8$ is 17 times $S_4$, find the exact possible values of $r$."
+      ],
+      "back": [
+        "Spot: (a) write out $S_n$ and $rS_n$, then subtract. (b) Use $1-r^8=(1-r^4)(1+r^4)$.",
+        "Use: $S_n=a+ar+\\dots+ar^{n-1}$ and $rS_n=ar+\\dots+ar^n$.",
+        "(a) $S_n-rS_n=a-ar^n\\Rightarrow S_n=\\dfrac{a(1-r^n)}{1-r}$",
+        "(b) $1-r^8=17(1-r^4)\\Rightarrow1+r^4=17\\Rightarrow r^4=16$",
+        "Answer: $r=2$ or $r=-2$"
+      ],
+      "choices": [
+        "Write out $S_n$ and $rS_n$ and subtract",
+        "Use the arithmetic series formula",
+        "Prove it for $n=1$ and $n=2$ only",
+        "Differentiate $S_n$ with respect to $r$"
+      ]
+    },
+    {
+      "id": "2020-10-p2-q16",
+      "topic": "paper-2020-10",
+      "source": "October 2020 · Paper 2 · Q16",
+      "front": [
+        "Use algebra to prove that the cube of any integer is either a multiple of 9, or one more or one less than a multiple of 9."
+      ],
+      "back": [
+        "Spot: “any integer” with a multiple of 3 involved means split the integers into $3k$, $3k+1$ and $3k-1$ (proof by exhaustion).",
+        "Use: $(3k\\pm1)^3=27k^3\\pm27k^2+9k\\pm1$.",
+        "Method: $(3k)^3=27k^3=9(3k^3)$",
+        "$(3k+1)^3=9(3k^3+3k^2+k)+1$ and $(3k-1)^3=9(3k^3-3k^2+k)-1$",
+        "Every integer is one of these forms, so the result holds."
+      ],
+      "choices": [
+        "Write any integer as $3k$, $3k+1$ or $3k-1$ and cube each case",
+        "Check $n=1,2,3$",
+        "Write any integer as $9k$",
+        "Use proof by contradiction with $n$ even"
+      ]
+    },
     {
       "id": "2019-06-p1-q01",
       "topic": "paper-2019-06",
