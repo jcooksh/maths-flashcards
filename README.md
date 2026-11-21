@@ -21,6 +21,18 @@ The trig rules cover every identity and formula in the 9MA0 trigonometry content
 
 Cards marked “In the formula booklet” are printed in Pearson’s booklet: compound angles, factor formulae, small angle approximations, and the tan, sec, cot and cosec derivatives and integrals. Cards marked “Recall for the exam” are not printed and must be learned. These include the Pythagorean identities, double angle formulae, sine and cosine rules, arc length and sector area, and the sin and cos derivatives and integrals. The wrong answers are near-misses: sign errors, swapped functions and missing factors.
 
+## Past papers
+
+The Past papers section has a card for every question in the Edexcel 9MA0 Pure papers (Papers 1 and 2). Each question is reworded with different numbers, so you won't be doing the same questions when you sit the real papers. The front shows the question. The back gives the method:
+
+- **Spot**: what in the question tells you which technique to use
+- **Use**: the formulas or identities you need
+- the working for each part, and the answer
+
+In Questions mode, each card asks how you should start, with four approaches to choose from.
+
+The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`.
+
 ## Controls
 
 - Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. Arrow keys move between cards.

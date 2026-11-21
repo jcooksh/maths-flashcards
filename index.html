@@ -14,10 +14,10 @@
     } catch {}
   </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=8">
+  <link rel="stylesheet" href="./styles.css?v=11">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=10"></script>
+  <script type="module" src="./app.js?v=12"></script>
 </head>
 <body>
   <header class="mobile-header">
@@ -42,6 +42,10 @@
           <div class="topic-group">
             <button class="group-button" data-deck="trigonometry" type="button" aria-pressed="false" aria-label="All trig rules">Trig rules</button>
             <div class="topic-list" id="trigonometry-topics"></div>
+          </div>
+          <div class="topic-group">
+            <button class="group-button" data-deck="papers" type="button" aria-pressed="false" aria-label="All past paper questions">Past papers</button>
+            <div class="topic-list" id="papers-topics"></div>
           </div>
           <button class="all-cards" data-deck="all" type="button" aria-pressed="false">
             <span id="all-deck-label">All cards</span><span id="count-all"></span>
@@ -114,7 +118,7 @@
           </div>
 
           <section id="practice" aria-label="Flashcard practice" hidden>
-            <button class="flashcard" id="flashcard" type="button" aria-pressed="false">
+            <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-pressed="false">
               <span class="swipe-stamp swipe-known" aria-hidden="true">Got it</span>
               <span class="swipe-stamp swipe-review" aria-hidden="true">Not yet</span>
               <span class="card-top">
@@ -125,7 +129,7 @@
                 <span class="flip-hint" id="flip-hint"><span class="hint-touch">Tap to flip · swipe to rate</span><span class="hint-keys">Click to flip <kbd>Space</kbd></span></span>
                 <span class="reference-label" id="reference-label" hidden></span>
               </span>
-            </button>
+            </div>
 
             <div class="card-actions" id="flashcard-actions" role="group" aria-label="Flashcard actions">
               <button class="pill pill-review" id="review-card" type="button" aria-keyshortcuts="1">Not yet<kbd aria-hidden="true">1</kbd></button>

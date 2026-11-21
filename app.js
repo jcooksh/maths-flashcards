@@ -2,7 +2,7 @@ import { studyPlan } from "./progress.js?v=1";
 import { connectAccount } from "./account.js?v=3";
 
 const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (element) => [element.id, element]));
-const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", review: "To review", study: "Study next" };
+const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", papers: "Past papers", review: "To review", study: "Study next" };
 const topicHues = {
   differentiation: 155, sequences: 255, logarithms: 305, integration: 60, algebra: 20, modelling: 200,
   identities: 330, compound: 40, double: 0, factor: 100, harmonic: 210, exact: 235,
@@ -180,13 +180,41 @@ function appendMath(element, value, standalone = true) {
   }
 }
 
+const lineLabel = /^(Spot|Use|Method|Answers?|Watch out|Check|Key idea|Tip):\s*/;
+const partLabel = /^\((?:[a-h]|i{1,3}|iv|v|vi)\)\s+/;
+
+// Lines can start with a label such as "Spot:" or a part such as "(a)". Both get their own styling.
 function mathLines(lines, className) {
   return lines.map((line) => {
     const element = document.createElement("span");
     element.className = className;
-    appendMath(element, line);
+    const label = lineLabel.exec(line);
+    const part = label ? null : partLabel.exec(line);
+    if (label) {
+      const tag = document.createElement("span");
+      tag.className = "line-label " + label[1].toLowerCase().replace(/\s+/g, "-");
+      tag.textContent = label[1];
+      element.append(tag);
+      appendMath(element, line.slice(label[0].length), false);
+    } else if (part) {
+      const tag = document.createElement("span");
+      tag.className = "part-label";
+      tag.textContent = part[0].trim();
+      element.append(tag, " ");
+      appendMath(element, line.slice(part[0].length), false);
+    } else {
+      appendMath(element, line);
+    }
     return element;
   });
+}
+
+function frontLines(card) {
+  return Array.isArray(card.front) ? card.front : [card.front];
+}
+
+function isExam(card) {
+  return topics.get(card?.topic)?.collection === "papers";
 }
 
 function availableCards() {
@@ -250,7 +278,7 @@ function renderTopics() {
     button.className = "topic-button";
     button.dataset.deck = topic.collection;
     button.dataset.topic = topic.id;
-    button.style.setProperty("--hue", topicHues[topic.id] ?? 155);
+    button.style.setProperty("--hue", topicHues[topic.id] ?? topic.hue ?? 155);
     button.style.setProperty("--i", index++);
 
     const dot = document.createElement("span");
@@ -322,8 +350,20 @@ function renderQuestion(card) {
   const optionList = ui["question-options"];
   if (displayedQuestion !== attempt) {
     displayedQuestion = attempt;
-    ui["question-prompt"].replaceChildren();
-    appendMath(ui["question-prompt"], card.front, false);
+    const exam = isExam(card);
+    ui["question-card"].classList.toggle("exam", exam);
+    ui["question-prompt"].replaceChildren(...frontLines(card).map((line) => {
+      const element = document.createElement("span");
+      element.className = "prompt-line";
+      appendMath(element, line, false);
+      return element;
+    }));
+    if (exam) {
+      const ask = document.createElement("span");
+      ask.className = "ask-line";
+      ask.textContent = card.ask ?? "How should you start?";
+      ui["question-prompt"].append(ask);
+    }
     const visibleLength = (text) => text.replace(/\\[a-zA-Z]+/g, "x").replace(/[${}^_\\\s]/g, "").length;
     optionList.dataset.fit = attempt.options.every((option) => visibleLength(option.text) <= 24) ? "try" : "";
     optionList.replaceChildren(...attempt.options.map((option, index) => {
@@ -430,7 +470,7 @@ function renderCard(announcement = "") {
   const deckName = questionMode && activeDeck === "all" ? "All questions" : deckLabels[activeDeck];
   ui["collection-label"].textContent = deckName;
   ui["deck-title"].textContent = topic?.title ?? deckName;
-  ui["open-topics"].style.setProperty("--hue", topicHues[topic?.id] ?? 155);
+  ui["open-topics"].style.setProperty("--hue", topicHues[topic?.id] ?? topic?.hue ?? 155);
   ui["menu-label"].textContent = topic?.title ?? deckName;
   ui["open-topics"].setAttribute("aria-label", "Choose a topic. Current: " + (topic?.title ?? deckName));
   ui["position-label"].textContent = card ? (position + 1) + " / " + queue.length : "";
@@ -483,12 +523,16 @@ function renderCard(announcement = "") {
   ui.flashcard.classList.toggle("answer-side", answerVisible);
   ui["flip-card"].setAttribute("aria-pressed", String(answerVisible));
   ui["flip-card"].textContent = answerVisible ? "Show question" : "Show answer";
-  ui["card-face-label"].textContent = answerVisible ? "Answer" : "Question";
+  const exam = isExam(card);
+  ui.flashcard.classList.toggle("exam", exam);
+  ui["card-face-label"].textContent = answerVisible ? (exam ? "Method" : "Answer") : (card.source ?? "Question");
   ui["flip-hint"].hidden = answerVisible;
   ui["reference-label"].hidden = !answerVisible || !card.reference;
   ui["reference-label"].textContent = answerVisible ? referenceLabels[card.reference] ?? "" : "";
-  const lines = answerVisible ? card.back : [card.front];
-  ui["card-content"].replaceChildren(...mathLines(lines, answerVisible ? "answer-line" : "prompt"));
+  const lines = answerVisible ? card.back : frontLines(card);
+  ui["card-content"].replaceChildren(...mathLines(lines, answerVisible ? "answer-line" : exam ? "exam-line" : "prompt"));
+  ui["card-content"].scrollTop = 0;
+  markScrollable();
   ui.announcer.textContent = announcement || (answerVisible ? "Answer shown." : "Question " + (position + 1) + " of " + queue.length + ".");
 }
 
@@ -705,6 +749,13 @@ function setupSwipe() {
   };
   card.addEventListener("pointerup", end);
   card.addEventListener("pointercancel", end);
+  ui["card-content"].addEventListener("scroll", markScrollable, { passive: true });
+  card.addEventListener("keydown", (event) => {
+    if ((event.key === "Enter" || event.key === " ") && !event.repeat) {
+      event.preventDefault();
+      flipCard();
+    }
+  });
   card.addEventListener("click", (event) => {
     if (performance.now() < suppressClickUntil) {
       event.preventDefault();
@@ -729,6 +780,15 @@ function closeOnBackdrop(dialog) {
   });
 }
 
+// Long cards scroll inside the card; a fade at the bottom shows there's more.
+function markScrollable() {
+  const content = ui["card-content"];
+  requestAnimationFrame(() => {
+    const more = content.scrollHeight - content.clientHeight - content.scrollTop > 4;
+    content.classList.toggle("scrollable", more);
+  });
+}
+
 /* ---------- Mobile header ---------- */
 
 // On phones the theme and account buttons live in the top bar so the page fits on one screen.
@@ -739,11 +799,19 @@ function placeHeaderActions() {
 
 /* ---------- Start ---------- */
 
+async function loadDeck(url) {
+  const response = await fetch(url, { cache: "no-cache" });
+  if (!response.ok) throw new Error("Deck request failed: " + url);
+  return response.json();
+}
+
 async function start() {
   try {
-    const response = await fetch("./cards.json", { cache: "no-cache" });
-    if (!response.ok) throw new Error("Flashcard deck request failed");
-    const data = await response.json();
+    const [main, papers] = await Promise.all([loadDeck("./cards.json"), loadDeck("./papers.json").catch(() => null)]);
+    const data = {
+      topics: [...main.topics, ...(papers?.topics ?? [])],
+      cards: [...main.cards, ...(papers?.cards ?? [])],
+    };
     cards = data.cards;
     questionCards = cards.filter(({ choices }) => Array.isArray(choices) && choices.length === 4 &&
       choices.every((choice) => typeof choice === "string" && choice.trim()) && new Set(choices).size === 4);
