@@ -2,9 +2,36 @@
 
 Quick recall of methods and formulas for Edexcel A level Pure Mathematics (9MA0). Click the card to reveal the answer, or use Space. Arrow keys move between cards.
 
-Study next starts with missed cards and then cards due for review. When those are done, it offers up to ten new cards. Each correct review increases the time before the next one. A missed card is due straight away.
+## Red, amber and green boxes
 
-Questions mode presents four shuffled answer choices for each supported flashcard. The first answer updates the same progress as flashcard practice. Revealing an answer also puts that card in review. You can open Questions directly with `?mode=questions`.
+Every card sits in one of three boxes (a Leitner system). All cards start in **Red**. A right answer moves a card up a box: Red to Amber, then Amber to Green. A wrong answer sends it straight back to Red.
+
+Cards come back on a schedule. Red cards are always due. Amber cards come back a day later. Green cards come back after 3, 7, 14, 30 and then 60 days. A right answer before a card is due keeps it in its box, so cramming can't promote it. It only moves up once it's due again.
+
+## Home, sessions and progress
+
+The home page shows your boxes and lets you choose what to study. Untick a group (Revision, Trig rules, Past papers) to leave it out, or open its topic list to pick individual topics. The choice is remembered on that browser.
+
+**Start** begins an open-ended session:
+- Missed (red) cards come first, then amber and green cards that are due, then cards you haven't seen yet, mixed together.
+- A missed card comes back a few cards later in the same session.
+- Every answer is saved straight away, so you can stop whenever you like with the close button or the back button.
+- When nothing is left, you can practise cards early. They won't move up until they're due.
+
+The progress page (`?view=progress`) has:
+- the share of cards in Green
+- how many cards are due
+- your day streak
+- how many cards you answered in the last 7 days
+- the box split
+- cards answered per day
+- cards in Green over time
+- a breakdown by group and topic
+- the topics with the most missed cards, each with a button to practise it
+
+Every chart has a table view and works with the keyboard.
+
+Questions mode shows four shuffled answer choices for each card. The first answer counts and moves the card between boxes in the same way. You can open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
 
 ## Trigonometry deck
 
@@ -35,7 +62,7 @@ The cards are built from `tools/past-papers/`, with one file per exam series. `p
 
 ## Controls
 
-- Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. Arrow keys move between cards.
+- Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. The card shows its box, and the swipe stamp shows where it will go. In a session, Skip moves a card to the back of the queue.
 - Questions: press 1–4 or A–D to answer, Enter for the next question.
 - The moon/sun button switches between light and dark mode. It follows the system setting until you choose one.
 - Animations are reduced when the system “reduce motion” setting is on.
@@ -44,9 +71,14 @@ The cards are built from `tools/past-papers/`, with one file per exam series. `p
 
 Ratings are stored in the current browser, so no account is needed. Signing in syncs them across devices. The first sign-in on a browser also includes existing ratings from that browser.
 
-Sign-in uses Supabase Auth with email and password. Accounts are created by the `create-account` Edge Function, which makes an already-confirmed account so sign-up never waits on an email. Password reset still sends an email; the link returns to the page it was requested from, so add the site URL to the project's Auth redirect URLs. Supabase's built-in email service is heavily rate limited and only delivers to the project's team members, so set up custom SMTP if other people need password resets.
+Sign-in uses Supabase Auth with email and password, or Google. The “Continue with Google” button appears automatically once the Google provider is switched on for the project:
+1. In Google Cloud, create an OAuth client ID of type *Web application*, with `https://mosmevfnxnnxxmmktfcb.supabase.co/auth/v1/callback` as an authorised redirect URI.
+2. Paste its client ID and secret into Supabase under Authentication, then Providers, then Google.
+3. Make sure the site URL is in the project's redirect URLs.
 
-Progress is stored per account by the migration in `supabase/migrations/`. The browser uses the project's publishable API key. Supabase JS 2.119.1 is served locally with its licence in `assets/supabase/`.
+Accounts are created by the `create-account` Edge Function, which makes an already-confirmed account so sign-up never waits on an email. Password reset still sends an email; the link returns to the page it was requested from, so add the site URL to the project's Auth redirect URLs. Supabase's built-in email service is heavily rate limited and only delivers to the project's team members, so set up custom SMTP if other people need password resets.
+
+Progress is stored per account by the migrations in `supabase/migrations/`. Daily totals for the charts are kept per browser and uploaded under a device id, so a phone and a laptop add up without counting anything twice. The browser uses the project's publishable API key. Supabase JS 2.119.1 is served locally with its licence in `assets/supabase/`.
 
 ## Run locally
 

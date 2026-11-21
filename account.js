@@ -1,8 +1,14 @@
-import { guestKey, readProgress, saveProgress, rateProgress, mergeProgress } from "./progress.js?v=1";
+import { guestKey, readProgress, saveProgress, rateProgress, mergeProgress } from "./progress.js?v=2";
+import {
+  activityKey, deviceId, readActivity, saveActivity, recordReview, addActivity, combineActivity,
+  toRows, fromRow, readOthers, saveOthers,
+} from "./activity.js?v=1";
 
 const apiUrl = "https://mosmevfnxnnxxmmktfcb.supabase.co";
 const publishableKey = "sb_publishable_B2CkIOCAUSm_uEg7nN7rAQ_MPAI7XU4";
 const minPasswordLength = 8;
+const oauthKey = "maths-flashcards.oauth";
+const providersKey = "maths-flashcards.providers";
 const pointerFine = window.matchMedia("(hover: hover) and (pointer: fine)");
 
 const views = {
@@ -33,16 +39,41 @@ const views = {
 // Supabase sends people back with tokens or an error in the URL fragment.
 function readCallback() {
   const params = new URLSearchParams(location.hash.slice(1));
+  let oauth = null;
+  try {
+    oauth = sessionStorage.getItem(oauthKey);
+    sessionStorage.removeItem(oauthKey);
+  } catch {}
   if (params.has("error") || params.has("error_code")) {
     history.replaceState(history.state, "", location.pathname + location.search);
-    return {
-      error: params.get("error_code") === "otp_expired"
-        ? "That link has expired or has already been used. Request a new one."
-        : "That link didn’t work. Please try again.",
-    };
+    let error = "That link didn’t work. Please try again.";
+    if (params.get("error_code") === "otp_expired") error = "That link has expired or has already been used. Request a new one.";
+    else if (oauth) error = "Google sign-in didn’t finish. Please try again.";
+    return { error };
   }
   if (params.has("setup")) history.replaceState(history.state, "", location.pathname + location.search);
-  return { type: params.has("access_token") ? params.get("type") : null };
+  if (!params.has("access_token")) return { type: null };
+  return { type: params.get("type") ?? (oauth ? "oauth" : null) };
+}
+
+// Shows “Continue with Google” only once Google is switched on for the project.
+async function googleEnabled() {
+  try {
+    const cached = sessionStorage.getItem(providersKey);
+    if (cached) return cached === "google";
+  } catch {}
+  try {
+    const response = await fetch(apiUrl + "/auth/v1/settings", {
+      headers: { apikey: publishableKey },
+      signal: AbortSignal.timeout(8_000),
+    });
+    const settings = await response.json();
+    const enabled = settings?.external?.google === true;
+    try { sessionStorage.setItem(providersKey, enabled ? "google" : "email"); } catch {}
+    return enabled;
+  } catch {
+    return false;
+  }
 }
 
 // Creates a confirmed account through the project's create-account Edge Function,
@@ -84,7 +115,7 @@ function errorMessage(error) {
   return "Something went wrong. Please try again.";
 }
 
-export function connectAccount(ui, onProgress, toast = () => {}) {
+export function connectAccount(ui, onProgress, toast = () => {}, onActivity = () => {}) {
   const dialog = ui["account-dialog"];
   const form = ui["sign-in-form"];
   const emailInput = ui["account-email"];
@@ -96,7 +127,11 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
   const client = window.supabase?.createClient(apiUrl, publishableKey, {
     auth: { flowType: "implicit", detectSessionInUrl: true, storageKey: "maths-flashcards.session.v1" },
   });
+  const device = deviceId();
   let progress = readProgress();
+  let activity = readActivity();
+  let others = new Map();
+  let google = false;
   let profile = null;
   let view = "signin";
   let sentText = "";
@@ -126,6 +161,7 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
     ui["account-intro"].textContent = config.intro;
     form.hidden = !config.submit;
     ui["auth-tabs"].hidden = !config.tabs;
+    ui["google-option"].hidden = !(google && config.tabs);
     ui["auth-tabs"].dataset.active = current;
     ui["tab-signin"].setAttribute("aria-pressed", String(current === "signin"));
     ui["tab-signup"].setAttribute("aria-pressed", String(current === "signup"));
@@ -235,6 +271,37 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
         saveProgress(progress, current.storageKey);
         onProgress(progress);
       }
+
+      const sentAt = Math.max(0, ...Array.from(activity.values(), (entry) => entry.at));
+      const { data: days, error: activityError } = await client.rpc("sync_flashcard_activity", {
+        account_id: current.id,
+        device,
+        records: toRows(activity, current.activitySentAt ?? 0),
+      }).abortSignal(AbortSignal.timeout(10_000));
+      if (activityError) throw activityError;
+      if (profile !== current) return;
+      current.activitySentAt = sentAt;
+      const fromOthers = new Map();
+      let restored = false;
+      for (const row of days) {
+        const entry = fromRow(row);
+        if (!entry) continue;
+        if (row.device_id === device) {
+          // Days this browser uploaded before its local copy was cleared.
+          const mine = activity.get(row.day);
+          if (!mine || entry.at > mine.at) {
+            activity.set(row.day, entry);
+            restored = true;
+          }
+          continue;
+        }
+        if (!fromOthers.has(row.device_id)) fromOthers.set(row.device_id, new Map());
+        fromOthers.get(row.device_id).set(row.day, entry);
+      }
+      others = fromOthers;
+      saveOthers(others, current.othersKey);
+      if (restored) saveActivity(activity, current.activityKey);
+      onActivity();
       if (!current.syncAgain) setSync("synced", "Progress synced.");
     } catch {
       if (profile === current) {
@@ -255,19 +322,35 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
       clearTimeout(syncTimer);
       const guest = readProgress();
       if (user) {
-        profile = { id: user.id, email: user.email ?? "", storageKey: guestKey + "." + user.id };
+        profile = {
+          id: user.id,
+          email: user.email ?? "",
+          storageKey: guestKey + "." + user.id,
+          activityKey: activityKey + "." + user.id,
+          othersKey: activityKey + ".others." + user.id,
+        };
         const saved = readProgress(profile.storageKey);
         mergeProgress(saved, guest);
         progress = saved;
         saveProgress(progress, profile.storageKey);
+        activity = readActivity(profile.activityKey);
+        const guestDays = readActivity();
+        if (guestDays.size) {
+          addActivity(activity, guestDays);
+          if (saveActivity(activity, profile.activityKey)) saveActivity(new Map());
+        }
+        others = readOthers(profile.othersKey);
         setSync("syncing", "Syncing progress…");
         queueSync(0);
       } else {
         profile = null;
         progress = guest;
+        activity = readActivity();
+        others = new Map();
         setSync("", "");
       }
       onProgress(progress, true);
+      onActivity();
     }
     if (profile && user?.email) profile.email = user.email;
     renderAccount();
@@ -359,7 +442,30 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
   window.addEventListener("storage", (event) => {
     const key = profile?.storageKey ?? guestKey;
     if (event.key === key && mergeProgress(progress, readProgress(key))) onProgress(progress);
+    if (event.key === (profile?.activityKey ?? activityKey)) {
+      activity = readActivity(event.key);
+      onActivity();
+    }
   });
+
+  ui["google-sign-in"].addEventListener("click", async () => {
+    if (!client || ui["google-sign-in"].disabled) return;
+    ui["google-sign-in"].disabled = true;
+    message.textContent = "";
+    try { sessionStorage.setItem(oauthKey, "google"); } catch {}
+    const { error } = await client.auth.signInWithOAuth({ provider: "google", options: { redirectTo } });
+    if (error) {
+      try { sessionStorage.removeItem(oauthKey); } catch {}
+      message.textContent = "Google sign-in isn’t available right now. Use your email instead.";
+      ui["google-sign-in"].disabled = false;
+    }
+  });
+  if (client) {
+    googleEnabled().then((enabled) => {
+      google = enabled;
+      renderAccount();
+    });
+  }
 
   if (client) {
     client.auth.onAuthStateChange((event, session) => {
@@ -370,7 +476,8 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
           callback.type = null;
           openAccount("recovery");
         } else if (event === "SIGNED_IN" && callback.type) {
-          toast(callback.type === "signup" ? "Email confirmed. You’re signed in." : "You’re signed in.");
+          const messages = { signup: "Email confirmed. You’re signed in.", oauth: "Signed in with Google. Your progress will sync." };
+          toast(messages[callback.type] ?? "You’re signed in.");
           callback.type = null;
         }
       });
@@ -382,6 +489,7 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
     openAccount("signin");
   }
   onProgress(progress);
+  onActivity();
 
   return {
     rate(cardId, rating) {
@@ -394,6 +502,17 @@ export function connectAccount(ui, onProgress, toast = () => {}) {
         queueSync();
       }
       return saved;
+    },
+    // Adds one answer to today's totals, with a snapshot of the box counts after it.
+    logReview(correct, counts) {
+      const key = profile?.activityKey ?? activityKey;
+      recordReview(activity, correct, counts);
+      saveActivity(activity, key);
+      if (profile) queueSync();
+      onActivity();
+    },
+    activity() {
+      return combineActivity(activity, others);
     },
   };
 }

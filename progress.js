@@ -60,19 +60,52 @@ export function rateProgress(previous, rating, now = Date.now()) {
   return { rating, streak, ratedAt, dueAt: ratedAt + intervals[streak - 1] * day };
 }
 
-export function studyPlan(cards, progress, now = Date.now()) {
-  const missed = [];
-  const due = [];
-  const newCards = [];
+/* ---------- Leitner boxes ----------
+ * Every card starts in the red box. A right answer moves it up one box
+ * (red → amber → green); a wrong answer sends it back to red.
+ * Amber cards come back after a day, green cards after 3, 7, 14, 30 then 60 days.
+ * A right answer before a card is due keeps it where it is, so cramming can't promote it.
+ */
+export const boxes = ["red", "amber", "green"];
+export const boxNames = { red: "Red", amber: "Amber", green: "Green" };
+
+export function boxOf(record) {
+  if (!record || record.rating === "review") return "red";
+  return record.streak >= 2 ? "green" : "amber";
+}
+
+export function isDue(record, now = Date.now()) {
+  return Boolean(record) && (record.rating === "review" || record.dueAt <= now);
+}
+
+export function boxCounts(cards, progress, now = Date.now()) {
+  const counts = { red: 0, amber: 0, green: 0, fresh: 0, due: 0, total: cards.length };
   for (const card of cards) {
     const record = progress.get(card.id);
-    if (!record) newCards.push(card);
+    counts[boxOf(record)]++;
+    if (!record) counts.fresh++;
+    else if (isDue(record, now)) counts.due++;
+  }
+  return counts;
+}
+
+// The order cards come up in a session: missed (red) cards first, then amber and green
+// cards that are due, then cards not seen yet. Cards that aren't due yet wait in `ahead`.
+export function sessionPlan(cards, progress, now = Date.now(), shuffle = (items) => items) {
+  const missed = [];
+  const due = [];
+  const fresh = [];
+  const ahead = [];
+  for (const card of cards) {
+    const record = progress.get(card.id);
+    if (!record) fresh.push(card);
     else if (record.rating === "review") missed.push(card);
     else if (record.dueAt <= now) due.push(card);
+    else ahead.push(card);
   }
-
-  const oldestFirst = (first, second) => progress.get(first.id).dueAt - progress.get(second.id).dueAt;
-  const reviewCount = missed.length + due.length;
-  const queue = reviewCount ? [...missed.sort(oldestFirst), ...due.sort(oldestFirst)] : newCards.slice(0, 10);
-  return { queue, reviewCount };
+  const at = (card) => progress.get(card.id);
+  missed.sort((a, b) => at(a).ratedAt - at(b).ratedAt);
+  due.sort((a, b) => (at(a).streak - at(b).streak) || (at(a).dueAt - at(b).dueAt));
+  ahead.sort((a, b) => at(a).dueAt - at(b).dueAt);
+  return { queue: [...missed, ...due, ...shuffle(fresh)], ahead, due: missed.length + due.length, fresh: fresh.length };
 }

@@ -1,19 +1,25 @@
-import { studyPlan } from "./progress.js?v=1";
-import { connectAccount } from "./account.js?v=3";
+import { boxes, boxNames, boxOf, boxCounts, sessionPlan, isDue } from "./progress.js?v=2";
+import { connectAccount } from "./account.js?v=4";
+import { renderDashboard, boxBar, boxLegend, fitLabels, studyStreak } from "./dashboard.js?v=1";
+import { dayKey } from "./activity.js?v=1";
 
 const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (element) => [element.id, element]));
-const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", papers: "Past papers", review: "To review", study: "Study next" };
+const deckLabels = { all: "All cards", revision: "Revision", trigonometry: "Trig rules", papers: "Past papers", session: "Session" };
+const collections = ["revision", "trigonometry", "papers"];
+const collectionHues = { revision: 155, trigonometry: 330, papers: 240 };
 const topicHues = {
   differentiation: 155, sequences: 255, logarithms: 305, integration: 60, algebra: 20, modelling: 200,
   identities: 330, compound: 40, double: 0, factor: 100, harmonic: 210, exact: 235,
   inverse: 270, "small-angle": 80, triangles: 125, equations: 175, "trig-calculus": 295,
 };
 const topicsDialog = ui["topics-dialog"];
+const studyArea = document.querySelector(".study");
 const accountDialog = ui["account-dialog"];
 const mobileLayout = window.matchMedia("(max-width: 720px)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const darkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 const themeKey = "maths-flashcards.theme";
+const selectionKey = "maths-flashcards.excluded-topics.v1";
 const themeColors = { light: "#141a2e", dark: "#090d19" };
 const easeOut = "cubic-bezier(0.22, 1, 0.36, 1)";
 const easeIn = "cubic-bezier(0.55, 0, 1, 0.45)";
@@ -41,9 +47,15 @@ let answerVisible = false;
 let questionMode = pageParams.get("mode") === "questions";
 let questionRoundFinished = false;
 let displayedQuestion;
-let roundStats = { known: 0, review: 0 };
 let usingPointer = false;
+// Keyed by the queue entry, so a card that comes back later in a session gets a fresh attempt.
 const questionAttempts = new Map();
+let view = "home";
+let navDepth = 0;
+let session = null;
+let lastSession = null;
+let excludedTopics = readExcluded();
+let pickerCollection = null;
 
 /* ---------- Motion ---------- */
 
@@ -223,51 +235,253 @@ function availableCards() {
 
 function matchesDeck(card) {
   if (activeDeck === "all") return true;
-  if (activeDeck === "review") return progress.get(card.id)?.rating === "review";
   return topics.get(card.topic).collection === activeDeck;
 }
 
-function renderProgress(animate = true) {
+const plural = (count, word) => count + " " + word + (count === 1 ? "" : "s");
+
+/* ---------- Boxes ---------- */
+
+// Where a card goes if the next answer is right or wrong.
+function destination(record, correct, now = Date.now()) {
+  if (!correct) return "red";
+  if (!record || record.rating === "review") return "amber";
+  return record.dueAt <= now ? "green" : boxOf(record);
+}
+
+function moveText(before, after, correct) {
+  if (after !== before) return "Moved to " + boxNames[after] + ".";
+  if (!correct) return "Still in Red.";
+  return after === "green" ? "Stays in Green." : "Stays in " + boxNames[after] + " until it’s due.";
+}
+
+function sessionSummary(stats) {
+  let text = plural(stats.done, "card") + ", " + stats.right + " right";
+  if (stats.up) text += ", " + stats.up + " moved up";
+  return text;
+}
+
+// Saves one answer, updates the session tally and logs it for the progress charts.
+function recordAnswer(card, correct) {
+  const before = boxOf(progress.get(card.id));
+  const saved = account.rate(card.id, correct ? "known" : "review");
+  const after = boxOf(progress.get(card.id));
+  account.logReview(correct, boxCounts(cards, progress));
+  if (activeDeck === "session" && session) {
+    session.stats.done++;
+    if (correct) session.stats.right++;
+    if (boxes.indexOf(after) > boxes.indexOf(before)) session.stats.up++;
+    if (boxes.indexOf(after) < boxes.indexOf(before)) session.stats.down++;
+  }
+  return { saved, before, after };
+}
+
+// A missed card comes back a few cards later in the same session.
+function requeue(card) {
+  if (activeDeck !== "session") return;
+  const at = Math.min(queue.length, position + 5);
+  queue.splice(at, 0, { ...card });
+}
+
+function renderProgress() {
+  if (!cards.length) return;
   const available = availableCards();
-  const known = available.filter((card) => progress.get(card.id)?.rating === "known").length;
-  const review = available.filter((card) => progress.get(card.id)?.rating === "review").length;
-  const plan = studyPlan(available, progress);
-  ui["count-all"].textContent = available.length;
-  setText(ui["count-review"], review, animate);
-  setText(ui["known-count"], known, animate);
-  ui["mastery-fill"].style.transform = `scaleX(${available.length ? known / available.length : 0})`;
-  ui["study-next"].disabled = !plan.queue.length;
-  ui["study-next-label"].textContent = plan.queue.length ? "Study next" : "All caught up";
-  setText(ui["study-next-count"], plan.reviewCount ? plan.reviewCount + " due" : plan.queue.length ? plan.queue.length + " new" : "", animate);
+  const counts = boxCounts(available, progress);
+  ui["rail-boxes"].replaceChildren(boxBar(counts));
+  ui["rail-legend"].replaceChildren(...boxes.map((box) => {
+    const item = document.createElement("span");
+    item.className = "rail-count";
+    const swatch = document.createElement("span");
+    swatch.className = "swatch " + box;
+    item.append(swatch, boxNames[box] + " " + counts[box]);
+    return item;
+  }));
+  ui["rail-summary"].setAttribute("aria-label", `Your boxes: ${counts.red} red, ${counts.amber} amber, ${counts.green} green. Open your progress`);
 
   for (const button of ui.library.querySelectorAll("[data-topic]")) {
     const topicCards = available.filter((card) => card.topic === button.dataset.topic);
-    const topicKnown = topicCards.filter((card) => progress.get(card.id)?.rating === "known").length;
-    button.style.setProperty("--mastery", topicCards.length ? topicKnown / topicCards.length : 0);
-    button.toggleAttribute("data-started", topicKnown > 0);
-    button.title = `${topicKnown} of ${topicCards.length} known`;
+    const green = topicCards.filter((card) => boxOf(progress.get(card.id)) === "green").length;
+    button.style.setProperty("--mastery", topicCards.length ? green / topicCards.length : 0);
+    button.toggleAttribute("data-started", topicCards.some((card) => progress.has(card.id)));
+    button.title = `${green} of ${topicCards.length} in Green`;
   }
+  if (view === "home") renderHome();
+  if (view === "progress") renderProgressView();
+  renderSessionChip();
 }
 
 function useProgress(next, accountChanged) {
   progress = next;
   if (!cards.length) return;
   renderProgress();
-  if (activeDeck === "study" && accountChanged) {
-    resetQueue();
-    renderCard();
+  if (accountChanged && activeDeck === "session") {
+    resetQueue({ keepStats: true });
+    if (view === "study") renderCard();
+  } else if (view === "study") {
+    renderBoxChip(queue[position]);
   }
-  if (activeDeck === "review" && (accountChanged || !questionMode)) {
-    const previousCard = queue[position];
-    const previousFace = answerVisible;
-    resetQueue();
-    const currentPosition = queue.indexOf(previousCard);
-    if (currentPosition !== -1) {
-      position = currentPosition;
-      answerVisible = previousFace;
-    }
-    renderCard();
+}
+
+function useActivity() {
+  if (!cards.length) return;
+  if (view === "progress") renderProgressView();
+  if (view === "home") renderHome();
+}
+
+/* ---------- Home ---------- */
+
+function readExcluded() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(selectionKey));
+    return new Set(Array.isArray(stored) ? stored.filter((id) => typeof id === "string") : []);
+  } catch {
+    return new Set();
   }
+}
+
+function saveExcluded() {
+  try { localStorage.setItem(selectionKey, JSON.stringify([...excludedTopics])); } catch {}
+}
+
+function selectedCards() {
+  return availableCards().filter((card) => !excludedTopics.has(card.topic));
+}
+
+function topicsIn(collection) {
+  return [...topics.values()].filter((topic) => topic.collection === collection);
+}
+
+function greeting() {
+  const hour = new Date().getHours();
+  return hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+}
+
+function renderHome() {
+  if (!cards.length) return;
+  const pool = availableCards();
+  const chosen = selectedCards();
+  const counts = boxCounts(chosen, progress);
+  ui["home-greeting"].textContent = greeting();
+  const days = account.activity();
+  const today = days.get(dayKey()) ?? { n: 0, right: 0 };
+  const figures = document.createElement("dl");
+  figures.className = "home-figures";
+  for (const [label, value] of [["Due now", counts.due], ["Answered today", today.n], ["Day streak", studyStreak(days)]]) {
+    const item = document.createElement("div");
+    const term = document.createElement("dt");
+    term.textContent = label;
+    const detail = document.createElement("dd");
+    detail.textContent = value;
+    item.append(term, detail);
+    figures.append(item);
+  }
+  ui["home-boxes"].replaceChildren(boxBar(counts, { tall: true }), boxLegend(counts, { fresh: counts.fresh }), figures);
+  ui["home-due"].textContent = counts.due ? counts.due + " due now" : "Nothing due";
+  ui["home-due"].dataset.due = String(counts.due > 0);
+  ui["home-selected"].textContent = chosen.length === pool.length ? "All " + pool.length + " cards" : chosen.length + " of " + pool.length + " cards";
+
+  ui["group-picker"].replaceChildren(...collections.map((collection) => {
+    const groupTopics = topicsIn(collection).filter((topic) => pool.some((card) => card.topic === topic.id));
+    const included = groupTopics.filter((topic) => !excludedTopics.has(topic.id));
+    const groupCards = pool.filter((card) => topics.get(card.topic)?.collection === collection && !excludedTopics.has(card.topic));
+    const groupCounts = boxCounts(groupCards, progress);
+    const row = document.createElement("li");
+    row.className = "group-row";
+    row.style.setProperty("--hue", collectionHues[collection]);
+    row.dataset.state = !included.length ? "off" : included.length === groupTopics.length ? "on" : "some";
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "group-check";
+    toggle.dataset.collection = collection;
+    toggle.setAttribute("aria-pressed", !included.length ? "false" : included.length === groupTopics.length ? "true" : "mixed");
+    const box = document.createElement("span");
+    box.className = "check-box";
+    box.setAttribute("aria-hidden", "true");
+    box.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+    const name = document.createElement("span");
+    name.className = "group-name";
+    name.textContent = deckLabels[collection];
+    const count = document.createElement("span");
+    count.className = "group-count";
+    count.textContent = groupCards.length ? groupCounts.green + " of " + groupCards.length + " green" : "Not included";
+    toggle.append(box, name, count);
+
+    const choose = document.createElement("button");
+    choose.type = "button";
+    choose.className = "group-topics";
+    choose.dataset.collection = collection;
+    choose.setAttribute("aria-label", "Choose " + deckLabels[collection] + " topics, " + included.length + " of " + groupTopics.length + " chosen");
+    choose.innerHTML = '<span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+    choose.firstChild.textContent = included.length + "/" + groupTopics.length;
+
+    row.append(toggle, choose, boxBar(groupCounts));
+    return row;
+  }));
+
+  const plan = sessionPlan(chosen, progress);
+  ui["start-session"].disabled = !chosen.length;
+  ui["start-detail"].textContent = !chosen.length ? "Choose some topics first"
+    : plan.due ? plan.due + " due" + (plan.fresh ? ", then new cards" : "")
+      : plan.fresh ? plural(plan.fresh, "new card") : "Practise ahead";
+  ui["last-session"].textContent = lastSession ? "Saved. Last session: " + sessionSummary(lastSession) + "." : "";
+  ui["last-session"].hidden = !lastSession;
+}
+
+function toggleCollection(collection) {
+  const groupTopics = topicsIn(collection);
+  const anyIncluded = groupTopics.some((topic) => !excludedTopics.has(topic.id));
+  for (const topic of groupTopics) {
+    if (anyIncluded) excludedTopics.add(topic.id);
+    else excludedTopics.delete(topic.id);
+  }
+  saveExcluded();
+  renderHome();
+}
+
+function openPicker(collection) {
+  pickerCollection = collection;
+  ui["picker-title"].textContent = deckLabels[collection] + " topics";
+  renderPicker();
+  ui["topic-picker"].showModal();
+}
+
+function renderPicker() {
+  const pool = availableCards();
+  ui["picker-list"].replaceChildren(...topicsIn(pickerCollection).map((topic) => {
+    const topicCards = pool.filter((card) => card.topic === topic.id);
+    const item = document.createElement("li");
+    const label = document.createElement("label");
+    label.className = "picker-item";
+    label.style.setProperty("--hue", topicHues[topic.id] ?? topic.hue ?? 155);
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = !excludedTopics.has(topic.id);
+    input.dataset.topic = topic.id;
+    input.disabled = !topicCards.length;
+    const name = document.createElement("span");
+    name.className = "picker-name";
+    name.textContent = topic.title;
+    const meta = document.createElement("span");
+    meta.className = "picker-meta";
+    const counts = boxCounts(topicCards, progress);
+    meta.textContent = topicCards.length ? counts.green + "/" + topicCards.length + " green" : "No questions";
+    label.append(input, name, meta);
+    item.append(label);
+    return item;
+  }));
+}
+
+/* ---------- Progress page ---------- */
+
+function renderProgressView() {
+  renderDashboard(ui.dashboard, {
+    cards,
+    topics,
+    progress,
+    activity: account.activity(),
+    onPractise: (topicId) => startSession(topicId),
+  });
 }
 
 function renderTopics() {
@@ -291,7 +505,6 @@ function renderTopics() {
     count.className = "topic-count";
     button.append(dot, name, count);
     ui[topic.collection + "-topics"].append(button);
-    ui["review-topic"].add(new Option(topic.title, topic.id));
   }
 }
 
@@ -299,7 +512,6 @@ function renderMode() {
   ui["question-mode"].setAttribute("aria-pressed", String(questionMode));
   ui["flashcard-mode"].setAttribute("aria-pressed", String(!questionMode));
   ui["study-modes"].dataset.active = questionMode ? "questions" : "flashcards";
-  ui["all-deck-label"].textContent = questionMode ? "All questions" : deckLabels.all;
   ui.practice.setAttribute("aria-label", questionMode ? "Maths questions practice" : "Flashcard practice");
   ui.practice.classList.toggle("question-mode", questionMode);
   ui.flashcard.hidden = questionMode;
@@ -330,21 +542,26 @@ function changeMode(showQuestions) {
     renderMode();
     return;
   }
-  resetQueue();
+  if (view !== "study") {
+    renderMode();
+    renderProgress();
+    return;
+  }
+  resetQueue({ keepStats: true });
   if (queue.includes(card)) position = queue.indexOf(card);
   animateSwap(ui["deck-view"], () => {
     renderMode();
-    renderProgress(false);
+    renderProgress();
     renderCard();
   }, ...fade, { out: 120, in: 300 });
 }
 
 function renderQuestion(card) {
-  let attempt = questionAttempts.get(card.id);
+  let attempt = questionAttempts.get(card);
   if (!attempt) {
     const options = shuffled(card.choices.map((text, index) => ({ text, correct: index === 0 })));
-    attempt = { options, wrong: new Set(), outcome: null, firstCorrect: null };
-    questionAttempts.set(card.id, attempt);
+    attempt = { options, wrong: new Set(), outcome: null, firstCorrect: null, move: "" };
+    questionAttempts.set(card, attempt);
   }
 
   const optionList = ui["question-options"];
@@ -393,9 +610,9 @@ function renderQuestion(card) {
     button.firstElementChild.textContent = correct ? "✓" : wrong ? "×" : "ABCD"[index];
   }
 
-  let message = attempt.wrong.size ? "Not quite. Try another answer." : "";
-  if (attempt.outcome === "revealed") message = "Answer shown. It’s on your review list.";
-  if (attempt.outcome === "correct") message = attempt.firstCorrect ? "Correct!" : "Correct. It’s on your review list.";
+  let message = attempt.wrong.size ? "Not quite. " + attempt.move + " Try another answer." : "";
+  if (attempt.outcome === "revealed") message = "Answer shown. " + attempt.move;
+  if (attempt.outcome === "correct") message = (attempt.firstCorrect ? "Correct! " : "Correct. ") + attempt.move;
   ui["question-feedback"].textContent = message;
   ui["question-feedback"].dataset.outcome = attempt.outcome ?? (attempt.wrong.size ? "wrong" : "");
   ui["reveal-question"].hidden = Boolean(attempt.outcome);
@@ -417,14 +634,18 @@ function answerQuestion(choiceIndex) {
   const card = queue[position];
   if (!questionMode || !card || questionRoundFinished) return;
   flushMotion();
-  const attempt = questionAttempts.get(card.id);
+  const attempt = questionAttempts.get(card);
   if (!attempt || attempt.outcome || attempt.wrong.has(choiceIndex)) return;
   const revealed = choiceIndex === undefined;
   const correct = !revealed && attempt.options[choiceIndex].correct;
   let saved = true;
   if (attempt.firstCorrect === null) {
     attempt.firstCorrect = correct;
-    saved = account.rate(card.id, correct ? "known" : "review");
+    const result = recordAnswer(card, correct);
+    saved = result.saved;
+    attempt.move = moveText(result.before, result.after, correct);
+    flashMove(result.before, result.after);
+    if (!correct) requeue(card);
     renderProgress();
   }
   if (revealed || correct) attempt.outcome = revealed ? "revealed" : "correct";
@@ -456,65 +677,73 @@ function answerQuestion(choiceIndex) {
 
 function renderNextButton() {
   const last = position === queue.length - 1;
-  const label = questionMode ? (last ? "Finish" : "Next") : "Next";
+  const inSession = activeDeck === "session";
+  const label = questionMode ? (last ? "Finish" : "Next") : inSession ? "Skip" : "Next";
   ui["next-label"].textContent = label;
-  ui.next.setAttribute("aria-label", questionMode ? (last ? "Finish round" : "Next question") : "Next card");
-  const attempt = questionMode ? questionAttempts.get(queue[position]?.id) : null;
+  ui.next.setAttribute("aria-label", questionMode ? (last ? "Finish round" : "Next question") : inSession ? "Skip this card for now" : "Next card");
+  const attempt = questionMode ? questionAttempts.get(queue[position]) : null;
   ui.next.classList.toggle("ready", Boolean(attempt?.outcome));
 }
 
 function renderCard(announcement = "") {
   const card = questionRoundFinished ? undefined : queue[position];
-  const topic = topics.get(card?.topic ?? activeTopic);
+  const inSession = activeDeck === "session";
+  const topic = inSession ? topics.get(session?.topic) : topics.get(card?.topic ?? activeTopic);
   ui.practice.hidden = !card;
   ui.empty.hidden = Boolean(card);
   const deckName = questionMode && activeDeck === "all" ? "All questions" : deckLabels[activeDeck];
-  ui["collection-label"].textContent = deckName;
-  ui["deck-title"].textContent = topic?.title ?? deckName;
-  ui["open-topics"].style.setProperty("--hue", topicHues[topic?.id] ?? topic?.hue ?? 155);
-  ui["menu-label"].textContent = topic?.title ?? deckName;
-  ui["open-topics"].setAttribute("aria-label", "Choose a topic. Current: " + (topic?.title ?? deckName));
-  ui["position-label"].textContent = card ? (position + 1) + " / " + queue.length : "";
-  ui["deck-progress-fill"].style.transform = `scaleX(${queue.length ? (position + 1) / queue.length : 0})`;
+  ui["collection-label"].textContent = inSession ? (questionMode ? "Questions session" : "Flashcard session") : deckName;
+  ui["deck-title"].textContent = topic?.title ?? (inSession ? "Today’s cards" : deckName);
+  renderMenuButton();
+  ui.practice.classList.toggle("in-session", inSession);
+  ui.previous.hidden = inSession;
+  ui.shuffle.hidden = inSession;
+  if (inSession) {
+    const dueLeft = queue.slice(position).filter((entry) => isDue(progress.get(entry.id))).length;
+    ui["position-label"].textContent = card ? (dueLeft ? dueLeft + " due left" : "New cards") : "";
+    ui["deck-progress-fill"].style.transform = `scaleX(${session.due ? 1 - dueLeft / Math.max(session.due, dueLeft) : 1})`;
+  } else {
+    ui["position-label"].textContent = card ? (position + 1) + " / " + queue.length : "";
+    ui["deck-progress-fill"].style.transform = `scaleX(${queue.length ? (position + 1) / queue.length : 0})`;
+  }
   ui.shuffle.disabled = queue.length < 2;
+  renderSessionChip();
   if (!card) {
-    const ratedThisRound = roundStats.known + roundStats.review;
     let done = false;
     let message = questionMode ? "There are no questions for this topic." : "There are no cards for this topic in this deck.";
-    let action = questionMode ? "Study all questions" : "Study all cards";
-    if (activeDeck === "study") {
-      done = ratedThisRound > 0;
-      if (done) {
-        message = `Round complete. ${roundStats.known} got it, ${roundStats.review} to review.`;
-        action = ui["study-next"].disabled ? "Study all cards" : "Next round";
-      } else {
-        message = ui["study-next"].disabled
-          ? "You’re all caught up. Come back when more cards are due."
-          : "You’ve finished this round. Use Study next when you’re ready for another.";
-      }
-    }
-    if (activeDeck === "review" && activeTopic === "all") {
-      message = questionMode ? "Questions you miss will appear here." : "Your review deck is empty. Choose “Not yet” on a card to add it here.";
-    }
-    if (questionRoundFinished) {
+    let action = "Back to home";
+    let showHome = false;
+    if (inSession) {
+      const later = session.ahead.length;
+      done = session.stats.done > 0;
+      message = done
+        ? "That’s everything due for now. This session: " + sessionSummary(session.stats) + "."
+        : "Nothing is due in the topics you picked.";
+      if (session.stats.up) message += " Cards you moved up come back in a day or more, to check they’ve stuck.";
+      if (later) message += " " + plural(later, "card") + (later === 1 ? " is" : " are") + " waiting for later. You can practise them now, but they won’t move up until they’re due.";
+      action = later ? "Keep practising" : "Back to home";
+      showHome = Boolean(later);
+    } else if (questionRoundFinished) {
       const attempted = [...questionAttempts.values()].filter((attempt) => attempt.firstCorrect !== null);
       const correct = attempted.filter((attempt) => attempt.firstCorrect).length;
       done = true;
       message = attempted.length ? `${correct} of ${attempted.length} correct on your first try.` : "You’ve reached the end of this set.";
       action = "Start another round";
+      showHome = true;
     }
     ui.empty.dataset.state = done ? "done" : "empty";
     ui["return-to-deck"].textContent = action;
+    ui["empty-home"].hidden = !showHome;
     ui["empty-message"].textContent = message;
     ui.announcer.textContent = announcement || message;
     return;
   }
 
   ui.previous.disabled = position === 0;
-  ui.next.disabled = !questionMode && position === queue.length - 1;
+  ui.next.disabled = !questionMode && (inSession ? queue.length - position < 2 : position === queue.length - 1);
   renderNextButton();
   if (questionMode) {
-    if (displayedQuestion !== questionAttempts.get(card.id)) ui["question-card"].scrollTop = 0;
+    if (displayedQuestion !== questionAttempts.get(card)) ui["question-card"].scrollTop = 0;
     renderQuestion(card);
     ui.announcer.textContent = announcement || "Question " + (position + 1) + " of " + queue.length + ".";
     return;
@@ -530,6 +759,7 @@ function renderCard(announcement = "") {
   ui["flip-hint"].hidden = answerVisible;
   ui["reference-label"].hidden = !answerVisible || !card.reference;
   ui["reference-label"].textContent = answerVisible ? referenceLabels[card.reference] ?? "" : "";
+  renderBoxChip(card);
   const lines = answerVisible ? card.back : frontLines(card);
   ui["card-content"].replaceChildren(...mathLines(lines, answerVisible ? "answer-line" : exam ? "exam-line" : "prompt"));
   ui["card-content"].scrollTop = 0;
@@ -537,15 +767,67 @@ function renderCard(announcement = "") {
   ui.announcer.textContent = announcement || (answerVisible ? "Answer shown." : "Question " + (position + 1) + " of " + queue.length + ".");
 }
 
-function resetQueue() {
+function renderBoxChip(card) {
+  if (!card) return;
+  const record = progress.get(card.id);
+  const box = boxOf(record);
+  ui["box-chip"].dataset.box = box;
+  ui["box-chip-label"].textContent = record ? boxNames[box] : "Red · new";
+  ui["box-chip"].title = record ? "In the " + box + " box" : "Not seen yet. Every card starts in Red.";
+  const up = destination(record, true);
+  ui["stamp-known-box"].textContent = record && up === box ? "stays " + boxNames[up] : "→ " + boxNames[up];
+  ui["stamp-review-box"].textContent = record && box === "red" ? "stays Red" : "→ Red";
+}
+
+function renderSessionChip() {
+  const inSession = view === "study" && activeDeck === "session" && session;
+  ui["session-chip"].hidden = !inSession;
+  if (!inSession) return;
+  const { done, right } = session.stats;
+  ui["session-chip"].replaceChildren();
+  const main = document.createElement("span");
+  main.textContent = done ? done + " done" : "Session";
+  ui["session-chip"].append(main);
+  if (done) {
+    const extra = document.createElement("span");
+    extra.className = "chip-extra";
+    extra.textContent = " · " + right + " right";
+    ui["session-chip"].append(extra);
+  }
+}
+
+// Briefly shows where the last card went, above the next card.
+let moveTimer;
+function flashMove(before, after) {
+  const element = ui["box-move"];
+  element.dataset.box = after;
+  element.textContent = after === before ? (after === "red" ? "Still Red" : "Stays " + boxNames[after]) : boxNames[after] + (boxes.indexOf(after) > boxes.indexOf(before) ? " ↑" : " ↓");
+  element.classList.remove("show");
+  void element.offsetWidth;
+  element.classList.add("show");
+  clearTimeout(moveTimer);
+  moveTimer = setTimeout(() => element.classList.remove("show"), 1400);
+}
+
+function resetQueue({ keepStats = false } = {}) {
   const available = availableCards();
-  queue = activeDeck === "study"
-    ? studyPlan(available, progress).queue
-    : available.filter((card) => matchesDeck(card) && (activeTopic === "all" || activeTopic === card.topic));
+  if (activeDeck === "session") {
+    const topic = session?.topic ?? null;
+    const pool = topic ? available.filter((card) => card.topic === topic) : selectedCards();
+    const plan = sessionPlan(pool, progress, Date.now(), shuffled);
+    queue = plan.queue;
+    session = {
+      topic,
+      stats: keepStats && session ? session.stats : { done: 0, right: 0, up: 0, down: 0 },
+      ahead: plan.ahead,
+      due: plan.due,
+    };
+  } else {
+    queue = available.filter((card) => matchesDeck(card) && (activeTopic === "all" || activeTopic === card.topic));
+  }
   position = 0;
   answerVisible = false;
   questionRoundFinished = false;
-  roundStats = { known: 0, review: 0 };
   questionAttempts.clear();
   displayedQuestion = null;
 }
@@ -554,20 +836,115 @@ function changeDeck(deck, topic = "all", animate = true) {
   flushMotion();
   activeDeck = deck;
   activeTopic = topic;
+  resetQueue();
+  renderNav();
+  if (animate) animateSwap(ui["deck-view"], () => renderCard(), ...fade, { out: 120, in: 320 });
+  else renderCard();
+}
+
+function practiseAhead() {
+  if (!session?.ahead.length) return goHome();
+  flushMotion();
+  queue = session.ahead;
+  session.ahead = [];
+  session.due = 0;
+  position = 0;
+  answerVisible = false;
+  questionRoundFinished = false;
+  questionAttempts.clear();
+  displayedQuestion = null;
+  animateSwap(ui["deck-view"], () => renderCard(), ...fade, { out: 120, in: 320 });
+}
+
+/* ---------- Views ---------- */
+
+function viewUrl(next) {
+  const url = new URL(window.location.href);
+  if (next === "progress") url.searchParams.set("view", "progress");
+  else url.searchParams.delete("view");
+  if (next !== "study") url.searchParams.delete("card");
+  return url;
+}
+
+function renderMenuButton() {
+  let label = view === "progress" ? "Progress" : "Home";
+  let hue = 155;
+  if (view === "study") {
+    const topic = topics.get(activeDeck === "session" ? session?.topic : activeTopic);
+    label = topic?.title ?? (activeDeck === "session" ? "Session" : deckLabels[activeDeck]);
+    hue = topicHues[topic?.id] ?? topic?.hue ?? collectionHues[activeDeck] ?? 155;
+  }
+  ui["menu-label"].textContent = label;
+  ui["open-topics"].style.setProperty("--hue", hue);
+  ui["open-topics"].setAttribute("aria-label", "Open the menu. You’re on: " + label);
+}
+
+function renderNav() {
+  for (const link of ui.library.querySelectorAll(".view-link")) {
+    if (link.dataset.view === view) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  }
   for (const button of ui.library.querySelectorAll("[data-deck]")) {
-    const active = button.dataset.deck === deck && (
-      deck === "review" || (button.dataset.topic ?? "all") === topic
-    );
+    const active = view === "study" && activeDeck !== "session" &&
+      button.dataset.deck === activeDeck && (button.dataset.topic ?? "all") === activeTopic;
     button.setAttribute("aria-pressed", String(active));
   }
+  renderMenuButton();
+}
+
+function setView(next, { push = true } = {}) {
+  flushMotion();
+  const previous = view;
+  if (previous === "study" && next !== "study" && activeDeck === "session" && session?.stats.done) {
+    lastSession = { ...session.stats };
+    toast("Progress saved. " + sessionSummary(lastSession) + ".");
+    session.stats = { done: 0, right: 0, up: 0, down: 0 };
+  }
+  view = next;
+  if (push && previous !== next) {
+    history.pushState({ view: next }, "", viewUrl(next));
+    navDepth++;
+  } else if (!push) {
+    history.replaceState({ view: next }, "", viewUrl(next));
+  }
+  const pages = { home: ui["home-view"], progress: ui["progress-view"], study: ui["deck-view"] };
+  for (const [name, element] of Object.entries(pages)) element.hidden = name !== next;
+  document.body.dataset.view = next;
+  ui["exit-study"].hidden = next !== "study";
+  const closeLabel = activeDeck === "session" ? "End session" : "Close";
+  ui["exit-study"].setAttribute("aria-label", closeLabel);
+  ui["exit-study"].title = closeLabel;
+  renderNav();
+  renderSessionChip();
+  if (next === "home") renderHome();
+  if (next === "progress") renderProgressView();
+  studyArea.scrollTop = 0;
+  if (previous !== next) play(pages[next], fade[1], { duration: 320, easing: easeOut });
+}
+
+function goHome() {
+  if (view === "home") return;
+  if (navDepth > 0) history.back();
+  else setView("home", { push: false });
+}
+
+function startSession(topicId = null) {
+  if (!cards.length) return;
+  flushMotion();
+  activeDeck = "session";
+  activeTopic = "all";
+  session = { topic: topicId, stats: { done: 0, right: 0, up: 0, down: 0 }, ahead: [], due: 0 };
   resetQueue();
-  const render = () => {
-    ui["review-filter"].hidden = deck !== "review";
-    ui["review-topic"].value = deck === "review" ? topic : "all";
-    renderCard();
-  };
-  if (animate) animateSwap(ui["deck-view"], render, ...fade, { out: 120, in: 320 });
-  else render();
+  setView("study");
+  renderCard();
+  focusPractice();
+}
+
+function browse(deck, topic = "all") {
+  const animate = view === "study";
+  changeDeck(deck, topic, animate);
+  if (view !== "study") setView("study");
+  focusPractice();
 }
 
 function stage() {
@@ -589,7 +966,7 @@ function flipCard() {
 }
 
 function focusPractice() {
-  if (usingPointer) return;
+  if (usingPointer || view !== "study") return;
   const target = questionRoundFinished || !queue.length
     ? ui["return-to-deck"]
     : questionMode ? ui["question-prompt"] : ui.flashcard;
@@ -599,6 +976,19 @@ function focusPractice() {
 function moveCard(direction) {
   if (questionRoundFinished) return;
   flushMotion();
+  // In a session, Skip sends the card to the back of the queue.
+  if (activeDeck === "session" && !questionMode) {
+    if (direction !== 1 || queue.length - position < 2) {
+      play(stage(), [
+        { transform: "translateX(0)" }, { transform: `translateX(${direction * 10}px)` }, { transform: "translateX(0)" },
+      ], { duration: 260, easing: easeOut });
+      return;
+    }
+    queue.push(queue.splice(position, 1)[0]);
+    answerVisible = false;
+    animateSwap(stage(), () => renderCard("Skipped. It comes back later in this session."), ...slide(1));
+    return;
+  }
   const target = position + direction;
   if (questionMode && direction === 1 && target === queue.length && queue.length) {
     questionRoundFinished = true;
@@ -658,15 +1048,17 @@ function rateCard(rating, { dragged = false } = {}) {
   const card = queue[position];
   if (!card || questionMode) return;
   flushMotion();
-  const saved = account.rate(card.id, rating);
-  roundStats[rating]++;
-  let announcement = rating === "known" ? "Marked as known." : "Added to your review deck.";
+  const correct = rating === "known";
+  const { saved, before, after } = recordAnswer(card, correct);
+  let announcement = (correct ? "Got it. " : "Not yet. ") + moveText(before, after, correct);
+  flashMove(before, after);
 
-  if (activeDeck === "study" || (activeDeck === "review" && rating === "known")) {
+  if (activeDeck === "session") {
     queue.splice(position, 1);
+    if (!correct) requeue(card);
     position = Math.max(0, Math.min(position, queue.length - 1));
     answerVisible = false;
-    if (!queue.length) announcement += " You’ve finished this round.";
+    if (!queue.length) announcement += " That’s everything due.";
   } else if (position < queue.length - 1) {
     position++;
     answerVisible = false;
@@ -823,16 +1215,19 @@ async function start() {
     ui.loading.hidden = true;
     renderTopics();
     renderMode();
-    renderProgress(false);
 
     const cardId = pageParams.get("card");
     const directCard = cards.find((card) => card.id === cardId);
-    const topic = topics.get(directCard?.topic) ?? topics.values().next().value;
-    changeDeck(topic.collection, topic.id, false);
-    if (directCard && queue.includes(directCard)) {
-      position = queue.indexOf(directCard);
+    if (directCard) {
+      const topic = topics.get(directCard.topic);
+      changeDeck(topic.collection, topic.id, false);
+      if (queue.includes(directCard)) position = queue.indexOf(directCard);
+      setView("study", { push: false });
       renderCard();
+    } else {
+      setView(pageParams.get("view") === "progress" ? "progress" : "home", { push: false });
     }
+    renderProgress();
   } catch (error) {
     console.error(error);
     ui.loading.hidden = false;
@@ -844,17 +1239,61 @@ document.addEventListener("pointerdown", () => { usingPointer = true; }, true);
 document.addEventListener("keydown", () => { usingPointer = false; }, true);
 
 ui.library.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-deck]");
-  if (!button || !cards.length) return;
-  if (button.getAttribute("aria-pressed") !== "true") changeDeck(button.dataset.deck, button.dataset.topic);
-  if (topicsDialog.open) topicsDialog.close();
+  if (!cards.length) return;
+  const link = event.target.closest("button[data-view]");
+  const button = event.target.closest("button[data-deck]");
+  if (topicsDialog.open && (link || button)) topicsDialog.close();
+  if (link) {
+    if (link.dataset.view === "home" && view !== "home") goHome();
+    else if (link.dataset.view !== view) setView(link.dataset.view);
+    return;
+  }
+  if (button && (view !== "study" || button.getAttribute("aria-pressed") !== "true")) browse(button.dataset.deck, button.dataset.topic);
 });
-ui["review-topic"].addEventListener("change", (event) => {
-  changeDeck("review", event.target.value);
+window.addEventListener("popstate", (event) => {
+  navDepth = Math.max(0, navDepth - 1);
+  const next = event.state?.view ?? "home";
+  setView(next === "study" && !queue.length ? "home" : next, { push: false });
+  if (next === "study") renderCard();
 });
-ui["study-next"].addEventListener("click", () => {
-  changeDeck("study");
-  focusPractice();
+ui["exit-study"].addEventListener("click", goHome);
+ui["start-session"].addEventListener("click", () => startSession());
+ui["empty-home"].addEventListener("click", goHome);
+ui["group-picker"].addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-collection]");
+  if (!button) return;
+  const collection = button.dataset.collection;
+  if (button.classList.contains("group-topics")) {
+    openPicker(collection);
+    return;
+  }
+  toggleCollection(collection);
+  ui["group-picker"].querySelector(`.group-check[data-collection="${collection}"]`)?.focus({ preventScroll: true });
+});
+ui["picker-list"].addEventListener("change", (event) => {
+  const input = event.target.closest("input[data-topic]");
+  if (!input) return;
+  if (input.checked) excludedTopics.delete(input.dataset.topic);
+  else excludedTopics.add(input.dataset.topic);
+  saveExcluded();
+  renderPicker();
+  ui["picker-list"].querySelector(`input[data-topic="${input.dataset.topic}"]`)?.focus({ preventScroll: true });
+});
+for (const [id, include] of [["picker-all", true], ["picker-none", false]]) {
+  ui[id].addEventListener("click", () => {
+    for (const topic of topicsIn(pickerCollection)) {
+      if (include) excludedTopics.delete(topic.id);
+      else excludedTopics.add(topic.id);
+    }
+    saveExcluded();
+    renderPicker();
+  });
+}
+ui["picker-close"].addEventListener("click", () => ui["topic-picker"].close());
+ui["picker-done"].addEventListener("click", () => ui["topic-picker"].close());
+ui["topic-picker"].addEventListener("close", () => {
+  renderHome();
+  ui["group-picker"].querySelector(`.group-topics[data-collection="${pickerCollection}"]`)?.focus({ preventScroll: true });
 });
 ui["flashcard-mode"].addEventListener("click", () => changeMode(false));
 ui["question-mode"].addEventListener("click", () => changeMode(true));
@@ -882,10 +1321,7 @@ topicsDialog.addEventListener("close", () => {
 let fitFrame = 0;
 window.addEventListener("resize", () => {
   cancelAnimationFrame(fitFrame);
-  fitFrame = requestAnimationFrame(() => {
-    if (questionMode) fitOptions();
-    markScrollable();
-  });
+  fitFrame = requestAnimationFrame(refit);
 });
 mobileLayout.addEventListener("change", (event) => {
   if (!event.matches && topicsDialog.open) topicsDialog.close();
@@ -893,6 +1329,7 @@ mobileLayout.addEventListener("change", (event) => {
 });
 closeOnBackdrop(topicsDialog);
 closeOnBackdrop(accountDialog);
+closeOnBackdrop(ui["topic-picker"]);
 
 ui.shuffle.addEventListener("click", shuffleCards);
 ui["flip-card"].addEventListener("click", flipCard);
@@ -901,14 +1338,16 @@ ui.next.addEventListener("click", () => moveCard(1));
 ui["know-card"].addEventListener("click", () => rateCard("known"));
 ui["review-card"].addEventListener("click", () => rateCard("review"));
 ui["return-to-deck"].addEventListener("click", () => {
-  if (questionRoundFinished) changeDeck(activeDeck, activeTopic);
-  else if (activeDeck === "study" && !ui["study-next"].disabled) changeDeck("study");
-  else changeDeck("all");
+  if (activeDeck === "session") {
+    if (session?.ahead.length) practiseAhead();
+    else return goHome();
+  } else if (questionRoundFinished) changeDeck(activeDeck, activeTopic);
+  else return goHome();
   focusPractice();
 });
 
 document.addEventListener("keydown", (event) => {
-  if (topicsDialog.open || accountDialog.open || event.altKey || event.ctrlKey || event.metaKey || !queue.length || questionRoundFinished || event.defaultPrevented) return;
+  if (view !== "study" || topicsDialog.open || accountDialog.open || ui["topic-picker"].open || event.altKey || event.ctrlKey || event.metaKey || !queue.length || questionRoundFinished || event.defaultPrevented) return;
   if (event.target.closest("input, select, textarea, [contenteditable]")) return;
   const key = event.key.toLowerCase();
   if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
@@ -925,7 +1364,7 @@ document.addEventListener("keydown", (event) => {
     const index = "1234".includes(key) ? Number(key) - 1 : "abcd".indexOf(key);
     answerQuestion(index);
   } else if (questionMode && event.key === "Enter" && !event.target.closest("button, a")) {
-    const attempt = questionAttempts.get(queue[position]?.id);
+    const attempt = questionAttempts.get(queue[position]);
     if (attempt?.outcome) {
       event.preventDefault();
       moveCard(1);
@@ -939,10 +1378,18 @@ placeHeaderActions();
 function refit() {
   if (questionMode) fitOptions();
   markScrollable();
+  for (const bar of document.querySelectorAll(".box-bar.tall")) fitLabels(bar);
 }
 document.fonts?.ready.then(refit);
 document.fonts?.addEventListener("loadingdone", refit);
 renderTheme();
-const account = connectAccount(ui, useProgress, toast);
+const account = connectAccount(ui, useProgress, toast, useActivity);
 start();
-window.setInterval(() => { if (cards.length) renderProgress(false); }, 60_000);
+// Cards fall due while the page is open, so refresh the counts now and then.
+let lastDue = -1;
+window.setInterval(() => {
+  if (!cards.length || view === "study") return;
+  const due = boxCounts(availableCards(), progress).due;
+  if (due !== lastDue) renderProgress();
+  lastDue = due;
+}, 60_000);
