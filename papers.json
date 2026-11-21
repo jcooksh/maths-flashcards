@@ -1,6 +1,18 @@
 {
   "topics": [
     {
+      "id": "paper-2023-06",
+      "title": "June 2023",
+      "collection": "papers",
+      "hue": 200
+    },
+    {
+      "id": "paper-2022-06",
+      "title": "June 2022",
+      "collection": "papers",
+      "hue": 160
+    },
+    {
       "id": "paper-2021-10",
       "title": "October 2021",
       "collection": "papers",
@@ -26,6 +38,1479 @@
     }
   ],
   "cards": [
+    {
+      "id": "2023-06-p1-q01",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q1",
+      "front": [
+        "Find $\\displaystyle\\int\\frac{\\sqrt x(4x-3)}{2}\\,dx$, writing each term in its simplest form."
+      ],
+      "back": [
+        "Spot: you can't integrate a root multiplied by a bracket as it stands. Expand it into separate powers of $x$ first.",
+        "Use: $\\sqrt x=x^{\\frac12}$ and $\\displaystyle\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+c$.",
+        "Method: $\\dfrac{\\sqrt x(4x-3)}{2}=2x^{\\frac32}-\\dfrac32x^{\\frac12}$",
+        "Answer: $\\dfrac45x^{\\frac52}-x^{\\frac32}+c$"
+      ],
+      "choices": [
+        "Expand to $2x^{\\frac32}-\\frac32x^{\\frac12}$, then integrate each term",
+        "Integrate $\\sqrt x$ and $4x-3$ separately, then multiply",
+        "Integrate the top and the bottom separately",
+        "Use $\\displaystyle\\int\\sqrt x\\,dx=\\frac{1}{2\\sqrt x}$"
+      ]
+    },
+    {
+      "id": "2023-06-p1-q02",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q2",
+      "front": [
+        "$f(x)=2x^3+3x^2-11x+2a$, where $a$ is a positive constant. $(x-a)$ is a factor of $f(x)$.",
+        "(a) Show that $a(2a^2+3a-9)=0$.",
+        "(b)(i) Find the value of $a$. (ii) Use algebra to find the exact solutions of $f(x)=3$."
+      ],
+      "back": [
+        "Spot: “$(x-a)$ is a factor” means $f(a)=0$, which gives an equation in $a$ alone.",
+        "Use: the factor theorem. In (b)(ii) the constant term cancels, so take out a factor of $x$.",
+        "(a) $2a^3+3a^2-11a+2a=0\\Rightarrow a(2a^2+3a-9)=0$",
+        "(b)(i) $a(2a-3)(a+3)=0$ and $a>0$, so $a=\\tfrac32$.",
+        "(ii) $2x^3+3x^2-11x=0\\Rightarrow x(2x^2+3x-11)=0$",
+        "Answer: $x=0$ or $x=\\dfrac{-3\\pm\\sqrt{97}}{4}$"
+      ],
+      "choices": [
+        "Substitute $x=a$ and set $f(a)=0$",
+        "Substitute $x=-a$ and set it equal to 0",
+        "Set $f(0)=0$",
+        "Divide $f(x)$ by $x$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p1-q03",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q3",
+      "front": [
+        "Relative to a fixed origin $O$, $A$ has position vector $4\\mathbf{i}-5\\mathbf{j}+3\\mathbf{k}$ and $B$ has position vector $3\\mathbf{i}+2\\mathbf{j}+a\\mathbf{k}$, where $a$ is a positive integer.",
+        "(a) Show that $|\\overrightarrow{OA}|=5\\sqrt2$.",
+        "(b) Find the smallest value of $a$ for which $|\\overrightarrow{OB}|>|\\overrightarrow{OA}|$."
+      ],
+      "back": [
+        "Spot: compare the magnitudes by comparing their squares. That way there are no square roots.",
+        "Use: $|x\\mathbf{i}+y\\mathbf{j}+z\\mathbf{k}|=\\sqrt{x^2+y^2+z^2}$.",
+        "(a) $\\sqrt{16+25+9}=\\sqrt{50}=5\\sqrt2$",
+        "(b) $9+4+a^2>50\\Rightarrow a^2>37$. $6^2=36$ is too small, so $a=7$."
+      ],
+      "choices": [
+        "Compare $|\\overrightarrow{OB}|^2=13+a^2$ with 50",
+        "Set $\\overrightarrow{OB}=\\overrightarrow{OA}$",
+        "Use the dot product $\\overrightarrow{OA}\\cdot\\overrightarrow{OB}$",
+        "Compare $3+2+a$ with $4-5+3$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p1-q04",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q4",
+      "front": [
+        "The curve $C$ has equation $y=f(x)$, where $f'(x)=5x+2\\cos x$. $C$ has a stationary point with $x$-coordinate $\\alpha$, where $\\alpha$ is small.",
+        "(a) Use the small angle approximation for $\\cos x$ to estimate $\\alpha$ to 3 decimal places.",
+        "The point $P(0,3)$ lies on $C$.",
+        "(b) Find the equation of the tangent to $C$ at $P$, in the form $y=mx+c$."
+      ],
+      "back": [
+        "Spot: “$\\alpha$ is small” means replace $\\cos\\alpha$ with $1-\\dfrac{\\alpha^2}{2}$. A stationary point means $f'(\\alpha)=0$.",
+        "Use: $\\cos x\\approx1-\\dfrac{x^2}{2}$, then solve the quadratic and take the small root.",
+        "(a) $5\\alpha+2-\\alpha^2=0\\Rightarrow\\alpha^2-5\\alpha-2=0\\Rightarrow\\alpha=\\dfrac{5-\\sqrt{33}}{2}\\approx-0.372$",
+        "(b) The gradient is $f'(0)=2$, so $y=2x+3$."
+      ],
+      "choices": [
+        "Replace $\\cos\\alpha$ with $1-\\frac{\\alpha^2}{2}$ and set $f'(\\alpha)=0$",
+        "Replace $\\cos\\alpha$ with 1",
+        "Replace $\\cos\\alpha$ with $\\alpha$",
+        "Integrate $f'(x)$ and set it equal to 0"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p1-q05",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q5",
+      "front": [
+        "A continuous curve has equation $y=f(x)$. The table shows values of $x$ and $y$, where $a$ and $b$ are constants.",
+        "$x$: 2, 2.2, 2.4, 2.6, 2.8, 3. $y$: $a$, 12.4, $b$, 15.1, 14.6, 11.9",
+        "The trapezium rule with all the $y$ values gives 13.45 as an estimate of the area under the curve from $x=2$ to $x=3$.",
+        "(a) Show that $a+2b=38.4$.",
+        "(b) The $y$ values in the table add up to 78.1. Find $a$ and $b$."
+      ],
+      "back": [
+        "Spot: the trapezium rule gives one equation in $a$ and $b$. The total of the $y$ values gives a second, so solve them simultaneously.",
+        "Use: area $\\approx\\dfrac h2\\left[y_0+y_n+2(y_1+\\dots+y_{n-1})\\right]$ with $h=0.2$.",
+        "(a) $0.1\\left[a+11.9+2(12.4+b+15.1+14.6)\\right]=13.45\\Rightarrow a+2b+96.1=134.5$",
+        "(b) $a+b+54=78.1\\Rightarrow a+b=24.1$",
+        "Answer: $b=14.3$ and $a=9.8$"
+      ],
+      "choices": [
+        "Use the trapezium rule with $h=0.2$ to make an equation in $a$ and $b$",
+        "Use the trapezium rule with $h=1$",
+        "Use the trapezium rule with $h=\\frac16$",
+        "Add up the $y$ values and multiply by 0.2"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p1-q06",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q6",
+      "front": [
+        "$a=\\log_3x$ and $b=\\log_3(x+9)$. Write each expression in terms of $a$ and/or $b$:",
+        "(a) $\\log_3\\sqrt[3]{x}$",
+        "(b) $\\log_3(x^2+9x)$",
+        "(c) $\\log_3\\left(27+\\dfrac{243}{x}\\right)$"
+      ],
+      "back": [
+        "Spot: rewrite each expression so its only factors are $x$, $(x+9)$ and powers of 3. Then split it up with the log laws.",
+        "Use: $\\log pq=\\log p+\\log q$, $\\log\\dfrac pq=\\log p-\\log q$, $\\log p^n=n\\log p$ and $\\log_327=3$.",
+        "(a) $\\tfrac13a$",
+        "(b) $\\log_3x(x+9)=a+b$",
+        "(c) $27+\\dfrac{243}{x}=\\dfrac{27(x+9)}{x}$, so it equals $3+b-a$."
+      ],
+      "choices": [
+        "Write $27+\\frac{243}{x}=\\frac{27(x+9)}{x}$, then use the log laws",
+        "Split it into $\\log_327+\\log_3\\frac{243}{x}$",
+        "Use $\\log_3(x+9)=\\log_3x+\\log_39$",
+        "Divide $b$ by $a$"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2023-06-p1-q07",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q7",
+      "front": [
+        "$f(x)=2+\\sqrt{x-5}$, $x>5$.",
+        "(a) State the range of $f$. (b) Find $f^{-1}$.",
+        "$g(x)=\\dfrac{14}{x-2}$, $x\\ne2$.",
+        "(c) Find $gf(9)$.",
+        "(d) Find the exact value of the constant $a$ for which $f(a^2+5)=g(a)$."
+      ],
+      "back": [
+        "Spot: to find $f^{-1}$, swap $x$ and $y$ and rearrange. The domain of $f^{-1}$ is the range of $f$. In (d), $\\sqrt{a^2}=|a|$.",
+        "Use: $f(a^2+5)=2+\\sqrt{a^2}$.",
+        "(a) $f(x)>2$",
+        "(b) $f^{-1}(x)=(x-2)^2+5$, $x>2$",
+        "(c) $f(9)=4$, so $gf(9)=\\dfrac{14}{2}=7$",
+        "(d) $(2+a)(a-2)=14\\Rightarrow a^2=18$. $g(a)$ has to be more than 2, so $a>2$ and $a=3\\sqrt2$."
+      ],
+      "choices": [
+        "Substitute to get $2+a=\\frac{14}{a-2}$, then solve",
+        "Find $f^{-1}(a)$ and set it equal to $g(a)$",
+        "Set $a^2+5=\\frac{14}{a-2}$",
+        "Find $gf(a)$ and set it equal to $a$"
+      ],
+      "ask": "How do you start part (d)?"
+    },
+    {
+      "id": "2023-06-p1-q08",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q8",
+      "front": [
+        "The plan of a stage is a sector $OCDE$ of a circle with centre $O$, between two congruent triangles $ABO$ and $GFO$.",
+        "$AOG$ is a straight line of length 16 m along the back of the stage. $B$ lies on $OC$ extended and $F$ lies on $OE$ extended. Angle $COE=2.1$ radians and arc $CDE=21$ m.",
+        "(a) Show that $OC=10$ m. (b) Show that angle $AOB=0.521$ radians to 3 d.p.",
+        "(c) The front of the stage, $BC$ plus arc $CDE$ plus $EF$, is 26 m long. Find the total area of the stage to the nearest $\\text{m}^2$."
+      ],
+      "back": [
+        "Spot: the angles on the straight line $AOG$ add to $\\pi$. $B$ is on $OC$ extended, so $OB=OC+CB$. Each triangle has two known sides and the angle between them.",
+        "Use: arc $=r\\theta$, sector $=\\tfrac12r^2\\theta$, triangle $=\\tfrac12ab\\sin C$.",
+        "(a) $2.1r=21\\Rightarrow r=10$",
+        "(b) $2\\theta+2.1=\\pi\\Rightarrow\\theta=\\dfrac{\\pi-2.1}{2}\\approx0.521$",
+        "(c) $BC=EF=\\tfrac12(26-21)=2.5$, so $OB=12.5$ and $OA=8$.",
+        "Area $=\\tfrac12(10^2)(2.1)+2\\times\\tfrac12(8)(12.5)\\sin0.521\\approx105+49.8\\approx155\\text{ m}^2$"
+      ],
+      "choices": [
+        "Find $OB=OC+BC$, then add the sector and two triangles using $\\frac12ab\\sin C$",
+        "Use the sector area $\\pi r^2\\theta$",
+        "Treat each triangle as right-angled",
+        "Use the arc length 21 m as the radius"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2023-06-p1-q09",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q9",
+      "front": [
+        "The first three terms of a geometric sequence are $2k+2$, $18-2k$ and $k+6$, where $k$ is a constant.",
+        "(a) Show that $k^2-43k+156=0$.",
+        "Given that the sequence converges,",
+        "(b)(i) find $k$, giving a reason. (ii) Find $S_\\infty$."
+      ],
+      "back": [
+        "Spot: three terms of a geometric sequence means $\\dfrac{u_2}{u_1}=\\dfrac{u_3}{u_2}$, so $(u_2)^2=u_1u_3$. “Converges” means $|r|<1$.",
+        "Use: $S_\\infty=\\dfrac{a}{1-r}$.",
+        "(a) $(18-2k)^2=(2k+2)(k+6)\\Rightarrow324-72k+4k^2=2k^2+14k+12$, which simplifies to the quadratic.",
+        "(b)(i) $(k-4)(k-39)=0$. $k=4$ gives $10,10,10$ with $r=1$, which doesn't converge, so $k=39$.",
+        "(ii) The terms are $80,-60,45$, so $r=-\\tfrac34$ and $S_\\infty=\\dfrac{80}{1+\\frac34}=\\dfrac{320}{7}$."
+      ],
+      "choices": [
+        "Use $(18-2k)^2=(2k+2)(k+6)$",
+        "Use $18-2k=\\frac{(2k+2)+(k+6)}{2}$",
+        "Use $(2k+2)^2=(18-2k)(k+6)$",
+        "Use $r=\\frac{k+6}{2k+2}$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p1-q10",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q10",
+      "front": [
+        "A circle $C$ has equation $x^2+y^2-4kx+2ky+5=0$, where $k$ is a constant.",
+        "(a) Find, in terms of $k$, (i) the coordinates of the centre (ii) the radius.",
+        "The line $y=x+1$ meets $C$ at two distinct points.",
+        "(b) Find the range of possible values of $k$."
+      ],
+      "back": [
+        "Spot: “two distinct points” means substitute the line into the circle and use $b^2-4ac>0$.",
+        "Use: complete the square for the centre and radius.",
+        "(a) $(x-2k)^2+(y+k)^2=5k^2-5$, so the centre is $(2k,-k)$ and the radius is $\\sqrt{5k^2-5}$.",
+        "(b) $2x^2+(2-2k)x+2k+6=0$, so $(2-2k)^2-8(2k+6)>0\\Rightarrow k^2-6k-11>0$",
+        "Answer: $k<3-2\\sqrt5$ or $k>3+2\\sqrt5$. Both ranges also make the radius real."
+      ],
+      "choices": [
+        "Substitute $y=x+1$ into the circle and use $b^2-4ac>0$",
+        "Substitute $y=x+1$ and use $b^2-4ac=0$",
+        "Substitute $x=0$ into the circle",
+        "Solve $5k^2-5>0$ and stop"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p1-q11",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q11",
+      "front": [
+        "The value, $V$ pounds, of a laptop $t$ months after it was bought is modelled by $V=ab^t$, where $a$ and $b$ are constants.",
+        "The graph of $\\log_{10}V$ against $t$ is a straight line through $(0,2.8)$ and $(12,2.56)$.",
+        "(a) Find the initial value of the laptop.",
+        "(b) Find a complete equation for $V$ in terms of $t$, giving $a$ exactly and $b$ to 3 s.f.",
+        "(c) Exactly 3 years after it was bought, the laptop was worth £118. Evaluate the reliability of the model."
+      ],
+      "back": [
+        "Spot: $V=ab^t$ with a graph of $\\log V$ means take logs: $\\log V=\\log a+t\\log b$. The intercept is $\\log a$ and the gradient is $\\log b$.",
+        "Use: gradient $=\\dfrac{2.56-2.8}{12}=-0.02$.",
+        "(a) $\\log_{10}a=2.8\\Rightarrow a=10^{2.8}\\approx631$, so £631",
+        "(b) $b=10^{-0.02}\\approx0.955$, so $V=10^{2.8}(0.955)^t$",
+        "(c) $t=36$ gives $V\\approx£120$. That's close to £118, so the model is reliable here."
+      ],
+      "choices": [
+        "Take logs: $\\log V=\\log a+t\\log b$, so the intercept is $\\log a$",
+        "Use $a=2.8$",
+        "Use $b=-0.02$",
+        "Use $V=2.8-0.02t$"
+      ]
+    },
+    {
+      "id": "2023-06-p1-q12",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q12",
+      "front": [
+        "$y=\\cos x$, where $x$ is in radians. Use differentiation from first principles to show that $\\dfrac{dy}{dx}=-\\sin x$.",
+        "You may use the formula for $\\cos(A\\pm B)$, and assume that as $h\\to0$, $\\dfrac{\\sin h}{h}\\to1$ and $\\dfrac{\\cos h-1}{h}\\to0$."
+      ],
+      "back": [
+        "Spot: “first principles” means start from $\\dfrac{f(x+h)-f(x)}{h}$. Expand $\\cos(x+h)$, then group the terms so the given limits appear.",
+        "Use: $\\cos(x+h)=\\cos x\\cos h-\\sin x\\sin h$.",
+        "Method: $\\dfrac{\\cos x\\cos h-\\sin x\\sin h-\\cos x}{h}=\\cos x\\left(\\dfrac{\\cos h-1}{h}\\right)-\\sin x\\left(\\dfrac{\\sin h}{h}\\right)$",
+        "As $h\\to0$, this tends to $\\cos x\\times0-\\sin x\\times1=-\\sin x$."
+      ],
+      "choices": [
+        "Write $\\frac{\\cos(x+h)-\\cos x}{h}$, expand $\\cos(x+h)$ and group into the given limits",
+        "Use $\\cos(x+h)=\\cos x+\\cos h$",
+        "Substitute $h=0$ straight away",
+        "Use the chain rule"
+      ]
+    },
+    {
+      "id": "2023-06-p1-q13",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q13",
+      "front": [
+        "Carriages on a roller coaster go round the same circuit again and again. A carriage's maximum height is 48 m, and it starts each circuit 3 m above the ground.",
+        "Its height $H$ m, $t$ seconds after it starts the first circuit, is modelled by $H=a-b(t-15)^2$, where $a$ and $b$ are positive constants.",
+        "(a) Find a complete equation for the model. (b) Find the height when $t=30$.",
+        "An alternative model is $H=22.5\\cos(12t+\\alpha)^\\circ+\\beta$, $0\\le\\alpha<360$.",
+        "(c) Find $\\alpha$ and $\\beta$. (d) The carriage moves continuously for 2 minutes. Give a reason why the alternative model is more appropriate."
+      ],
+      "back": [
+        "Spot: in $a-b(t-15)^2$ the maximum is $a$, and $t=0$ gives $b$. In the cosine model, $\\beta$ is the midline and $\\cos=-1$ at the lowest point.",
+        "Use: $\\beta=\\dfrac{\\max+\\min}{2}$, and the amplitude $\\dfrac{\\max-\\min}{2}=22.5$ checks out.",
+        "(a) $a=48$, and $3=48-225b\\Rightarrow b=0.2$, so $H=48-0.2(t-15)^2$",
+        "(b) $H=48-0.2(225)=3$ m",
+        "(c) $\\beta=25.5$, and $22.5\\cos\\alpha+25.5=3\\Rightarrow\\cos\\alpha=-1\\Rightarrow\\alpha=180$",
+        "(d) The cosine model repeats every 30 s, like the circuits. The quadratic gives negative heights after $t=30$."
+      ],
+      "choices": [
+        "Use the maximum for $a$, then $t=0$ and $H=3$ to find $b$",
+        "Use $t=15$ and $H=3$",
+        "Set $a=3$",
+        "Set $b=48$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p1-q14",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q14",
+      "front": [
+        "Prove, using algebra, that $n^3+(n+1)^3$ is odd for all $n\\in\\mathbb{N}$."
+      ],
+      "back": [
+        "Spot: odd or even for all $n$ means consider $n$ even and $n$ odd separately.",
+        "Use: $n=2k$ and $n=2k+1$, then write each result as $2(\\dots)+1$.",
+        "$n=2k$: $8k^3+(2k+1)^3=16k^3+12k^2+6k+1=2(8k^3+6k^2+3k)+1$, which is odd.",
+        "$n=2k+1$: $(2k+1)^3+(2k+2)^3=16k^3+36k^2+30k+9=2(8k^3+18k^2+15k+4)+1$, which is odd."
+      ],
+      "choices": [
+        "Consider $n=2k$ and $n=2k+1$ separately",
+        "Check $n=1$, 2 and 3",
+        "Write it as $(2n+1)^3$",
+        "Expand and set it equal to 0"
+      ]
+    },
+    {
+      "id": "2023-06-p1-q15",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 1 · Q15",
+      "front": [
+        "$f(x)=\\dfrac{5xe^x}{\\sqrt{e^{3x}-3}}$, $x>\\tfrac13\\ln3$.",
+        "(a) Show that $f'(x)=\\dfrac{5e^x\\left(e^{3x}(2-x)+Ax+B\\right)}{2(e^{3x}-3)^{\\frac32}}$, where $A$ and $B$ are constants to be found.",
+        "(b) Hence show that the $x$-coordinates of the turning points satisfy $x=\\dfrac{2e^{3x}-6}{e^{3x}+6}$. This equation has roots $\\alpha$ and $\\beta$, where $\\beta>\\alpha>0$.",
+        "(c) Using $x_{n+1}=\\dfrac{2e^{3x_n}-6}{e^{3x_n}+6}$ with $x_1=1$, find $x_2$ and $\\beta$ to 3 d.p.",
+        "(d) Using a suitable interval and function, show that $\\alpha=0.676$ to 3 d.p."
+      ],
+      "back": [
+        "Spot: write it as $5xe^x(e^{3x}-3)^{-\\frac12}$ and use the product rule with the chain rule. Turning points mean the bracket on top is 0.",
+        "Use: $\\dfrac{d}{dx}(e^{3x}-3)^{-\\frac12}=-\\tfrac32e^{3x}(e^{3x}-3)^{-\\frac32}$.",
+        "(a) Take out $\\dfrac{5e^x}{2(e^{3x}-3)^{\\frac32}}$ to leave $2(1+x)(e^{3x}-3)-3xe^{3x}=e^{3x}(2-x)-6x-6$, so $A=B=-6$.",
+        "(b) $e^{3x}(2-x)=6x+6\\Rightarrow2e^{3x}-6=x(e^{3x}+6)$",
+        "(c) $x_2=1.310$, and the iterates converge to $\\beta=1.949$.",
+        "(d) Let $h(x)=x-\\dfrac{2e^{3x}-6}{e^{3x}+6}$. $h(0.6755)>0$ and $h(0.6765)<0$, and $h$ is continuous, so $\\alpha=0.676$."
+      ],
+      "choices": [
+        "Write it as $5xe^x(e^{3x}-3)^{-\\frac12}$ and use the product and chain rules",
+        "Differentiate the top and the bottom separately",
+        "Use the chain rule on $e^{3x}$ only",
+        "Take logs of the top only"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p2-q01",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q1",
+      "front": [
+        "$f(x)=2x^3-9x^2+4x-7$.",
+        "(a) Find $f''(x)$.",
+        "(b)(i) Solve $f''(x)=0$. (ii) Hence find the values of $x$ for which $f(x)$ is concave."
+      ],
+      "back": [
+        "Spot: concave means $f''(x)\\le0$. Convex means $f''(x)\\ge0$.",
+        "Use: differentiate twice.",
+        "(a) $f'(x)=6x^2-18x+4$, so $f''(x)=12x-18$",
+        "(b)(i) $x=\\tfrac32$ (ii) $12x-18\\le0\\Rightarrow x\\le\\tfrac32$"
+      ],
+      "choices": [
+        "Solve $f''(x)\\le0$",
+        "Solve $f''(x)\\ge0$",
+        "Solve $f'(x)\\le0$",
+        "Solve $f(x)\\le0$"
+      ],
+      "ask": "How do you find where $f$ is concave?"
+    },
+    {
+      "id": "2023-06-p2-q02",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q2",
+      "front": [
+        "A sequence is defined by $u_1=20$ and $u_{n+1}=u_n+6\\cos\\left(\\dfrac{n\\pi}{2}\\right)+4(-1)^n$.",
+        "(a)(i) Show that $u_2=16$. (ii) Find $u_3$ and $u_4$.",
+        "The sequence is periodic with order 4.",
+        "(b)(i) Write down $u_5$. (ii) Find $\\displaystyle\\sum_{r=1}^{30}u_r$."
+      ],
+      "back": [
+        "Spot: periodic with order 4 means the terms repeat every 4. For the sum, count the full cycles, then add the leftover terms.",
+        "Use: $\\cos\\dfrac{\\pi}{2}=0$, $\\cos\\pi=-1$, $\\cos\\dfrac{3\\pi}{2}=0$ and $\\cos2\\pi=1$.",
+        "(a)(i) $u_2=20+0-4=16$ (ii) $u_3=16-6+4=14$ and $u_4=14+0-4=10$",
+        "(b)(i) $u_5=20$",
+        "(ii) Each cycle adds to 60. 30 terms are 7 cycles plus $u_1+u_2$, so the sum is $7(60)+36=456$."
+      ],
+      "choices": [
+        "Use 7 full cycles of 4 terms, then add $u_{29}+u_{30}=u_1+u_2$",
+        "Use $\\frac{30}{2}(u_1+u_{30})$",
+        "Multiply $u_1$ by 30",
+        "Use 8 full cycles of 4 terms"
+      ],
+      "ask": "How do you start part (b)(ii)?"
+    },
+    {
+      "id": "2023-06-p2-q03",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q3",
+      "front": [
+        "Given that $\\log_3(x+3)+\\log_3(x+6)=1+2\\log_3x$,",
+        "(a) show that $2x^2-9x-18=0$.",
+        "(b)(i) Write down the roots of $2x^2-9x-18=0$. (ii) Hence state which root is not a solution of the log equation, giving a reason."
+      ],
+      "back": [
+        "Spot: combine each side into a single log, then drop the logs. Write the 1 as $\\log_33$.",
+        "Use: $\\log a+\\log b=\\log ab$ and $2\\log x=\\log x^2$.",
+        "(a) $\\log_3(x+3)(x+6)=\\log_3(3x^2)\\Rightarrow x^2+9x+18=3x^2$",
+        "(b)(i) $(2x+3)(x-6)=0$, so $x=6$ or $x=-\\tfrac32$",
+        "(ii) $x=-\\tfrac32$, because $\\log_3x$ isn't defined for negative $x$."
+      ],
+      "choices": [
+        "Write 1 as $\\log_33$, then combine each side into a single log",
+        "Write 1 as $\\log_31$",
+        "Use $\\log_3(x+3)+\\log_3(x+6)=\\log_3(2x+9)$",
+        "Divide both sides by $\\log_3x$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p2-q04",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q4",
+      "front": [
+        "The temperature of a cup of tea, $H$ °C, $t$ minutes after it is made is modelled by $H=Ae^{-Bt}+22$, where $A$ and $B$ are constants.",
+        "Initially the tea is at 90 °C.",
+        "(a) State the value of $A$.",
+        "Initially the tea is cooling at 6.2 °C per minute.",
+        "(b) Find a complete equation linking $H$ and $t$, giving $B$ to 3 d.p."
+      ],
+      "back": [
+        "Spot: “initially” means $t=0$. A rate of cooling is $\\dfrac{dH}{dt}$, which is negative.",
+        "Use: $\\dfrac{dH}{dt}=-ABe^{-Bt}$, which is $-AB$ at $t=0$.",
+        "(a) $90=A+22\\Rightarrow A=68$",
+        "(b) $-68B=-6.2\\Rightarrow B\\approx0.091$, so $H=68e^{-0.091t}+22$"
+      ],
+      "choices": [
+        "Differentiate and set $\\frac{dH}{dt}=-6.2$ at $t=0$",
+        "Set $H=6.2$ at $t=1$",
+        "Use $B=6.2$",
+        "Set $H=90-6.2t$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p2-q05",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q5",
+      "front": [
+        "The curve $C$ has equation $y=f(x)$. It passes through $P(2,5)$ and has a turning point at $P$.",
+        "Given that $\\dfrac{dy}{dx}=3x^3-8x^2+2x+k$, where $k$ is a constant,",
+        "(a) show that $k=4$.",
+        "(b) Hence find the coordinates of the point where $C$ crosses the $y$-axis."
+      ],
+      "back": [
+        "Spot: a turning point at $P$ means $\\dfrac{dy}{dx}=0$ when $x=2$. To get back to $y$, integrate, then use $P$ to find $c$.",
+        "Use: $y=\\displaystyle\\int\\frac{dy}{dx}\\,dx$, with $(2,5)$ on the curve.",
+        "(a) $24-32+4+k=0\\Rightarrow k=4$",
+        "(b) $y=\\tfrac34x^4-\\tfrac83x^3+x^2+4x+c$, and $5=\\tfrac83+c\\Rightarrow c=\\tfrac73$",
+        "Answer: $\\left(0,\\tfrac73\\right)$"
+      ],
+      "choices": [
+        "Integrate, then substitute $(2,5)$ to find $c$",
+        "Substitute $x=0$ into $\\frac{dy}{dx}$",
+        "Differentiate $\\frac{dy}{dx}$ again",
+        "Set $\\frac{dy}{dx}=5$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p2-q06",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q6",
+      "front": [
+        "Relative to a fixed origin $O$, the points $A$, $B$, $C$ and $D$ have position vectors $9\\mathbf{i}$, $12\\mathbf{j}$, $32\\mathbf{i}+72\\mathbf{j}$ and $17\\mathbf{i}+15\\mathbf{j}$.",
+        "(a) Show that $AD$ is parallel to $BC$.",
+        "The points model the corners of a running track, with lengths in metres. A runner runs along all four sides for each lap, and completes 3 laps in exactly 2 minutes.",
+        "(b) Find the runner's average speed in km/h."
+      ],
+      "back": [
+        "Spot: parallel means one vector is a multiple of the other. For the speed you need the perimeter, so find all four side lengths.",
+        "Use: $\\overrightarrow{AD}=\\mathbf{d}-\\mathbf{a}$, and speed $=\\dfrac{\\text{distance}}{\\text{time}}$, then change the units.",
+        "(a) $\\overrightarrow{AD}=8\\mathbf{i}+15\\mathbf{j}$ and $\\overrightarrow{BC}=32\\mathbf{i}+60\\mathbf{j}=4\\overrightarrow{AD}$",
+        "(b) $AB=15$, $BC=68$, $CD=\\sqrt{15^2+57^2}\\approx58.94$ and $DA=17$, so a lap is about 158.94 m.",
+        "$3\\times158.94\\approx476.8$ m in 2 minutes, which is about 14.3 km/h"
+      ],
+      "choices": [
+        "Find all four side lengths, add them for one lap, then multiply by 3",
+        "Use $|\\overrightarrow{OC}|$ as the length of a lap",
+        "Use $|\\overrightarrow{AD}|+|\\overrightarrow{BC}|$ as the length of a lap",
+        "Divide 2 minutes by 3 laps"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p2-q07",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q7",
+      "front": [
+        "A curve has equation $x^3-3xy+2y^2=26$.",
+        "(a) Find $\\dfrac{dy}{dx}$ in terms of $x$ and $y$.",
+        "The point $P(-1,3)$ lies on the curve.",
+        "(b) Find the equation of the normal at $P$, in the form $ax+by+c=0$, where $a$, $b$ and $c$ are integers."
+      ],
+      "back": [
+        "Spot: $x$ and $y$ mixed together means implicit differentiation. The $xy$ term needs the product rule.",
+        "Use: $\\dfrac{d}{dx}(y^2)=2y\\dfrac{dy}{dx}$ and $\\dfrac{d}{dx}(xy)=y+x\\dfrac{dy}{dx}$.",
+        "(a) $3x^2-3y-3x\\dfrac{dy}{dx}+4y\\dfrac{dy}{dx}=0\\Rightarrow\\dfrac{dy}{dx}=\\dfrac{3y-3x^2}{4y-3x}$",
+        "(b) At $P$ the gradient is $\\dfrac{6}{15}=\\dfrac25$, so the normal has gradient $-\\dfrac52$.",
+        "Answer: $5x+2y-1=0$"
+      ],
+      "choices": [
+        "Differentiate implicitly, using the product rule on $3xy$",
+        "Make $y$ the subject first",
+        "Differentiate $3xy$ as $3y$",
+        "Treat $y$ as a constant"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p2-q08",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q8",
+      "front": [
+        "(a) Express $4\\sin\\theta+6\\cos\\theta$ in the form $R\\sin(\\theta+\\alpha)$, where $R>0$ and $0<\\alpha<\\dfrac{\\pi}{2}$. Give $R$ exactly and $\\alpha$ in radians to 3 d.p.",
+        "The first three terms of an arithmetic sequence are $2\\sin x$, $2\\sin x+\\cos x$ and $2\\sin x+2\\cos x$. $S_7$ is the sum of the first 7 terms, as $x$ varies.",
+        "(b)(i) Find the exact maximum value of $S_7$. (ii) Deduce the smallest positive value of $x$ at which it occurs."
+      ],
+      "back": [
+        "Spot: the sum of an arithmetic sequence with $a=2\\sin x$ and $d=\\cos x$ is a mix of $\\sin x$ and $\\cos x$, so use the R-form from (a).",
+        "Use: $S_n=\\dfrac n2\\left[2a+(n-1)d\\right]$. $R\\sin(x+\\alpha)$ has maximum $R$, when $x+\\alpha=\\dfrac{\\pi}{2}$.",
+        "(a) $R=\\sqrt{16+36}=2\\sqrt{13}$ and $\\tan\\alpha=\\dfrac64$, so $\\alpha\\approx0.983$",
+        "(b)(i) $S_7=\\dfrac72(4\\sin x+6\\cos x)=7\\sqrt{13}\\sin(x+\\alpha)$, so the maximum is $7\\sqrt{13}$.",
+        "(ii) $x+0.983=\\dfrac{\\pi}{2}\\Rightarrow x\\approx0.588$"
+      ],
+      "choices": [
+        "Use $S_7=\\frac72[2a+6d]$ with $a=2\\sin x$ and $d=\\cos x$, then the R-form",
+        "Use $S_7=7a$",
+        "Use $d=2\\sin x$",
+        "Use the geometric series formula"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p2-q09",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q9",
+      "front": [
+        "The curve $C$ has parametric equations $x=t^2-4t-5$, $y=4\\ln(t-2)$, $t>2$.",
+        "(a) Show that a Cartesian equation of $C$ is $y=A\\ln(x+B)$, $x>-B$, where $A$ and $B$ are integers.",
+        "$C$ cuts the $y$-axis at $P$.",
+        "(b) Show that the tangent to $C$ at $P$ can be written as $ax+by=c\\ln3$, where $a$, $b$ and $c$ are integers."
+      ],
+      "back": [
+        "Spot: complete the square on the quadratic in $t$ so that $t-2$, the expression inside the log, appears on its own.",
+        "Use: $x=(t-2)^2-9$ and $\\ln\\sqrt u=\\tfrac12\\ln u$.",
+        "(a) $t-2=\\sqrt{x+9}$, so $y=4\\ln\\sqrt{x+9}=2\\ln(x+9)$. $A=2$ and $B=9$.",
+        "(b) At $x=0$: $y=2\\ln9=4\\ln3$, and $\\dfrac{dy}{dx}=\\dfrac{2}{x+9}=\\dfrac29$.",
+        "Answer: $y-4\\ln3=\\tfrac29x\\Rightarrow2x-9y=-36\\ln3$"
+      ],
+      "choices": [
+        "Complete the square: $x=(t-2)^2-9$",
+        "Use $t=\\frac{x+5}{-4}$",
+        "Differentiate both equations with respect to $t$",
+        "Set $t=0$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p2-q10",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q10",
+      "front": [
+        "$f(x)=\\dfrac{4kx+12}{(x+3)(x-1)}$, where $k$ is a positive constant.",
+        "(a) Express $f(x)$ in partial fractions in terms of $k$.",
+        "(b) Hence find the exact value of $k$ for which $\\displaystyle\\int_{-2}^{0}f(x)\\,dx=10$."
+      ],
+      "back": [
+        "Spot: the partial fractions turn the integral into logs. Between $-2$ and 0, $x-1$ is negative, so use $\\ln|x-1|$.",
+        "Use: $\\dfrac{4kx+12}{(x+3)(x-1)}\\equiv\\dfrac{A}{x+3}+\\dfrac{B}{x-1}$, then substitute $x=1$ and $x=-3$.",
+        "(a) $\\dfrac{3k-3}{x+3}+\\dfrac{k+3}{x-1}$",
+        "(b) $\\left[(3k-3)\\ln|x+3|+(k+3)\\ln|x-1|\\right]_{-2}^{0}=(3k-3)\\ln3-(k+3)\\ln3=(2k-6)\\ln3$",
+        "Answer: $(2k-6)\\ln3=10\\Rightarrow k=\\dfrac{5}{\\ln3}+3$"
+      ],
+      "choices": [
+        "Integrate the partial fractions to logs, then set the result equal to 10",
+        "Integrate the numerator and denominator separately",
+        "Substitute $x=0$ and $x=-2$ into $f(x)$ and subtract",
+        "Differentiate the partial fractions"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2023-06-p2-q11",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q11",
+      "front": [
+        "A cuboid tank has a base 15 m by 8 m and a height of 4 m. Water flows in, and after $t$ minutes it's $h$ m deep with volume $V\\text{ m}^3$.",
+        "In a model, the rate of change of $V$ is inversely proportional to $\\sqrt h$.",
+        "(a) Show that $\\dfrac{dh}{dt}=\\dfrac{\\lambda}{\\sqrt h}$, where $\\lambda$ is a constant.",
+        "Initially the water is 0.64 m deep. After 10 minutes it's 2.25 m deep.",
+        "(b) Find an equation linking $h$ and $t$ in the form $h^{\\frac32}=At+B$.",
+        "(c) Find how long the tank takes to fill completely."
+      ],
+      "back": [
+        "Spot: link $\\dfrac{dh}{dt}$ and $\\dfrac{dV}{dt}$ with the chain rule. $V=120h$, so $\\dfrac{dV}{dh}=120$. Then separate the variables.",
+        "Use: $\\dfrac{dh}{dt}=\\dfrac{dh}{dV}\\times\\dfrac{dV}{dt}=\\dfrac{1}{120}\\times\\dfrac{k}{\\sqrt h}$.",
+        "(b) $\\displaystyle\\int\\sqrt h\\,dh=\\int\\lambda\\,dt\\Rightarrow\\tfrac23h^{\\frac32}=\\lambda t+c$, so $h^{\\frac32}=At+B$.",
+        "$t=0$ gives $B=0.64^{1.5}=0.512$. $t=10$ gives $3.375=10A+0.512$, so $A=0.2863$.",
+        "(c) Full means $h=4$: $8=0.2863t+0.512\\Rightarrow t\\approx26.2$ minutes"
+      ],
+      "choices": [
+        "Use $\\frac{dh}{dt}=\\frac{dh}{dV}\\times\\frac{dV}{dt}$ with $V=120h$",
+        "Integrate $V=120h$",
+        "Use $\\frac{dV}{dt}=k\\sqrt h$",
+        "Use $V=\\frac13\\pi r^2h$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p2-q12",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q12",
+      "front": [
+        "The numbers of subscribers, in thousands, to two streaming companies are modelled by $N_A=|t-4|+2$ and $N_B=11-|2t-8|$, $t\\ge0$, where $t$ is the time in years.",
+        "(a) Find the initial difference between the numbers of subscribers.",
+        "When $t=T$, company A cut its prices and its number of subscribers rose. (b) Suggest a value for $T$, with a reason.",
+        "(c) Find the values of $t$ for which $N_A>N_B$, in set notation.",
+        "(d) State a limitation of the model for company B."
+      ],
+      "back": [
+        "Spot: both moduli contain $t-4$, because $|2t-8|=2|t-4|$. So the inequality becomes one in $|t-4|$.",
+        "Use: $|t-4|>3$ means $t<1$ or $t>7$.",
+        "(a) $N_A(0)=6$ and $N_B(0)=3$, so the difference is 3 thousand.",
+        "(b) $T=4$, where $N_A$ stops falling and starts rising.",
+        "(c) $|t-4|+2>11-2|t-4|\\Rightarrow|t-4|>3$, so $\\{t:0\\le t<1\\}\\cup\\{t:t>7\\}$",
+        "(d) $N_B$ becomes negative for $t>9.5$, which is impossible."
+      ],
+      "choices": [
+        "Write $|2t-8|=2|t-4|$, then solve for $|t-4|$",
+        "Square both sides",
+        "Solve $N_A=N_B$ and take the region between the roots",
+        "Remove the modulus signs and solve $t+2>11-(2t-8)$"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2023-06-p2-q13",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q13",
+      "front": [
+        "(a) Find the first three terms, in ascending powers of $x$, of the binomial expansion of $(2+x)^{-2}$.",
+        "(b) Using your answer to (a) and algebraic integration, estimate $\\displaystyle\\int_{0.1}^{0.3}\\frac{8x}{(2+x)^2}\\,dx$ to 4 s.f.",
+        "(c) Find the exact value of this integral, in the form $a\\ln b+c$."
+      ],
+      "back": [
+        "Spot: (b) multiply the expansion by $8x$ and integrate the polynomial. (c) needs an exact method: substitute $u=2+x$.",
+        "Use: $(2+x)^{-2}=\\tfrac14\\left(1+\\tfrac x2\\right)^{-2}$. For (c), $x=u-2$ and $dx=du$.",
+        "(a) $\\dfrac14-\\dfrac14x+\\dfrac{3}{16}x^2$",
+        "(b) $\\displaystyle\\int_{0.1}^{0.3}\\left(2x-2x^2+\\tfrac32x^3\\right)dx\\approx0.06567$",
+        "(c) $\\displaystyle\\int_{2.1}^{2.3}\\left(\\frac8u-\\frac{16}{u^2}\\right)du=\\left[8\\ln u+\\frac{16}{u}\\right]_{2.1}^{2.3}=8\\ln\\frac{23}{21}-\\frac{320}{483}$"
+      ],
+      "choices": [
+        "Substitute $u=2+x$ to split it into $\\frac8u-\\frac{16}{u^2}$",
+        "Integrate the expansion from (a)",
+        "Use $\\displaystyle\\int\\frac{8x}{(2+x)^2}\\,dx=4\\ln(2+x)^2$",
+        "Use the trapezium rule"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2023-06-p2-q14",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q14",
+      "front": [
+        "(a) Show that $2\\tan\\theta(5\\cos\\theta+12\\sin^2\\theta)=5\\sin2\\theta(1+\\tan^2\\theta)$ can be written as $\\sin2\\theta(A\\cos^2\\theta+B\\cos\\theta+C)=0$, where $A$, $B$ and $C$ are constants.",
+        "(b) Hence solve $2\\tan x(5\\cos x+12\\sin^2x)=5\\sin2x(1+\\tan^2x)$ for $180^\\circ\\le x\\le360^\\circ$, $x\\ne270^\\circ$, to 1 d.p."
+      ],
+      "back": [
+        "Spot: $1+\\tan^2\\theta=\\sec^2\\theta$, so multiply both sides by $\\cos^2\\theta$ to clear the fractions. Then $\\sin2\\theta$ appears on both sides.",
+        "Use: $\\sin2\\theta=2\\sin\\theta\\cos\\theta$ and $\\sin^2\\theta=1-\\cos^2\\theta$.",
+        "(a) $\\sin2\\theta(5\\cos\\theta+12\\sin^2\\theta)=5\\sin2\\theta\\Rightarrow\\sin2\\theta(-12\\cos^2\\theta+5\\cos\\theta+7)=0$",
+        "(b) $\\sin2x=0$ gives $x=180^\\circ$ or $360^\\circ$ ($270^\\circ$ is excluded). $(12\\cos x+7)(\\cos x-1)=0$ gives $\\cos x=1$ or $\\cos x=-\\tfrac{7}{12}$, so $x=234.3^\\circ$.",
+        "Answer: $x=180^\\circ,\\ 234.3^\\circ,\\ 360^\\circ$"
+      ],
+      "choices": [
+        "Use $1+\\tan^2\\theta=\\sec^2\\theta$, then multiply through by $\\cos^2\\theta$",
+        "Divide both sides by $\\sin2\\theta$",
+        "Use $1+\\tan^2\\theta=\\cos^2\\theta$",
+        "Expand $\\sin2\\theta$ as $2\\sin\\theta$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2023-06-p2-q15",
+      "topic": "paper-2023-06",
+      "source": "June 2023 · Paper 2 · Q15",
+      "front": [
+        "Given that $x$ is an acute angle, use algebra to prove by contradiction that $\\sin x+\\cos x>1$."
+      ],
+      "back": [
+        "Spot: contradiction means assume the opposite, $\\sin x+\\cos x\\le1$. Both sides are positive, so you can square.",
+        "Use: $\\sin^2x+\\cos^2x=1$.",
+        "Assume $\\sin x+\\cos x\\le1$. Then $(\\sin x+\\cos x)^2\\le1\\Rightarrow1+2\\sin x\\cos x\\le1\\Rightarrow\\sin x\\cos x\\le0$.",
+        "But $\\sin x>0$ and $\\cos x>0$ for an acute angle, so $\\sin x\\cos x>0$. That's a contradiction, so $\\sin x+\\cos x>1$."
+      ],
+      "choices": [
+        "Assume $\\sin x+\\cos x\\le1$, square, then use $\\sin^2x+\\cos^2x=1$",
+        "Assume $\\sin x+\\cos x<1$",
+        "Assume $\\sin x+\\cos x>1$",
+        "Try $x=45^\\circ$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q01",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q1",
+      "front": [
+        "The point $P(3,-4)$ lies on the curve $y=f(x)$. Find the point that $P$ maps to when the curve is transformed to:",
+        "(a) $y=f(x)-3$",
+        "(b) $y=|f(x)|$",
+        "(c) $y=2f(x+1)-5$"
+      ],
+      "back": [
+        "Spot: changes inside the bracket affect $x$, and they work the opposite way to how they look. Changes outside affect $y$, and they work as written.",
+        "Use: $f(x+1)$ shifts left by 1. $2f$ stretches $y$ by 2. $-5$ shifts down by 5. $|f|$ makes negative $y$ values positive.",
+        "(a) $(3,-7)$",
+        "(b) $(3,4)$",
+        "(c) $x\\to3-1=2$ and $y\\to2(-4)-5=-13$, giving $(2,-13)$"
+      ],
+      "choices": [
+        "Apply the change inside the bracket to $x$ (opposite way), and the outside changes to $y$",
+        "Add 1 to the $x$-coordinate for $f(x+1)$",
+        "Apply the $-5$ before multiplying by 2",
+        "Change only the $y$-coordinate"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q02",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q2",
+      "front": [
+        "$f(x)=(x-3)(x^2+2x+k)+36$, where $k$ is a constant.",
+        "Given that $(x+1)$ is a factor of $f(x)$, find $k$."
+      ],
+      "back": [
+        "Spot: “$(x+1)$ is a factor” means $f(-1)=0$. There's no need to expand.",
+        "Use: substitute $x=-1$ straight into the given form.",
+        "Method: $(-4)(1-2+k)+36=0\\Rightarrow-4k+4+36=0$",
+        "Answer: $k=10$"
+      ],
+      "choices": [
+        "Substitute $x=-1$ and set $f(-1)=0$",
+        "Expand the brackets fully, then divide by $(x+1)$",
+        "Set $x^2+2x+k=0$",
+        "Substitute $x=1$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q03",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q3",
+      "front": [
+        "A circle has equation $x^2+y^2+6x-8y=24$.",
+        "(a) Find the centre and radius.",
+        "(b) $P$ is the point on the circle furthest from the origin $O$. Find the exact length $OP$."
+      ],
+      "back": [
+        "Spot: furthest from the origin means go from $O$ through the centre and out to the circle, so $OP=|OC|+r$.",
+        "Use: complete the square: $(x+3)^2+(y-4)^2=49$.",
+        "(a) The centre is $(-3,4)$ and $r=7$.",
+        "(b) $|OC|=\\sqrt{9+16}=5$, so $OP=5+7=12$."
+      ],
+      "choices": [
+        "Complete the square, then use $OP=|OC|+r$",
+        "Use $OP=r$",
+        "Use $OP=|OC|-r$",
+        "Use $OP=\\sqrt{24}$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q04",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q4",
+      "front": [
+        "(a) Express $\\displaystyle\\lim_{\\delta x\\to0}\\sum_{x=1.5}^{7.5}\\frac3x\\,\\delta x$ as an integral.",
+        "(b) Hence show that this limit equals $\\ln k$, where $k$ is a constant to be found."
+      ],
+      "back": [
+        "Spot: the limit of a sum of $f(x)\\,\\delta x$ is a definite integral. $\\dfrac{3}{x}$ integrates to a log.",
+        "Use: $\\displaystyle\\int\\frac{3}{x}\\,dx=3\\ln x$ and $3\\ln5=\\ln5^3$.",
+        "(a) $\\displaystyle\\int_{1.5}^{7.5}\\frac3x\\,dx$",
+        "(b) $3\\ln7.5-3\\ln1.5=3\\ln5=\\ln125$",
+        "Answer: $k=125$"
+      ],
+      "choices": [
+        "Recognise it as $\\displaystyle\\int_{1.5}^{7.5}\\frac3x\\,dx$",
+        "Add up $\\frac3x$ for $x=1.5,\\dots,7.5$",
+        "Differentiate $\\frac3x$",
+        "Integrate $\\frac3x$ to $-\\frac{3}{x^2}$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q05",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q5",
+      "front": [
+        "The height $h$ m of a tree $t$ years after planting is modelled by $h^2=at+b$, $0\\le t<25$.",
+        "The tree was 2.80 m tall after 3 years and 5.50 m tall after 12 years.",
+        "(a) Find $a$ and $b$ to 3 s.f.",
+        "(b) The tree was 6.50 m tall after 20 years. Evaluate the model."
+      ],
+      "back": [
+        "Spot: two data points and two unknowns. Square the heights first, because the model is in $h^2$.",
+        "Use: $7.84=3a+b$ and $30.25=12a+b$.",
+        "(a) $9a=22.41\\Rightarrow a\\approx2.49$, and $b=7.84-3a\\approx0.370$",
+        "(b) The model gives $h=\\sqrt{20a+b}\\approx7.08$ m, compared with 6.50 m, so it overestimates. It may not hold for older trees."
+      ],
+      "choices": [
+        "Square the heights, then solve $7.84=3a+b$ and $30.25=12a+b$",
+        "Solve $2.8=3a+b$ and $5.5=12a+b$",
+        "Take logs of both sides",
+        "Assume $b=0$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q06",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q6",
+      "front": [
+        "A cubic curve $y=f(x)$ passes through the origin, has a maximum at $(1,4)$ and a minimum at $(3,0)$.",
+        "(a) Write down the set of values of $x$ for which $f'(x)<0$.",
+        "(b) The line $y=k$ meets the curve at only one point. Find the possible values of $k$.",
+        "(c) Find the equation of the curve."
+      ],
+      "back": [
+        "Spot: a minimum touching the $x$-axis at $(3,0)$ means a repeated root, so there's a factor of $(x-3)^2$.",
+        "Use: $f(x)=ax(x-3)^2$, then the maximum point to find $a$.",
+        "(a) It's decreasing between the turning points: $\\{x:1<x<3\\}$",
+        "(b) $\\{k:k<0\\}\\cup\\{k:k>4\\}$",
+        "(c) $f(1)=4a=4\\Rightarrow a=1$, so $y=x(x-3)^2$"
+      ],
+      "choices": [
+        "Use the repeated root: $f(x)=ax(x-3)^2$",
+        "Use $f(x)=ax(x-1)(x-3)$",
+        "Use $f(x)=a(x-1)^2(x-3)$",
+        "Integrate $f'(x)=(x-1)(x-3)$ and stop"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2022-06-p1-q07",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q7",
+      "front": [
+        "(i) $p$ and $q$ are integers with $p^2q$ even. Prove by contradiction that at least one of $p$ and $q$ is even.",
+        "(ii) $x$ and $y$ are integers with $x<0$ and $(x-y)^2<5x^2+y^2$. Show that $y<-2x$."
+      ],
+      "back": [
+        "Spot: (i) contradiction: assume both are odd. (ii) Expand, cancel, then divide by a negative quantity, which flips the inequality.",
+        "Use: odd $\\times$ odd $=$ odd. Since $x<0$, $-2x>0$.",
+        "(i) Suppose $p$ and $q$ are both odd. Then $p^2$ is odd, so $p^2q$ is odd. That's a contradiction.",
+        "(ii) $x^2-2xy+y^2<5x^2+y^2\\Rightarrow-2xy<4x^2$",
+        "Divide by $-2x>0$: $y<-2x$"
+      ],
+      "choices": [
+        "Assume $p$ and $q$ are both odd and show $p^2q$ is then odd",
+        "Assume $p$ and $q$ are both even",
+        "Try $p=1$ and $q=2$",
+        "Use proof by exhaustion over all integers"
+      ],
+      "ask": "How do you start part (i)?"
+    },
+    {
+      "id": "2022-06-p1-q08",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q8",
+      "front": [
+        "A car's speed between two sets of traffic lights is modelled by $v=(12-0.5t)\\ln(t+1)$, $0\\le t\\le T$.",
+        "(a) Find $T$.",
+        "(b) Show that the maximum speed occurs when $t=\\dfrac{25}{1+\\ln(t+1)}-1$.",
+        "(c) Using $t_{n+1}=\\dfrac{25}{1+\\ln(t_n+1)}-1$ with $t_1=6$, find $t_3$ to 3 d.p., and the time of maximum speed."
+      ],
+      "back": [
+        "Spot: the car stops when $v=0$. The maximum speed is where $\\dfrac{dv}{dt}=0$, which needs the product rule.",
+        "Use: $\\dfrac{dv}{dt}=-0.5\\ln(t+1)+\\dfrac{12-0.5t}{t+1}$.",
+        "(a) $12-0.5t=0\\Rightarrow T=24$",
+        "(b) $12-0.5t=0.5(t+1)\\ln(t+1)\\Rightarrow25=(t+1)\\left(1+\\ln(t+1)\\right)$, which rearranges to the given form.",
+        "(c) $t_2=7.486$ and $t_3=6.966$, converging to $t\\approx7.09$ s"
+      ],
+      "choices": [
+        "Use the product rule and set $\\dfrac{dv}{dt}=0$",
+        "Set $v=0$",
+        "Differentiate $\\ln(t+1)$ only",
+        "Integrate $v$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2022-06-p1-q09",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q9",
+      "front": [
+        "$PQRS$ is a parallelogram with $\\overrightarrow{PQ}=2\\mathbf{i}+6\\mathbf{j}+3\\mathbf{k}$ and $\\overrightarrow{QR}=6\\mathbf{i}-2\\mathbf{j}+3\\mathbf{k}$.",
+        "(a) Show that $PQRS$ is a rhombus.",
+        "(b) Find the exact area of $PQRS$."
+      ],
+      "back": [
+        "Spot: a rhombus is a parallelogram with equal sides, so compare $|\\overrightarrow{PQ}|$ and $|\\overrightarrow{QR}|$. Area $=ab\\sin\\theta$.",
+        "Use: $\\cos\\theta=\\dfrac{\\mathbf{a}\\cdot\\mathbf{b}}{|\\mathbf{a}||\\mathbf{b}|}$, then $\\sin\\theta=\\sqrt{1-\\cos^2\\theta}$.",
+        "(a) $|\\overrightarrow{PQ}|=\\sqrt{4+36+9}=7$ and $|\\overrightarrow{QR}|=\\sqrt{36+4+9}=7$",
+        "(b) $\\overrightarrow{PQ}\\cdot\\overrightarrow{QR}=12-12+9=9$, so $\\cos\\theta=\\pm\\dfrac{9}{49}$ and $\\sin\\theta=\\dfrac{\\sqrt{2320}}{49}$.",
+        "Area $=7\\times7\\times\\dfrac{\\sqrt{2320}}{49}=4\\sqrt{145}$"
+      ],
+      "choices": [
+        "Show $|\\overrightarrow{PQ}|=|\\overrightarrow{QR}|$, then use area $=ab\\sin\\theta$",
+        "Show $\\overrightarrow{PQ}\\cdot\\overrightarrow{QR}=0$",
+        "Use area $=|\\overrightarrow{PQ}|\\times|\\overrightarrow{QR}|$",
+        "Use area $=\\tfrac12ab\\sin\\theta$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q10",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q10",
+      "front": [
+        "The number of bees (in thousands) is modelled by $N_b=30+150e^{0.04t}$, where $t$ is the number of years from the start of the study.",
+        "(a) Find the number of bees at the start.",
+        "(b) Show that after exactly 15 years the number is increasing at about 11 thousand per year.",
+        "(c) The number of wasps is $N_w=20+600e^{-0.04t}$. Find $T$, to 2 d.p., when the numbers of bees and wasps are equal."
+      ],
+      "back": [
+        "Spot: “rate” means differentiate. Equal populations with $e^{kt}$ and $e^{-kt}$ means let $u=e^{0.04T}$ to get a quadratic.",
+        "Use: $\\dfrac{dN_b}{dt}=6e^{0.04t}$, and $e^{-0.04T}=\\dfrac1u$.",
+        "(a) $30+150=180$ thousand",
+        "(b) $6e^{0.6}\\approx10.9\\approx11$ thousand per year",
+        "(c) $30+150u=20+\\dfrac{600}{u}\\Rightarrow15u^2+u-60=0\\Rightarrow u\\approx1.967$",
+        "Answer: $T=25\\ln u\\approx16.91$"
+      ],
+      "choices": [
+        "Let $u=e^{0.04T}$ and multiply through by $u$ to get a quadratic",
+        "Take logs of each term",
+        "Set $150e^{0.04T}=600e^{-0.04T}$ and ignore the constants",
+        "Differentiate both models and equate them"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2022-06-p1-q11",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q11",
+      "front": [
+        "$C_1$: $y=2x^3+5$, $x>0$, and $C_2$: $y=23x-9x^2-4$, $x>0$.",
+        "(a) Verify that the curves intersect at $x=\\dfrac12$.",
+        "(b) They intersect again at $P$. Using algebra, find the exact $x$-coordinate of $P$."
+      ],
+      "back": [
+        "Spot: you already know one intersection, so $(2x-1)$ is a factor of the cubic you get when you equate the curves.",
+        "Use: $2x^3+9x^2-23x+9=0$, then divide by $(2x-1)$.",
+        "(a) Both give $y=5.25$ at $x=\\tfrac12$.",
+        "(b) $(2x-1)(x^2+5x-9)=0\\Rightarrow x=\\dfrac{-5\\pm\\sqrt{61}}{2}$",
+        "Answer: $x>0$, so $x=\\dfrac{-5+\\sqrt{61}}{2}$"
+      ],
+      "choices": [
+        "Equate the curves, then divide the cubic by $(2x-1)$",
+        "Differentiate both curves",
+        "Use the quadratic formula on $2x^3+9x^2-23x+9$",
+        "Substitute $x=1$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2022-06-p1-q12",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q12",
+      "front": [
+        "Show that $\\displaystyle\\int_1^{e^2}\\sqrt x\\,\\ln x\\,dx=ae^3+b$, where $a$ and $b$ are rational constants to be found."
+      ],
+      "back": [
+        "Spot: a power of $x$ times $\\ln x$ means integration by parts with $u=\\ln x$, because it differentiates to something simpler.",
+        "Use: $u=\\ln x$ and $\\dfrac{dv}{dx}=x^{\\frac12}$, so $v=\\tfrac23x^{\\frac32}$.",
+        "Method: $\\left[\\tfrac23x^{\\frac32}\\ln x\\right]_1^{e^2}-\\displaystyle\\int_1^{e^2}\\tfrac23x^{\\frac12}\\,dx=\\tfrac43e^3-\\left[\\tfrac49x^{\\frac32}\\right]_1^{e^2}$",
+        "Answer: $\\dfrac89e^3+\\dfrac49$"
+      ],
+      "choices": [
+        "Use integration by parts with $u=\\ln x$ and $\\dfrac{dv}{dx}=\\sqrt x$",
+        "Use integration by parts with $u=\\sqrt x$ and $\\dfrac{dv}{dx}=\\ln x$",
+        "Substitute $u=\\sqrt x$",
+        "Integrate $\\ln x$ to $\\dfrac1x$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q13",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q13",
+      "front": [
+        "(i) Prove that the sum of the first $n$ terms of an arithmetic series is $S_n=\\dfrac n2\\left[2a+(n-1)d\\right]$.",
+        "(ii) Ama saves £12 in week 1, £11.50 in week 2, £11 in week 3, and so on. She needs £122.50 for a printer and takes $n$ weeks to save exactly that much.",
+        "(a) Show that $n^2-49n+490=0$. (b) Solve it. (c) State how many weeks she takes, with a reason."
+      ],
+      "back": [
+        "Spot: (i) write the sum forwards and backwards, then add. (ii) Saving less each week means an arithmetic series with $d=-0.5$.",
+        "Use: $S_n=\\dfrac n2\\left[2(12)+(n-1)(-0.5)\\right]=122.5$.",
+        "(a) $\\dfrac n2(24.5-0.5n)=122.5\\Rightarrow49n-n^2=490$",
+        "(b) $(n-14)(n-35)=0$, so $n=14$ or $35$",
+        "(c) 14 weeks. From week 26 the weekly amount would be negative, so $n=35$ makes no sense."
+      ],
+      "choices": [
+        "Use $S_n$ with $a=12$ and $d=-0.5$, and set it equal to 122.5",
+        "Use $d=0.5$",
+        "Use $u_n=122.5$",
+        "Use the geometric series formula"
+      ],
+      "ask": "How do you start part (ii)(a)?"
+    },
+    {
+      "id": "2022-06-p1-q14",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q14",
+      "front": [
+        "(a) Given that $2\\cos(x+60^\\circ)=\\sin(x+30^\\circ)$, show that $\\tan x=\\dfrac{\\sqrt3}{9}$.",
+        "(b) Hence, or otherwise, solve $2\\cos2\\theta=\\sin(2\\theta-30^\\circ)$ for $0\\le\\theta<180^\\circ$, to 1 d.p."
+      ],
+      "back": [
+        "Spot: compound angles with exact angles means expand both sides, then collect the $\\sin x$ and $\\cos x$ terms to get $\\tan x$.",
+        "Use: the $\\cos(A+B)$ and $\\sin(A+B)$ expansions, and $\\cos60^\\circ=\\sin30^\\circ=\\tfrac12$.",
+        "(a) $\\cos x-\\sqrt3\\sin x=\\tfrac{\\sqrt3}{2}\\sin x+\\tfrac12\\cos x\\Rightarrow\\tfrac12\\cos x=\\tfrac{3\\sqrt3}{2}\\sin x\\Rightarrow\\tan x=\\dfrac{1}{3\\sqrt3}=\\dfrac{\\sqrt3}{9}$",
+        "(b) Let $x=2\\theta-60^\\circ$. Then $\\tan(2\\theta-60^\\circ)=\\dfrac{\\sqrt3}{9}$, so $2\\theta-60^\\circ=10.9^\\circ+180n$.",
+        "Answer: $\\theta=35.4^\\circ,\\ 125.4^\\circ$"
+      ],
+      "choices": [
+        "Expand both sides with the compound angle formulae, then divide by $\\cos x$",
+        "Use the R-form straight away",
+        "Square both sides",
+        "Use $\\cos(x+60^\\circ)=\\cos x+\\cos60^\\circ$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2022-06-p1-q15",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q15",
+      "front": [
+        "A toy is a prism whose cross-section is a sector of a circle with radius $r$ cm and angle 1.2 radians. Its length is $h$ cm, and its volume is $300\\text{ cm}^3$.",
+        "(a) Show that its surface area is $S=1.2r^2+\\dfrac{1600}{r}$.",
+        "(b) Find the value of $r$ for which $S$ is stationary.",
+        "(c) Prove that this gives the minimum surface area."
+      ],
+      "back": [
+        "Spot: “minimise surface area” with a fixed volume means use the volume to remove $h$, then differentiate.",
+        "Use: volume $=\\tfrac12r^2(1.2)h=0.6r^2h$, and the area is two sectors plus two rectangles plus the curved face.",
+        "(a) $h=\\dfrac{500}{r^2}$, and $S=2(0.6r^2)+(2r+1.2r)h=1.2r^2+\\dfrac{1600}{r}$",
+        "(b) $\\dfrac{dS}{dr}=2.4r-\\dfrac{1600}{r^2}=0\\Rightarrow r^3=\\dfrac{2000}{3}\\Rightarrow r\\approx8.74$",
+        "(c) $\\dfrac{d^2S}{dr^2}=2.4+\\dfrac{3200}{r^3}>0$, so it's a minimum."
+      ],
+      "choices": [
+        "Use the volume to write $h$ in terms of $r$, then substitute into $S$",
+        "Differentiate $S$ with respect to $h$",
+        "Use the sector area $\\pi r^2$",
+        "Set $r=h$"
+      ]
+    },
+    {
+      "id": "2022-06-p1-q16",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 1 · Q16",
+      "front": [
+        "A curve $C$ has parametric equations $x=4\\sin^2t$, $y=3\\sin2t+2\\sin t$, $0\\le t\\le\\dfrac{\\pi}{2}$.",
+        "The region $R$ is bounded by $C$, the $x$-axis and the line $x=2$.",
+        "(a) Show that the area of $R$ is $\\displaystyle\\int_0^{a}\\left(6-6\\cos4t+16\\sin^2t\\cos t\\right)dt$, where $a$ is a constant.",
+        "(b) Hence find the exact area of $R$."
+      ],
+      "back": [
+        "Spot: parametric area means $\\displaystyle\\int y\\frac{dx}{dt}\\,dt$. Convert the $x$ limits to $t$ limits.",
+        "Use: $\\dfrac{dx}{dt}=8\\sin t\\cos t=4\\sin2t$ and $\\sin^22t=\\dfrac{1-\\cos4t}{2}$. $x=2$ gives $\\sin^2t=\\tfrac12$, so $t=\\dfrac{\\pi}{4}$.",
+        "(a) $(3\\sin2t+2\\sin t)(4\\sin2t)=12\\sin^22t+8\\sin t\\sin2t=6-6\\cos4t+16\\sin^2t\\cos t$, with $a=\\dfrac{\\pi}{4}$",
+        "(b) $\\left[6t-\\tfrac32\\sin4t+\\tfrac{16}{3}\\sin^3t\\right]_0^{\\frac{\\pi}{4}}$",
+        "Answer: $\\dfrac{3\\pi}{2}+\\dfrac{4\\sqrt2}{3}$"
+      ],
+      "choices": [
+        "Use area $=\\displaystyle\\int y\\frac{dx}{dt}\\,dt$ and change the $x$ limits to $t$",
+        "Use area $=\\displaystyle\\int y\\,dt$ from 0 to 2",
+        "Eliminate $t$ first",
+        "Use area $=\\displaystyle\\int x\\frac{dy}{dt}\\,dt$"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q01",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q1",
+      "front": [
+        "Solve $|5-3x|=9+x$."
+      ],
+      "back": [
+        "Spot: modulus equal to a linear expression means two cases: inside $=\\pm$ the right-hand side. Check every answer.",
+        "Use: $5-3x=9+x$ or $5-3x=-(9+x)$.",
+        "Method: $5-3x=9+x\\Rightarrow x=-1$, and $3x-5=9+x\\Rightarrow x=7$",
+        "Answer: $x=-1$ or $x=7$ (both check: $8=8$ and $16=16$)"
+      ],
+      "choices": [
+        "Solve $5-3x=9+x$ and $5-3x=-(9+x)$, then check both",
+        "Solve $5-3x=9+x$ only",
+        "Square both sides and ignore the check",
+        "Drop the modulus signs"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q02",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q2",
+      "front": [
+        "(a) Sketch $y=5^x$, stating where it meets the axes.",
+        "(b) Solve $5^x=80$, giving your answer to 2 d.p."
+      ],
+      "back": [
+        "Spot: an exponential graph has a $y$-intercept of 1 and an asymptote $y=0$. To solve for a power, take logs.",
+        "Use: $x=\\log_580=\\dfrac{\\ln80}{\\ln5}$.",
+        "(a) An increasing curve through $(0,1)$, approaching $y=0$ as $x\\to-\\infty$",
+        "(b) $x=\\dfrac{\\ln80}{\\ln5}\\approx2.72$"
+      ],
+      "choices": [
+        "Take logs: $x=\\dfrac{\\ln80}{\\ln5}$",
+        "Divide 80 by 5",
+        "Use $x=\\ln\\dfrac{80}{5}$",
+        "Square root 80"
+      ],
+      "ask": "How do you solve part (b)?"
+    },
+    {
+      "id": "2022-06-p2-q03",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q3",
+      "front": [
+        "A sequence is defined by $a_1=4$ and $a_{n+1}=\\dfrac{1}{1-a_n}$.",
+        "(a) Show that the sequence is periodic and state its order.",
+        "(b) Find $\\displaystyle\\sum_{n=1}^{40}a_n$."
+      ],
+      "back": [
+        "Spot: “periodic” means generate terms until $a_1$ comes back.",
+        "Use: count the full cycles in 40 terms, plus the leftovers.",
+        "(a) $4,\\ -\\tfrac13,\\ \\tfrac34,\\ 4,\\dots$, so it's periodic of order 3.",
+        "(b) Each cycle adds to $4-\\tfrac13+\\tfrac34=\\tfrac{53}{12}$. 13 cycles cover 39 terms, then add $a_{40}=4$.",
+        "Answer: $13\\times\\dfrac{53}{12}+4=\\dfrac{737}{12}$"
+      ],
+      "choices": [
+        "Work out terms until 4 appears again",
+        "Use the arithmetic series formula",
+        "Use the geometric series formula",
+        "Assume $a_n$ tends to a limit"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q04",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q4",
+      "front": [
+        "Given that $y=3x^2-5x$, use differentiation from first principles to show that $\\dfrac{dy}{dx}=6x-5$."
+      ],
+      "back": [
+        "Spot: “first principles” means start from $\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$.",
+        "Use: expand $3(x+h)^2-5(x+h)$, cancel, then divide by $h$.",
+        "Method: $\\dfrac{3x^2+6xh+3h^2-5x-5h-3x^2+5x}{h}=6x+3h-5$",
+        "As $h\\to0$, this tends to $6x-5$."
+      ],
+      "choices": [
+        "Write $\\dfrac{f(x+h)-f(x)}{h}$, expand, simplify, then let $h\\to0$",
+        "Use the power rule",
+        "Substitute $h=0$ first",
+        "Integrate $6x-5$"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q05",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q5",
+      "front": [
+        "The table shows values of $y=\\log_2(3x)$, to 2 d.p.",
+        "$x$: 2, 3, 4, 5, 6. $y$: 2.58, 3.17, 3.58, 3.91, 4.17",
+        "(a) Use the trapezium rule with all the values to estimate $\\displaystyle\\int_2^6\\log_2(3x)\\,dx$.",
+        "(b) Hence estimate (i) $\\displaystyle\\int_2^6\\log_2(27x^3)\\,dx$ and (ii) $\\displaystyle\\int_2^6\\log_2(12x)\\,dx$."
+      ],
+      "back": [
+        "Spot: (b) means rewrite each new integrand in terms of $\\log_2(3x)$ using the laws of logs, then reuse (a).",
+        "Use: $\\log_2(27x^3)=\\log_2(3x)^3=3\\log_2(3x)$ and $\\log_2(12x)=\\log_24+\\log_2(3x)=2+\\log_2(3x)$.",
+        "(a) $\\tfrac12\\left[(2.58+4.17)+2(3.17+3.58+3.91)\\right]=14.035$",
+        "(b)(i) $3\\times14.035\\approx42.1$",
+        "(ii) $\\displaystyle\\int_2^62\\,dx+14.035=8+14.035\\approx22.0$"
+      ],
+      "choices": [
+        "Rewrite the new logs in terms of $\\log_2(3x)$ using the laws of logs",
+        "Use the trapezium rule again with new values",
+        "Multiply the answer to (a) by 4 for (ii)",
+        "Differentiate the answer to (a)"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2022-06-p2-q06",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q6",
+      "front": [
+        "$f(x)=10\\sin\\left(\\dfrac x2\\right)-4x+6$, $x>0$, with $x$ in radians. $P$ is a local maximum.",
+        "(a) Find the $x$-coordinate of $P$ to 3 s.f.",
+        "(b) The curve crosses the $x$-axis at $\\alpha$. Given $f(3)=3.975$ and $f(4)=-0.907$, explain why $3<\\alpha<4$.",
+        "(c) With $x_0=4$, apply Newton–Raphson once to find a second approximation to $\\alpha$, to 3 s.f."
+      ],
+      "back": [
+        "Spot: a local maximum means $f'(x)=0$. “Explain why it's in the interval” means a sign change on a continuous function. Newton–Raphson is in the booklet.",
+        "Use: $f'(x)=5\\cos\\left(\\dfrac x2\\right)-4$ and $x_1=x_0-\\dfrac{f(x_0)}{f'(x_0)}$.",
+        "(a) $\\cos\\dfrac x2=0.8\\Rightarrow x=2\\arccos0.8\\approx1.29$",
+        "(b) $f$ is continuous and changes sign between 3 and 4.",
+        "(c) $x_1=4-\\dfrac{-0.907}{5\\cos2-4}\\approx3.85$"
+      ],
+      "choices": [
+        "Differentiate and solve $5\\cos\\left(\\frac x2\\right)-4=0$",
+        "Set $f(x)=0$",
+        "Differentiate $\\sin\\frac x2$ as $\\cos\\frac x2$ with no factor of $\\frac12$",
+        "Use degrees"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2022-06-p2-q07",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q7",
+      "front": [
+        "(a) Find the first four terms, in ascending powers of $x$, of the binomial expansion of $\\sqrt{9-8x}$.",
+        "(b) A student uses this expansion with $x=\\dfrac34$ to approximate $\\sqrt3$. Without calculating, state whether it will overestimate or underestimate, with a reason."
+      ],
+      "back": [
+        "Spot: take the 9 out first: $\\sqrt{9-8x}=3\\left(1-\\dfrac{8x}{9}\\right)^{\\frac12}$.",
+        "Use: $(1+x)^n$ with $n=\\tfrac12$ and $x$ replaced by $-\\dfrac{8x}{9}$.",
+        "(a) $3-\\dfrac43x-\\dfrac{8}{27}x^2-\\dfrac{32}{243}x^3$",
+        "(b) Overestimate: every term after the first is negative, so the terms you leave out would make it smaller."
+      ],
+      "choices": [
+        "Write $\\sqrt{9-8x}=3\\left(1-\\frac{8x}{9}\\right)^{\\frac12}$, then expand",
+        "Use $(1+x)^n$ with $x$ replaced by $-8x$, without taking out the 9",
+        "Use $\\sqrt9-\\sqrt{8x}$",
+        "Square the expansion"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q08",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q8",
+      "front": [
+        "The region $R$ is bounded by the curve $y=\\dfrac{(x-1)(x-2)}{3\\sqrt x}$, $x>0$, and the $x$-axis.",
+        "Find the exact area of $R$ in the form $a\\sqrt2+b$."
+      ],
+      "back": [
+        "Spot: a fraction over $\\sqrt x$ means divide each term by $x^{\\frac12}$ to get powers of $x$. The region is between the roots 1 and 2, below the axis.",
+        "Use: $y=\\tfrac13\\left(x^{\\frac32}-3x^{\\frac12}+2x^{-\\frac12}\\right)$. Below the axis, area $=-\\displaystyle\\int y\\,dx$.",
+        "Method: $\\displaystyle\\int_1^2y\\,dx=\\tfrac13\\left[\\tfrac25x^{\\frac52}-2x^{\\frac32}+4x^{\\frac12}\\right]_1^2=\\tfrac13\\left(\\tfrac{8\\sqrt2}{5}-\\tfrac{12}{5}\\right)<0$",
+        "Answer: area $=\\dfrac45-\\dfrac{8}{15}\\sqrt2$"
+      ],
+      "choices": [
+        "Expand and divide by $\\sqrt x$, then integrate between the roots",
+        "Use the quotient rule",
+        "Integrate from 0 to 2",
+        "Use the trapezium rule"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q09",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q9",
+      "front": [
+        "A passenger's height $H$ m on a Ferris wheel is modelled by $H=|A\\sin(bt+\\alpha)^\\circ|$, where $t$ is in seconds.",
+        "The maximum height is 64 m. The passenger is 2 m above the ground at the start, and one revolution takes 900 s.",
+        "(a) Find $A$ and $b$ exactly, and $\\alpha$ to 3 s.f.",
+        "(b) Explain why $H=|A\\sin(bt+\\alpha)^\\circ|+d$, with $d>0$, would be a better model."
+      ],
+      "back": [
+        "Spot: $|\\sin|$ repeats every $180^\\circ$, so one revolution is one hump: $\\dfrac{180}{b}=900$.",
+        "Use: the maximum gives $A$, and $t=0$ gives $\\alpha$.",
+        "(a) $A=64$, $b=\\dfrac{180}{900}=0.2$, and $64\\sin\\alpha=2\\Rightarrow\\alpha\\approx1.79$",
+        "(b) In this model the height reaches 0, so the passenger would touch the ground. The $+d$ lifts the lowest point above the ground."
+      ],
+      "choices": [
+        "Use $\\dfrac{180}{b}=900$, because $|\\sin|$ has period $180^\\circ$",
+        "Use $\\dfrac{360}{b}=900$",
+        "Use $b=900$",
+        "Use $A=32$"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q10",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q10",
+      "front": [
+        "$f(x)=\\dfrac{6x+1}{3x+2}$, $x>-\\dfrac23$, and $g(x)=\\sqrt{9-x^2}$, $0\\le x\\le3$.",
+        "(a) Find $f^{-1}(1)$.",
+        "(b) Show that $f(x)=A+\\dfrac{B}{3x+2}$.",
+        "(c) State the range of $g^{-1}$.",
+        "(d) Find the range of $fg^{-1}$."
+      ],
+      "back": [
+        "Spot: $f^{-1}(1)$ means solve $f(x)=1$. The range of $g^{-1}$ is the domain of $g$.",
+        "Use: $f(x)=2-\\dfrac{3}{3x+2}$, which is increasing.",
+        "(a) $6x+1=3x+2\\Rightarrow x=\\tfrac13$",
+        "(b) $A=2$ and $B=-3$",
+        "(c) $0\\le g^{-1}(x)\\le3$",
+        "(d) Apply $f$ to $[0,3]$: $\\dfrac12\\le fg^{-1}(x)\\le\\dfrac{19}{11}$"
+      ],
+      "choices": [
+        "Solve $f(x)=1$",
+        "Find $\\dfrac{1}{f(1)}$",
+        "Substitute $x=1$ into $f$",
+        "Differentiate $f$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2022-06-p2-q11",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q11",
+      "front": [
+        "Prove, using algebra, that $n^2+3n+5$ is odd for all $n\\in\\mathbb{N}$."
+      ],
+      "back": [
+        "Spot: odd or even for all $n$ means split into $n$ even ($2k$) and $n$ odd ($2k+1$).",
+        "Use: even $+$ even $=$ even, and odd $+$ odd $=$ even.",
+        "$n=2k$: $4k^2+6k+5=2(2k^2+3k+2)+1$, which is odd.",
+        "$n=2k+1$: $4k^2+4k+1+6k+3+5=2(2k^2+5k+4)+1$, which is odd."
+      ],
+      "choices": [
+        "Consider $n=2k$ and $n=2k+1$ separately",
+        "Check $n=1,2,3$",
+        "Factorise $n^2+3n+5$",
+        "Use the quadratic formula"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q12",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q12",
+      "front": [
+        "$f(x)=\\dfrac{e^{2x}}{x^2+k}$, where $k$ is a positive constant.",
+        "(a) Show that $f'(x)=(x^2-x+k)g(x)$, where $g(x)$ is a function to be found.",
+        "(b) Given that $y=f(x)$ has at least one stationary point, find the possible values of $k$."
+      ],
+      "back": [
+        "Spot: quotient rule. Then “at least one stationary point” means the quadratic factor has real roots: $b^2-4ac\\ge0$.",
+        "Use: $e^{2x}$ and the denominator are never 0, so only the quadratic can be 0.",
+        "(a) $f'(x)=\\dfrac{2e^{2x}(x^2+k)-2xe^{2x}}{(x^2+k)^2}$, so $g(x)=\\dfrac{2e^{2x}}{(x^2+k)^2}$",
+        "(b) $1-4k\\ge0$ and $k>0$, so $0<k\\le\\dfrac14$"
+      ],
+      "choices": [
+        "Use the quotient rule, then factorise out $2e^{2x}$",
+        "Differentiate the top and bottom separately",
+        "Use the product rule without the chain rule",
+        "Take logs and integrate"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q13",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q13",
+      "front": [
+        "$A$, $B$ and $C$ have position vectors $2\\mathbf{i}+\\mathbf{j}-3\\mathbf{k}$, $3\\mathbf{j}+\\mathbf{k}$ and $-4\\mathbf{i}+p\\mathbf{j}+9\\mathbf{k}$, and lie on a straight line.",
+        "(a) Find $p$.",
+        "(b) $OB$ is extended to a point $D$ so that $\\overrightarrow{CD}$ is parallel to $\\overrightarrow{OA}$. Find $|\\overrightarrow{OD}|$ as a simplified surd."
+      ],
+      "back": [
+        "Spot: collinear means $\\overrightarrow{AC}$ is a multiple of $\\overrightarrow{AB}$. “Extended” means $\\overrightarrow{OD}=\\mu\\overrightarrow{OB}$.",
+        "Use: compare the components of $\\overrightarrow{CD}=\\lambda\\overrightarrow{OA}$.",
+        "(a) $\\overrightarrow{AB}=(-2,2,4)$ and $\\overrightarrow{AC}=(-6,p-1,12)=3\\overrightarrow{AB}$, so $p=7$.",
+        "(b) $D=(0,3\\mu,\\mu)$ and $\\overrightarrow{CD}=(4,3\\mu-7,\\mu-9)=\\lambda(2,1,-3)$, giving $\\lambda=2$ and $\\mu=3$.",
+        "Answer: $|\\overrightarrow{OD}|=\\sqrt{0+81+9}=3\\sqrt{10}$"
+      ],
+      "choices": [
+        "Set $\\overrightarrow{AC}=k\\overrightarrow{AB}$ and compare components",
+        "Set $\\overrightarrow{OC}=k\\overrightarrow{OA}$",
+        "Use the dot product",
+        "Find the midpoint of $AB$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2022-06-p2-q14",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q14",
+      "front": [
+        "(a) Express $\\dfrac{5}{(3x-2)(x+1)}$ in partial fractions.",
+        "The volume $V\\text{ m}^3$ of gas produced $t$ hours after mixing satisfies $\\dfrac{dV}{dt}=\\dfrac{5V}{(3t-2)(t+1)}$. After 3 hours, $V=7$.",
+        "(b) Show that $V=\\dfrac{4(3t-2)}{t+1}$.",
+        "(c) Deduce the time delay before gas is produced, in minutes, and the limit of the volume produced."
+      ],
+      "back": [
+        "Spot: separate the variables. The right-hand side then needs the partial fractions from (a).",
+        "Use: $\\dfrac{5}{(3x-2)(x+1)}=\\dfrac{3}{3x-2}-\\dfrac{1}{x+1}$.",
+        "(b) $\\ln V=\\ln(3t-2)-\\ln(t+1)+c\\Rightarrow V=\\dfrac{A(3t-2)}{t+1}$. $V(3)=\\dfrac{7A}{4}=7\\Rightarrow A=4$.",
+        "(c) $V=0$ at $t=\\tfrac23$ h, so the delay is 40 minutes. As $t\\to\\infty$, $V\\to12\\text{ m}^3$."
+      ],
+      "choices": [
+        "Separate the variables and use the partial fractions from (a)",
+        "Integrate $5V$ with respect to $t$",
+        "Differentiate the partial fractions",
+        "Assume $V$ is constant"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2022-06-p2-q15",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q15",
+      "front": [
+        "The first three terms of a geometric series are $8\\cos\\theta$, $3+2\\sin\\theta$ and $4\\tan\\theta$.",
+        "(a) Show that $4\\sin^2\\theta-20\\sin\\theta+9=0$.",
+        "(b) Given that $\\theta$ is obtuse and in radians, find its exact value.",
+        "(c) Show that the sum to infinity is $k(1-\\sqrt3)$, where $k$ is a constant to be found."
+      ],
+      "back": [
+        "Spot: three terms in a GP means the middle term squared equals the product of the outer two.",
+        "Use: $(3+2\\sin\\theta)^2=8\\cos\\theta\\cdot4\\tan\\theta=32\\sin\\theta$.",
+        "(a) $9+12\\sin\\theta+4\\sin^2\\theta=32\\sin\\theta$, which rearranges to the quadratic.",
+        "(b) $(2\\sin\\theta-1)(2\\sin\\theta-9)=0$, so $\\sin\\theta=\\tfrac12$ and, since it's obtuse, $\\theta=\\dfrac{5\\pi}{6}$.",
+        "(c) $a=8\\cos\\dfrac{5\\pi}{6}=-4\\sqrt3$ and $r=\\dfrac{4}{-4\\sqrt3}=-\\dfrac{1}{\\sqrt3}$",
+        "$S_\\infty=\\dfrac{-4\\sqrt3}{1+\\frac{1}{\\sqrt3}}=-\\dfrac{12}{\\sqrt3+1}=6(1-\\sqrt3)$, so $k=6$."
+      ],
+      "choices": [
+        "Use $(\\text{middle})^2=\\text{first}\\times\\text{third}$",
+        "Use $\\text{middle}=\\dfrac{\\text{first}+\\text{third}}{2}$",
+        "Set the first term equal to the third",
+        "Use $S_\\infty$ straight away"
+      ]
+    },
+    {
+      "id": "2022-06-p2-q16",
+      "topic": "paper-2022-06",
+      "source": "June 2022 · Paper 2 · Q16",
+      "front": [
+        "$C$ has parametric equations $x=2\\tan t-1$, $y=3\\sec^2t-1$, $-\\dfrac{\\pi}{4}\\le t\\le\\dfrac{\\pi}{3}$. The line $l$ is the normal to $C$ at $t=\\dfrac{\\pi}{4}$.",
+        "(a) Show that $l$ has equation $y=-\\dfrac13x+\\dfrac{16}{3}$.",
+        "(b) Show that all points on $C$ satisfy $y=\\dfrac34(x+1)^2+2$.",
+        "(c) The line $y=-\\dfrac13x+k$ meets $C$ at two distinct points. Find the possible values of $k$."
+      ],
+      "back": [
+        "Spot: parametric gradient $\\dfrac{dy/dt}{dx/dt}$. For the Cartesian equation, use $\\sec^2t\\equiv1+\\tan^2t$. Two intersections on a limited curve means check the discriminant and the endpoints.",
+        "Use: $\\dfrac{dy}{dx}=\\dfrac{6\\sec^2t\\tan t}{2\\sec^2t}=3\\tan t$. The values of $x$ run from $-3$ to $2\\sqrt3-1$.",
+        "(a) At $t=\\dfrac{\\pi}{4}$: the point is $(1,5)$ and the gradient is 3, so the normal has gradient $-\\tfrac13$.",
+        "(b) $\\tan t=\\dfrac{x+1}{2}$, so $y=3\\left(1+\\dfrac{(x+1)^2}{4}\\right)-1$.",
+        "(c) $9x^2+22x+33-12k=0$. Two roots need $432k-704>0$, so $k>\\tfrac{44}{27}$. The endpoint $(-3,5)$ gives $k=4$.",
+        "Answer: $\\dfrac{44}{27}<k\\le4$"
+      ],
+      "choices": [
+        "Use $\\dfrac{dy}{dx}=\\dfrac{dy/dt}{dx/dt}$ at $t=\\frac{\\pi}{4}$, then the perpendicular gradient",
+        "Differentiate $y$ with respect to $t$ only",
+        "Use the gradient of the tangent for the normal",
+        "Eliminate $t$ using $\\sin^2t+\\cos^2t=1$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
     {
       "id": "2021-10-p1-q01",
       "topic": "paper-2021-10",

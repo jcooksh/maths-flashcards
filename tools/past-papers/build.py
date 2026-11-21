@@ -2,7 +2,10 @@
 
 Run from the repository root:  python3 tools/past-papers/build.py
 Needs sympy (pip install sympy) and node, for the KaTeX check.
+A series whose file (and common.py) hasn't changed since its last passing
+check is skipped. Pass --force to check every series again.
 """
+import hashlib
 import importlib
 import json
 import pathlib
@@ -16,6 +19,7 @@ sys.path.insert(0, str(HERE))
 
 # Newest first, so the sidebar lists the most recent papers at the top.
 SERIES_MODULES = sorted((p.stem for p in HERE.glob("series_*.py")), reverse=True)
+CACHE = HERE / ".checked.json"
 LABELS = ("Spot:", "Use:", "Method:", "Answer:", "Answers:", "Watch out:", "Check:", "Key idea:", "Tip:")
 
 
@@ -31,12 +35,27 @@ def validate(card, where):
         assert not re.search(r"\s{2,}", text), (where, "double space", text)
 
 
+def digest(name):
+    data = (HERE / f"{name}.py").read_bytes() + (HERE / "common.py").read_bytes()
+    return hashlib.sha256(data).hexdigest()
+
+
 def main():
+    force = "--force" in sys.argv
+    try:
+        cache = {} if force else json.loads(CACHE.read_text())
+    except (OSError, ValueError):
+        cache = {}
     topics, cards = [], []
     for name in SERIES_MODULES:
         module = importlib.import_module(name)
         series = module.SERIES
-        module.check()
+        if cache.get(name) == digest(name):
+            print(f'{series["title"]}: unchanged, check skipped')
+        else:
+            module.check()
+            cache[name] = digest(name)
+            CACHE.write_text(json.dumps(cache, indent=1) + "\n")
         topics.append({"id": series["id"], "title": series["title"], "collection": "papers", "hue": series["hue"]})
         seen = set()
         for c in sorted(module.CARDS, key=lambda c: (c["paper"], c["q"])):
@@ -55,7 +74,7 @@ def main():
             if "ask" in c:
                 out["ask"] = c["ask"]
             cards.append(out)
-        print(f'{series["title"]}: {len(seen)} questions checked')
+        print(f'{series["title"]}: {len(seen)} questions')
 
     data = {"topics": topics, "cards": cards}
     path = ROOT / "papers.json"

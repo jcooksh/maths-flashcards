@@ -1381,6 +1381,19 @@ body:has(dialog[open]) { overflow: hidden; }
   .card-content > :first-child { margin-top: auto; }
   .card-content > :last-child { margin-bottom: auto; }
   .question-card { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  /* A fade pinned to the bottom of the card while more of the question or its choices is below. */
+  .question-card.scrollable::after {
+    content: "";
+    position: sticky;
+    bottom: 0;
+    flex: none;
+    height: 2.75rem;
+    margin-top: -2.75rem;
+    background: linear-gradient(to bottom, transparent, var(--surface) 80%);
+    /* Sticky stops at the padding edge, so a solid shadow covers the bottom padding too. */
+    box-shadow: 0 2.75rem 0 var(--surface);
+    pointer-events: none;
+  }
   .notice:not(.loading) { flex: 0 1 auto; min-height: 0; }
   .loading { flex: 1 1 auto; min-height: 0; max-height: 38rem; }
   .card-actions, .card-navigation { flex: none; }

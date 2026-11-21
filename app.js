@@ -401,6 +401,7 @@ function renderQuestion(card) {
   ui["reveal-question"].hidden = Boolean(attempt.outcome);
   ui["question-explanation"].hidden = !attempt.outcome;
   if (attempt.outcome) ui["question-explanation"].replaceChildren(...mathLines(card.back, "answer-line"));
+  markScrollable();
 }
 
 // On phones, short answers sit in a 2×2 grid, but only if every one fits on a single line.
@@ -750,6 +751,7 @@ function setupSwipe() {
   card.addEventListener("pointerup", end);
   card.addEventListener("pointercancel", end);
   ui["card-content"].addEventListener("scroll", markScrollable, { passive: true });
+  ui["question-card"].addEventListener("scroll", markScrollable, { passive: true });
   card.addEventListener("keydown", (event) => {
     if ((event.key === "Enter" || event.key === " ") && !event.repeat) {
       event.preventDefault();
@@ -782,10 +784,11 @@ function closeOnBackdrop(dialog) {
 
 // Long cards scroll inside the card; a fade at the bottom shows there's more.
 function markScrollable() {
-  const content = ui["card-content"];
   requestAnimationFrame(() => {
-    const more = content.scrollHeight - content.clientHeight - content.scrollTop > 4;
-    content.classList.toggle("scrollable", more);
+    for (const box of [ui["card-content"], ui["question-card"]]) {
+      const more = !box.hidden && box.scrollHeight - box.clientHeight - box.scrollTop > 4;
+      box.classList.toggle("scrollable", more);
+    }
   });
 }
 
@@ -879,7 +882,10 @@ topicsDialog.addEventListener("close", () => {
 let fitFrame = 0;
 window.addEventListener("resize", () => {
   cancelAnimationFrame(fitFrame);
-  fitFrame = requestAnimationFrame(() => { if (questionMode) fitOptions(); });
+  fitFrame = requestAnimationFrame(() => {
+    if (questionMode) fitOptions();
+    markScrollable();
+  });
 });
 mobileLayout.addEventListener("change", (event) => {
   if (!event.matches && topicsDialog.open) topicsDialog.close();
@@ -930,8 +936,12 @@ document.addEventListener("keydown", (event) => {
 setupSwipe();
 placeHeaderActions();
 // Math fonts load lazily, so measure the answer choices again once they arrive.
-document.fonts?.ready.then(() => { if (questionMode) fitOptions(); });
-document.fonts?.addEventListener("loadingdone", () => { if (questionMode) fitOptions(); });
+function refit() {
+  if (questionMode) fitOptions();
+  markScrollable();
+}
+document.fonts?.ready.then(refit);
+document.fonts?.addEventListener("loadingdone", refit);
 renderTheme();
 const account = connectAccount(ui, useProgress, toast);
 start();
