@@ -1,6 +1,12 @@
 {
   "topics": [
     {
+      "id": "paper-2024-06",
+      "title": "June 2024",
+      "collection": "papers",
+      "hue": 240
+    },
+    {
       "id": "paper-2023-06",
       "title": "June 2023",
       "collection": "papers",
@@ -38,6 +44,734 @@
     }
   ],
   "cards": [
+    {
+      "id": "2024-06-p1-q01",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q1",
+      "front": [
+        "$g(x)=2x^3-9x^2+(k-5)x+2k$, where $k$ is a constant.",
+        "Given that $(x-4)$ is a factor of $g(x)$, find the value of $k$."
+      ],
+      "back": [
+        "Spot: “$(x-4)$ is a factor” means $g(4)=0$, which gives a linear equation in $k$.",
+        "Use: the factor theorem.",
+        "Method: $2(64)-9(16)+4(k-5)+2k=0\\Rightarrow128-144+4k-20+2k=0\\Rightarrow6k-36=0$",
+        "Answer: $k=6$"
+      ],
+      "choices": [
+        "Substitute $x=4$ and set $g(4)=0$",
+        "Substitute $x=-4$ and set $g(-4)=0$",
+        "Set $g(0)=4$",
+        "Divide $g(x)$ by $(x+4)$"
+      ]
+    },
+    {
+      "id": "2024-06-p1-q02",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q2",
+      "front": [
+        "(a) Find, in ascending powers of $x$, the first four terms of the binomial expansion of $\\sqrt{1+8x}$, giving each term in its simplest form.",
+        "(b) Give a reason why $x=\\tfrac14$ should not be used in this expansion to approximate $\\sqrt3$."
+      ],
+      "back": [
+        "Spot: $\\sqrt{1+8x}=(1+8x)^{\\frac12}$, which is $(1+x)^n$ from the formula booklet with $x$ replaced by $8x$. Each power of $x$ gets the matching power of 8.",
+        "Use: $(1+x)^n=1+nx+\\dfrac{n(n-1)}{2!}x^2+\\dfrac{n(n-1)(n-2)}{3!}x^3+\\dots$, valid for $|x|<1$.",
+        "(a) $1+4x-8x^2+32x^3$",
+        "(b) The expansion is only valid for $|8x|<1$, so $|x|<\\tfrac18$, and $\\tfrac14$ is outside that range."
+      ],
+      "choices": [
+        "Use $(1+x)^n$ with $n=\\frac12$ and $x$ replaced by $8x$",
+        "Use $(1+x)^n$ with $n=2$",
+        "Replace $x$ by $8x$ in the first two terms only",
+        "Use $(1+x)^n$ with $n=-\\frac12$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p1-q03",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q3",
+      "front": [
+        "$f(x)=2x+\\tan\\left(\\dfrac x2\\right)$, $\\pi<x<\\dfrac{3\\pi}{2}$. The equation $f(x)=0$ has a single root $\\alpha$.",
+        "(a) Show that $\\alpha$ lies in the interval $[3.4,3.5]$.",
+        "(b) Find $f'(x)$.",
+        "(c) Using 3.5 as a first approximation for $\\alpha$, apply the Newton–Raphson method once to find a second approximation, to 3 d.p."
+      ],
+      "back": [
+        "Spot: “show the root is in an interval” means a sign change on a continuous function. Newton–Raphson needs $f'(x)$, and $\\tan\\left(\\dfrac x2\\right)$ needs the chain rule.",
+        "Use: $\\dfrac{d}{dx}\\tan(kx)=k\\sec^2(kx)$, and $x_1=x_0-\\dfrac{f(x_0)}{f'(x_0)}$ in radians.",
+        "(a) $f(3.4)\\approx-0.897<0$ and $f(3.5)\\approx1.480>0$. $f$ is continuous on the interval, so there's a root.",
+        "(b) $f'(x)=2+\\tfrac12\\sec^2\\left(\\dfrac x2\\right)$",
+        "(c) $x_1=3.5-\\dfrac{1.480}{17.737}\\approx3.417$"
+      ],
+      "choices": [
+        "Use $x_1=3.5-\\frac{f(3.5)}{f'(3.5)}$ with $f'(x)=2+\\frac12\\sec^2\\frac x2$",
+        "Use $f'(x)=2+\\sec^2\\frac x2$",
+        "Use $x_1=3.5+\\frac{f(3.5)}{f'(3.5)}$",
+        "Work in degrees"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2024-06-p1-q04",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q4",
+      "front": [
+        "Given that $y=x^3$, use differentiation from first principles to show that $\\dfrac{dy}{dx}=3x^2$."
+      ],
+      "back": [
+        "Spot: “first principles” means start from $\\displaystyle\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$.",
+        "Use: $(x+h)^3=x^3+3x^2h+3xh^2+h^3$.",
+        "Method: $\\dfrac{(x+h)^3-x^3}{h}=\\dfrac{3x^2h+3xh^2+h^3}{h}=3x^2+3xh+h^2$",
+        "As $h\\to0$, this tends to $3x^2$."
+      ],
+      "choices": [
+        "Write $\\frac{(x+h)^3-x^3}{h}$, expand, simplify, then let $h\\to0$",
+        "Use the power rule",
+        "Substitute $h=0$ first",
+        "Use $(x+h)^3=x^3+h^3$"
+      ]
+    },
+    {
+      "id": "2024-06-p1-q05",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q5",
+      "front": [
+        "$f(x)=\\dfrac{3x+2}{x^2+5}$.",
+        "(a) Show that $f'(x)=\\dfrac{ax^2+bx+c}{(x^2+5)^2}$, where $a$, $b$ and $c$ are constants to be found.",
+        "(b) Hence, using algebra, find the values of $x$ for which $f$ is decreasing."
+      ],
+      "back": [
+        "Spot: a fraction of two functions means the quotient rule. “Decreasing” means $f'(x)<0$, and the denominator is always positive.",
+        "Use: $\\dfrac{d}{dx}\\left(\\dfrac uv\\right)=\\dfrac{vu'-uv'}{v^2}$.",
+        "(a) $\\dfrac{3(x^2+5)-2x(3x+2)}{(x^2+5)^2}=\\dfrac{-3x^2-4x+15}{(x^2+5)^2}$, so $a=-3$, $b=-4$, $c=15$",
+        "(b) $-3x^2-4x+15<0\\Rightarrow(3x-5)(x+3)>0$",
+        "Answer: $x<-3$ or $x>\\tfrac53$"
+      ],
+      "choices": [
+        "Solve $-3x^2-4x+15<0$, because the denominator is always positive",
+        "Solve $f(x)<0$",
+        "Solve $-3x^2-4x+15>0$",
+        "Solve $3x+2<0$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p1-q06",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q6",
+      "front": [
+        "The graph of $y=2|x-3|+4$ has its vertex at $P$.",
+        "(a) Find the coordinates of $P$.",
+        "(b) Solve $19-3x=2|x-3|+4$.",
+        "The line $y=kx+1$, where $k$ is a constant, meets $y=2|x-3|+4$ at two distinct points.",
+        "(c) Find the range of values of $k$."
+      ],
+      "back": [
+        "Spot: a modulus graph is a V. Sketch it with the line to see which branch the line crosses, and only solve on that branch.",
+        "Use: for $x\\ge3$, $y=2x-2$. For $x<3$, $y=10-2x$.",
+        "(a) $P(3,4)$",
+        "(b) Right branch: $19-3x=2x-2\\Rightarrow x=\\tfrac{21}{5}$. The left branch gives $x=9$, which isn't less than 3, so reject it.",
+        "(c) The line passes through $(0,1)$. It must be steeper than the line to $P$ (gradient 1) but less steep than the right arm (gradient 2): $1<k<2$."
+      ],
+      "choices": [
+        "Sketch the V and the line through $(0,1)$, then compare its gradient with the line to $P$ and the right arm",
+        "Solve $kx+1=2x-2$ only",
+        "Use $b^2-4ac>0$",
+        "Use $k=2$, the gradient of the right arm"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2024-06-p1-q07",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q7",
+      "front": [
+        "A cylindrical tank 2 m tall is full of water. Water leaks out through a small hole in its side.",
+        "The depth $H$ m of the water $t$ hours after the leak starts is modelled by $\\dfrac{dH}{dt}=-0.15e^{-0.25t}$.",
+        "(a) Show that $H=Ae^{-0.25t}+B$, where $A$ and $B$ are constants to be found.",
+        "(b) Find the time taken for the depth to fall to 1.7 m, in hours and minutes to the nearest minute.",
+        "In the long term, the water level falls to the height of the hole. (c) Find the height of the hole above the bottom of the tank."
+      ],
+      "back": [
+        "Spot: $\\dfrac{dH}{dt}$ depends on $t$ only, so integrate directly. The tank being full at the start gives the constant.",
+        "Use: $\\displaystyle\\int e^{-0.25t}\\,dt=-4e^{-0.25t}+c$.",
+        "(a) $H=0.6e^{-0.25t}+c$, and $H=2$ at $t=0$ gives $c=1.4$. So $A=0.6$ and $B=1.4$.",
+        "(b) $0.6e^{-0.25t}=0.3\\Rightarrow t=4\\ln2\\approx2.773$ hours, which is 2 hours 46 minutes",
+        "(c) As $t\\to\\infty$, $H\\to1.4$, so the hole is 1.4 m above the bottom."
+      ],
+      "choices": [
+        "Integrate with respect to $t$, then use $H=2$ at $t=0$",
+        "Separate the variables as $\\frac{dH}{H}$",
+        "Use $H=2e^{-0.25t}$",
+        "Differentiate $-0.15e^{-0.25t}$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p1-q08",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q8",
+      "front": [
+        "$f(x)=3-2x^2$, $x\\in\\mathbb{R}$, and $g(x)=\\dfrac{3}{2x-7}$, $x\\ne\\dfrac72$.",
+        "(a) Find $fg(4)$. (b) Find $g^{-1}$.",
+        "(c)(i) Find $gf(x)$ as a simplified fraction. (ii) Deduce the range of $gf$.",
+        "$h(x)=x^2-4x+k$, where $k$ is a constant.",
+        "(d) Find the values of $k$ for which $f(x)=h(x)$ has no real solutions."
+      ],
+      "back": [
+        "Spot: $gf$ means apply $f$ first. In (d), “no real solutions” means rearrange to a quadratic and use $b^2-4ac<0$.",
+        "Use: for $g^{-1}$, write $y=g(x)$ and make $x$ the subject.",
+        "(a) $g(4)=3$, so $fg(4)=f(3)=-15$",
+        "(b) $g^{-1}(x)=\\dfrac{3+7x}{2x}$, $x\\ne0$",
+        "(c)(i) $gf(x)=\\dfrac{3}{2(3-2x^2)-7}=-\\dfrac{3}{1+4x^2}$ (ii) $1+4x^2\\ge1$, so $-3\\le gf(x)<0$",
+        "(d) $3x^2-4x+k-3=0$, and $16-12(k-3)<0\\Rightarrow k>\\dfrac{13}{3}$"
+      ],
+      "choices": [
+        "Rearrange to $3x^2-4x+k-3=0$ and use $b^2-4ac<0$",
+        "Rearrange and use $b^2-4ac>0$",
+        "Solve $f(x)=0$ and $h(x)=0$ separately",
+        "Rearrange and use $b^2-4ac=0$"
+      ],
+      "ask": "How do you start part (d)?"
+    },
+    {
+      "id": "2024-06-p1-q09",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q9",
+      "front": [
+        "The first three terms of a geometric sequence are $2^{4k-5}$, $4^{8-2k}$ and $2^{k-2}$, where $k$ is a constant.",
+        "(a) Using algebra, prove that $k=3$.",
+        "(b) Hence find the sum to infinity of the sequence."
+      ],
+      "back": [
+        "Spot: in a geometric sequence $(u_2)^2=u_1u_3$. Write every term as a power of 2, then compare the indices.",
+        "Use: $4^{8-2k}=2^{2(8-2k)}$ and $2^a\\times2^b=2^{a+b}$.",
+        "(a) $\\left(2^{16-4k}\\right)^2=2^{4k-5}\\times2^{k-2}\\Rightarrow32-8k=5k-7\\Rightarrow k=3$",
+        "(b) The terms are $128,16,2$, so $r=\\tfrac18$ and $S_\\infty=\\dfrac{128}{1-\\frac18}=\\dfrac{1024}{7}$"
+      ],
+      "choices": [
+        "Write every term as a power of 2 and use $(u_2)^2=u_1u_3$",
+        "Use $u_2-u_1=u_3-u_2$",
+        "Put the indices $4k-5$, $8-2k$ and $k-2$ in an arithmetic sequence",
+        "Take $\\log_4$ of each term and add them"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p1-q10",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q10",
+      "front": [
+        "The curve $C$ has equation $y=2x-x^{\\frac32}$, $x\\ge0$, and crosses the $x$-axis at $A$.",
+        "(a) Verify that the $x$-coordinate of $A$ is 4.",
+        "The line $l_1$ is the tangent to $C$ at $A$. (b) Use calculus to show that $l_1$ has equation $x+y=4$.",
+        "The line $l_2$ has equation $y=2x$. The region $R$ is bounded by $C$, $l_1$ and $l_2$.",
+        "(c) Use algebraic integration to find the exact area of $R$."
+      ],
+      "back": [
+        "Spot: $R$ is the triangle under the two lines minus the area under the curve. The lines meet where $2x=4-x$.",
+        "Use: the area under $C$ is $\\displaystyle\\int_0^4\\left(2x-x^{\\frac32}\\right)dx$, and a triangle is $\\tfrac12\\times\\text{base}\\times\\text{height}$.",
+        "(a) $8-4^{\\frac32}=8-8=0$",
+        "(b) $\\dfrac{dy}{dx}=2-\\tfrac32x^{\\frac12}=-1$ at $x=4$, so $y=-(x-4)$",
+        "(c) The lines meet at $\\left(\\tfrac43,\\tfrac83\\right)$, so the triangle with $O$ and $A$ has area $\\tfrac12(4)\\left(\\tfrac83\\right)=\\tfrac{16}{3}$.",
+        "$\\left[x^2-\\tfrac25x^{\\frac52}\\right]_0^4=16-\\tfrac{64}{5}=\\tfrac{16}{5}$, so the area of $R$ is $\\tfrac{16}{3}-\\tfrac{16}{5}=\\tfrac{32}{15}$."
+      ],
+      "choices": [
+        "Find the triangle under $l_1$ and $l_2$, then subtract the area under $C$",
+        "Integrate $C$ from 0 to 4 and stop",
+        "Integrate $2x-(4-x)$ from 0 to 4",
+        "Add the area under $C$ to the triangle"
+      ],
+      "ask": "How do you start part (c)?"
+    },
+    {
+      "id": "2024-06-p1-q11",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q11",
+      "front": [
+        "A badge is a semicircle $ABCOA$ with centre $O$ and diameter $AC=12$ cm. $B$ is on the curved edge.",
+        "$OB$ is an arc of the circle with centre $A$ and radius 6 cm. The region $R$ is bounded by the arc $OB$, the arc $BC$ and the line $OC$.",
+        "Find the exact area of $R$, in the form $(a\\sqrt3+b\\pi)\\text{ cm}^2$, where $a$ and $b$ are rational."
+      ],
+      "back": [
+        "Spot: $AB=AO=OB=6$, so triangle $AOB$ is equilateral. That gives angle $BAO=\\dfrac{\\pi}{3}$ and angle $BOC=\\dfrac{2\\pi}{3}$.",
+        "Use: sector $=\\tfrac12r^2\\theta$, and segment $=\\tfrac12r^2(\\theta-\\sin\\theta)$.",
+        "Method: $R$ is sector $BOC$ minus the segment that chord $OB$ cuts from the circle centred at $A$.",
+        "$\\tfrac12(36)\\left(\\tfrac{2\\pi}{3}\\right)-\\tfrac12(36)\\left(\\tfrac{\\pi}{3}-\\sin\\tfrac{\\pi}{3}\\right)=12\\pi-6\\pi+9\\sqrt3$",
+        "Answer: $(9\\sqrt3+6\\pi)\\text{ cm}^2$"
+      ],
+      "choices": [
+        "Spot the equilateral triangle $AOB$, then take a segment away from sector $BOC$",
+        "Use angle $BOC=\\frac{\\pi}{3}$",
+        "Use the sector $BOC$ alone",
+        "Use $\\frac12r^2\\theta$ with $\\theta$ in degrees"
+      ]
+    },
+    {
+      "id": "2024-06-p1-q12",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q12",
+      "front": [
+        "(a) Express $120\\cos\\theta-350\\sin\\theta$ in the form $K\\cos(\\theta+\\alpha)$, where $K>0$ and $0<\\alpha<90^\\circ$. Give $\\alpha$ to 2 d.p.",
+        "The number of rabbits in a wood $t$ months after the start of a year is modelled by $R=A+120\\cos(30t)^\\circ-350\\sin(30t)^\\circ$, where $A$ is a constant. The maximum number during the year is 1200.",
+        "(b)(i) Find a complete equation for the model. (ii) Write down the minimum number of rabbits.",
+        "(c) The actual number of rabbits was lowest in the middle of April. Comment on the model.",
+        "The number of foxes is modelled by $F=90+60\\sin(30t+50)^\\circ$, and is lowest after $T$ months. (d) Find the number of rabbits at time $T$."
+      ],
+      "back": [
+        "Spot: once it's in the form $K\\cos(\\theta+\\alpha)$, the maximum and minimum are $A\\pm K$, and you can work out when they happen.",
+        "Use: $K=\\sqrt{120^2+350^2}$ and $\\tan\\alpha=\\dfrac{350}{120}$.",
+        "(a) $K=370$ and $\\alpha\\approx71.08^\\circ$",
+        "(b)(i) $A+370=1200$, so $R=830+370\\cos(30t+71.08)^\\circ$ (ii) $830-370=460$",
+        "(c) The minimum is when $30t+71.08=180$, so $t\\approx3.6$, which is in April. The model fits.",
+        "(d) $30T+50=270\\Rightarrow T=\\tfrac{22}{3}$, so $R=830+370\\cos291.08^\\circ\\approx963$ rabbits"
+      ],
+      "choices": [
+        "Write it as $K\\cos(\\theta+\\alpha)$ with $K=370$, so the maximum is $A+370$",
+        "Use a maximum of $A+120$",
+        "Use $K=120+350$",
+        "Set $t=0$ for the maximum"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p1-q13",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q13",
+      "front": [
+        "(a) Given that $a$ is a positive constant, use the substitution $x=a\\sin^2\\theta$ to show that $\\displaystyle\\int_0^{\\frac{3a}{4}}\\sqrt{\\frac{x}{a-x}}\\,dx=2a\\int_0^{\\frac{\\pi}{3}}\\sin^2\\theta\\,d\\theta$.",
+        "(b) Hence use algebraic integration to show that the integral equals $a\\left(\\dfrac{\\pi}{3}-\\dfrac{\\sqrt3}{4}\\right)$."
+      ],
+      "back": [
+        "Spot: with a given substitution, change all three parts: the integrand, $dx$ and the limits. Then $\\sin^2\\theta$ needs the double angle formula.",
+        "Use: $dx=2a\\sin\\theta\\cos\\theta\\,d\\theta$, $1-\\sin^2\\theta=\\cos^2\\theta$ and $\\sin^2\\theta=\\dfrac{1-\\cos2\\theta}{2}$.",
+        "(a) $\\sqrt{\\dfrac{a\\sin^2\\theta}{a\\cos^2\\theta}}\\times2a\\sin\\theta\\cos\\theta=2a\\sin^2\\theta$. $x=0$ gives $\\theta=0$, and $x=\\tfrac{3a}{4}$ gives $\\sin^2\\theta=\\tfrac34$, so $\\theta=\\tfrac{\\pi}{3}$.",
+        "(b) $2a\\left[\\dfrac{\\theta}{2}-\\dfrac{\\sin2\\theta}{4}\\right]_0^{\\frac{\\pi}{3}}=2a\\left(\\dfrac{\\pi}{6}-\\dfrac{\\sqrt3}{8}\\right)=a\\left(\\dfrac{\\pi}{3}-\\dfrac{\\sqrt3}{4}\\right)$"
+      ],
+      "choices": [
+        "Use $\\sin^2\\theta=\\frac{1-\\cos2\\theta}{2}$, then integrate",
+        "Integrate $\\sin^2\\theta$ as $\\frac13\\sin^3\\theta$",
+        "Use $\\sin^2\\theta=\\frac{1+\\cos2\\theta}{2}$",
+        "Integrate $\\sin^2\\theta$ as $-\\cos^2\\theta$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p1-q14",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q14",
+      "front": [
+        "A balloon is being inflated. In a simple model, the balloon is a sphere and the rate of increase of its radius is inversely proportional to its radius. At time $t$ seconds, the radius is $r$ cm.",
+        "(a) Write down a differential equation for this model.",
+        "When $t=5$, the radius is 10 cm and is increasing at 0.8 cm per second.",
+        "(b) Solve the differential equation to show that $r^2=16t+20$.",
+        "(c) Find the radius when $t=12$, to the nearest millimetre. (d) Suggest a limitation of the model."
+      ],
+      "back": [
+        "Spot: “inversely proportional to $r$” means $\\dfrac{dr}{dt}=\\dfrac kr$. Use the given rate to find $k$, then separate the variables.",
+        "Use: $\\displaystyle\\int r\\,dr=\\int k\\,dt$.",
+        "(a) $\\dfrac{dr}{dt}=\\dfrac kr$",
+        "(b) $0.8=\\dfrac{k}{10}\\Rightarrow k=8$. Then $\\tfrac12r^2=8t+c$, and $t=5$, $r=10$ gives $c=10$, so $r^2=16t+20$.",
+        "(c) $r=\\sqrt{212}\\approx14.6$ cm",
+        "(d) The radius keeps growing forever, but a real balloon would burst. A balloon also isn't a perfect sphere."
+      ],
+      "choices": [
+        "Use $\\frac{dr}{dt}=\\frac kr$, find $k$ from the given rate, then separate the variables",
+        "Use $\\frac{dr}{dt}=kr$",
+        "Use $\\frac{dr}{dt}=\\frac{k}{r^2}$",
+        "Differentiate $V=\\frac43\\pi r^3$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p1-q15",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 1 · Q15",
+      "front": [
+        "(i) Show that $k^2+6k+11$ is positive for all real values of $k$.",
+        "(ii) Prove by contradiction that there are no positive integers $x$ and $y$ with $(3x+2y)(x-3y)=20$.",
+        "A student starts: assume such $x$ and $y$ exist. If $3x+2y=10$ and $x-3y=2$, then $x=\\tfrac{34}{11}$ and $y=\\tfrac{4}{11}$, which aren't integers. Complete the proof."
+      ],
+      "back": [
+        "Spot: (i) complete the square. (ii) Both brackets are integers, so they must be a factor pair of 20. Check every possible pair.",
+        "Use: $x,y\\ge1$ gives $3x+2y\\ge5$. The product is positive, so $x-3y$ is positive too.",
+        "(i) $(k+3)^2+2\\ge2>0$",
+        "(ii) The pairs left are $(20,1)$ and $(5,4)$. $3x+2y=20$ and $x-3y=1$ give $y=\\tfrac{17}{11}$. $3x+2y=5$ and $x-3y=4$ give $y=-\\tfrac{7}{11}$. Neither works.",
+        "Every case fails, which contradicts the assumption, so no such $x$ and $y$ exist."
+      ],
+      "choices": [
+        "List the factor pairs of 20 with $3x+2y\\ge5$ and solve each pair",
+        "Expand the brackets and complete the square",
+        "Try $x=1$ and $y=1$",
+        "Assume $x$ and $y$ are both even"
+      ],
+      "ask": "How do you complete part (ii)?"
+    },
+    {
+      "id": "2024-06-p2-q01",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q1",
+      "front": [
+        "$y=2x^3+9x^2-4x+3$.",
+        "(a) Find, in simplest form, (i) $\\dfrac{dy}{dx}$ (ii) $\\dfrac{d^2y}{dx^2}$.",
+        "(b) Hence find the exact value of $x$ when $\\dfrac{d^2y}{dx^2}=0$."
+      ],
+      "back": [
+        "Spot: differentiate term by term, twice. $\\dfrac{d^2y}{dx^2}=0$ is where the curve could change between concave and convex.",
+        "Use: $\\dfrac{d}{dx}(x^n)=nx^{n-1}$, and a constant differentiates to 0.",
+        "(a)(i) $6x^2+18x-4$ (ii) $12x+18$",
+        "(b) $12x+18=0\\Rightarrow x=-\\tfrac32$"
+      ],
+      "choices": [
+        "Differentiate twice, then solve $12x+18=0$",
+        "Solve $\\frac{dy}{dx}=0$",
+        "Solve $y=0$",
+        "Differentiate once and solve $6x^2+18x-4=0$"
+      ],
+      "ask": "How do you answer part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q02",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q2",
+      "front": [
+        "Sam takes out an interest-free loan of £4500. Sam repays £300 in month 1, £290 in month 2, £280 in month 3, and so on, as an arithmetic sequence.",
+        "(a) Show that Sam repays £190 in month 12.",
+        "After the $N$th payment, the loan is fully repaid.",
+        "(b) Show that $N^2-61N+900=0$. (c) Hence find $N$."
+      ],
+      "back": [
+        "Spot: the repayments form an arithmetic sequence, and the total repaid is the sum $S_N$.",
+        "Use: $u_n=a+(n-1)d$ and $S_n=\\dfrac n2\\left[2a+(n-1)d\\right]$, with $a=300$ and $d=-10$.",
+        "(a) $300+11(-10)=190$",
+        "(b) $\\dfrac N2\\left[600-10(N-1)\\right]=4500\\Rightarrow N(610-10N)=9000\\Rightarrow N^2-61N+900=0$",
+        "(c) $(N-25)(N-36)=0$. A payment in month 36 would be $300-350=-50$, which is impossible, so $N=25$."
+      ],
+      "choices": [
+        "Set $S_N=4500$ with $a=300$ and $d=-10$",
+        "Set $u_N=4500$",
+        "Use $d=10$",
+        "Use $S_N=\\frac N2(300+190)$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q03",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q3",
+      "front": [
+        "The point $P(-4,6)$ lies on the curve $y=f(x)$. Find the point that $P$ maps to when the curve is transformed to:",
+        "(i) $y=f(x+3)$",
+        "(ii) $y=f\\left(\\tfrac12x\\right)$",
+        "(iii) $y=-2f(-x)+1$"
+      ],
+      "back": [
+        "Spot: changes inside the bracket act on $x$, the opposite way to how they look. Changes outside act on $y$, as written.",
+        "Use: $f(x+3)$ moves left 3. $f\\left(\\tfrac12x\\right)$ stretches $x$ by a factor of 2. $f(-x)$ reflects in the $y$-axis. $-2f$ multiplies $y$ by $-2$, then $+1$ moves up 1.",
+        "(i) $(-7,6)$",
+        "(ii) $(-8,6)$",
+        "(iii) $(4,-11)$"
+      ],
+      "choices": [
+        "Reflect $x$ to 4, then multiply $y$ by $-2$ and add 1",
+        "Add 1 to $y$, then multiply by $-2$",
+        "Multiply $x$ by $-2$",
+        "Keep $x=-4$ and change $y$ only"
+      ],
+      "ask": "How do you find the point in (iii)?"
+    },
+    {
+      "id": "2024-06-p2-q04",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q4",
+      "front": [
+        "A sequence is defined by $u_1=9$ and $u_{n+1}=ku_n-6$, where $k$ is a positive constant. Given that $u_3=2$,",
+        "(a) show that $9k^2-6k-8=0$.",
+        "(b)(i) Find the value of $k$. (ii) Find $\\displaystyle\\sum_{r=1}^{4}u_r$."
+      ],
+      "back": [
+        "Spot: a recurrence relation with an unknown $k$. Generate $u_2$ and $u_3$ in terms of $k$, then use the given value.",
+        "Use: $u_2=9k-6$ and $u_3=k(9k-6)-6$.",
+        "(a) $9k^2-6k-6=2\\Rightarrow9k^2-6k-8=0$",
+        "(b)(i) $(3k-4)(3k+2)=0$ and $k>0$, so $k=\\tfrac43$",
+        "(ii) $u_2=6$, $u_3=2$ and $u_4=\\tfrac43(2)-6=-\\tfrac{10}{3}$, so the sum is $9+6+2-\\tfrac{10}{3}=\\tfrac{41}{3}$"
+      ],
+      "choices": [
+        "Write $u_2=9k-6$, then $u_3=k(9k-6)-6$, and set $u_3=2$",
+        "Use $u_3=u_1+2k$",
+        "Use $u_3=9k^2$",
+        "Use $u_3=9k-12$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p2-q05",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q5",
+      "front": [
+        "Given that $\\theta$ is small and in radians, use the small angle approximations to find an approximate value of $\\dfrac{3\\theta\\sin2\\theta}{1-\\cos4\\theta}$."
+      ],
+      "back": [
+        "Spot: “small and in radians” means replace each trig function with its small angle approximation, and then the powers of $\\theta$ cancel.",
+        "Use: $\\sin k\\theta\\approx k\\theta$ and $\\cos k\\theta\\approx1-\\dfrac{(k\\theta)^2}{2}$.",
+        "Method: $1-\\cos4\\theta\\approx\\dfrac{16\\theta^2}{2}=8\\theta^2$, so the expression is about $\\dfrac{3\\theta\\times2\\theta}{8\\theta^2}$.",
+        "Answer: $\\dfrac34$"
+      ],
+      "choices": [
+        "Use $\\sin2\\theta\\approx2\\theta$ and $\\cos4\\theta\\approx1-8\\theta^2$",
+        "Use $\\cos4\\theta\\approx1-4\\theta^2$",
+        "Use $\\cos4\\theta\\approx1$",
+        "Use $\\sin2\\theta\\approx1-2\\theta^2$"
+      ]
+    },
+    {
+      "id": "2024-06-p2-q06",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q6",
+      "front": [
+        "$f(x)=e^{2x^2-3}$ and $g(x)=4\\ln x$, for $x>0$.",
+        "(a) Find (i) $f'(x)$ (ii) $g'(x)$.",
+        "Given that $f'(x)=g'(x)$ at $x=\\alpha$, (b) show that $\\alpha$ satisfies $x^2+\\ln x-1.5=0$.",
+        "The iterative formula $x_{n+1}=\\sqrt{1.5-\\ln x_n}$ is used with $x_1=1$.",
+        "(c) Find, to 4 d.p., (i) $x_2$ (ii) $\\alpha$."
+      ],
+      "back": [
+        "Spot: $e^{\\text{function}}$ needs the chain rule. When you set the derivatives equal, take logs to bring the power down.",
+        "Use: $\\dfrac{d}{dx}e^{u}=u'e^{u}$ and $\\ln\\dfrac{1}{x^2}=-2\\ln x$.",
+        "(a)(i) $4xe^{2x^2-3}$ (ii) $\\dfrac4x$",
+        "(b) $4xe^{2x^2-3}=\\dfrac4x\\Rightarrow e^{2x^2-3}=\\dfrac{1}{x^2}\\Rightarrow2x^2-3=-2\\ln x$, then divide by 2.",
+        "(c)(i) $x_2=\\sqrt{1.5}=1.2247$ (ii) $\\alpha=1.1619$"
+      ],
+      "choices": [
+        "Set $4xe^{2x^2-3}=\\frac4x$, then take logs",
+        "Set $e^{2x^2-3}=4\\ln x$",
+        "Differentiate $e^{2x^2-3}$ as $e^{2x^2-3}$",
+        "Differentiate $e^{2x^2-3}$ as $(2x^2-3)e^{2x^2-4}$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q07",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q7",
+      "front": [
+        "Relative to a fixed origin $O$, $A$ has position vector $\\mathbf{i}+4\\mathbf{j}-2\\mathbf{k}$ and $B$ has position vector $3\\mathbf{i}-2\\mathbf{j}+2\\mathbf{k}$. The line $l$ passes through $A$ and $B$.",
+        "(a) Find $\\overrightarrow{AB}$.",
+        "The point $P$ lies on $l$, and $|\\overrightarrow{AP}|=3|\\overrightarrow{BP}|$.",
+        "(b) Find the possible position vectors of $P$."
+      ],
+      "back": [
+        "Spot: $P$ is on the line, so $\\overrightarrow{AP}=\\lambda\\overrightarrow{AB}$. The distance condition has two cases: $P$ between $A$ and $B$, or beyond $B$.",
+        "Use: $\\overrightarrow{BP}=(\\lambda-1)\\overrightarrow{AB}$, so $|\\lambda|=3|\\lambda-1|$.",
+        "(a) $2\\mathbf{i}-6\\mathbf{j}+4\\mathbf{k}$",
+        "(b) $\\lambda=\\tfrac32$ or $\\lambda=\\tfrac34$",
+        "Answer: $4\\mathbf{i}-5\\mathbf{j}+4\\mathbf{k}$ or $\\tfrac52\\mathbf{i}-\\tfrac12\\mathbf{j}+\\mathbf{k}$"
+      ],
+      "choices": [
+        "Write $\\overrightarrow{AP}=\\lambda\\overrightarrow{AB}$, so $|\\lambda|=3|\\lambda-1|$",
+        "Use $\\overrightarrow{OP}=3\\overrightarrow{OB}$",
+        "Use the midpoint of $AB$",
+        "Use $\\lambda=3$ only"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q08",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q8",
+      "front": [
+        "(a) Prove that $\\dfrac{1}{\\sec\\theta-1}+\\dfrac{1}{\\sec\\theta+1}\\equiv2\\cot\\theta\\cosec\\theta$, for $\\theta\\ne90n^\\circ$.",
+        "(b) Hence solve, for $0<x<90^\\circ$, the equation $\\dfrac{1}{\\sec2x-1}+\\dfrac{1}{\\sec2x+1}=3\\tan2x\\cosec2x$. Give your answers to 1 d.p."
+      ],
+      "back": [
+        "Spot: (a) add the fractions. The denominator is a difference of two squares, $\\sec^2\\theta-1=\\tan^2\\theta$. (b) Use (a) with $\\theta=2x$, and then $\\cosec2x$ cancels.",
+        "Use: $\\sec^2\\theta-1=\\tan^2\\theta$, $\\sec\\theta=\\dfrac{1}{\\cos\\theta}$ and $\\cot\\theta=\\dfrac{1}{\\tan\\theta}$.",
+        "(a) $\\dfrac{2\\sec\\theta}{\\sec^2\\theta-1}=\\dfrac{2\\sec\\theta}{\\tan^2\\theta}=\\dfrac{2}{\\cos\\theta}\\times\\dfrac{\\cos^2\\theta}{\\sin^2\\theta}=\\dfrac{2\\cos\\theta}{\\sin^2\\theta}=2\\cot\\theta\\cosec\\theta$",
+        "(b) $2\\cot2x\\cosec2x=3\\tan2x\\cosec2x\\Rightarrow\\tan^22x=\\tfrac23$",
+        "$2x=39.2^\\circ$ or $140.8^\\circ$, so $x=19.6^\\circ$ or $70.4^\\circ$"
+      ],
+      "choices": [
+        "Use (a) with $\\theta=2x$, cancel $\\cosec2x$, then solve $\\tan^22x=\\frac23$",
+        "Use (a) with $\\theta=x$",
+        "Square both sides first",
+        "Take only the positive root of $\\tan^22x=\\frac23$"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q09",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q9",
+      "front": [
+        "A small ball is thrown from $A(0,1.8)$ and caught at $B(24,1.2)$, where $x$ m is the horizontal distance and $H$ m is the height above horizontal ground. The ball is highest when $x=11$.",
+        "A quadratic model links $H$ and $x$. (a) Find $H$ in terms of $x$. (b) Give one limitation of the model.",
+        "Robin stands directly under the path, 20 m horizontally from $O$, and can catch the ball if it's less than 2.5 m above the ground.",
+        "(c) Use the model to decide whether Robin can catch the ball."
+      ],
+      "back": [
+        "Spot: the maximum at $x=11$ means use vertex form, $H=q-a(x-11)^2$. The two points give two equations.",
+        "Use: $1.8=q-121a$ and $1.2=q-169a$.",
+        "(a) $48a=0.6\\Rightarrow a=0.0125$ and $q=3.3125$, so $H=3.3125-0.0125(x-11)^2=-0.0125x^2+0.275x+1.8$",
+        "(b) It ignores air resistance and wind, and treats the ball as a particle.",
+        "(c) $H(20)=3.3125-0.0125(81)=2.3$ m, which is less than 2.5 m, so Robin can catch it."
+      ],
+      "choices": [
+        "Use $H=q-a(x-11)^2$ with the points $A$ and $B$",
+        "Use $H=ax^2+bx$",
+        "Use $H=a(x-11)^2$ with no constant",
+        "Use $H=1.8-(x-11)^2$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p2-q10",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q10",
+      "front": [
+        "A curve $C$ has parametric equations $x=(t+2)^2$, $y=2-t^3$, $-1.5\\le t\\le1$. The point $P(1,3)$ lies on $C$.",
+        "(a) Using parametric differentiation, show that the tangent to $C$ at $P$ has equation $3x+2y=9$.",
+        "$C$ models the profile of a water slide, in metres, where $y$ is the height above the water.",
+        "(b) Find the greatest height of the slide above the water."
+      ],
+      "back": [
+        "Spot: the parametric gradient is $\\dfrac{dy/dt}{dx/dt}$. First find the value of $t$ at $P$.",
+        "Use: $\\dfrac{dy}{dx}=\\dfrac{-3t^2}{2(t+2)}$.",
+        "(a) $P$ is at $t=-1$, where $\\dfrac{dy}{dx}=-\\dfrac32$. So $y-3=-\\tfrac32(x-1)\\Rightarrow3x+2y=9$.",
+        "(b) $y=2-t^3$ decreases as $t$ increases, so the greatest height is at $t=-1.5$: $2+3.375=5.375$ m"
+      ],
+      "choices": [
+        "Find $t$ at $P$, then use $\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}$",
+        "Use $\\frac{dy}{dx}=\\frac{dx/dt}{dy/dt}$",
+        "Substitute $t=1$",
+        "Differentiate $y$ with respect to $t$ and stop"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p2-q11",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q11",
+      "front": [
+        "The curve $C$ has equation $y=9x^2e^{-2x}$, $x\\ge0$. The region $R$ is bounded by $C$, the line $x=1$ and the $x$-axis.",
+        "Find the exact area of $R$, in the form $A+Be^{-2}$, where $A$ and $B$ are rational."
+      ],
+      "back": [
+        "Spot: a power of $x$ times an exponential means integration by parts. $x^2$ needs it twice, with $u$ as the power of $x$ each time.",
+        "Use: $\\displaystyle\\int u\\frac{dv}{dx}\\,dx=uv-\\int v\\frac{du}{dx}\\,dx$, with $u=x^2$ and $\\dfrac{dv}{dx}=e^{-2x}$.",
+        "Method: $\\displaystyle\\int x^2e^{-2x}\\,dx=-\\tfrac12x^2e^{-2x}-\\tfrac12xe^{-2x}-\\tfrac14e^{-2x}+c$",
+        "Answer: $9\\left[\\tfrac14-\\tfrac54e^{-2}\\right]=\\dfrac94-\\dfrac{45}{4}e^{-2}$"
+      ],
+      "choices": [
+        "Use integration by parts twice, with $u=x^2$ first",
+        "Use integration by parts with $u=e^{-2x}$",
+        "Integrate $x^2$ and $e^{-2x}$ separately and multiply",
+        "Use the substitution $u=x^2$"
+      ]
+    },
+    {
+      "id": "2024-06-p2-q12",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q12",
+      "front": [
+        "(a) Express $\\dfrac{1}{V(30-V)}$ in partial fractions.",
+        "The volume $V$ microlitres of a plant cell $t$ hours after watering is modelled by $\\dfrac{dV}{dt}=\\dfrac{1}{15}V(30-V)$. The initial volume is 10 microlitres.",
+        "(b) Find the time taken, in minutes, for the volume to reach 20 microlitres.",
+        "(c) Show that $V=\\dfrac{A}{B+e^{-kt}}$, where $A$, $B$ and $k$ are constants to be found.",
+        "(d) The model predicts an upper limit $L$ on the volume. Find $L$, with a reason."
+      ],
+      "back": [
+        "Spot: separate the variables. The $V$ side needs the partial fractions from (a).",
+        "Use: $\\dfrac{1}{V(30-V)}=\\dfrac{1}{30V}+\\dfrac{1}{30(30-V)}$, and $\\displaystyle\\int\\frac{dV}{30-V}=-\\ln|30-V|$.",
+        "(b) $\\dfrac{1}{30}\\ln\\dfrac{V}{30-V}=\\dfrac{t}{15}+c$, with $c=\\tfrac{1}{30}\\ln\\tfrac12$. $V=20$ gives $t=\\ln2$ hours, about 41.6 minutes.",
+        "(c) $\\dfrac{V}{30-V}=\\tfrac12e^{2t}\\Rightarrow V=\\dfrac{30}{1+2e^{-2t}}=\\dfrac{15}{\\frac12+e^{-2t}}$, so $A=15$, $B=\\tfrac12$ and $k=2$",
+        "(d) As $t\\to\\infty$, $e^{-2t}\\to0$, so $V\\to30$. $L=30$."
+      ],
+      "choices": [
+        "Separate the variables, using the partial fractions to integrate $\\frac{1}{V(30-V)}$",
+        "Integrate $V(30-V)$ with respect to $t$",
+        "Integrate $\\frac{1}{V(30-V)}$ as $\\ln V(30-V)$",
+        "Assume $\\frac{dV}{dt}$ is constant"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q13",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q13",
+      "front": [
+        "The number of subscribers to a streaming service, $P$ millions, is modelled by $P=ab^t$, where $t$ is the number of years after 2015.",
+        "A graph of $\\log_{10}P$ against $t$ is close to a straight line with gradient 0.12 and intercept 1.3.",
+        "(a) Estimate $a$ and $b$ to 3 d.p. (b) Interpret (i) $a$ (ii) $b$ in context.",
+        "(c) Estimate the number of subscribers in 2030. (d) Comment on the reliability of your answer to (c)."
+      ],
+      "back": [
+        "Spot: $P=ab^t$ becomes a straight line when you take logs: $\\log P=\\log a+t\\log b$. The intercept is $\\log a$ and the gradient is $\\log b$.",
+        "Use: $a=10^{\\text{intercept}}$ and $b=10^{\\text{gradient}}$.",
+        "(a) $a=10^{1.3}\\approx19.953$ and $b=10^{0.12}\\approx1.318$",
+        "(b)(i) There were about 20 million subscribers in 2015. (ii) The number grows by about 31.8% each year.",
+        "(c) $t=15$: $\\log_{10}P=1.3+15(0.12)=3.1$, so $P\\approx1260$ million",
+        "(d) It's unreliable: it extrapolates 15 years ahead, and growth of 32% a year can't continue."
+      ],
+      "choices": [
+        "Take logs: $\\log P=\\log a+t\\log b$, so $a=10^{1.3}$ and $b=10^{0.12}$",
+        "Use $a=1.3$ and $b=0.12$",
+        "Use $a=e^{1.3}$ and $b=e^{0.12}$",
+        "Use $a=0.12$ and $b=1.3$"
+      ],
+      "ask": "How do you start part (a)?"
+    },
+    {
+      "id": "2024-06-p2-q14",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q14",
+      "front": [
+        "The circle $C_1$ has equation $x^2+y^2+4x-10y+20=0$.",
+        "(a) Find (i) the coordinates of the centre (ii) the radius of $C_1$.",
+        "The circle $C_2$ has centre $(4,1)$ and radius $k$. $C_1$ and $C_2$ meet at two distinct points.",
+        "(b) Find the range of values of $k$, in set notation."
+      ],
+      "back": [
+        "Spot: two circles meet at two points when the distance between the centres is less than the sum of the radii and more than their difference.",
+        "Use: $|r_1-r_2|<d<r_1+r_2$.",
+        "(a) $(x+2)^2+(y-5)^2=9$, so the centre is $(-2,5)$ and the radius is 3.",
+        "(b) $d=\\sqrt{6^2+4^2}=2\\sqrt{13}$, so $k+3>2\\sqrt{13}$ and $|k-3|<2\\sqrt{13}$.",
+        "Answer: $\\{k:2\\sqrt{13}-3<k<2\\sqrt{13}+3\\}$"
+      ],
+      "choices": [
+        "Compare the distance between the centres with $k+3$ and $|k-3|$",
+        "Set the distance between the centres equal to $k+3$",
+        "Use $k>3$ only",
+        "Use $k<2\\sqrt{13}$ only"
+      ],
+      "ask": "How do you start part (b)?"
+    },
+    {
+      "id": "2024-06-p2-q15",
+      "topic": "paper-2024-06",
+      "source": "June 2024 · Paper 2 · Q15",
+      "front": [
+        "The curve $C$ has equation $(x+y)^3=2x^2-y-1$.",
+        "(a) Find $\\dfrac{dy}{dx}$ in terms of $x$ and $y$.",
+        "The point $P(1,0)$ lies on $C$. (b) Show that the normal to $C$ at $P$ has equation $y=4-4x$.",
+        "(c) Prove, using algebra, that the normal at $P$ doesn't meet $C$ again."
+      ],
+      "back": [
+        "Spot: implicit differentiation, with the chain rule on $(x+y)^3$. In (c), substitute the normal into $C$. You already know $x=1$ is a root, so factorise and show the other factor has no real roots.",
+        "Use: $\\dfrac{d}{dx}(x+y)^3=3(x+y)^2\\left(1+\\dfrac{dy}{dx}\\right)$.",
+        "(a) $3(x+y)^2\\left(1+\\dfrac{dy}{dx}\\right)=4x-\\dfrac{dy}{dx}\\Rightarrow\\dfrac{dy}{dx}=\\dfrac{4x-3(x+y)^2}{3(x+y)^2+1}$",
+        "(b) At $P$ the gradient is $\\dfrac14$, so the normal has gradient $-4$: $y=-4(x-1)$",
+        "(c) $(4-3x)^3=2x^2+4x-5\\Rightarrow27x^3-106x^2+148x-69=0\\Rightarrow(x-1)(27x^2-79x+69)=0$",
+        "$79^2-4(27)(69)=-1211<0$, so $x=1$ is the only intersection."
+      ],
+      "choices": [
+        "Substitute $y=4-4x$ into $C$, factor out $(x-1)$, then use the discriminant",
+        "Solve $\\frac{dy}{dx}=-4$",
+        "Show the normal and the tangent are perpendicular",
+        "Substitute $x=1$ into $C$"
+      ],
+      "ask": "How do you start part (c)?"
+    },
     {
       "id": "2023-06-p1-q01",
       "topic": "paper-2023-06",
