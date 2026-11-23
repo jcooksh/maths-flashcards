@@ -14,10 +14,10 @@
     } catch {}
   </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=14">
+  <link rel="stylesheet" href="./styles.css?v=16">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=14"></script>
+  <script type="module" src="./app.js?v=16"></script>
 </head>
 <body>
   <header class="mobile-header">
@@ -44,15 +44,15 @@
         </nav>
         <p class="nav-heading">Browse</p>
         <nav class="topic-nav" aria-label="Browse cards by topic">
-          <div class="topic-group">
+          <div class="topic-group" data-collection="revision">
             <button class="group-button" data-deck="revision" type="button" aria-pressed="false" aria-label="All revision topics">Revision</button>
             <div class="topic-list" id="revision-topics"></div>
           </div>
-          <div class="topic-group">
+          <div class="topic-group" data-collection="trigonometry">
             <button class="group-button" data-deck="trigonometry" type="button" aria-pressed="false" aria-label="All trig rules">Trig rules</button>
             <div class="topic-list" id="trigonometry-topics"></div>
           </div>
-          <div class="topic-group">
+          <div class="topic-group" data-collection="papers">
             <button class="group-button" data-deck="papers" type="button" aria-pressed="false" aria-label="All past paper questions">Past papers</button>
             <div class="topic-list" id="papers-topics"></div>
           </div>
@@ -175,6 +175,11 @@
               <span class="card-bottom">
                 <span class="flip-hint" id="flip-hint"><span class="hint-touch">Tap to flip · swipe to rate</span><span class="hint-keys">Click to flip <kbd>Space</kbd></span></span>
                 <span class="reference-label" id="reference-label" hidden></span>
+                <span class="pager" id="card-pager" hidden>
+                  <button class="pager-prev" type="button" aria-label="Previous part"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
+                  <span class="pager-label">1 / 2</span>
+                  <button class="pager-next" type="button" aria-label="Next part">More<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                </span>
               </span>
             </div>
 
@@ -184,14 +189,25 @@
               <button class="pill pill-known" id="know-card" type="button" aria-keyshortcuts="2">Got it<kbd aria-hidden="true">2</kbd></button>
             </div>
 
-            <div class="question-card" id="question-card" hidden>
+            <div class="question-card" id="question-card" data-face="ask" hidden>
+              <div class="question-tabs" id="question-tabs" role="group" aria-label="Switch view" hidden>
+                <button type="button" data-face="question" id="tab-question" aria-pressed="true">Question</button>
+                <button type="button" data-face="choose" id="tab-choose" aria-pressed="false">Answers</button>
+                <button type="button" data-face="method" id="tab-method" aria-pressed="false">Method</button>
+              </div>
               <h2 id="question-prompt" tabindex="-1"></h2>
+              <button class="pill pill-primary show-choices" id="show-choices" type="button">Choose your answer<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
               <div class="question-options" id="question-options" role="group" aria-label="Answer choices"></div>
               <div class="question-feedback">
                 <p id="question-feedback" role="status" tabindex="-1"></p>
                 <button class="quiet-button" id="reveal-question" type="button">Show answer</button>
               </div>
               <div class="question-explanation" id="question-explanation" hidden></div>
+              <div class="pager question-pager" id="question-pager" hidden>
+                <button class="pager-prev" type="button" aria-label="Previous part"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
+                <span class="pager-label">1 / 2</span>
+                <button class="pager-next" type="button" aria-label="Next part">More<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+              </div>
             </div>
 
             <div class="card-navigation" role="group" aria-label="Practice navigation">

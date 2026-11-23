@@ -1,6 +1,6 @@
 import { boxes, boxNames, boxOf, boxCounts, sessionPlan, isDue } from "./progress.js?v=2";
 import { connectAccount } from "./account.js?v=4";
-import { renderDashboard, boxBar, boxLegend, fitLabels, studyStreak } from "./dashboard.js?v=1";
+import { renderDashboard, boxBar, boxLegend, fitLabels, studyStreak } from "./dashboard.js?v=3";
 import { dayKey } from "./activity.js?v=1";
 
 const ui = Object.fromEntries(Array.from(document.querySelectorAll("[id]"), (element) => [element.id, element]));
@@ -560,12 +560,13 @@ function renderQuestion(card) {
   let attempt = questionAttempts.get(card);
   if (!attempt) {
     const options = shuffled(card.choices.map((text, index) => ({ text, correct: index === 0 })));
-    attempt = { options, wrong: new Set(), outcome: null, firstCorrect: null, move: "" };
+    attempt = { options, wrong: new Set(), outcome: null, firstCorrect: null, move: "", face: "ask", layout: "combined" };
     questionAttempts.set(card, attempt);
   }
 
   const optionList = ui["question-options"];
-  if (displayedQuestion !== attempt) {
+  const fresh = displayedQuestion !== attempt;
+  if (fresh) {
     displayedQuestion = attempt;
     const exam = isExam(card);
     ui["question-card"].classList.toggle("exam", exam);
@@ -575,12 +576,11 @@ function renderQuestion(card) {
       appendMath(element, line, false);
       return element;
     }));
-    if (exam) {
-      const ask = document.createElement("span");
-      ask.className = "ask-line";
-      ask.textContent = card.ask ?? "How should you start?";
-      ui["question-prompt"].append(ask);
-    }
+    // Shown under an exam question, and above the answers when a long question is split in two.
+    const ask = document.createElement("span");
+    ask.className = "ask-line" + (exam ? "" : " generic");
+    ask.textContent = exam ? card.ask ?? "How should you start?" : "Which answer is right?";
+    ui["question-prompt"].append(ask);
     const visibleLength = (text) => text.replace(/\\[a-zA-Z]+/g, "x").replace(/[${}^_\\\s]/g, "").length;
     optionList.dataset.fit = attempt.options.every((option) => visibleLength(option.text) <= 24) ? "try" : "";
     optionList.replaceChildren(...attempt.options.map((option, index) => {
@@ -617,8 +617,243 @@ function renderQuestion(card) {
   ui["question-feedback"].dataset.outcome = attempt.outcome ?? (attempt.wrong.size ? "wrong" : "");
   ui["reveal-question"].hidden = Boolean(attempt.outcome);
   ui["question-explanation"].hidden = !attempt.outcome;
-  if (attempt.outcome) ui["question-explanation"].replaceChildren(...mathLines(card.back, "answer-line"));
+  if (attempt.outcome) {
+    const right = attempt.options.find((option) => option.correct);
+    const answer = document.createElement("p");
+    answer.className = "method-answer";
+    const tick = document.createElement("span");
+    tick.className = "method-tick";
+    tick.textContent = "✓";
+    tick.setAttribute("aria-hidden", "true");
+    const text = document.createElement("span");
+    appendMath(text, right.text, false);
+    answer.append(tick, text);
+    ui["question-explanation"].replaceChildren(answer, ...mathLines(card.back, "answer-line"));
+  }
+  applyFace(attempt, fresh);
+}
+
+/* ---------- Question views ----------
+ * A question shows its prompt and answers together when they fit on screen ("ask").
+ * A long one is split: the question first ("question"), then the answers ("choose").
+ * After it's answered, the method gets its own view ("method"). Tabs move between them.
+ */
+const fitMinimum = { ask: 0.84, question: 0.8, choose: 0.76, method: 0.8 };
+let methodTimer;
+
+function setFace(attempt) {
+  const box = ui["question-card"];
+  box.dataset.face = attempt.face;
+  ui["question-tabs"].hidden = attempt.layout !== "split" && !attempt.outcome;
+  ui["tab-choose"].hidden = attempt.layout !== "split";
+  ui["tab-method"].hidden = !attempt.outcome;
+  const current = attempt.face === "ask" ? "question" : attempt.face;
+  for (const tab of ui["question-tabs"].querySelectorAll("[data-face]")) {
+    tab.setAttribute("aria-pressed", String(tab.dataset.face === current));
+  }
+}
+
+function fitFace(attempt) {
+  const box = ui["question-card"];
+  const holder = attempt.face === "method" ? ui["question-explanation"] : attempt.face === "question" ? ui["question-prompt"] : null;
+  if (holder) layoutPages(box, holder, ui["question-pager"], fitMinimum[attempt.face]);
+  else {
+    clearPages(box, ui["question-pager"]);
+    fitText(box, fitMinimum[attempt.face]);
+  }
   markScrollable();
+}
+
+function applyFace(attempt, fresh) {
+  if (fresh && !attempt.outcome) {
+    attempt.face = "ask";
+    attempt.layout = "combined";
+  }
+  setFace(attempt);
+  fitFace(attempt);
+  if (attempt.face === "ask" && !attempt.outcome && ui["question-card"].classList.contains("overflowing")) {
+    attempt.layout = "split";
+    attempt.face = "question";
+    setFace(attempt);
+    fitFace(attempt);
+  }
+}
+
+function showFace(face, { animate = true } = {}) {
+  const card = queue[position];
+  const attempt = questionAttempts.get(card);
+  if (!attempt) return;
+  if (face === "question" && attempt.layout !== "split") face = "ask";
+  if (face === "choose" && attempt.layout !== "split") face = "ask";
+  if (attempt.face === face) return;
+  attempt.face = face;
+  const swap = () => {
+    setFace(attempt);
+    fitFace(attempt);
+  };
+  if (animate) animateSwap(ui["question-card"], swap, ...fade, { out: 110, in: 260 });
+  else swap();
+}
+
+/* ---------- Pages ----------
+ * When a card's lines don't fit even at the smallest readable size, they're split into pages
+ * that each fit. More (or swiping up) shows the next page, so nothing ever scrolls.
+ */
+const pages = new WeakMap();
+
+function clearPages(box, pager) {
+  const state = pages.get(box);
+  if (state) for (const line of state.lines) line.hidden = false;
+  pages.delete(box);
+  box.classList.remove("paged");
+  pager.hidden = true;
+}
+
+function layoutPages(box, holder, pager, min) {
+  clearPages(box, pager);
+  if (fitText(box, min)) return;
+  const lines = Array.from(holder.children);
+  // Group lines greedily at the smallest readable size, with the pager showing.
+  box.classList.add("paged");
+  pager.hidden = false;
+  box.style.setProperty("--fit", String(min));
+  const fits = () => box.scrollHeight <= box.clientHeight + 1;
+  const groups = [];
+  let group = [];
+  for (const line of lines) line.hidden = true;
+  for (const line of lines) {
+    line.hidden = false;
+    group.push(line);
+    if (!fits() && group.length > 1) {
+      group.pop();
+      for (const shown of group) shown.hidden = true;
+      groups.push(group);
+      group = [line];
+    }
+  }
+  groups.push(group);
+  // One text size for every page: the largest that fits them all.
+  let scale = 1;
+  for (const page of groups) {
+    for (const line of lines) line.hidden = !page.includes(line);
+    let low = min;
+    let high = scale;
+    box.style.setProperty("--fit", String(high));
+    if (fits()) continue;
+    for (let i = 0; i < 6; i++) {
+      const middle = (low + high) / 2;
+      box.style.setProperty("--fit", middle.toFixed(3));
+      if (fits()) low = middle;
+      else high = middle;
+    }
+    scale = low;
+  }
+  box.style.setProperty("--fit", scale.toFixed(3));
+  box.classList.toggle("overflowing", false);
+  pages.set(box, { lines, groups, index: 0, pager });
+  showPage(box, 0, false);
+}
+
+function showPage(box, index, animate = true) {
+  const state = pages.get(box);
+  if (!state || index < 0 || index >= state.groups.length) return false;
+  const apply = () => {
+    state.index = index;
+    for (const line of state.lines) line.hidden = !state.groups[index].includes(line);
+    const label = state.pager.querySelector(".pager-label");
+    label.textContent = (index + 1) + " / " + state.groups.length;
+    state.pager.querySelector(".pager-prev").disabled = index === 0;
+    state.pager.querySelector(".pager-next").disabled = index === state.groups.length - 1;
+    fitFormulas(box);
+    box.classList.toggle("overflowing", box.scrollHeight > box.clientHeight + 1);
+    markScrollable();
+  };
+  if (animate && motionAllowed(box)) {
+    const direction = index > state.index ? 1 : -1;
+    const content = box === ui["card-content"] ? box : state.groups[index][0]?.parentElement ?? box;
+    animateSwap(content, apply,
+      [{ opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: `translateY(${-direction * 14}px)` }],
+      [{ opacity: 0, transform: `translateY(${direction * 18}px)` }, { opacity: 1, transform: "translateY(0)" }],
+      { out: 110, in: 260 });
+  } else {
+    apply();
+  }
+  ui.announcer.textContent = "Part " + (index + 1) + " of " + state.groups.length + ".";
+  return true;
+}
+
+// The box whose pages the arrow keys and swipes move through.
+function pagedBox() {
+  if (view !== "study") return null;
+  const box = questionMode ? ui["question-card"] : ui["card-content"];
+  return pages.has(box) ? box : null;
+}
+
+function turnPage(direction) {
+  const box = pagedBox();
+  if (!box) return false;
+  return showPage(box, pages.get(box).index + direction);
+}
+
+// Shrinks a box's text (through --fit) until everything in it fits, so nothing has to scroll.
+// If it still doesn't fit at the smallest size, the box is marked as overflowing and scrolls.
+// A long formula can't wrap like words can, so shrink any that is wider than its line.
+// Otherwise it would stick out of the card and get cut off.
+function blockOf(node) {
+  let parent = node.parentElement;
+  while (parent && /^(inline|contents)$/.test(getComputedStyle(parent).display)) parent = parent.parentElement;
+  return parent;
+}
+
+function fitFormulas(root) {
+  const formulas = Array.from(root.querySelectorAll(".katex"));
+  for (const formula of formulas) formula.style.removeProperty("font-size");
+  const changes = [];
+  for (const formula of formulas) {
+    if (!formula.getClientRects().length) continue;
+    const holder = blockOf(formula);
+    if (!holder) continue;
+    const style = getComputedStyle(holder);
+    const room = holder.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const parts = Array.from(formula.querySelectorAll(".katex-base, .base"), (part) => part.getBoundingClientRect());
+    if (!parts.length || room <= 0) continue;
+    // Unbreakable formulas need their whole width on one line; others only their widest piece.
+    const needed = getComputedStyle(formula).whiteSpace === "nowrap"
+      ? Math.max(...parts.map((part) => part.right)) - Math.min(...parts.map((part) => part.left))
+      : Math.max(...parts.map((part) => part.width));
+    if (needed <= room + 0.5) continue;
+    const size = parseFloat(getComputedStyle(formula).fontSize) / parseFloat(getComputedStyle(formula.parentElement).fontSize);
+    changes.push([formula, size * Math.max(0.5, Math.floor((room / needed) * 100) / 100)]);
+  }
+  for (const [formula, size] of changes) formula.style.fontSize = size.toFixed(3) + "em";
+}
+
+function fitText(box, min = 0.66) {
+  if (box.hidden || !box.isConnected) return true;
+  for (const formula of box.querySelectorAll(".katex[style]")) formula.style.removeProperty("font-size");
+  const fits = () => box.scrollHeight <= box.clientHeight + 1;
+  box.style.setProperty("--fit", "1");
+  let ok = fits();
+  if (!ok) {
+    box.style.setProperty("--fit", String(min));
+    ok = fits();
+    if (ok) {
+      let low = min;
+      let high = 1;
+      for (let i = 0; i < 6; i++) {
+        const middle = (low + high) / 2;
+        box.style.setProperty("--fit", middle.toFixed(3));
+        if (fits()) low = middle;
+        else high = middle;
+      }
+      box.style.setProperty("--fit", low.toFixed(3));
+    }
+  }
+  fitFormulas(box);
+  // Smaller formulas can be enough on their own.
+  if (!ok) ok = fits();
+  box.classList.toggle("overflowing", !ok);
+  return ok;
 }
 
 // On phones, short answers sit in a 2×2 grid, but only if every one fits on a single line.
@@ -636,6 +871,7 @@ function answerQuestion(choiceIndex) {
   flushMotion();
   const attempt = questionAttempts.get(card);
   if (!attempt || attempt.outcome || attempt.wrong.has(choiceIndex)) return;
+  if (attempt.face === "question" && choiceIndex !== undefined) showFace("choose", { animate: false });
   const revealed = choiceIndex === undefined;
   const correct = !revealed && attempt.options[choiceIndex].correct;
   let saved = true;
@@ -665,13 +901,12 @@ function answerQuestion(choiceIndex) {
   play(ui["question-feedback"], [{ opacity: 0, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: easeOut });
   if (!saved) ui["question-feedback"].textContent += " Progress couldn’t be saved on this device.";
   if (revealed) ui["question-feedback"].focus({ preventScroll: true });
+  // Once it's answered, show the method after a moment, so the tick on the right answer is seen first.
   if (attempt.outcome) {
-    const card = ui["question-card"];
-    requestAnimationFrame(() => {
-      if (card.scrollHeight > card.clientHeight) {
-        card.scrollTo({ top: card.scrollHeight, behavior: reducedMotion.matches ? "auto" : "smooth" });
-      }
-    });
+    clearTimeout(methodTimer);
+    methodTimer = setTimeout(() => {
+      if (queue[position] === card && questionAttempts.get(card) === attempt) showFace("method");
+    }, revealed ? 120 : 750);
   }
 }
 
@@ -763,6 +998,7 @@ function renderCard(announcement = "") {
   const lines = answerVisible ? card.back : frontLines(card);
   ui["card-content"].replaceChildren(...mathLines(lines, answerVisible ? "answer-line" : exam ? "exam-line" : "prompt"));
   ui["card-content"].scrollTop = 0;
+  layoutPages(ui["card-content"], ui["card-content"], ui["card-pager"], !answerVisible && !exam ? 0.6 : 0.8);
   markScrollable();
   ui.announcer.textContent = announcement || (answerVisible ? "Answer shown." : "Question " + (position + 1) + " of " + queue.length + ".");
 }
@@ -1103,7 +1339,11 @@ function setupSwipe() {
     const dy = event.clientY - drag.y;
     if (!drag.active) {
       if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
-        drag = null;
+        if (Math.abs(dy) > 36 && pagedBox()) {
+          drag = null;
+          suppressClickUntil = performance.now() + 400;
+          turnPage(dy < 0 ? 1 : -1);
+        }
         return;
       }
       if (Math.abs(dx) < 10) return;
@@ -1157,6 +1397,39 @@ function setupSwipe() {
     }
     flipCard();
   });
+}
+
+// A long question or method is split into pages. On a touch screen a swipe up or down
+// turns them, as on flashcards. (With a mouse, dragging still selects text.)
+function setupPageSwipe() {
+  const box = ui["question-card"];
+  let start = null;
+  let suppressClickUntil = 0;
+  box.addEventListener("pointerdown", (event) => {
+    start = event.isPrimary && event.pointerType !== "mouse" && pages.has(box)
+      ? { x: event.clientX, y: event.clientY, id: event.pointerId }
+      : null;
+  });
+  box.addEventListener("pointermove", (event) => {
+    if (!start || event.pointerId !== start.id) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dy) > 36 && Math.abs(dy) > Math.abs(dx) * 1.2) {
+      start = null;
+      suppressClickUntil = performance.now() + 400;
+      turnPage(dy < 0 ? 1 : -1);
+    }
+  });
+  const end = () => { start = null; };
+  box.addEventListener("pointerup", end);
+  box.addEventListener("pointercancel", end);
+  // A swipe that ends on an answer or button shouldn't press it.
+  box.addEventListener("click", (event) => {
+    if (performance.now() < suppressClickUntil) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }, true);
 }
 
 /* ---------- Dialogs ---------- */
@@ -1242,12 +1515,23 @@ ui.library.addEventListener("click", (event) => {
   if (!cards.length) return;
   const link = event.target.closest("button[data-view]");
   const button = event.target.closest("button[data-deck]");
-  if (topicsDialog.open && (link || button)) topicsDialog.close();
+  if (topicsDialog.open && link) topicsDialog.close();
   if (link) {
     if (link.dataset.view === "home" && view !== "home") goHome();
     else if (link.dataset.view !== view) setView(link.dataset.view);
     return;
   }
+  if (button?.classList.contains("group-button") && ui["mobile-library"].contains(ui.library)) {
+    const open = ui.library.dataset.group === button.dataset.deck;
+    if (open) delete ui.library.dataset.group;
+    else ui.library.dataset.group = button.dataset.deck;
+    for (const group of ui.library.querySelectorAll(".group-button")) {
+      group.setAttribute("aria-expanded", String(!open && group === button));
+    }
+    play(ui.library, fade[1], { duration: 260, easing: easeOut });
+    return;
+  }
+  if (topicsDialog.open && button) topicsDialog.close();
   if (button && (view !== "study" || button.getAttribute("aria-pressed") !== "true")) browse(button.dataset.deck, button.dataset.topic);
 });
 window.addEventListener("popstate", (event) => {
@@ -1302,10 +1586,27 @@ ui["question-options"].addEventListener("click", (event) => {
   if (choice) answerQuestion(Number(choice.dataset.choice));
 });
 ui["reveal-question"].addEventListener("click", () => answerQuestion());
+ui["show-choices"].addEventListener("click", () => showFace("choose"));
+for (const pager of [ui["card-pager"], ui["question-pager"]]) {
+  pager.addEventListener("pointerdown", (event) => event.stopPropagation());
+  pager.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const button = event.target.closest("button");
+    if (button) turnPage(button.classList.contains("pager-next") ? 1 : -1);
+  });
+}
+ui["question-tabs"].addEventListener("click", (event) => {
+  const tab = event.target.closest("button[data-face]");
+  if (tab) showFace(tab.dataset.face);
+});
 ui["theme-toggle"].addEventListener("click", toggleTheme);
 darkScheme.addEventListener("change", renderTheme);
 
 ui["open-topics"].addEventListener("click", () => {
+  // While browsing a topic, the menu opens on that topic's group.
+  const browsing = view === "study" && activeDeck !== "session" ? activeDeck : null;
+  if (browsing && collections.includes(browsing)) ui.library.dataset.group = browsing;
+  else delete ui.library.dataset.group;
   ui["mobile-library"].append(ui.library);
   topicsDialog.showModal();
   ui["open-topics"].setAttribute("aria-expanded", "true");
@@ -1350,7 +1651,10 @@ document.addEventListener("keydown", (event) => {
   if (view !== "study" || topicsDialog.open || accountDialog.open || ui["topic-picker"].open || event.altKey || event.ctrlKey || event.metaKey || !queue.length || questionRoundFinished || event.defaultPrevented) return;
   if (event.target.closest("input, select, textarea, [contenteditable]")) return;
   const key = event.key.toLowerCase();
-  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+  if ((event.key === "ArrowDown" || event.key === "ArrowUp") && pagedBox()) {
+    event.preventDefault();
+    turnPage(event.key === "ArrowDown" ? 1 : -1);
+  } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
     event.preventDefault();
     moveCard(event.key === "ArrowLeft" ? -1 : 1);
   } else if (!questionMode && event.code === "Space" && !event.repeat && !event.target.closest("button, a")) {
@@ -1361,6 +1665,8 @@ document.addEventListener("keydown", (event) => {
     rateCard(key === "2" ? "known" : "review");
   } else if (questionMode && !event.repeat && ["1", "2", "3", "4", "a", "b", "c", "d"].includes(key)) {
     event.preventDefault();
+    // A button clicked earlier, like the mode switch, would otherwise catch the Enter meant for "next".
+    if (event.target.closest("button, a")) event.target.blur();
     const index = "1234".includes(key) ? Number(key) - 1 : "abcd".indexOf(key);
     answerQuestion(index);
   } else if (questionMode && event.key === "Enter" && !event.target.closest("button, a")) {
@@ -1373,10 +1679,23 @@ document.addEventListener("keydown", (event) => {
 });
 
 setupSwipe();
+setupPageSwipe();
 placeHeaderActions();
 // Math fonts load lazily, so measure the answer choices again once they arrive.
 function refit() {
-  if (questionMode) fitOptions();
+  if (view === "study" && queue[position] && !questionRoundFinished) {
+    if (questionMode) {
+      fitOptions();
+      const attempt = questionAttempts.get(queue[position]);
+      // Fonts or the screen size changed. If the question and its answers no longer fit
+      // together, split them. Never join them back, so nothing jumps under a finger.
+      if (attempt && !attempt.outcome && attempt.face === "ask") applyFace(attempt, false);
+      else if (attempt) fitFace(attempt);
+    } else {
+      const exam = isExam(queue[position]);
+      layoutPages(ui["card-content"], ui["card-content"], ui["card-pager"], !answerVisible && !exam ? 0.6 : 0.8);
+    }
+  }
   markScrollable();
   for (const bar of document.querySelectorAll(".box-bar.tall")) fitLabels(bar);
 }

@@ -663,7 +663,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
   overflow: hidden;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   will-change: transform;
@@ -728,7 +728,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.6rem;
+  gap: calc(0.6rem * var(--fit, 1));
   width: 100%;
   min-width: 0;
   margin-block: 0.6rem;
@@ -737,6 +737,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
   display: block;
   max-width: 18ch;
   font: 740 clamp(2.15rem, 4.8vw, 3.6rem)/1.08 var(--heading);
+  font-size: calc(clamp(2.15rem, 4.8vw, 3.6rem) * var(--fit, 1));
   letter-spacing: -0.05em;
   overflow-wrap: anywhere;
   text-wrap: balance;
@@ -754,7 +755,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .answer-line {
   display: block;
   max-width: 59ch;
-  font-size: clamp(1.06rem, 1.92vw, 1.42rem);
+  font-size: calc(clamp(1.06rem, 1.92vw, 1.42rem) * var(--fit, 1));
   line-height: 1.5;
   animation: line-in 0.45s var(--ease-out) both;
 }
@@ -765,8 +766,8 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .formula { min-width: 0; overflow-x: auto; padding: 0.16em 0.05em; scrollbar-width: thin; }
 .formula .katex-display { margin: 0; }
 .formula .katex-display > .katex { text-align: left; }
-.answer-line.formula { max-width: 100%; font-size: clamp(1.12rem, 2.5vw, 1.85rem); }
-.answer-line.formula:only-child { font-size: clamp(1.42rem, 3.1vw, 2.35rem); }
+.answer-line.formula { max-width: 100%; font-size: calc(clamp(1.12rem, 2.5vw, 1.85rem) * var(--fit, 1)); }
+.answer-line.formula:only-child { font-size: calc(clamp(1.42rem, 3.1vw, 2.35rem) * var(--fit, 1)); }
 
 .reference-label {
   padding: 7px 13px;
@@ -780,19 +781,19 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 
 /* ---------- Past paper cards ---------- */
 
-.flashcard.exam .card-content { gap: 0.55rem; }
+.flashcard.exam .card-content { gap: calc(0.55rem * var(--fit, 1)); }
 .flashcard.exam .card-content > :first-child { margin-top: 0.2rem; }
 .exam-line {
   display: block;
   max-width: 64ch;
-  font-size: clamp(1rem, 1.55vw, 1.18rem);
+  font-size: calc(clamp(1rem, 1.55vw, 1.18rem) * var(--fit, 1));
   font-weight: 520;
   line-height: 1.55;
   overflow-wrap: anywhere;
 }
-.exam-line.formula { font-size: clamp(1.05rem, 2vw, 1.35rem); }
-.flashcard.exam .answer-line { max-width: 70ch; font-size: clamp(0.98rem, 1.35vw, 1.12rem); line-height: 1.55; }
-.flashcard.exam .answer-line.formula { font-size: clamp(1.02rem, 1.6vw, 1.2rem); }
+.exam-line.formula { font-size: calc(clamp(1.05rem, 2vw, 1.35rem) * var(--fit, 1)); }
+.flashcard.exam .answer-line { max-width: 70ch; font-size: calc(clamp(0.98rem, 1.35vw, 1.12rem) * var(--fit, 1)); line-height: 1.55; }
+.flashcard.exam .answer-line.formula { font-size: calc(clamp(1.02rem, 1.6vw, 1.2rem) * var(--fit, 1)); }
 .part-label { font-weight: 760; color: var(--accent-ink); }
 .line-label {
   display: inline-block;
@@ -816,6 +817,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .question-card.exam #question-prompt {
   max-width: 64ch;
   font: 560 clamp(1rem, 1.55vw, 1.18rem)/1.55 "Inter", system-ui, sans-serif;
+  font-size: calc(clamp(1rem, 1.55vw, 1.18rem) * var(--fit, 1));
   letter-spacing: 0;
   text-wrap: pretty;
 }
@@ -843,6 +845,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 #question-prompt {
   max-width: 34ch;
   font: 740 clamp(1.6rem, 3.2vw, 2.6rem)/1.14 var(--heading);
+  font-size: calc(clamp(1.6rem, 3.2vw, 2.6rem) * var(--fit, 1));
   letter-spacing: -0.04em;
   overflow-wrap: anywhere;
   text-wrap: balance;
@@ -866,7 +869,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
   border-radius: 14px;
   background: var(--surface-2);
   color: var(--ink);
-  font-size: 0.95rem;
+  font-size: calc(0.95rem * var(--fit, 1));
   line-height: 1.42;
   text-align: left;
   animation: rise 0.45s var(--ease-out) both;
@@ -907,14 +910,15 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .question-feedback .quiet-button { margin-left: auto; }
 .question-explanation {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 6px;
   padding: 16px 18px;
   border-radius: 14px;
   background: var(--surface-3);
   animation: expand 0.45s var(--ease-out) both;
 }
-.question-explanation .answer-line { max-width: 100%; font-size: 1rem; }
-.question-explanation .answer-line.formula { font-size: 1.08rem; }
+.question-explanation .answer-line { max-width: 100%; font-size: calc(1rem * var(--fit, 1)); }
+.question-explanation .answer-line.formula { font-size: calc(1.08rem * var(--fit, 1)); }
 
 /* ---------- Actions ---------- */
 
@@ -1109,7 +1113,8 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
   left: 50%;
   bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
   z-index: 50;
-  max-width: calc(100% - 32px);
+  width: max-content;
+  max-width: min(460px, calc(100vw - 32px));
   padding: 12px 18px;
   border-radius: 14px;
   background: var(--primary);
@@ -1294,6 +1299,108 @@ body:has(dialog[open]) { overflow: hidden; }
   line-height: 1.5;
 }
 
+/* ---------- Question views (see app.js) ---------- */
+
+.question-tabs {
+  display: flex;
+  flex: none;
+  align-self: flex-start;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+.question-tabs > button {
+  min-height: 30px;
+  padding: 4px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.question-tabs > button:hover:not([aria-pressed="true"]) { color: var(--ink); }
+.question-tabs > button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+.show-choices { flex: none; align-self: stretch; min-height: 54px; margin-top: auto; font-size: 1rem; }
+.show-choices svg { width: 20px; height: 20px; }
+
+.question-card[data-face="question"] .question-options,
+.question-card[data-face="question"] .question-feedback { display: none; }
+.question-card:not([data-face="question"]) .show-choices { display: none; }
+.question-card[data-face="choose"] .prompt-line { display: none; }
+.question-card[data-face="choose"] .ask-line { margin-top: 0; }
+.question-card[data-face="ask"] .ask-line.generic,
+.question-card[data-face="question"] .ask-line.generic { display: none; }
+.question-card[data-face="method"] #question-prompt,
+.question-card[data-face="method"] .question-options,
+.question-card[data-face="method"] #reveal-question { display: none; }
+.question-card:not([data-face="method"]) .question-explanation { display: none; }
+.question-card[data-face="method"] .question-explanation { gap: calc(8px * var(--fit, 1)); padding: 0; background: transparent; }
+.question-card[data-face="method"] .question-feedback { min-height: 22px; }
+/* Parts never squash to fit: the card's text is sized (or paged) to fit instead. */
+.question-card > * { flex-shrink: 0; }
+.method-answer {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 4px;
+  padding: calc(10px * var(--fit, 1)) 12px;
+  border-radius: 12px;
+  background: var(--green-bg);
+  color: var(--ink);
+  font-size: calc(1rem * var(--fit, 1));
+  font-weight: 650;
+  line-height: 1.45;
+}
+.method-tick {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  background: oklch(0.62 0.14 155);
+  color: white;
+  font-size: 0.78rem;
+  transform: translateY(3px);
+}
+
+/* Pages for text too long to fit at a readable size (see app.js) */
+.pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+.pager[hidden] { display: none; }
+.pager button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 720;
+}
+.pager button svg { width: 16px; height: 16px; }
+.pager .pager-next:not(:disabled) { background: var(--primary); color: var(--on-primary); padding: 0 10px 0 12px; }
+.pager button:disabled { opacity: 0.35; }
+.pager-label { min-width: 3.2em; color: var(--muted); font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
+.question-pager { flex: none; align-self: flex-end; margin-top: auto; }
+.question-card[data-face="question"].paged .question-pager { margin-top: 0; }
+
 /* ---------- Boxes ---------- */
 
 .box-bar { display: flex; gap: 2px; width: 100%; min-width: 0; height: 8px; }
@@ -1330,7 +1437,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .legend-item { display: inline-flex; align-items: center; gap: 7px; }
 .legend-count { color: var(--ink); font-weight: 750; }
 .legend-note { color: var(--muted); }
-.box-legend.compact { margin: -4px 0 10px; font-size: 0.8rem; }
+.box-legend.compact { margin: 0; font-size: 0.8rem; }
+.dash-card-head > .box-legend.compact { flex-wrap: nowrap; align-self: center; gap: 6px 12px; }
 .swatch { width: 10px; height: 10px; flex: none; border-radius: 3px; background: var(--box-red); }
 .swatch.amber { background: var(--box-amber); }
 .swatch.green { background: var(--box-green); }
@@ -1668,26 +1776,48 @@ summary .meter-name::before {
 .focus-button:hover { background: var(--primary-hover); }
 .dash-empty { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
+.dash-tabs {
+  display: none;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.dash-tabs button {
+  min-height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.dash-tabs button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+
 /* ---------- Topic picker + Google ---------- */
 
 .picker-tools { display: flex; gap: 18px; margin-top: 14px; }
+/* Topics are tiles in two columns, so even the 11 trig topics fit without scrolling. */
 .picker-list {
   display: grid;
-  gap: 6px;
-  max-height: min(52vh, 420px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   margin: 12px 0 0;
   padding: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   list-style: none;
 }
 .picker-item {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 12px;
-  min-height: 48px;
-  padding: 8px 12px;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  gap: 2px 10px;
+  min-height: 56px;
+  height: 100%;
+  padding: 9px 10px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--surface-2);
@@ -1696,9 +1826,10 @@ summary .meter-name::before {
 }
 .picker-item:hover { border-color: var(--line-strong); }
 .picker-item:has(input:disabled) { opacity: 0.5; cursor: default; }
-.picker-item input { width: 20px; height: 20px; margin: 0; accent-color: var(--primary); }
-.picker-name { font-size: 0.92rem; font-weight: 650; }
-.picker-meta { color: var(--muted); font-size: 0.78rem; font-weight: 620; white-space: nowrap; }
+.picker-item:has(input:checked) { border-color: color-mix(in oklab, var(--primary) 40%, var(--line)); background: var(--surface); }
+.picker-item input { grid-row: 1 / span 2; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--primary); }
+.picker-name { font-size: 0.86rem; font-weight: 650; line-height: 1.25; }
+.picker-meta { grid-column: 2; color: var(--muted); font-size: 0.74rem; font-weight: 620; white-space: nowrap; }
 .picker-done { width: 100%; min-height: 50px; margin-top: 16px; font-size: 0.98rem; }
 
 .google-option { display: grid; gap: 14px; margin-top: 20px; }
@@ -1811,6 +1942,7 @@ summary .meter-name::before {
     mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
     padding-bottom: 1.5rem;
   }
+  .card-content:not(.overflowing), .question-card:not(.overflowing) { overflow-y: hidden; }
   .card-content > :first-child { margin-top: auto; }
   .card-content > :last-child { margin-bottom: auto; }
   .question-card { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
@@ -1839,7 +1971,7 @@ summary .meter-name::before {
   .study-header { margin-top: 10px; gap: 4px; }
   .study-header h1 { font-size: 2.1rem; }
   .flashcard, .notice, .question-card { margin-top: 14px; padding-block: 22px; }
-  .prompt { font-size: clamp(1.8rem, 5.6svh, 2.8rem); }
+  .prompt { font-size: calc(clamp(1.8rem, 5.6svh, 2.8rem) * var(--fit, 1)); }
   .card-actions { margin-top: 14px; }
   .pill { min-height: 50px; }
   .card-navigation { margin-top: 10px; }
@@ -1991,6 +2123,12 @@ summary .meter-name::before {
 
   .flashcard, .notice, .question-card { margin-top: 12px; padding: 20px 20px; border-radius: 20px; }
   body[data-view="progress"] .study-topline { display: none; }
+  body[data-view="study"] .mobile-header { display: none; }
+  body[data-view="study"] .study { overflow: hidden; padding-top: 10px; }
+  .study { overscroll-behavior: none; }
+  /* Nothing on a question needs dragging, so a finger resting on an answer can't scroll or bounce it. */
+  .question-card:not(.overflowing) { touch-action: pinch-zoom; }
+  .toast { top: max(10px, calc(env(safe-area-inset-top) + 8px)); bottom: auto; text-align: center; transform: translate(-50%, -16px) scale(0.96); }
   .session-chip .chip-extra { display: none; }
   .page-header { margin-top: 6px; gap: 2px; }
   .page-header .position { display: block; font-size: 0.72rem; }
@@ -2005,8 +2143,7 @@ summary .meter-name::before {
   .start-row { position: sticky; bottom: 0; z-index: 2; margin-top: 12px; padding-top: 6px; }
   .start-button { min-height: 60px; padding: 8px 18px 8px 24px; }
   .start-label { font-size: 1.3rem; }
-  .last-session { font-size: 0.8rem; }
-  .last-session:empty { display: none; }
+  .last-session { display: none; }
   .dashboard {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "hero" "boxes" "activity" "green" "focus" "groups";
@@ -2022,11 +2159,68 @@ summary .meter-name::before {
   .meter-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; }
   .meter-row .box-bar { grid-column: 1 / -1; grid-row: 2; }
   .box-move { font-size: 0.8rem; }
+
+  .progress-view .page-header { display: none; }
+  .dash-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dashboard { grid-template-areas: none; margin-top: 2px; }
+  .dashboard > * { grid-area: auto; }
+  .dashboard[data-tab="overview"] > [data-tab]:not([data-tab="overview"]),
+  .dashboard[data-tab="activity"] > [data-tab]:not([data-tab="activity"]),
+  .dashboard[data-tab="topics"] > [data-tab]:not([data-tab="topics"]) { display: none; }
+  .dashboard > [data-tab] { animation: rise 0.4s var(--ease-out) both; }
+  .dash-tabs { order: -2; }
+  .dash-focus { order: -1; }
+  .dashboard:has(.meter-group[open]) > .dash-focus { display: none; }
+  .picker-dialog .dialog-intro { display: none; }
+  .picker-item { min-height: 50px; }
+  #topics-dialog:has(.library[data-group]) .drawer-sources { display: none; }
+  .meter-list:has(.meter-group[open]) > .meter-group:not([open]) { display: none; }
+  .topic-row { min-height: 30px; padding-block: 2px; }
+  .focus-list { gap: 8px; }
+  .focus-item { padding: 10px 12px; }
+  .focus-text { flex: 1; }
+  .focus-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  #mobile-library .library:not([data-group]) .topic-list { display: none; }
+  #mobile-library .library[data-group] .view-nav,
+  #mobile-library .library[data-group] .nav-heading { display: none; }
+  #mobile-library .library[data-group="revision"] .topic-group:not([data-collection="revision"]),
+  #mobile-library .library[data-group="trigonometry"] .topic-group:not([data-collection="trigonometry"]),
+  #mobile-library .library[data-group="papers"] .topic-group:not([data-collection="papers"]) { display: none; }
+  #mobile-library .progress-summary { display: none; }
+  #mobile-library .topic-nav { gap: 2px; }
+  #mobile-library .group-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 46px;
+    margin: 0;
+    padding: 8px 12px 8px 10px;
+    border-radius: 10px;
+    color: var(--rail-text);
+    font-size: 0.95rem;
+    font-weight: 640;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  #mobile-library .group-button::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    opacity: 0.7;
+    transform: rotate(-45deg);
+  }
+  #mobile-library .library[data-group] .group-button { justify-content: flex-start; gap: 14px; margin-bottom: 4px; color: white; font-weight: 720; }
+  #mobile-library .library[data-group] .group-button::after { order: -1; transform: rotate(135deg); }
+  #mobile-library .topic-button { min-height: 42px; }
   .flashcard { max-height: none; }
-  .prompt { max-width: none; font-size: clamp(1.55rem, min(8.2vw, 4.4svh), 2.4rem); letter-spacing: -0.045em; }
-  .answer-line { font-size: 1.05rem; }
-  .answer-line.formula { font-size: 1.1rem; }
-  .answer-line.formula:only-child { font-size: clamp(1.16rem, 5.25vw, 1.6rem); }
+  .prompt { max-width: none; font-size: calc(clamp(1.55rem, min(8.2vw, 4.4svh), 2.4rem) * var(--fit, 1)); letter-spacing: -0.045em; }
+  .answer-line { font-size: calc(1.05rem * var(--fit, 1)); }
+  .answer-line.formula { font-size: calc(1.1rem * var(--fit, 1)); }
+  .answer-line.formula:only-child { font-size: calc(clamp(1.16rem, 5.25vw, 1.6rem) * var(--fit, 1)); }
   .card-face-label { font-size: 0.72rem; }
   .card-bottom { min-height: 1.6rem; }
   .flip-hint { font-size: 0.8rem; }
@@ -2040,7 +2234,7 @@ summary .meter-name::before {
 
   .question-card { flex: 1 1 auto; gap: 14px; padding-block: 18px; }
   .question-options { margin-top: auto; }
-  #question-prompt { font-size: clamp(1.25rem, 5.6vw, 1.6rem); line-height: 1.18; }
+  #question-prompt { font-size: calc(clamp(1.25rem, 5.6vw, 1.6rem) * var(--fit, 1)); line-height: 1.18; }
   .question-options { gap: 8px; }
   .question-options.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .question-options.compact .option-text { white-space: nowrap; }
@@ -2075,11 +2269,56 @@ summary .meter-name::before {
   }
 }
 
-@media (max-width: 720px) and (max-height: 640px) {
+@media (max-width: 720px) and (max-height: 700px) {
+  #home-greeting { display: none; }
+  .page-header h1 { font-size: 1.4rem; }
+  .home-card { padding: 12px 14px; }
+  .home-card-head { margin-bottom: 8px; }
+  .home-card h2 { font-size: 1.02rem; }
+  .box-bar.tall { height: 24px; }
+  .box-legend { margin-top: 8px; font-size: 0.8rem; }
+  .group-row { padding: 2px 8px 8px 10px; }
+  .group-check { min-height: 34px; }
+  .group-topics { min-height: 32px; }
+  .start-row { margin-top: 8px; }
+  .start-button { min-height: 54px; }
+  .last-session { display: none; }
+  .dash-hero, .dash-card { padding: 12px 14px; }
+  .hero-value { font-size: 2.4rem; }
+  .stat-value { font-size: 1.3rem; }
+  .dash-card-head { margin-bottom: 8px; }
+  .account-dialog .dialog-intro, .account-dialog .dialog-footnote { display: none; }
+  .account-dialog { padding: 18px 18px 20px; }
+  .auth-tabs, .google-option, .auth-form { margin-top: 12px; }
+  .picker-item { min-height: 46px; padding: 6px 9px; }
+  .picker-tools { margin-top: 8px; }
+  #mobile-library .topic-button { min-height: 38px; }
+  .topic-row { min-height: 28px; }
   .flashcard, .notice, .question-card { padding: 16px 18px; }
   .pill { min-height: 46px; }
   .nav-button { height: 38px; min-width: 38px; }
   .question-option { min-height: 44px; }
+  .dash-focus .dash-subtitle { display: none; }
+  .focus-list { gap: 6px; }
+  .focus-item { padding: 7px 8px 7px 12px; }
+  .focus-name { font-size: 0.92rem; line-height: 1.25; }
+  .focus-detail { margin-top: 0; font-size: 0.78rem; }
+  .focus-button { min-height: 36px; padding-inline: 14px; }
+  .meter-row { min-height: 38px; padding-block: 4px; gap: 5px 10px; }
+  .topic-row { min-height: 28px; padding-block: 2px; }
+}
+
+/* Very short screens, like a small phone with the browser bars showing. */
+@media (max-width: 720px) and (max-height: 620px) {
+  .page-header h1 { font-size: 1.25rem; }
+  .home-grid { gap: 8px; margin-top: 8px; }
+  .picker-meta { display: none; }
+  .picker-item { min-height: 0; }
+  #mobile-library .topic-button { min-height: 35px; }
+  .topic-row { row-gap: 3px; }
+  .topic-row .meter-name { font-size: 0.8rem; }
+  .focus-name { font-size: 0.86rem; }
+  .meter-topics { padding-bottom: 4px; }
 }
 
 @media (max-width: 420px) {
@@ -2093,16 +2332,22 @@ summary .meter-name::before {
   .segmented > button { padding-inline: 9px; font-size: 0.78rem; }
   .mobile-actions .account-button { padding-inline: 10px; font-size: 0.8rem; }
   .pill { font-size: 0.9rem; }
-  .question-option { font-size: 0.9rem; }
-  .answer-line.formula, .answer-line.formula:only-child { font-size: 1rem; }
+  .question-option { font-size: calc(0.9rem * var(--fit, 1)); }
+  .answer-line.formula, .answer-line.formula:only-child { font-size: calc(1rem * var(--fit, 1)); }
 }
+
+@media (hover: none) {
+  .study, .mobile-header, .topics-dialog { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+}
+.question-option, .pill, .nav-button, .start-button, .group-row button, .question-tabs > button { touch-action: manipulation; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after, ::backdrop {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     animation-delay: 0ms !important;
-    transition-duration: 0.01ms !important;
+    /* Not a tiny duration: that would make every style change a transition and delay layout. */
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }

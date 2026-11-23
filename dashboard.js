@@ -10,6 +10,9 @@ const shortDate = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "sho
 const longDate = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short" });
 const collectionNames = { revision: "Revision", trigonometry: "Trig rules", papers: "Past papers" };
 const observers = new WeakMap();
+// On phones the page shows one tab at a time, so it never needs scrolling.
+const tabs = [["overview", "Overview"], ["activity", "Activity"], ["topics", "Topics"]];
+let activeTab = "overview";
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -102,7 +105,7 @@ function chartCard(title, subtitle, { table } = {}) {
     });
     body.append(table);
   }
-  return { card, body };
+  return { card, head, body };
 }
 
 function dataTable(caption, columns, rows) {
@@ -167,6 +170,9 @@ function niceTicks(max, count = 3) {
   if (ticks[ticks.length - 1] < max) ticks.push(ticks[ticks.length - 1] + step);
   return ticks;
 }
+
+const phone = window.matchMedia("(max-width: 720px)");
+const chartHeight = () => (phone.matches ? (window.innerHeight < 700 ? 92 : 120) : 150);
 
 // Redraws a chart whenever its box changes width.
 function responsive(container, draw) {
@@ -245,7 +251,7 @@ export function boxLegend(counts, { fresh } = {}) {
   for (const box of boxes) {
     const item = el("li", "legend-item");
     item.append(el("span", "swatch " + box), el("span", "legend-name", boxNames[box]), el("strong", "legend-count", format(counts[box])));
-    if (box === "red" && fresh) item.append(el("span", "legend-note", "· " + format(fresh) + " not started"));
+    if (box === "red" && fresh) item.append(el("span", "legend-note", "· " + format(fresh) + " new"));
     list.append(item);
   }
   return list;
@@ -283,7 +289,7 @@ function columnChart(days, values, rights) {
   };
 
   responsive(plot, (width) => {
-    const height = 150;
+    const height = chartHeight();
     const axisBand = 22;
     const left = 30;
     const max = Math.max(...values, 0);
@@ -381,7 +387,7 @@ function lineChart(days, series) {
   };
 
   responsive(plot, (width) => {
-    const height = 150;
+    const height = chartHeight();
     const axisBand = 22;
     const left = 30;
     const right = 10;
@@ -449,6 +455,26 @@ export function renderDashboard(root, { cards, topics, progress, activity, now =
   const greens = greenSeries(activity, days, counts.green);
   const sections = [];
 
+  const tabBar = el("div", "dash-tabs");
+  tabBar.setAttribute("role", "group");
+  tabBar.setAttribute("aria-label", "Progress sections");
+  for (const [id, label] of tabs) {
+    const button = el("button", "", label);
+    button.type = "button";
+    button.dataset.tab = id;
+    button.setAttribute("aria-pressed", String(id === activeTab));
+    tabBar.append(button);
+  }
+  tabBar.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-tab]");
+    if (!button || button.dataset.tab === activeTab) return;
+    activeTab = button.dataset.tab;
+    root.dataset.tab = activeTab;
+    for (const other of tabBar.children) other.setAttribute("aria-pressed", String(other === button));
+  });
+  sections.push(tabBar);
+  root.dataset.tab = activeTab;
+
   // Headline figures
   const hero = el("section", "dash-hero");
   const heroFigure = el("div", "hero-figure");
@@ -461,12 +487,14 @@ export function renderDashboard(root, { cards, topics, progress, activity, now =
     statTile("Last 7 days", format(week.n), week.n ? percent(week.right, week.n) + "% right first time" : "cards answered"),
   );
   hero.append(tiles);
+  hero.dataset.tab = "overview";
   sections.push(hero);
 
   // Box split
   const split = chartCard("Your boxes", plural(counts.total, "card") + " across every group");
   split.body.append(boxBar(counts, { tall: true }), boxLegend(counts, { fresh: counts.fresh }));
   split.card.classList.add("dash-boxes");
+  split.card.dataset.tab = "overview";
   sections.push(split.card);
 
   // Activity
@@ -477,6 +505,7 @@ export function renderDashboard(root, { cards, topics, progress, activity, now =
     }));
   const activityCard = chartCard("Cards answered", "Last 30 days", { table: activityTable });
   activityCard.card.classList.add("dash-activity");
+  activityCard.card.dataset.tab = "activity";
   activityCard.body.prepend(columnChart(days, answered, rights));
   sections.push(activityCard.card);
 
@@ -486,18 +515,22 @@ export function renderDashboard(root, { cards, topics, progress, activity, now =
       const value = greens[days.length - 1 - index];
       return [longDate.format(day.date), value === null ? "No data" : format(value)];
     }));
-  const greenCard = chartCard("Cards in Green", counts.green ? "Last 30 days" : "Last 30 days. A card reaches Green when you get it right again once it’s due, a day after it went Amber.", { table: greenTable });
+  const greenCard = chartCard("Cards in Green", counts.green ? "Last 30 days" : "Last 30 days. Get a card right, then right again a day later, and it goes Green.", { table: greenTable });
   greenCard.card.classList.add("dash-green");
+  greenCard.card.dataset.tab = "activity";
   greenCard.body.prepend(lineChart(days, greens));
   sections.push(greenCard.card);
 
   // Groups, then each group's topics
-  const groups = chartCard("By group", "Red, amber and green cards in each group");
+  const groups = chartCard("By group", "");
   groups.card.classList.add("dash-groups");
+  groups.card.dataset.tab = "topics";
+  // The key sits beside the title, so the bars start straight away.
   const legend = boxLegend({ red: 0, amber: 0, green: 0 });
   legend.classList.add("compact");
+  legend.setAttribute("aria-label", "Bar colours");
   for (const count of legend.querySelectorAll(".legend-count")) count.remove();
-  groups.body.append(legend);
+  groups.head.append(legend);
   const list = el("div", "meter-list");
   const byCollection = new Map();
   for (const topic of topics.values()) {
@@ -508,6 +541,7 @@ export function renderDashboard(root, { cards, topics, progress, activity, now =
     const groupCards = cards.filter((card) => topics.get(card.topic)?.collection === collection);
     const groupCounts = boxCounts(groupCards, progress, now);
     const details = el("details", "meter-group");
+    details.name = "dash-groups";
     const summary = el("summary", "meter-row");
     summary.append(
       el("span", "meter-name", collectionNames[collection] ?? collection),
@@ -543,6 +577,7 @@ export function renderDashboard(root, { cards, topics, progress, activity, now =
   const weakest = [...missedBy].sort((a, b) => b[1] - a[1]).slice(0, 3);
   const focus = chartCard("Needs work", weakest.length ? "Topics with the most cards in Red that you’ve missed" : "");
   focus.card.classList.add("dash-focus");
+  focus.card.dataset.tab = "topics";
   if (weakest.length) {
     const focusList = el("ul", "focus-list");
     for (const [topicId, missed] of weakest) {

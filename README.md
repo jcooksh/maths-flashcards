@@ -33,6 +33,8 @@ Every chart has a table view and works with the keyboard.
 
 Questions mode shows four shuffled answer choices for each card. The first answer counts and moves the card between boxes in the same way. You can open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
 
+On a phone every screen fits without scrolling. A question too long to show with its answers comes first on its own, with a button to the answers. After you answer, the method replaces the choices, and tabs switch between the question, answers and method. Anything still too long, such as a long method, is split into pages: tap the arrows or swipe up and down. Formulas too wide for a line are shrunk to fit. The progress page has Overview, Activity and Topics tabs.
+
 ## Trigonometry deck
 
 The trig rules cover every identity and formula in the 9MA0 trigonometry content, in both directions. You expand an identity and also recognise it in reverse. The topics are:
