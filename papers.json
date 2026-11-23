@@ -73,7 +73,14 @@
         "Subtract 7, then take the modulus",
         "Change $x$ to 3 as well"
       ],
-      "ask": "How do you find the point in (c)?"
+      "ask": "How do you find the point in (c)?",
+      "marks": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2025-06-p1-q02",
@@ -81,7 +88,8 @@
       "source": "June 2025 · Paper 1 · Q2",
       "front": [
         "The circle $C$ has equation $(x-5)^2+(y+2)^2=28$.",
-        "(a)(i) State the coordinates of the centre of $C$. (ii) Find the radius of $C$ as a fully simplified surd.",
+        "(a)(i) State the coordinates of the centre of $C$.",
+        "(ii) Find the radius of $C$ as a fully simplified surd.",
         "(b) Determine, giving a reason, whether the origin lies inside $C$."
       ],
       "back": [
@@ -96,7 +104,14 @@
         "Check whether the centre is in the first quadrant",
         "Compare $5+2$ with 28"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2025-06-p1-q03",
@@ -119,7 +134,13 @@
         "Use $5k+14+(k+4)=0$",
         "Use $\\frac{14}{5k}=\\frac{k+4}{14}$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        2,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2025-06-p1-q04",
@@ -141,7 +162,13 @@
         "Divide by $(x-3)$",
         "Show that $f(3)\\ne0$",
         "Use $b^2-4ac$ on the cubic"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2025-06-p1-q05",
@@ -162,7 +189,12 @@
         "Add up $\\frac{3}{\\sqrt x}$ for $x=2.25,\\dots,6.25$",
         "Differentiate $\\frac{3}{\\sqrt x}$",
         "Use the trapezium rule"
-      ]
+      ],
+      "marks": [
+        1,
+        2
+      ],
+      "total": 3
     },
     {
       "id": "2025-06-p1-q06",
@@ -172,7 +204,9 @@
         "A sea bird dives from its nest on a cliff. Its height above the sea, $h$ m, $t$ seconds after leaving the nest is modelled by $h=A-Bt^{1.5}$, $h\\ge0$, $0\\le t\\le T$, where $A$, $B$ and $T$ are positive constants.",
         "The bird is 26.8 m above the sea after 4 seconds, and 19.2 m above the sea after 9 seconds.",
         "(a) Find a complete equation for the model.",
-        "Find, according to the model, (b) the height of the nest above the sea (c) the limitation on the value of $T$."
+        "Find, according to the model,",
+        "(b) the height of the nest above the sea",
+        "(c) the limitation on the value of $T$."
       ],
       "back": [
         "Spot: two data points and two unknowns: substitute both and solve them simultaneously. $4^{1.5}=8$ and $9^{1.5}=27$.",
@@ -187,7 +221,16 @@
         "Assume $A=0$",
         "Use $4^{1.5}=6$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        4,
+        0,
+        1,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2025-06-p1-q07",
@@ -197,7 +240,8 @@
         "A curve $C$ has equation $y=f(x)$, where $f(x)$ is a quartic. $C$ has maximum points at $(-2,0)$ and $(4,0)$, crosses the $y$-axis at $(0,-32)$, and has a minimum point where $x=1$.",
         "(a) Find the set of values of $x$ for which $f'(x)\\ge0$, in set notation.",
         "(b) Find the equation of $C$. You may leave it in factorised form.",
-        "The curve $C_1$ has equation $y=f(x)+k$, where $k$ is a constant, and meets the $x$-axis at exactly four points. (c) Find the range of values of $k$."
+        "The curve $C_1$ has equation $y=f(x)+k$, where $k$ is a constant, and meets the $x$-axis at exactly four points.",
+        "(c) Find the range of values of $k$."
       ],
       "back": [
         "Spot: a maximum on the $x$-axis is a repeated root, so $(x+2)$ and $(x-4)$ are both squared. Two maxima mean the quartic is negative.",
@@ -212,7 +256,15 @@
         "Use $f(x)=a(x+2)(x-1)(x-4)$",
         "Use $f(x)=(x+2)^2(x-4)^2$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        3,
+        0,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2025-06-p1-q08",
@@ -222,7 +274,8 @@
         "A student was asked to prove that the cube of any integer can be written as $9n$ or $9n\\pm1$, where $n$ is an integer. Their proof starts:",
         "Let $m=3k$: $m^3=27k^3=9(3k^3)=9n$.",
         "Let $m=3k+1$: $m^3=27k^3+9k^2+9k+1=9(3k^3+k^2+k)+1=9n+1$.",
-        "(a) Identify and correct the algebraic error. (b) Complete the proof."
+        "(a) Identify and correct the algebraic error.",
+        "(b) Complete the proof."
       ],
       "back": [
         "Spot: proof by exhaustion. Every integer is $3k$, $3k+1$ or $3k+2$, so check each case.",
@@ -237,7 +290,15 @@
         "Check $m=9k$",
         "Assume $m^3=9n+2$"
       ],
-      "ask": "How do you complete part (b)?"
+      "ask": "How do you complete part (b)?",
+      "marks": [
+        0,
+        0,
+        0,
+        1,
+        4
+      ],
+      "total": 5
     },
     {
       "id": "2025-06-p1-q09",
@@ -247,7 +308,9 @@
         "A car's speed is modelled by $v=12t-te^{0.25t}$, $0\\le t\\le T$, where $t$ seconds is the time after it starts from rest, and it stops at time $T$.",
         "(a) Find $T$ to 1 d.p.",
         "(b) Show that the maximum speed occurs when $t=4\\ln\\left(\\dfrac{48}{t+4}\\right)$.",
-        "(c) Using $t_{n+1}=4\\ln\\left(\\dfrac{48}{t_n+4}\\right)$ with $t_1=5$, find (i) $t_3$ to 3 d.p. (ii) the time to reach maximum speed, by repeated iteration."
+        "(c) Using $t_{n+1}=4\\ln\\left(\\dfrac{48}{t_n+4}\\right)$ with $t_1=5$, find",
+        "(i) $t_3$ to 3 d.p.",
+        "(ii) the time to reach maximum speed, by repeated iteration."
       ],
       "back": [
         "Spot: the car stops when $v=0$ with $t>0$. The maximum speed is where $\\dfrac{dv}{dt}=0$, and $te^{0.25t}$ needs the product rule.",
@@ -262,7 +325,16 @@
         "Differentiate $te^{0.25t}$ as $0.25e^{0.25t}$",
         "Integrate $v$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        4,
+        0,
+        0,
+        3
+      ],
+      "total": 9
     },
     {
       "id": "2025-06-p1-q10",
@@ -284,7 +356,13 @@
         "Use $\\overrightarrow{PR}=\\overrightarrow{QR}-\\overrightarrow{PQ}$",
         "Show $\\overrightarrow{PQ}$ and $\\overrightarrow{QR}$ are parallel",
         "Show $\\overrightarrow{PQ}\\cdot\\overrightarrow{PR}=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        4
+      ],
+      "total": 6
     },
     {
       "id": "2025-06-p1-q11",
@@ -310,7 +388,15 @@
         "Use $A=26000$",
         "Take logs of $2000+Ae^{-kt}$ term by term"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        4,
+        3,
+        1
+      ],
+      "total": 8
     },
     {
       "id": "2025-06-p1-q12",
@@ -336,7 +422,15 @@
         "Use the quadratic formula on the cubic",
         "Use Newton–Raphson"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        2,
+        0,
+        2,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2025-06-p1-q13",
@@ -356,7 +450,11 @@
         "Integrate the top and bottom separately",
         "Integrate it to $\\ln(3x+1)$",
         "Substitute $u=x^2$"
-      ]
+      ],
+      "marks": [
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2025-06-p1-q14",
@@ -379,7 +477,12 @@
         "Use $\\sin2\\theta=2\\sin\\theta$",
         "Square both sides"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2025-06-p1-q15",
@@ -404,7 +507,14 @@
         "Include $OB$ in the perimeter",
         "Use the sector area $\\pi r^2\\theta$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        4,
+        3,
+        2
+      ],
+      "total": 9
     },
     {
       "id": "2025-06-p1-q16",
@@ -427,7 +537,13 @@
         "Keep the $x$ limits",
         "Use $\\sqrt{9-9\\sin^2u}=3\\sin u$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        4,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2025-06-p2-q01",
@@ -447,7 +563,11 @@
         "Use the quadratic formula on the cubic",
         "Take out $x$ and stop",
         "Divide by $x$ and solve"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2025-06-p2-q02",
@@ -467,7 +587,11 @@
         "Integrate $8x$ and $\\sqrt x$ separately, then divide",
         "Write $\\frac{8x}{\\sqrt x}$ as $8x^{-\\frac12}$",
         "Differentiate each term"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2025-06-p2-q03",
@@ -487,7 +611,11 @@
         "Divide both sides by 5",
         "Use $\\frac xy=\\frac{2\\times3}{5}$",
         "Set $x=3y$"
-      ]
+      ],
+      "marks": [
+        2
+      ],
+      "total": 2
     },
     {
       "id": "2025-06-p2-q04",
@@ -511,7 +639,14 @@
         "Use the sector with radius 11",
         "Treat the triangle as right-angled"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        0,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2025-06-p2-q05",
@@ -536,7 +671,14 @@
         "Make $t$ the subject of the $y$ equation and stop",
         "Differentiate $y$ with respect to $t$ only"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        2,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2025-06-p2-q06",
@@ -560,7 +702,13 @@
         "Use $\\sin\\frac x2\\approx\\frac{x^2}{2}$",
         "Divide the answer to (a) by $x$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        2,
+        2,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2025-06-p2-q07",
@@ -581,7 +729,11 @@
         "Use $\\frac{C}{x-2}+\\frac{D}{x+1}$ only, with no $Ax+B$",
         "Substitute $x=0$ only",
         "Divide the denominator by the numerator"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2025-06-p2-q08",
@@ -589,7 +741,8 @@
       "source": "June 2025 · Paper 2 · Q8",
       "front": [
         "$f(x)=x^4-\\tfrac23x^3-8x^2+ax+\\tfrac{16}{3}$, where $a$ is a constant. The curve $y=f(x)$ has a local maximum at $x=\\tfrac12$.",
-        "(a) Show that $a=8$. (b) Find the exact $y$-coordinate of the local maximum.",
+        "(a) Show that $a=8$.",
+        "(b) Find the exact $y$-coordinate of the local maximum.",
         "The equation $f(x)=k$, where $k$ is a constant, has 4 distinct solutions.",
         "(c) Using algebra, find the range of values of $k$, in set notation."
       ],
@@ -606,7 +759,15 @@
         "Use $b^2-4ac>0$",
         "Take $k>\\frac{117}{16}$"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        4,
+        1,
+        0,
+        4
+      ],
+      "total": 9
     },
     {
       "id": "2025-06-p2-q09",
@@ -617,7 +778,8 @@
         "(a) Find the number sold in the first 4 months.",
         "(b) Given that $N=5000$ when $t=T$, find $T$ to 2 d.p.",
         "(c) Find the rate at which sales are increasing when $t=4$, to 3 s.f.",
-        "After an advertising campaign, total sales are expected to have an upper limit of 10 000. (d) Suggest one refinement to the model."
+        "After an advertising campaign, total sales are expected to have an upper limit of 10 000.",
+        "(d) Suggest one refinement to the model."
       ],
       "back": [
         "Spot: “rate of increase” means $\\dfrac{dN}{dt}$. To find $T$, isolate the exponential and take logs.",
@@ -633,7 +795,16 @@
         "Take logs of each term",
         "Differentiate first"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        3,
+        2,
+        0,
+        1
+      ],
+      "total": 8
     },
     {
       "id": "2025-06-p2-q10",
@@ -644,7 +815,8 @@
         "(a) Show that $20\\dfrac{dV}{dt}=12-5V$.",
         "When the tap was opened, the container held 0.4 m³.",
         "(b) Solve the differential equation to show that $V=P-Qe^{-kt}$, where $P$, $Q$ and $k$ are positive constants to be found.",
-        "The container holds 2 m³, the tap stays open and the inflow stays the same. (c) Determine whether the container will ever become full, giving a reason."
+        "The container holds 2 m³, the tap stays open and the inflow stays the same.",
+        "(c) Determine whether the container will ever become full, giving a reason."
       ],
       "back": [
         "Spot: rate of change = rate in − rate out. Then separate the variables: the $V$ side integrates to a log.",
@@ -659,7 +831,16 @@
         "Integrate $0.6-0.25V$ with respect to $t$, treating $V$ as a constant",
         "Use $V=0.6t-0.25t$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        2,
+        0,
+        5,
+        0,
+        2
+      ],
+      "total": 9
     },
     {
       "id": "2025-06-p2-q11",
@@ -670,7 +851,8 @@
         "(a) Using a linear model, find $y$, the expected number sold in a year, in terms of the price £$x$.",
         "Each game costs £15 to make, and the company has other costs of £12 000 a year.",
         "(b) Show that the yearly profit, $P$ thousand pounds, is $P=-0.06x^2+4.5x-66$.",
-        "(c) Find the range of prices that give a profit. (d) Deduce the price that maximises the profit.",
+        "(c) Find the range of prices that give a profit.",
+        "(d) Deduce the price that maximises the profit.",
         "(e) One year the game sold at £40 and the profit was £16 200. Evaluate the model."
       ],
       "back": [
@@ -688,7 +870,17 @@
         "Use profit $=(x-15)y$",
         "Use profit $=xy+12000$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        3,
+        0,
+        3,
+        2,
+        1,
+        2
+      ],
+      "total": 11
     },
     {
       "id": "2025-06-p2-q12",
@@ -697,7 +889,8 @@
       "front": [
         "$f(x)=3|x+2|-4$, $x\\in\\mathbb{R}$.",
         "(a) Given that $|a|=2$, find the possible values of $f(a)$.",
-        "$g(x)=5-2x$, $x\\in\\mathbb{R}$. (b) Find the range of $gf(x)$.",
+        "$g(x)=5-2x$, $x\\in\\mathbb{R}$.",
+        "(b) Find the range of $gf(x)$.",
         "$h(x)=kx$, where $k$ is a constant, and the equation $f(x)=h(x)$ has no solutions.",
         "(c) Find the range of values of $k$."
       ],
@@ -714,7 +907,16 @@
         "Use $b^2-4ac<0$",
         "Use $k<-3$"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        2,
+        0,
+        2,
+        0,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2025-06-p2-q13",
@@ -737,7 +939,13 @@
         "Use $n=8$",
         "Use $n=2$"
       ],
-      "ask": "How do you start part (i)?"
+      "ask": "How do you start part (i)?",
+      "marks": [
+        0,
+        1,
+        2
+      ],
+      "total": 3
     },
     {
       "id": "2025-06-p2-q14",
@@ -762,7 +970,14 @@
         "Use $BX:XD=BN:NC$",
         "Use the dot product"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        3,
+        0,
+        5
+      ],
+      "total": 8
     },
     {
       "id": "2025-06-p2-q15",
@@ -772,7 +987,8 @@
         "$f(x)=\\dfrac{4-x^2}{(4+x^2)^2}$. The curve $y=f(x)$ crosses the $x$-axis at $-2$ and 2, and has minimum points $P$ and $Q$, where $P$ has $x<0$.",
         "(a) Use calculus to find the exact coordinates of $P$.",
         "(b) Using the substitution $x=2\\tan\\theta$, show that $\\displaystyle\\int_{-2}^{2}f(x)\\,dx=\\int_\\alpha^\\beta\\tfrac12\\cos2\\theta\\,d\\theta$, where $\\alpha$ and $\\beta$ are constants.",
-        "The region $R$ is bounded by the curve and the $x$-axis. (c) Use algebraic integration to find the area of $R$."
+        "The region $R$ is bounded by the curve and the $x$-axis.",
+        "(c) Use algebraic integration to find the area of $R$."
       ],
       "back": [
         "Spot: (a) quotient rule, then take out the factor $-2x(4+x^2)$. (b) with $x=2\\tan\\theta$, $4+x^2$ becomes $4\\sec^2\\theta$.",
@@ -787,7 +1003,15 @@
         "Keep the limits as $-2$ and 2",
         "Use $4+4\\tan^2\\theta=4\\cos^2\\theta$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        5,
+        5,
+        0,
+        3
+      ],
+      "total": 13
     },
     {
       "id": "2024-06-p1-q01",
@@ -808,7 +1032,12 @@
         "Substitute $x=-4$ and set $g(-4)=0$",
         "Set $g(0)=4$",
         "Divide $g(x)$ by $(x+4)$"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2024-06-p1-q02",
@@ -830,7 +1059,12 @@
         "Replace $x$ by $8x$ in the first two terms only",
         "Use $(1+x)^n$ with $n=-\\frac12$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        3,
+        1
+      ],
+      "total": 4
     },
     {
       "id": "2024-06-p1-q03",
@@ -855,7 +1089,14 @@
         "Use $x_1=3.5+\\frac{f(3.5)}{f'(3.5)}$",
         "Work in degrees"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        2,
+        2,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2024-06-p1-q04",
@@ -875,7 +1116,11 @@
         "Use the power rule",
         "Substitute $h=0$ first",
         "Use $(x+h)^3=x^3+h^3$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2024-06-p1-q05",
@@ -899,7 +1144,13 @@
         "Solve $-3x^2-4x+15>0$",
         "Solve $3x+2<0$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2024-06-p1-q06",
@@ -925,7 +1176,15 @@
         "Use $b^2-4ac>0$",
         "Use $k=2$, the gradient of the right arm"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        2,
+        2,
+        0,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2024-06-p1-q07",
@@ -936,7 +1195,8 @@
         "The depth $H$ m of the water $t$ hours after the leak starts is modelled by $\\dfrac{dH}{dt}=-0.15e^{-0.25t}$.",
         "(a) Show that $H=Ae^{-0.25t}+B$, where $A$ and $B$ are constants to be found.",
         "(b) Find the time taken for the depth to fall to 1.7 m, in hours and minutes to the nearest minute.",
-        "In the long term, the water level falls to the height of the hole. (c) Find the height of the hole above the bottom of the tank."
+        "In the long term, the water level falls to the height of the hole.",
+        "(c) Find the height of the hole above the bottom of the tank."
       ],
       "back": [
         "Spot: $\\dfrac{dH}{dt}$ depends on $t$ only, so integrate directly. The tank being full at the start gives the constant.",
@@ -951,7 +1211,16 @@
         "Use $H=2e^{-0.25t}$",
         "Differentiate $-0.15e^{-0.25t}$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        3,
+        3,
+        0,
+        2
+      ],
+      "total": 8
     },
     {
       "id": "2024-06-p1-q08",
@@ -959,8 +1228,10 @@
       "source": "June 2024 · Paper 1 · Q8",
       "front": [
         "$f(x)=3-2x^2$, $x\\in\\mathbb{R}$, and $g(x)=\\dfrac{3}{2x-7}$, $x\\ne\\dfrac72$.",
-        "(a) Find $fg(4)$. (b) Find $g^{-1}$.",
-        "(c)(i) Find $gf(x)$ as a simplified fraction. (ii) Deduce the range of $gf$.",
+        "(a) Find $fg(4)$.",
+        "(b) Find $g^{-1}$.",
+        "(c)(i) Find $gf(x)$ as a simplified fraction.",
+        "(ii) Deduce the range of $gf$.",
         "$h(x)=x^2-4x+k$, where $k$ is a constant.",
         "(d) Find the values of $k$ for which $f(x)=h(x)$ has no real solutions."
       ],
@@ -978,7 +1249,17 @@
         "Solve $f(x)=0$ and $h(x)=0$ separately",
         "Rearrange and use $b^2-4ac=0$"
       ],
-      "ask": "How do you start part (d)?"
+      "ask": "How do you start part (d)?",
+      "marks": [
+        0,
+        2,
+        3,
+        0,
+        3,
+        0,
+        3
+      ],
+      "total": 11
     },
     {
       "id": "2024-06-p1-q09",
@@ -1001,7 +1282,13 @@
         "Put the indices $4k-5$, $8-2k$ and $k-2$ in an arithmetic sequence",
         "Take $\\log_4$ of each term and add them"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2024-06-p1-q10",
@@ -1010,7 +1297,8 @@
       "front": [
         "The curve $C$ has equation $y=2x-x^{\\frac32}$, $x\\ge0$, and crosses the $x$-axis at $A$.",
         "(a) Verify that the $x$-coordinate of $A$ is 4.",
-        "The line $l_1$ is the tangent to $C$ at $A$. (b) Use calculus to show that $l_1$ has equation $x+y=4$.",
+        "The line $l_1$ is the tangent to $C$ at $A$.",
+        "(b) Use calculus to show that $l_1$ has equation $x+y=4$.",
         "The line $l_2$ has equation $y=2x$. The region $R$ is bounded by $C$, $l_1$ and $l_2$.",
         "(c) Use algebraic integration to find the exact area of $R$."
       ],
@@ -1028,7 +1316,16 @@
         "Integrate $2x-(4-x)$ from 0 to 4",
         "Add the area under $C$ to the triangle"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        1,
+        0,
+        3,
+        0,
+        5
+      ],
+      "total": 9
     },
     {
       "id": "2024-06-p1-q11",
@@ -1051,7 +1348,13 @@
         "Use angle $BOC=\\frac{\\pi}{3}$",
         "Use the sector $BOC$ alone",
         "Use $\\frac12r^2\\theta$ with $\\theta$ in degrees"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2024-06-p1-q12",
@@ -1060,9 +1363,11 @@
       "front": [
         "(a) Express $120\\cos\\theta-350\\sin\\theta$ in the form $K\\cos(\\theta+\\alpha)$, where $K>0$ and $0<\\alpha<90^\\circ$. Give $\\alpha$ to 2 d.p.",
         "The number of rabbits in a wood $t$ months after the start of a year is modelled by $R=A+120\\cos(30t)^\\circ-350\\sin(30t)^\\circ$, where $A$ is a constant. The maximum number during the year is 1200.",
-        "(b)(i) Find a complete equation for the model. (ii) Write down the minimum number of rabbits.",
+        "(b)(i) Find a complete equation for the model.",
+        "(ii) Write down the minimum number of rabbits.",
         "(c) The actual number of rabbits was lowest in the middle of April. Comment on the model.",
-        "The number of foxes is modelled by $F=90+60\\sin(30t+50)^\\circ$, and is lowest after $T$ months. (d) Find the number of rabbits at time $T$."
+        "The number of foxes is modelled by $F=90+60\\sin(30t+50)^\\circ$, and is lowest after $T$ months.",
+        "(d) Find the number of rabbits at time $T$."
       ],
       "back": [
         "Spot: once it's in the form $K\\cos(\\theta+\\alpha)$, the maximum and minimum are $A\\pm K$, and you can work out when they happen.",
@@ -1078,7 +1383,17 @@
         "Use $K=120+350$",
         "Set $t=0$ for the maximum"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        4
+      ],
+      "total": 11
     },
     {
       "id": "2024-06-p1-q13",
@@ -1100,7 +1415,12 @@
         "Use $\\sin^2\\theta=\\frac{1+\\cos2\\theta}{2}$",
         "Integrate $\\sin^2\\theta$ as $-\\cos^2\\theta$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        4,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2024-06-p1-q14",
@@ -1111,7 +1431,8 @@
         "(a) Write down a differential equation for this model.",
         "When $t=5$, the radius is 10 cm and is increasing at 0.8 cm per second.",
         "(b) Solve the differential equation to show that $r^2=16t+20$.",
-        "(c) Find the radius when $t=12$, to the nearest millimetre. (d) Suggest a limitation of the model."
+        "(c) Find the radius when $t=12$, to the nearest millimetre.",
+        "(d) Suggest a limitation of the model."
       ],
       "back": [
         "Spot: “inversely proportional to $r$” means $\\dfrac{dr}{dt}=\\dfrac kr$. Use the given rate to find $k$, then separate the variables.",
@@ -1127,7 +1448,16 @@
         "Use $\\frac{dr}{dt}=\\frac{k}{r^2}$",
         "Differentiate $V=\\frac43\\pi r^3$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        1,
+        0,
+        5,
+        2,
+        1
+      ],
+      "total": 9
     },
     {
       "id": "2024-06-p1-q15",
@@ -1151,7 +1481,13 @@
         "Try $x=1$ and $y=1$",
         "Assume $x$ and $y$ are both even"
       ],
-      "ask": "How do you complete part (ii)?"
+      "ask": "How do you complete part (ii)?",
+      "marks": [
+        2,
+        4,
+        0
+      ],
+      "total": 6
     },
     {
       "id": "2024-06-p2-q01",
@@ -1159,7 +1495,9 @@
       "source": "June 2024 · Paper 2 · Q1",
       "front": [
         "$y=2x^3+9x^2-4x+3$.",
-        "(a) Find, in simplest form, (i) $\\dfrac{dy}{dx}$ (ii) $\\dfrac{d^2y}{dx^2}$.",
+        "(a) Find, in simplest form,",
+        "(i) $\\dfrac{dy}{dx}$",
+        "(ii) $\\dfrac{d^2y}{dx^2}$.",
         "(b) Hence find the exact value of $x$ when $\\dfrac{d^2y}{dx^2}=0$."
       ],
       "back": [
@@ -1174,7 +1512,15 @@
         "Solve $y=0$",
         "Differentiate once and solve $6x^2+18x-4=0$"
       ],
-      "ask": "How do you answer part (b)?"
+      "ask": "How do you answer part (b)?",
+      "marks": [
+        0,
+        0,
+        0,
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2024-06-p2-q02",
@@ -1184,7 +1530,8 @@
         "Sam takes out an interest-free loan of £4500. Sam repays £300 in month 1, £290 in month 2, £280 in month 3, and so on, as an arithmetic sequence.",
         "(a) Show that Sam repays £190 in month 12.",
         "After the $N$th payment, the loan is fully repaid.",
-        "(b) Show that $N^2-61N+900=0$. (c) Hence find $N$."
+        "(b) Show that $N^2-61N+900=0$.",
+        "(c) Hence find $N$."
       ],
       "back": [
         "Spot: the repayments form an arithmetic sequence, and the total repaid is the sum $S_N$.",
@@ -1199,7 +1546,15 @@
         "Use $d=10$",
         "Use $S_N=\\frac N2(300+190)$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2024-06-p2-q03",
@@ -1224,7 +1579,14 @@
         "Multiply $x$ by $-2$",
         "Keep $x=-4$ and change $y$ only"
       ],
-      "ask": "How do you find the point in (iii)?"
+      "ask": "How do you find the point in (iii)?",
+      "marks": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2024-06-p2-q04",
@@ -1233,7 +1595,8 @@
       "front": [
         "A sequence is defined by $u_1=9$ and $u_{n+1}=ku_n-6$, where $k$ is a positive constant. Given that $u_3=2$,",
         "(a) show that $9k^2-6k-8=0$.",
-        "(b)(i) Find the value of $k$. (ii) Find $\\displaystyle\\sum_{r=1}^{4}u_r$."
+        "(b)(i) Find the value of $k$.",
+        "(ii) Find $\\displaystyle\\sum_{r=1}^{4}u_r$."
       ],
       "back": [
         "Spot: a recurrence relation with an unknown $k$. Generate $u_2$ and $u_3$ in terms of $k$, then use the given value.",
@@ -1248,7 +1611,14 @@
         "Use $u_3=9k^2$",
         "Use $u_3=9k-12$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        2,
+        0,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2024-06-p2-q05",
@@ -1268,7 +1638,11 @@
         "Use $\\cos4\\theta\\approx1-4\\theta^2$",
         "Use $\\cos4\\theta\\approx1$",
         "Use $\\sin2\\theta\\approx1-2\\theta^2$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2024-06-p2-q06",
@@ -1276,10 +1650,15 @@
       "source": "June 2024 · Paper 2 · Q6",
       "front": [
         "$f(x)=e^{2x^2-3}$ and $g(x)=4\\ln x$, for $x>0$.",
-        "(a) Find (i) $f'(x)$ (ii) $g'(x)$.",
-        "Given that $f'(x)=g'(x)$ at $x=\\alpha$, (b) show that $\\alpha$ satisfies $x^2+\\ln x-1.5=0$.",
+        "(a) Find",
+        "(i) $f'(x)$",
+        "(ii) $g'(x)$.",
+        "Given that $f'(x)=g'(x)$ at $x=\\alpha$,",
+        "(b) show that $\\alpha$ satisfies $x^2+\\ln x-1.5=0$.",
         "The iterative formula $x_{n+1}=\\sqrt{1.5-\\ln x_n}$ is used with $x_1=1$.",
-        "(c) Find, to 4 d.p., (i) $x_2$ (ii) $\\alpha$."
+        "(c) Find, to 4 d.p.,",
+        "(i) $x_2$",
+        "(ii) $\\alpha$."
       ],
       "back": [
         "Spot: $e^{\\text{function}}$ needs the chain rule. When you set the derivatives equal, take logs to bring the power down.",
@@ -1294,7 +1673,20 @@
         "Differentiate $e^{2x^2-3}$ as $e^{2x^2-3}$",
         "Differentiate $e^{2x^2-3}$ as $(2x^2-3)e^{2x^2-4}$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        2,
+        0,
+        0,
+        0,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2024-06-p2-q07",
@@ -1319,7 +1711,14 @@
         "Use the midpoint of $AB$",
         "Use $\\lambda=3$ only"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        1,
+        0,
+        4
+      ],
+      "total": 5
     },
     {
       "id": "2024-06-p2-q08",
@@ -1342,7 +1741,12 @@
         "Square both sides first",
         "Take only the positive root of $\\tan^22x=\\frac23$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2024-06-p2-q09",
@@ -1350,7 +1754,9 @@
       "source": "June 2024 · Paper 2 · Q9",
       "front": [
         "A small ball is thrown from $A(0,1.8)$ and caught at $B(24,1.2)$, where $x$ m is the horizontal distance and $H$ m is the height above horizontal ground. The ball is highest when $x=11$.",
-        "A quadratic model links $H$ and $x$. (a) Find $H$ in terms of $x$. (b) Give one limitation of the model.",
+        "A quadratic model links $H$ and $x$.",
+        "(a) Find $H$ in terms of $x$.",
+        "(b) Give one limitation of the model.",
         "Robin stands directly under the path, 20 m horizontally from $O$, and can catch the ball if it's less than 2.5 m above the ground.",
         "(c) Use the model to decide whether Robin can catch the ball."
       ],
@@ -1367,7 +1773,16 @@
         "Use $H=a(x-11)^2$ with no constant",
         "Use $H=1.8-(x-11)^2$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        4,
+        1,
+        0,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2024-06-p2-q10",
@@ -1391,7 +1806,14 @@
         "Substitute $t=1$",
         "Differentiate $y$ with respect to $t$ and stop"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        5,
+        0,
+        1
+      ],
+      "total": 6
     },
     {
       "id": "2024-06-p2-q11",
@@ -1412,7 +1834,12 @@
         "Use integration by parts with $u=e^{-2x}$",
         "Integrate $x^2$ and $e^{-2x}$ separately and multiply",
         "Use the substitution $u=x^2$"
-      ]
+      ],
+      "marks": [
+        0,
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2024-06-p2-q12",
@@ -1438,7 +1865,15 @@
         "Integrate $\\frac{1}{V(30-V)}$ as $\\ln V(30-V)$",
         "Assume $\\frac{dV}{dt}$ is constant"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        2,
+        0,
+        5,
+        3,
+        2
+      ],
+      "total": 12
     },
     {
       "id": "2024-06-p2-q13",
@@ -1447,8 +1882,12 @@
       "front": [
         "The number of subscribers to a streaming service, $P$ millions, is modelled by $P=ab^t$, where $t$ is the number of years after 2015.",
         "A graph of $\\log_{10}P$ against $t$ is close to a straight line with gradient 0.12 and intercept 1.3.",
-        "(a) Estimate $a$ and $b$ to 3 d.p. (b) Interpret (i) $a$ (ii) $b$ in context.",
-        "(c) Estimate the number of subscribers in 2030. (d) Comment on the reliability of your answer to (c)."
+        "(a) Estimate $a$ and $b$ to 3 d.p.",
+        "(b) Interpret",
+        "(i) $a$",
+        "(ii) $b$ in context.",
+        "(c) Estimate the number of subscribers in 2030.",
+        "(d) Comment on the reliability of your answer to (c)."
       ],
       "back": [
         "Spot: $P=ab^t$ becomes a straight line when you take logs: $\\log P=\\log a+t\\log b$. The intercept is $\\log a$ and the gradient is $\\log b$.",
@@ -1464,7 +1903,18 @@
         "Use $a=e^{1.3}$ and $b=e^{0.12}$",
         "Use $a=0.12$ and $b=1.3$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        4,
+        0,
+        0,
+        2,
+        2,
+        1
+      ],
+      "total": 9
     },
     {
       "id": "2024-06-p2-q14",
@@ -1472,7 +1922,9 @@
       "source": "June 2024 · Paper 2 · Q14",
       "front": [
         "The circle $C_1$ has equation $x^2+y^2+4x-10y+20=0$.",
-        "(a) Find (i) the coordinates of the centre (ii) the radius of $C_1$.",
+        "(a) Find",
+        "(i) the coordinates of the centre",
+        "(ii) the radius of $C_1$.",
         "The circle $C_2$ has centre $(4,1)$ and radius $k$. $C_1$ and $C_2$ meet at two distinct points.",
         "(b) Find the range of values of $k$, in set notation."
       ],
@@ -1489,7 +1941,16 @@
         "Use $k>3$ only",
         "Use $k<2\\sqrt{13}$ only"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        5
+      ],
+      "total": 8
     },
     {
       "id": "2024-06-p2-q15",
@@ -1498,7 +1959,8 @@
       "front": [
         "The curve $C$ has equation $(x+y)^3=2x^2-y-1$.",
         "(a) Find $\\dfrac{dy}{dx}$ in terms of $x$ and $y$.",
-        "The point $P(1,0)$ lies on $C$. (b) Show that the normal to $C$ at $P$ has equation $y=4-4x$.",
+        "The point $P(1,0)$ lies on $C$.",
+        "(b) Show that the normal to $C$ at $P$ has equation $y=4-4x$.",
         "(c) Prove, using algebra, that the normal at $P$ doesn't meet $C$ again."
       ],
       "back": [
@@ -1515,7 +1977,15 @@
         "Show the normal and the tangent are perpendicular",
         "Substitute $x=1$ into $C$"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        5,
+        0,
+        2,
+        5
+      ],
+      "total": 12
     },
     {
       "id": "2023-06-p1-q01",
@@ -1535,7 +2005,11 @@
         "Integrate $\\sqrt x$ and $4x-3$ separately, then multiply",
         "Integrate the top and the bottom separately",
         "Use $\\displaystyle\\int\\sqrt x\\,dx=\\frac{1}{2\\sqrt x}$"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2023-06-p1-q02",
@@ -1544,7 +2018,8 @@
       "front": [
         "$f(x)=2x^3+3x^2-11x+2a$, where $a$ is a positive constant. $(x-a)$ is a factor of $f(x)$.",
         "(a) Show that $a(2a^2+3a-9)=0$.",
-        "(b)(i) Find the value of $a$. (ii) Use algebra to find the exact solutions of $f(x)=3$."
+        "(b)(i) Find the value of $a$.",
+        "(ii) Use algebra to find the exact solutions of $f(x)=3$."
       ],
       "back": [
         "Spot: “$(x-a)$ is a factor” means $f(a)=0$, which gives an equation in $a$ alone.",
@@ -1560,7 +2035,14 @@
         "Set $f(0)=0$",
         "Divide $f(x)$ by $x$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        2,
+        0,
+        4
+      ],
+      "total": 6
     },
     {
       "id": "2023-06-p1-q03",
@@ -1583,7 +2065,13 @@
         "Use the dot product $\\overrightarrow{OA}\\cdot\\overrightarrow{OB}$",
         "Compare $3+2+a$ with $4-5+3$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        1,
+        2
+      ],
+      "total": 3
     },
     {
       "id": "2023-06-p1-q04",
@@ -1607,7 +2095,14 @@
         "Replace $\\cos\\alpha$ with $\\alpha$",
         "Integrate $f'(x)$ and set it equal to 0"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        3,
+        0,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2023-06-p1-q05",
@@ -1633,7 +2128,15 @@
         "Use the trapezium rule with $h=\\frac16$",
         "Add up the $y$ values and multiply by 0.2"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2023-06-p1-q06",
@@ -1658,7 +2161,14 @@
         "Use $\\log_3(x+9)=\\log_3x+\\log_39$",
         "Divide $b$ by $a$"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2023-06-p1-q07",
@@ -1666,7 +2176,8 @@
       "source": "June 2023 · Paper 1 · Q7",
       "front": [
         "$f(x)=2+\\sqrt{x-5}$, $x>5$.",
-        "(a) State the range of $f$. (b) Find $f^{-1}$.",
+        "(a) State the range of $f$.",
+        "(b) Find $f^{-1}$.",
         "$g(x)=\\dfrac{14}{x-2}$, $x\\ne2$.",
         "(c) Find $gf(9)$.",
         "(d) Find the exact value of the constant $a$ for which $f(a^2+5)=g(a)$."
@@ -1685,7 +2196,16 @@
         "Set $a^2+5=\\frac{14}{a-2}$",
         "Find $gf(a)$ and set it equal to $a$"
       ],
-      "ask": "How do you start part (d)?"
+      "ask": "How do you start part (d)?",
+      "marks": [
+        0,
+        1,
+        3,
+        0,
+        2,
+        2
+      ],
+      "total": 8
     },
     {
       "id": "2023-06-p1-q08",
@@ -1694,7 +2214,8 @@
       "front": [
         "The plan of a stage is a sector $OCDE$ of a circle with centre $O$, between two congruent triangles $ABO$ and $GFO$.",
         "$AOG$ is a straight line of length 16 m along the back of the stage. $B$ lies on $OC$ extended and $F$ lies on $OE$ extended. Angle $COE=2.1$ radians and arc $CDE=21$ m.",
-        "(a) Show that $OC=10$ m. (b) Show that angle $AOB=0.521$ radians to 3 d.p.",
+        "(a) Show that $OC=10$ m.",
+        "(b) Show that angle $AOB=0.521$ radians to 3 d.p.",
         "(c) The front of the stage, $BC$ plus arc $CDE$ plus $EF$, is 26 m long. Find the total area of the stage to the nearest $\\text{m}^2$."
       ],
       "back": [
@@ -1711,7 +2232,15 @@
         "Treat each triangle as right-angled",
         "Use the arc length 21 m as the radius"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        0,
+        2,
+        2,
+        6
+      ],
+      "total": 10
     },
     {
       "id": "2023-06-p1-q09",
@@ -1721,7 +2250,8 @@
         "The first three terms of a geometric sequence are $2k+2$, $18-2k$ and $k+6$, where $k$ is a constant.",
         "(a) Show that $k^2-43k+156=0$.",
         "Given that the sequence converges,",
-        "(b)(i) find $k$, giving a reason. (ii) Find $S_\\infty$."
+        "(b)(i) find $k$, giving a reason.",
+        "(ii) Find $S_\\infty$."
       ],
       "back": [
         "Spot: three terms of a geometric sequence means $\\dfrac{u_2}{u_1}=\\dfrac{u_3}{u_2}$, so $(u_2)^2=u_1u_3$. “Converges” means $|r|<1$.",
@@ -1736,7 +2266,15 @@
         "Use $(2k+2)^2=(18-2k)(k+6)$",
         "Use $r=\\frac{k+6}{2k+2}$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        2,
+        0,
+        0,
+        5
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p1-q10",
@@ -1744,7 +2282,9 @@
       "source": "June 2023 · Paper 1 · Q10",
       "front": [
         "A circle $C$ has equation $x^2+y^2-4kx+2ky+5=0$, where $k$ is a constant.",
-        "(a) Find, in terms of $k$, (i) the coordinates of the centre (ii) the radius.",
+        "(a) Find, in terms of $k$,",
+        "(i) the coordinates of the centre",
+        "(ii) the radius.",
         "The line $y=x+1$ meets $C$ at two distinct points.",
         "(b) Find the range of possible values of $k$."
       ],
@@ -1761,7 +2301,16 @@
         "Substitute $x=0$ into the circle",
         "Solve $5k^2-5>0$ and stop"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        6
+      ],
+      "total": 9
     },
     {
       "id": "2023-06-p1-q11",
@@ -1786,7 +2335,15 @@
         "Use $a=2.8$",
         "Use $b=-0.02$",
         "Use $V=2.8-0.02t$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        2,
+        3,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p1-q12",
@@ -1807,7 +2364,12 @@
         "Use $\\cos(x+h)=\\cos x+\\cos h$",
         "Substitute $h=0$ straight away",
         "Use the chain rule"
-      ]
+      ],
+      "marks": [
+        0,
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2023-06-p1-q13",
@@ -1816,9 +2378,11 @@
       "front": [
         "Carriages on a roller coaster go round the same circuit again and again. A carriage's maximum height is 48 m, and it starts each circuit 3 m above the ground.",
         "Its height $H$ m, $t$ seconds after it starts the first circuit, is modelled by $H=a-b(t-15)^2$, where $a$ and $b$ are positive constants.",
-        "(a) Find a complete equation for the model. (b) Find the height when $t=30$.",
+        "(a) Find a complete equation for the model.",
+        "(b) Find the height when $t=30$.",
         "An alternative model is $H=22.5\\cos(12t+\\alpha)^\\circ+\\beta$, $0\\le\\alpha<360$.",
-        "(c) Find $\\alpha$ and $\\beta$. (d) The carriage moves continuously for 2 minutes. Give a reason why the alternative model is more appropriate."
+        "(c) Find $\\alpha$ and $\\beta$.",
+        "(d) The carriage moves continuously for 2 minutes. Give a reason why the alternative model is more appropriate."
       ],
       "back": [
         "Spot: in $a-b(t-15)^2$ the maximum is $a$, and $t=0$ gives $b$. In the cosine model, $\\beta$ is the midline and $\\cos=-1$ at the lowest point.",
@@ -1834,7 +2398,17 @@
         "Set $a=3$",
         "Set $b=48$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        3,
+        1,
+        0,
+        2,
+        1
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p1-q14",
@@ -1854,7 +2428,11 @@
         "Check $n=1$, 2 and 3",
         "Write it as $(2n+1)^3$",
         "Expand and set it equal to 0"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2023-06-p1-q15",
@@ -1881,7 +2459,15 @@
         "Use the chain rule on $e^{3x}$ only",
         "Take logs of the top only"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        5,
+        2,
+        3,
+        2
+      ],
+      "total": 12
     },
     {
       "id": "2023-06-p2-q01",
@@ -1890,7 +2476,8 @@
       "front": [
         "$f(x)=2x^3-9x^2+4x-7$.",
         "(a) Find $f''(x)$.",
-        "(b)(i) Solve $f''(x)=0$. (ii) Hence find the values of $x$ for which $f(x)$ is concave."
+        "(b)(i) Solve $f''(x)=0$.",
+        "(ii) Hence find the values of $x$ for which $f(x)$ is concave."
       ],
       "back": [
         "Spot: concave means $f''(x)\\le0$. Convex means $f''(x)\\ge0$.",
@@ -1904,7 +2491,14 @@
         "Solve $f'(x)\\le0$",
         "Solve $f(x)\\le0$"
       ],
-      "ask": "How do you find where $f$ is concave?"
+      "ask": "How do you find where $f$ is concave?",
+      "marks": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2023-06-p2-q02",
@@ -1912,9 +2506,11 @@
       "source": "June 2023 · Paper 2 · Q2",
       "front": [
         "A sequence is defined by $u_1=20$ and $u_{n+1}=u_n+6\\cos\\left(\\dfrac{n\\pi}{2}\\right)+4(-1)^n$.",
-        "(a)(i) Show that $u_2=16$. (ii) Find $u_3$ and $u_4$.",
+        "(a)(i) Show that $u_2=16$.",
+        "(ii) Find $u_3$ and $u_4$.",
         "The sequence is periodic with order 4.",
-        "(b)(i) Write down $u_5$. (ii) Find $\\displaystyle\\sum_{r=1}^{30}u_r$."
+        "(b)(i) Write down $u_5$.",
+        "(ii) Find $\\displaystyle\\sum_{r=1}^{30}u_r$."
       ],
       "back": [
         "Spot: periodic with order 4 means the terms repeat every 4. For the sum, count the full cycles, then add the leftover terms.",
@@ -1929,7 +2525,16 @@
         "Multiply $u_1$ by 30",
         "Use 8 full cycles of 4 terms"
       ],
-      "ask": "How do you start part (b)(ii)?"
+      "ask": "How do you start part (b)(ii)?",
+      "marks": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2023-06-p2-q03",
@@ -1938,7 +2543,8 @@
       "front": [
         "Given that $\\log_3(x+3)+\\log_3(x+6)=1+2\\log_3x$,",
         "(a) show that $2x^2-9x-18=0$.",
-        "(b)(i) Write down the roots of $2x^2-9x-18=0$. (ii) Hence state which root is not a solution of the log equation, giving a reason."
+        "(b)(i) Write down the roots of $2x^2-9x-18=0$.",
+        "(ii) Hence state which root is not a solution of the log equation, giving a reason."
       ],
       "back": [
         "Spot: combine each side into a single log, then drop the logs. Write the 1 as $\\log_33$.",
@@ -1953,7 +2559,14 @@
         "Use $\\log_3(x+3)+\\log_3(x+6)=\\log_3(2x+9)$",
         "Divide both sides by $\\log_3x$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        3,
+        0,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2023-06-p2-q04",
@@ -1978,7 +2591,15 @@
         "Use $B=6.2$",
         "Set $H=90-6.2t$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        1,
+        0,
+        3
+      ],
+      "total": 4
     },
     {
       "id": "2023-06-p2-q05",
@@ -2003,7 +2624,14 @@
         "Differentiate $\\frac{dy}{dx}$ again",
         "Set $\\frac{dy}{dx}=5$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2023-06-p2-q06",
@@ -2028,7 +2656,14 @@
         "Use $|\\overrightarrow{AD}|+|\\overrightarrow{BC}|$ as the length of a lap",
         "Divide 2 minutes by 3 laps"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        0,
+        4
+      ],
+      "total": 6
     },
     {
       "id": "2023-06-p2-q07",
@@ -2053,7 +2688,14 @@
         "Differentiate $3xy$ as $3y$",
         "Treat $y$ as a constant"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        4,
+        0,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p2-q08",
@@ -2062,7 +2704,8 @@
       "front": [
         "(a) Express $4\\sin\\theta+6\\cos\\theta$ in the form $R\\sin(\\theta+\\alpha)$, where $R>0$ and $0<\\alpha<\\dfrac{\\pi}{2}$. Give $R$ exactly and $\\alpha$ in radians to 3 d.p.",
         "The first three terms of an arithmetic sequence are $2\\sin x$, $2\\sin x+\\cos x$ and $2\\sin x+2\\cos x$. $S_7$ is the sum of the first 7 terms, as $x$ varies.",
-        "(b)(i) Find the exact maximum value of $S_7$. (ii) Deduce the smallest positive value of $x$ at which it occurs."
+        "(b)(i) Find the exact maximum value of $S_7$.",
+        "(ii) Deduce the smallest positive value of $x$ at which it occurs."
       ],
       "back": [
         "Spot: the sum of an arithmetic sequence with $a=2\\sin x$ and $d=\\cos x$ is a mix of $\\sin x$ and $\\cos x$, so use the R-form from (a).",
@@ -2077,7 +2720,14 @@
         "Use $d=2\\sin x$",
         "Use the geometric series formula"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        0,
+        0,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2023-06-p2-q09",
@@ -2102,7 +2752,14 @@
         "Differentiate both equations with respect to $t$",
         "Set $t=0$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        3,
+        0,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p2-q10",
@@ -2126,7 +2783,13 @@
         "Substitute $x=0$ and $x=-2$ into $f(x)$ and subtract",
         "Differentiate the partial fractions"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p2-q11",
@@ -2153,7 +2816,16 @@
         "Use $\\frac{dV}{dt}=k\\sqrt h$",
         "Use $V=\\frac13\\pi r^2h$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        0,
+        3,
+        0,
+        5,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2023-06-p2-q12",
@@ -2162,7 +2834,8 @@
       "front": [
         "The numbers of subscribers, in thousands, to two streaming companies are modelled by $N_A=|t-4|+2$ and $N_B=11-|2t-8|$, $t\\ge0$, where $t$ is the time in years.",
         "(a) Find the initial difference between the numbers of subscribers.",
-        "When $t=T$, company A cut its prices and its number of subscribers rose. (b) Suggest a value for $T$, with a reason.",
+        "When $t=T$, company A cut its prices and its number of subscribers rose.",
+        "(b) Suggest a value for $T$, with a reason.",
         "(c) Find the values of $t$ for which $N_A>N_B$, in set notation.",
         "(d) State a limitation of the model for company B."
       ],
@@ -2180,7 +2853,16 @@
         "Solve $N_A=N_B$ and take the region between the roots",
         "Remove the modulus signs and solve $t+2>11-(2t-8)$"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        2,
+        0,
+        2,
+        5,
+        1
+      ],
+      "total": 10
     },
     {
       "id": "2023-06-p2-q13",
@@ -2204,7 +2886,13 @@
         "Use $\\displaystyle\\int\\frac{8x}{(2+x)^2}\\,dx=4\\ln(2+x)^2$",
         "Use the trapezium rule"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        4,
+        4,
+        5
+      ],
+      "total": 13
     },
     {
       "id": "2023-06-p2-q14",
@@ -2227,7 +2915,12 @@
         "Use $1+\\tan^2\\theta=\\cos^2\\theta$",
         "Expand $\\sin2\\theta$ as $2\\sin\\theta$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2023-06-p2-q15",
@@ -2247,7 +2940,11 @@
         "Assume $\\sin x+\\cos x<1$",
         "Assume $\\sin x+\\cos x>1$",
         "Try $x=45^\\circ$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2022-06-p1-q01",
@@ -2271,7 +2968,14 @@
         "Add 1 to the $x$-coordinate for $f(x+1)$",
         "Apply the $-5$ before multiplying by 2",
         "Change only the $y$-coordinate"
-      ]
+      ],
+      "marks": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2022-06-p1-q02",
@@ -2292,7 +2996,12 @@
         "Expand the brackets fully, then divide by $(x+1)$",
         "Set $x^2+2x+k=0$",
         "Substitute $x=1$"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2022-06-p1-q03",
@@ -2314,7 +3023,13 @@
         "Use $OP=r$",
         "Use $OP=|OC|-r$",
         "Use $OP=\\sqrt{24}$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2022-06-p1-q04",
@@ -2336,7 +3051,12 @@
         "Add up $\\frac3x$ for $x=1.5,\\dots,7.5$",
         "Differentiate $\\frac3x$",
         "Integrate $\\frac3x$ to $-\\frac{3}{x^2}$"
-      ]
+      ],
+      "marks": [
+        1,
+        2
+      ],
+      "total": 3
     },
     {
       "id": "2022-06-p1-q05",
@@ -2359,7 +3079,14 @@
         "Solve $2.8=3a+b$ and $5.5=12a+b$",
         "Take logs of both sides",
         "Assume $b=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p1-q06",
@@ -2384,7 +3111,14 @@
         "Use $f(x)=a(x-1)^2(x-3)$",
         "Integrate $f'(x)=(x-1)(x-3)$ and stop"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p1-q07",
@@ -2407,7 +3141,12 @@
         "Try $p=1$ and $q=2$",
         "Use proof by exhaustion over all integers"
       ],
-      "ask": "How do you start part (i)?"
+      "ask": "How do you start part (i)?",
+      "marks": [
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2022-06-p1-q08",
@@ -2432,7 +3171,14 @@
         "Differentiate $\\ln(t+1)$ only",
         "Integrate $v$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        1,
+        4,
+        3
+      ],
+      "total": 8
     },
     {
       "id": "2022-06-p1-q09",
@@ -2455,7 +3201,13 @@
         "Show $\\overrightarrow{PQ}\\cdot\\overrightarrow{QR}=0$",
         "Use area $=|\\overrightarrow{PQ}|\\times|\\overrightarrow{QR}|$",
         "Use area $=\\tfrac12ab\\sin\\theta$"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        4
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p1-q10",
@@ -2481,7 +3233,14 @@
         "Set $150e^{0.04T}=600e^{-0.04T}$ and ignore the constants",
         "Differentiate both models and equate them"
       ],
-      "ask": "How do you start part (c)?"
+      "ask": "How do you start part (c)?",
+      "marks": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2022-06-p1-q11",
@@ -2505,7 +3264,13 @@
         "Use the quadratic formula on $2x^3+9x^2-23x+9$",
         "Substitute $x=1$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        2,
+        5
+      ],
+      "total": 7
     },
     {
       "id": "2022-06-p1-q12",
@@ -2525,7 +3290,11 @@
         "Use integration by parts with $u=\\sqrt x$ and $\\dfrac{dv}{dx}=\\ln x$",
         "Substitute $u=\\sqrt x$",
         "Integrate $\\ln x$ to $\\dfrac1x$"
-      ]
+      ],
+      "marks": [
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2022-06-p1-q13",
@@ -2534,7 +3303,9 @@
       "front": [
         "(i) Prove that the sum of the first $n$ terms of an arithmetic series is $S_n=\\dfrac n2\\left[2a+(n-1)d\\right]$.",
         "(ii) Ama saves £12 in week 1, £11.50 in week 2, £11 in week 3, and so on. She needs £122.50 for a printer and takes $n$ weeks to save exactly that much.",
-        "(a) Show that $n^2-49n+490=0$. (b) Solve it. (c) State how many weeks she takes, with a reason."
+        "(a) Show that $n^2-49n+490=0$.",
+        "(b) Solve it.",
+        "(c) State how many weeks she takes, with a reason."
       ],
       "back": [
         "Spot: (i) write the sum forwards and backwards, then add. (ii) Saving less each week means an arithmetic series with $d=-0.5$.",
@@ -2549,7 +3320,15 @@
         "Use $u_n=122.5$",
         "Use the geometric series formula"
       ],
-      "ask": "How do you start part (ii)(a)?"
+      "ask": "How do you start part (ii)(a)?",
+      "marks": [
+        3,
+        0,
+        2,
+        1,
+        1
+      ],
+      "total": 7
     },
     {
       "id": "2022-06-p1-q14",
@@ -2572,7 +3351,12 @@
         "Square both sides",
         "Use $\\cos(x+60^\\circ)=\\cos x+\\cos60^\\circ$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        4,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2022-06-p1-q15",
@@ -2596,7 +3380,14 @@
         "Differentiate $S$ with respect to $h$",
         "Use the sector area $\\pi r^2$",
         "Set $r=h$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        4,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2022-06-p1-q16",
@@ -2620,7 +3411,14 @@
         "Use area $=\\displaystyle\\int y\\,dt$ from 0 to 2",
         "Eliminate $t$ first",
         "Use area $=\\displaystyle\\int x\\frac{dy}{dt}\\,dt$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        5,
+        4
+      ],
+      "total": 9
     },
     {
       "id": "2022-06-p2-q01",
@@ -2640,7 +3438,11 @@
         "Solve $5-3x=9+x$ only",
         "Square both sides and ignore the check",
         "Drop the modulus signs"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2022-06-p2-q02",
@@ -2662,7 +3464,12 @@
         "Use $x=\\ln\\dfrac{80}{5}$",
         "Square root 80"
       ],
-      "ask": "How do you solve part (b)?"
+      "ask": "How do you solve part (b)?",
+      "marks": [
+        2,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2022-06-p2-q03",
@@ -2685,7 +3492,13 @@
         "Use the arithmetic series formula",
         "Use the geometric series formula",
         "Assume $a_n$ tends to a limit"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2022-06-p2-q04",
@@ -2705,7 +3518,11 @@
         "Use the power rule",
         "Substitute $h=0$ first",
         "Integrate $6x-5$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2022-06-p2-q05",
@@ -2715,7 +3532,8 @@
         "The table shows values of $y=\\log_2(3x)$, to 2 d.p.",
         "$x$: 2, 3, 4, 5, 6. $y$: 2.58, 3.17, 3.58, 3.91, 4.17",
         "(a) Use the trapezium rule with all the values to estimate $\\displaystyle\\int_2^6\\log_2(3x)\\,dx$.",
-        "(b) Hence estimate (i) $\\displaystyle\\int_2^6\\log_2(27x^3)\\,dx$ and (ii) $\\displaystyle\\int_2^6\\log_2(12x)\\,dx$."
+        "(b) Hence estimate",
+        "(i) $\\displaystyle\\int_2^6\\log_2(27x^3)\\,dx$ and (ii) $\\displaystyle\\int_2^6\\log_2(12x)\\,dx$."
       ],
       "back": [
         "Spot: (b) means rewrite each new integrand in terms of $\\log_2(3x)$ using the laws of logs, then reuse (a).",
@@ -2730,7 +3548,15 @@
         "Multiply the answer to (a) by 4 for (ii)",
         "Differentiate the answer to (a)"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        3,
+        0,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p2-q06",
@@ -2755,7 +3581,14 @@
         "Differentiate $\\sin\\frac x2$ as $\\cos\\frac x2$ with no factor of $\\frac12$",
         "Use degrees"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        4,
+        1,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2022-06-p2-q07",
@@ -2776,7 +3609,12 @@
         "Use $(1+x)^n$ with $x$ replaced by $-8x$, without taking out the 9",
         "Use $\\sqrt9-\\sqrt{8x}$",
         "Square the expansion"
-      ]
+      ],
+      "marks": [
+        4,
+        1
+      ],
+      "total": 5
     },
     {
       "id": "2022-06-p2-q08",
@@ -2797,7 +3635,12 @@
         "Use the quotient rule",
         "Integrate from 0 to 2",
         "Use the trapezium rule"
-      ]
+      ],
+      "marks": [
+        0,
+        6
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p2-q09",
@@ -2820,7 +3663,14 @@
         "Use $\\dfrac{360}{b}=900$",
         "Use $b=900$",
         "Use $A=32$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4,
+        1
+      ],
+      "total": 5
     },
     {
       "id": "2022-06-p2-q10",
@@ -2847,7 +3697,15 @@
         "Substitute $x=1$ into $f$",
         "Differentiate $f$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        2,
+        2,
+        1,
+        3
+      ],
+      "total": 8
     },
     {
       "id": "2022-06-p2-q11",
@@ -2867,7 +3725,11 @@
         "Check $n=1,2,3$",
         "Factorise $n^2+3n+5$",
         "Use the quadratic formula"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2022-06-p2-q12",
@@ -2889,7 +3751,13 @@
         "Differentiate the top and bottom separately",
         "Use the product rule without the chain rule",
         "Take logs and integrate"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p2-q13",
@@ -2913,7 +3781,13 @@
         "Use the dot product",
         "Find the midpoint of $AB$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2022-06-p2-q14",
@@ -2937,7 +3811,14 @@
         "Differentiate the partial fractions",
         "Assume $V$ is constant"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        0,
+        5,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2022-06-p2-q15",
@@ -2962,7 +3843,14 @@
         "Use $\\text{middle}=\\dfrac{\\text{first}+\\text{third}}{2}$",
         "Set the first term equal to the third",
         "Use $S_\\infty$ straight away"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        2,
+        5
+      ],
+      "total": 10
     },
     {
       "id": "2022-06-p2-q16",
@@ -2988,7 +3876,14 @@
         "Use the gradient of the tangent for the normal",
         "Eliminate $t$ using $\\sin^2t+\\cos^2t=1$"
       ],
-      "ask": "How do you start part (a)?"
+      "ask": "How do you start part (a)?",
+      "marks": [
+        0,
+        5,
+        2,
+        5
+      ],
+      "total": 12
     },
     {
       "id": "2021-10-p1-q01",
@@ -3009,7 +3904,12 @@
         "Set $f(-2)=0$ and solve for $a$",
         "Set $f(0)=2$",
         "Differentiate and set $f'(2)=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2021-10-p1-q02",
@@ -3031,7 +3931,13 @@
         "Use the quadratic formula",
         "Factorise $x^2+6x+14$",
         "Differentiate and integrate"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2021-10-p1-q03",
@@ -3056,7 +3962,15 @@
         "Assume $k=u_1$",
         "Use the arithmetic series formula",
         "Set $u_2=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        3,
+        2,
+        1
+      ],
+      "total": 6
     },
     {
       "id": "2021-10-p1-q04",
@@ -3080,7 +3994,14 @@
         "Set $f(x)=0$",
         "Differentiate $\\ln(x^2-2x+3)$ as $\\dfrac{1}{x^2-2x+3}$",
         "Take $e$ to the power of both sides"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        3,
+        2
+      ],
+      "total": 9
     },
     {
       "id": "2021-10-p1-q05",
@@ -3105,7 +4026,14 @@
         "Use an arithmetic sequence with $d=0.06$",
         "Use $r=0.06$",
         "Use $15000\\times1.06n$"
-      ]
+      ],
+      "marks": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2021-10-p1-q06",
@@ -3129,7 +4057,13 @@
         "Use the sine rule",
         "Add the lengths $|AB|+|BC|$"
       ],
-      "ask": "How do you find $\\cos ABC$?"
+      "ask": "How do you find $\\cos ABC$?",
+      "marks": [
+        0,
+        2,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2021-10-p1-q07",
@@ -3152,7 +4086,13 @@
         "Read the centre as $(6,-8)$",
         "Read the radius as $\\sqrt5$",
         "Differentiate the circle's equation"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        5
+      ],
+      "total": 9
     },
     {
       "id": "2021-10-p1-q08",
@@ -3176,7 +4116,14 @@
         "Use $e^{3k}=6$",
         "Use $k=\\dfrac{3}{6}$",
         "Use $N=800\\times3t$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        2,
+        3
+      ],
+      "total": 9
     },
     {
       "id": "2021-10-p1-q09",
@@ -3200,7 +4147,14 @@
         "Ignore the $\\dfrac{A}{3x+1}$ term from the start",
         "Expand the top and divide by the bottom",
         "Use $x=0$ only"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4,
+        7
+      ],
+      "total": 11
     },
     {
       "id": "2021-10-p1-q10",
@@ -3223,7 +4177,12 @@
         "Cancel the 1s on the top and bottom",
         "Divide the top and bottom by $\\cos2\\theta$",
         "Use the R-form on the numerator"
-      ]
+      ],
+      "marks": [
+        4,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2021-10-p1-q11",
@@ -3248,7 +4207,14 @@
         "Use the substitution $u=x^2$",
         "Write $(\\ln x)^2$ as $\\ln(x^2)$"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        0,
+        3,
+        5
+      ],
+      "total": 8
     },
     {
       "id": "2021-10-p1-q12",
@@ -3273,7 +4239,15 @@
         "Write $H=ax(x-60)$",
         "Write $H=a(x-90)^2+4$",
         "Write $H=-x^2+60x+4$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        5,
+        3,
+        1
+      ],
+      "total": 9
     },
     {
       "id": "2021-10-p1-q13",
@@ -3293,7 +4267,12 @@
         "Solve for $t$ in terms of $x$, then substitute into $y$",
         "Differentiate both equations",
         "Set $t=0$ and check"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2021-10-p1-q14",
@@ -3313,7 +4292,11 @@
         "Differentiate the top and bottom separately",
         "Cancel the $\\sqrt x$ first",
         "Use the product rule without the chain rule"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2021-10-p1-q15",
@@ -3334,7 +4317,12 @@
         "Prove it for $n=1$ and assume the rest",
         "Use the binomial expansion of $(n+1)^2$",
         "Take logs of both sides"
-      ]
+      ],
+      "marks": [
+        2,
+        4
+      ],
+      "total": 6
     },
     {
       "id": "2021-10-p2-q01",
@@ -3356,7 +4344,13 @@
         "Use $u_{31}=a+31d$",
         "Divide 22 by 31",
         "Use the geometric series formula"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2021-10-p2-q02",
@@ -3381,7 +4375,14 @@
         "Multiply $f(1.5)$ by $g(1.5)$",
         "Add $f(1.5)$ and $g(1.5)$"
       ],
-      "ask": "How do you find $gf(1.5)$?"
+      "ask": "How do you find $gf(1.5)$?",
+      "marks": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2021-10-p2-q03",
@@ -3401,7 +4402,11 @@
         "Write it as $\\dfrac{\\log_2(7y+1)}{\\log_2(1-2y)}=4$",
         "Subtract the insides: $\\log_2(9y)=4$",
         "Use $2^4=8$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2021-10-p2-q04",
@@ -3421,7 +4426,11 @@
         "Use $\\cos\\frac\\theta2\\approx1-\\frac{\\theta^2}{2}$",
         "Use $\\tan\\frac\\theta5\\approx\\theta$",
         "Use $\\cos^2\\frac\\theta2\\approx1$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2021-10-p2-q05",
@@ -3444,7 +4453,13 @@
         "Show that $\\dfrac{d^2y}{dx^2}>0$",
         "Set $y=0$"
       ],
-      "ask": "How do you show it's a point of inflection?"
+      "ask": "How do you show it's a point of inflection?",
+      "marks": [
+        0,
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2021-10-p2-q06",
@@ -3468,7 +4483,14 @@
         "Use $\\angle AOB=\\pi-\\theta$",
         "Use radius $r$ for all three sectors",
         "Use degrees in the sector formulas"
-      ]
+      ],
+      "marks": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2021-10-p2-q07",
@@ -3493,7 +4515,14 @@
         "Use the gradient of the line joining $P$ to the origin",
         "Integrate the curve to find the tangent",
         "Set $y=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        1,
+        4
+      ],
+      "total": 9
     },
     {
       "id": "2021-10-p2-q08",
@@ -3516,7 +4545,13 @@
         "Treat $q$ and $y$ as constants",
         "Rearrange for $y$ first",
         "Differentiate $2y^2$ as $4y$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        5
+      ],
+      "total": 9
     },
     {
       "id": "2021-10-p2-q09",
@@ -3536,7 +4571,11 @@
         "Use the ratio $\\tfrac25$",
         "Notice $\\cos(180n^\\circ)=1$ for every $n$",
         "Use the arithmetic series formula"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2021-10-p2-q10",
@@ -3560,7 +4599,14 @@
         "Write $\\log T=a\\log l+b$",
         "Use $\\log(al^b)=b\\log(al)$",
         "Differentiate both sides"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        3,
+        1
+      ],
+      "total": 6
     },
     {
       "id": "2021-10-p2-q11",
@@ -3585,7 +4631,14 @@
         "Remove the modulus and solve once",
         "Set $x=k$"
       ],
-      "ask": "How do you solve part (b)?"
+      "ask": "How do you solve part (b)?",
+      "marks": [
+        0,
+        4,
+        4,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2021-10-p2-q12",
@@ -3607,7 +4660,12 @@
         "Write $x=u-1$ and $dx=du$",
         "Keep the limits 0 and 9",
         "Use integration by parts"
-      ]
+      ],
+      "marks": [
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2021-10-p2-q13",
@@ -3630,7 +4688,13 @@
         "Use $\\dfrac{dy}{dx}=\\dfrac{dx/d\\theta}{dy/d\\theta}$",
         "Eliminate $\\theta$ first",
         "Differentiate $y$ with respect to $x$ directly, treating $\\theta$ as a constant"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2021-10-p2-q14",
@@ -3654,7 +4718,14 @@
         "Use rate in $+$ rate out",
         "Use $V=h^3$",
         "Set $\\dfrac{dh}{dt}=0.6$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        6,
+        2
+      ],
+      "total": 12
     },
     {
       "id": "2021-10-p2-q15",
@@ -3678,7 +4749,14 @@
         "Use $R\\cos\\alpha=2$ and $R\\sin\\alpha=3$",
         "Use $R=3+2$",
         "Use $\\tan\\alpha=\\tfrac32$"
-      ]
+      ],
+      "marks": [
+        3,
+        0,
+        3,
+        4
+      ],
+      "total": 10
     },
     {
       "id": "2020-10-p1-q01",
@@ -3699,7 +4777,12 @@
         "Use the binomial series with $n=2$",
         "Expand $(1-6x)^{\\frac12}$ as $1-(6x)^{\\frac12}$",
         "Use Pascal's triangle"
-      ]
+      ],
+      "marks": [
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2020-10-p1-q02",
@@ -3719,7 +4802,11 @@
         "Divide both sides by 3",
         "Write $7^{150}$ as $(3+4)^{150}$",
         "Take logs to get $\\ln(2p+1)=\\ln150$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2020-10-p1-q03",
@@ -3741,7 +4828,13 @@
         "Show that all four sides have equal length",
         "Show that $\\overrightarrow{OA}\\cdot\\overrightarrow{OB}=0$",
         "Find the midpoint of $AC$"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2020-10-p1-q04",
@@ -3765,7 +4858,13 @@
         "Substitute $x=4$ into $f(x)$",
         "Find $f'(4)$"
       ],
-      "ask": "How do you find $f^{-1}(4)$ quickly?"
+      "ask": "How do you find $f^{-1}(4)$ quickly?",
+      "marks": [
+        0,
+        2,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2020-10-p1-q05",
@@ -3787,7 +4886,13 @@
         "Use $u_7=u_1+7d$ to find $d$",
         "Divide 42 by 7",
         "Use $S_n$ with $n=7$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2020-10-p1-q06",
@@ -3812,7 +4917,14 @@
         "Use $R=2+3$ and $\\tan\\alpha=\\tfrac23$",
         "Square both terms and add",
         "Differentiate and set the result to zero"
-      ]
+      ],
+      "marks": [
+        3,
+        0,
+        1,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2020-10-p1-q07",
@@ -3834,7 +4946,13 @@
         "Use $f(x)=x^2+4$",
         "Integrate between $x=1$ and $x=3$",
         "Write $f(x)=a(x-3)(x-1)$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2020-10-p1-q08",
@@ -3855,7 +4973,12 @@
         "Write $N=k\\sqrt t$",
         "Write $N=Ae^{kt}$",
         "Write $\\dfrac{dN}{dt}=\\dfrac{k}{\\sqrt N}$"
-      ]
+      ],
+      "marks": [
+        0,
+        2
+      ],
+      "total": 2
     },
     {
       "id": "2020-10-p1-q09",
@@ -3880,7 +5003,15 @@
         "Differentiate $x^2-3$ and $e^{-x}$ separately and multiply",
         "Use the quotient rule with denominator $e^{x}$, then set the denominator to zero",
         "Take logs first"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        3,
+        0,
+        3
+      ],
+      "total": 9
     },
     {
       "id": "2020-10-p1-q10",
@@ -3902,7 +5033,12 @@
         "Replace $x$ with $u^2+1$ but keep $dx$ and the limits",
         "Integrate with respect to $x$ first, then substitute",
         "Use integration by parts"
-      ]
+      ],
+      "marks": [
+        4,
+        6
+      ],
+      "total": 10
     },
     {
       "id": "2020-10-p1-q11",
@@ -3925,7 +5061,13 @@
         "Add the two radii",
         "Use the cosine rule with sides 25 and 18",
         "Set the two $y$ values equal and solve a cubic"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2020-10-p1-q12",
@@ -3948,7 +5090,12 @@
         "Expand $\\tan(3x-40^\\circ)$ using the compound angle formula",
         "Square both sides"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        5
+      ],
+      "total": 8
     },
     {
       "id": "2020-10-p1-q13",
@@ -3973,7 +5120,14 @@
         "Set $a_2=a_1$",
         "Use the arithmetic series formula",
         "Set $a_3=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        1,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2020-10-p1-q14",
@@ -3998,7 +5152,15 @@
         "Write $r=30-kt$",
         "Use $\\dfrac{dr}{dt}=-k$",
         "Differentiate $V=4\\pi r^2$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        0,
+        5,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2020-10-p1-q15",
@@ -4020,7 +5182,13 @@
         "Rearrange to $y=\\arctan\\dfrac{4}{x^2}$ and stop",
         "Differentiate $\\tan y$ as $\\sec^2y$ without $\\dfrac{dy}{dx}$",
         "Take logs of both sides"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2020-10-p1-q16",
@@ -4041,7 +5209,11 @@
         "Try $p=1,2,3$ and conclude",
         "Assume $p$ and $q$ are both even",
         "Use the quadratic formula on $9p^2=16+q^2$"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2020-10-p2-q01",
@@ -4066,7 +5238,15 @@
         "Add the $y$ values and multiply by $0.5$",
         "Use the trapezium rule with $h=1$",
         "Integrate $\\sqrt{\\dfrac{x}{x+3}}$ by substitution"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        3,
+        1,
+        1
+      ],
+      "total": 5
     },
     {
       "id": "2020-10-p2-q02",
@@ -4086,7 +5266,12 @@
         "Write $\\mathbf{q}=\\tfrac25(\\mathbf{p}+\\mathbf{r})$",
         "Write $\\mathbf{q}=\\mathbf{r}+\\tfrac25\\mathbf{p}$",
         "Write $\\mathbf{q}=\\tfrac25\\mathbf{r}-\\mathbf{p}$"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2020-10-p2-q03",
@@ -4109,7 +5294,13 @@
         "Use $2\\log(6-x)=\\log(12-2x)$",
         "Divide both sides by $\\log$",
         "Take $e$ to the power of each term separately"
-      ]
+      ],
+      "marks": [
+        3,
+        0,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2020-10-p2-q04",
@@ -4130,7 +5321,12 @@
         "Use the $x^3$ term $\\binom63a^3(3x)^3$ but forget to cube the 3",
         "Expand $(1+3x)^6$ and multiply by $a$",
         "Use $\\binom64a^4(3x)^2$"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2020-10-p2-q05",
@@ -4151,7 +5347,12 @@
         "Take logs of each term separately",
         "Write $5^{x+1}=5^x+5$",
         "Square both sides"
-      ]
+      ],
+      "marks": [
+        0,
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2020-10-p2-q06",
@@ -4173,7 +5374,12 @@
         "Integrate the top and bottom separately",
         "Use integration by parts",
         "Write it as $\\ln(2x^2+7x-1)$ divided by $\\ln(x+3)$"
-      ]
+      ],
+      "marks": [
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2020-10-p2-q07",
@@ -4197,7 +5403,14 @@
         "Use the quotient rule on the whole of $y$",
         "Differentiate the top and bottom separately",
         "Use the chain rule on $\\ln x$ only"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        3,
+        3
+      ],
+      "total": 10
     },
     {
       "id": "2020-10-p2-q08",
@@ -4219,7 +5432,13 @@
         "Differentiate $f'(x)$ again",
         "Set $f'(2)=0$",
         "Set $f'(0)=8$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        6
+      ],
+      "total": 6
     },
     {
       "id": "2020-10-p2-q09",
@@ -4242,7 +5461,14 @@
         "Substitute $t=15$ only",
         "Take logs of both sides straight away",
         "Assume $A=78$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2020-10-p2-q10",
@@ -4265,7 +5491,12 @@
         "Use $\\sin3x=3\\sin x$",
         "Use the R-form"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        4,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2020-10-p2-q11",
@@ -4291,7 +5522,14 @@
         "Remove the modulus signs and solve once",
         "Set $x-2=0$"
       ],
-      "ask": "How do you solve part (b)?"
+      "ask": "How do you solve part (b)?",
+      "marks": [
+        0,
+        2,
+        2,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2020-10-p2-q12",
@@ -4315,7 +5553,13 @@
         "Use area $=\\displaystyle\\int y\\,dt$",
         "Use area $=\\displaystyle\\int x\\frac{dy}{dt}\\,dt$",
         "Eliminate $t$ first, then integrate"
-      ]
+      ],
+      "marks": [
+        0,
+        6,
+        5
+      ],
+      "total": 11
     },
     {
       "id": "2020-10-p2-q13",
@@ -4340,7 +5584,14 @@
         "Differentiate the top and bottom separately",
         "Let $u=\\ln x$ and integrate"
       ],
-      "ask": "How do you prove part (b)?"
+      "ask": "How do you prove part (b)?",
+      "marks": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2020-10-p2-q14",
@@ -4363,7 +5614,13 @@
         "Write the circle as $x^2+y^2=r^2$",
         "Set the gradient of $l$ equal to the radius",
         "Use the distance from the origin to $l$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2020-10-p2-q15",
@@ -4386,7 +5643,13 @@
         "Use the arithmetic series formula",
         "Prove it for $n=1$ and $n=2$ only",
         "Differentiate $S_n$ with respect to $r$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        4
+      ],
+      "total": 8
     },
     {
       "id": "2020-10-p2-q16",
@@ -4407,7 +5670,11 @@
         "Check $n=1,2,3$",
         "Write any integer as $9k$",
         "Use proof by contradiction with $n$ even"
-      ]
+      ],
+      "marks": [
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2019-06-p1-q01",
@@ -4428,7 +5695,12 @@
         "Set $f(2)=0$ and solve for $a$",
         "Divide $f(x)$ by $(x+2)$ and set the quotient to zero",
         "Differentiate $f(x)$ and set $f'(-2)=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2019-06-p1-q02",
@@ -4452,7 +5724,13 @@
         "Differentiate $\\cos x$ and set it to zero",
         "Use $\\cos x\\approx1$ straight away",
         "Solve $\\cos x=3x$ using the quadratic formula"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2019-06-p1-q03",
@@ -4475,7 +5753,13 @@
         "Differentiate the top and the bottom separately",
         "Expand the denominator and use the product rule on the numerator only",
         "Use partial fractions and integrate"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        1
+      ],
+      "total": 5
     },
     {
       "id": "2019-06-p1-q04",
@@ -4498,7 +5782,13 @@
         "Expand $(9-x)^{\\frac12}$ with $n=\\tfrac12$",
         "Write it as $9^{-\\frac12}-x^{-\\frac12}$",
         "Use $(1+x)^n$ with $n=-\\tfrac12$ and $x$ replaced by $9-x$"
-      ]
+      ],
+      "marks": [
+        4,
+        0,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2019-06-p1-q05",
@@ -4524,7 +5814,15 @@
         "Use the quadratic formula to find the roots",
         "Differentiate and set $f'(x)=0$ to find the form",
         "Factorise $3x^2-12x+17$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        3,
+        0,
+        4
+      ],
+      "total": 10
     },
     {
       "id": "2019-06-p1-q06",
@@ -4547,7 +5845,12 @@
         "Divide both sides by $\\sin\\theta$",
         "Square both sides",
         "Use $\\tan\\theta=\\dfrac{\\cos\\theta}{\\sin\\theta}$"
-      ]
+      ],
+      "marks": [
+        6,
+        2
+      ],
+      "total": 8
     },
     {
       "id": "2019-06-p1-q07",
@@ -4571,7 +5874,14 @@
         "Use $V=24000-6000t$",
         "Use $V=24000t^{0.75}$",
         "Use $V=18000\\times0.75^t$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        2,
+        1
+      ],
+      "total": 7
     },
     {
       "id": "2019-06-p1-q08",
@@ -4595,7 +5905,14 @@
         "Integrate $x(x+1)(x-3)$ from $-1$ to $3$",
         "Use the trapezium rule between $-1$ and $0$",
         "Differentiate and find the turning points"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        4,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2019-06-p1-q09",
@@ -4617,7 +5934,13 @@
         "Use $\\log(a+b)=\\log a+\\log b$",
         "Cancel the logs to get $a-b=a+b$",
         "Raise $e$ to each term: $a-b=e^{a+b}$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        2
+      ],
+      "total": 5
     },
     {
       "id": "2019-06-p1-q10",
@@ -4639,7 +5962,12 @@
         "Check $n=1,2,3$ and conclude",
         "Assume $n^2+1=4k$ and differentiate",
         "Prove it by contradiction using a single example"
-      ]
+      ],
+      "marks": [
+        4,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2019-06-p1-q11",
@@ -4664,7 +5992,15 @@
         "Use an arithmetic series with $d=0.04$",
         "Work out $5\\times15\\times1.04$",
         "Use $5\\times1.04^{15}$ for the total time"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        2,
+        1,
+        4
+      ],
+      "total": 7
     },
     {
       "id": "2019-06-p1-q12",
@@ -4691,7 +6027,16 @@
         "Differentiate $\\sin x$ only and set it to zero",
         "Take logs of $f(x)$ and integrate",
         "Set $f(x)=0$ and solve"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        0,
+        2,
+        3,
+        1
+      ],
+      "total": 10
     },
     {
       "id": "2019-06-p1-q13",
@@ -4700,7 +6045,8 @@
       "front": [
         "The curve $C$ has equation $y=\\dfrac{p-3x}{(2x-q)(x+1)}$, $x\\ne-1$, $x\\ne1$, where $p$ and $q$ are constants.",
         "$C$ passes through $\\left(2,\\dfrac12\\right)$ and has vertical asymptotes $x=1$ and $x=-1$.",
-        "(a)(i) Explain why $q=2$. (ii) Show that $p=9$.",
+        "(a)(i) Explain why $q=2$.",
+        "(ii) Show that $p=9$.",
         "(b) The region $R$ is bounded by $C$, the $x$-axis and the line $x=2$. Show that its area is $a\\ln2+b\\ln3$, where $a$ and $b$ are rational constants to be found."
       ],
       "back": [
@@ -4715,7 +6061,15 @@
         "Integrate the top and bottom separately",
         "Integrate from $x=-1$ to $x=1$",
         "Use the substitution $u=(2x-2)(x+1)$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        0,
+        3,
+        8
+      ],
+      "total": 11
     },
     {
       "id": "2019-06-p1-q14",
@@ -4724,7 +6078,8 @@
       "front": [
         "The curve $C$ has equation $x=5\\sin3y$, $-\\dfrac{\\pi}{6}<y<\\dfrac{\\pi}{6}$, and passes through the origin.",
         "(a) Find $\\dfrac{dy}{dx}$ at the origin.",
-        "(b)(i) Use the small angle approximation for $\\sin3y$ to find an equation linking $x$ and $y$ near the origin. (ii) Explain how this relates to (a).",
+        "(b)(i) Use the small angle approximation for $\\sin3y$ to find an equation linking $x$ and $y$ near the origin.",
+        "(ii) Explain how this relates to (a).",
         "(c) Show that, for all points on $C$, $\\dfrac{dy}{dx}=\\dfrac{1}{a\\sqrt{b-x^2}}$, where $a$ and $b$ are constants to be found."
       ],
       "back": [
@@ -4739,7 +6094,15 @@
         "Rearrange to $y=\\tfrac13\\arcsin(5x)$ and differentiate",
         "Differentiate $5\\sin3y$ with respect to $x$, treating $y$ as a constant",
         "Use the product rule"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        0,
+        2,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2019-06-p2-q01",
@@ -4759,7 +6122,11 @@
         "Take logs base 10 of each term separately and add them",
         "Divide $9\\sqrt3$ by $27$",
         "Set $x=0$ and solve for $y$"
-      ]
+      ],
+      "marks": [
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2019-06-p2-q02",
@@ -4782,7 +6149,14 @@
         "Add the speeds and multiply by 30",
         "Find the gradient between each pair of readings",
         "Use the trapezium rule with $h=1$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        3,
+        1
+      ],
+      "total": 4
     },
     {
       "id": "2019-06-p2-q03",
@@ -4805,7 +6179,14 @@
         "Use $\\pi r^2$ instead",
         "Halve the angle first",
         "Use $\\tfrac12r\\theta$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "total": 3
     },
     {
       "id": "2019-06-p2-q04",
@@ -4828,7 +6209,13 @@
         "Set $6\\cos t=2\\sqrt3\\sin t$",
         "Differentiate both curves and equate the gradients",
         "Substitute $t=\\dfrac{7\\pi}{4}$ straight away"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        6
+      ],
+      "total": 6
     },
     {
       "id": "2019-06-p2-q05",
@@ -4849,7 +6236,12 @@
         "Add $\\sqrt[3]{x}$ for $x=1,2,\\dots,8$",
         "Differentiate $x^{\\frac13}$",
         "Use the trapezium rule with one strip"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2019-06-p2-q06",
@@ -4876,7 +6268,16 @@
         "Square $g(0)$",
         "Use $3x-2$ for every input",
         "Find $g^{-1}$ first"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        4,
+        0,
+        1,
+        3
+      ],
+      "total": 10
     },
     {
       "id": "2019-06-p2-q07",
@@ -4903,7 +6304,16 @@
         "Set $y=1.5x$",
         "Use $y=a+bx$ with $a=400$",
         "Divide 400 by 1000"
-      ]
+      ],
+      "marks": [
+        0,
+        1,
+        0,
+        3,
+        1,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2019-06-p2-q08",
@@ -4924,7 +6334,12 @@
         "Use $S_\\infty=\\dfrac{54}{1-\\frac13}$",
         "Add the first three terms",
         "Use $S_n$ with $n=3$"
-      ]
+      ],
+      "marks": [
+        3,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2019-06-p2-q09",
@@ -4949,7 +6364,14 @@
         "Use $d=kV+n$, because the graph is a straight line",
         "Use the gradient of the $d$–$V$ graph as $k$",
         "Use $d=ke^{nV}$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        3,
+        3
+      ],
+      "total": 9
     },
     {
       "id": "2019-06-p2-q10",
@@ -4974,7 +6396,15 @@
         "Find the lengths using Pythagoras",
         "Assume $N$ is the midpoint of $OB$",
         "Use $\\overrightarrow{ON}=\\overrightarrow{OA}+\\overrightarrow{OB}$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        2,
+        2,
+        2
+      ],
+      "total": 6
     },
     {
       "id": "2019-06-p2-q11",
@@ -5000,7 +6430,15 @@
         "Use the power rule: $\\dfrac{dy}{dx}=x(2x)^{x-1}$",
         "Treat it as an exponential: $\\dfrac{dy}{dx}=(2x)^x\\ln2$",
         "Set $y=0$"
-      ]
+      ],
+      "marks": [
+        0,
+        5,
+        2,
+        2,
+        2
+      ],
+      "total": 11
     },
     {
       "id": "2019-06-p2-q12",
@@ -5022,7 +6460,12 @@
         "Cancel the $\\theta$s to get $\\cos3+\\sin3$",
         "Multiply only the first fraction by $\\cos\\theta$",
         "Use the R-form"
-      ]
+      ],
+      "marks": [
+        4,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2019-06-p2-q13",
@@ -5047,7 +6490,15 @@
         "Differentiate $S$ with respect to $h$",
         "Set $r=h$",
         "Use $S=4\\pi r^2$ for the whole tank"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4,
+        4,
+        2
+      ],
+      "total": 10
     },
     {
       "id": "2019-06-p2-q14",
@@ -5072,7 +6523,14 @@
         "Integrate $\\dfrac{1}{3-\\sqrt h}$ as $\\ln\\left|3-\\sqrt h\\right|$",
         "Use integration by parts with $u=\\sqrt h$",
         "Multiply by $3+\\sqrt h$ and integrate term by term"
-      ]
+      ],
+      "marks": [
+        6,
+        0,
+        2,
+        7
+      ],
+      "total": 15
     },
     {
       "id": "2018-06-p1-q01",
@@ -5093,7 +6551,12 @@
         "Use $\\cos6\\theta\\approx1-\\dfrac{\\theta^2}{2}$ and $\\sin2\\theta\\approx\\theta$, then simplify",
         "Use $\\cos6\\theta\\approx1$ and $\\sin2\\theta\\approx2\\theta$, then simplify",
         "Expand $\\cos6\\theta$ with the compound angle formula first"
-      ]
+      ],
+      "marks": [
+        0,
+        3
+      ],
+      "total": 3
     },
     {
       "id": "2018-06-p1-q02",
@@ -5117,7 +6580,14 @@
         "Use the quotient rule on $36\\sqrt x$",
         "Integrate $y$, then set the result to zero",
         "Set $y=0$ and solve for $x$"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        2,
+        2
+      ],
+      "total": 7
     },
     {
       "id": "2018-06-p1-q03",
@@ -5140,7 +6610,13 @@
         "Use the area formula $\\pi r^2=12$",
         "Set the arc length equal to the area",
         "Use the cosine rule in triangle $AOB$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4
+      ],
+      "total": 4
     },
     {
       "id": "2018-06-p1-q04",
@@ -5163,7 +6639,13 @@
         "Solve $3\\ln(10-x)=x$ exactly using laws of logs",
         "Differentiate $3\\ln(10-x)$ and set it to zero",
         "Substitute $x=4.5$ and check it gives zero"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        2
+      ],
+      "total": 4
     },
     {
       "id": "2018-06-p1-q05",
@@ -5185,7 +6667,12 @@
         "Use the product rule on $5\\sin\\theta$ and $3\\sin\\theta+3\\cos\\theta$ separately",
         "Differentiate the top and the bottom separately",
         "Use the chain rule with $u=\\tan\\theta$"
-      ]
+      ],
+      "marks": [
+        0,
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2018-06-p1-q06",
@@ -5210,7 +6697,14 @@
         "Use the fact that $AP$ has the same gradient as the tangent",
         "Substitute $(8,3)$ into $y=2x-3$",
         "Find where $y=2x-3$ crosses the $x$-axis"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        4,
+        3
+      ],
+      "total": 10
     },
     {
       "id": "2018-06-p1-q07",
@@ -5232,7 +6726,13 @@
         "Use integration by parts with $u=\\dfrac{1}{2x-k}$",
         "Substitute $k=1$ and evaluate",
         "Differentiate with respect to $k$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2018-06-p1-q08",
@@ -5258,7 +6758,14 @@
         "Substitute $t=8.75$ and give that time",
         "Differentiate $D$ and set the derivative equal to $5$"
       ],
-      "ask": "How do you find the earliest leaving time in (b)?"
+      "ask": "How do you find the earliest leaving time in (b)?",
+      "marks": [
+        0,
+        0,
+        1,
+        4
+      ],
+      "total": 5
     },
     {
       "id": "2018-06-p1-q09",
@@ -5283,7 +6790,14 @@
         "Rearrange to make $y$ the subject first",
         "Set $\\dfrac{dy}{dx}=0$ to find the furthest west point",
         "Set $x=0$ and solve for $y$"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        5,
+        1
+      ],
+      "total": 10
     },
     {
       "id": "2018-06-p1-q10",
@@ -5308,7 +6822,15 @@
         "Integrate both sides with respect to $t$, treating $H$ as a constant",
         "Differentiate $\\dfrac{H\\cos(0.5t)}{20}$ with the product rule",
         "Substitute $t=0$ into the differential equation and stop there"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        5,
+        1,
+        2
+      ],
+      "total": 8
     },
     {
       "id": "2018-06-p1-q11",
@@ -5332,7 +6854,13 @@
         "Expand $(1+5x)^{\\frac12}$, then divide by $(1-x)$",
         "Use partial fractions first",
         "Square both sides and compare coefficients"
-      ]
+      ],
+      "marks": [
+        6,
+        1,
+        3
+      ],
+      "total": 10
     },
     {
       "id": "2018-06-p1-q12",
@@ -5358,7 +6886,15 @@
         "Take logs of $45000-20000$",
         "Substitute $t=2003$ and $t=2013$ into the model",
         "Assume $p=1.1$ and solve for $A$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        4,
+        2,
+        4
+      ],
+      "total": 10
     },
     {
       "id": "2018-06-p1-q13",
@@ -5379,7 +6915,11 @@
         "Rewrite $x\\sqrt{x+3}$ as $\\sqrt{x^2+3x}$",
         "Work out $\\displaystyle\\int x\\,dx\\times\\int\\sqrt{x+3}\\,dx$",
         "Use the trapezium rule"
-      ]
+      ],
+      "marks": [
+        7
+      ],
+      "total": 7
     },
     {
       "id": "2018-06-p1-q14",
@@ -5405,7 +6945,14 @@
         "Use $\\cos2t\\equiv2\\cos^2t-1$ and $\\cos t=x-1$",
         "Square $x$ and $y$ and add them",
         "Differentiate both equations with respect to $t$"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "total": 10
     },
     {
       "id": "2018-06-p2-q01",
@@ -5429,7 +6976,14 @@
         "Square $g(6)$",
         "Find $g(6)$ and $g(12)$, then add",
         "Substitute $x=6$ into $g^{-1}(x)$"
-      ]
+      ],
+      "marks": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "total": 6
     },
     {
       "id": "2018-06-p2-q02",
@@ -5453,7 +7007,14 @@
         "Use $\\overrightarrow{OD}=\\overrightarrow{OA}+\\overrightarrow{OB}$",
         "Use $\\overrightarrow{OD}=\\overrightarrow{AB}-\\overrightarrow{OB}$",
         "Find the midpoint of $AB$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2018-06-p2-q03",
@@ -5476,7 +7037,13 @@
         "Show it works for $p=\\sqrt2$ and $q=\\sqrt3$",
         "Prove it by contradiction",
         "Check every pair of irrational numbers (proof by exhaustion)"
-      ]
+      ],
+      "marks": [
+        2,
+        0,
+        3
+      ],
+      "total": 5
     },
     {
       "id": "2018-06-p2-q04",
@@ -5498,7 +7065,12 @@
         "Use the AP sum formula for the whole expression",
         "Work out all 12 terms by hand",
         "Use the binomial expansion of $(4+3r)^{12}$"
-      ]
+      ],
+      "marks": [
+        4,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2018-06-p2-q05",
@@ -5522,7 +7094,14 @@
         "Rearrange $3x^3-x^2-4=0$ into the form $x=g(x)$",
         "Use $x_{n+1}=x_n-\\dfrac{f'(x_n)}{f(x_n)}$",
         "Use interval bisection between 1 and 2"
-      ]
+      ],
+      "marks": [
+        0,
+        3,
+        2,
+        1
+      ],
+      "total": 6
     },
     {
       "id": "2018-06-p2-q06",
@@ -5530,7 +7109,8 @@
       "source": "June 2018 · Paper 2 · Q6",
       "front": [
         "$f(x)=-2x^3+7x^2-7x+12$, $x\\in\\mathbb{R}$",
-        "(a)(i) Calculate $f(3)$. (ii) Write $f(x)$ as a product of two algebraic factors.",
+        "(a)(i) Calculate $f(3)$.",
+        "(ii) Write $f(x)$ as a product of two algebraic factors.",
         "(b) Prove that $-2y^6+7y^4-7y^2+12=0$ has exactly two real solutions.",
         "(c) Deduce the number of real solutions, for $4\\pi\\le\\theta<8\\pi$, of $2\\tan^3\\theta-7\\tan^2\\theta+7\\tan\\theta-12=0$."
       ],
@@ -5547,7 +7127,15 @@
         "Use the quadratic formula on $f(x)$",
         "Differentiate $f$ to find its turning points",
         "Substitute $x=\\tan\\theta$ straight away"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        3,
+        2,
+        1
+      ],
+      "total": 6
     },
     {
       "id": "2018-06-p2-q07",
@@ -5571,7 +7159,12 @@
         "Divide both sides by $\\sin x$",
         "Replace $\\sec x$ with $\\dfrac{1}{\\sin x}$"
       ],
-      "ask": "How do you start part (i)?"
+      "ask": "How do you start part (i)?",
+      "marks": [
+        4,
+        5
+      ],
+      "total": 9
     },
     {
       "id": "2018-06-p2-q08",
@@ -5597,7 +7190,15 @@
         "Use $H=15-x^2$",
         "Use $H=kx^2+15$",
         "Use $H=k(x-15)^2+50$"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        3,
+        3,
+        1
+      ],
+      "total": 7
     },
     {
       "id": "2018-06-p2-q09",
@@ -5618,7 +7219,12 @@
         "Use the chain rule on $\\sin\\theta$",
         "Use the small angle approximation $\\sin\\theta\\approx\\theta$",
         "Integrate $\\cos\\theta$"
-      ]
+      ],
+      "marks": [
+        0,
+        5
+      ],
+      "total": 5
     },
     {
       "id": "2018-06-p2-q10",
@@ -5644,7 +7250,15 @@
         "Write $r=6-kt^2$",
         "Write $\\dfrac{dr}{dt}=-kr^2$",
         "Differentiate $V=\\tfrac43\\pi r^3$ and stop there"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        5,
+        2,
+        1
+      ],
+      "total": 8
     },
     {
       "id": "2018-06-p2-q11",
@@ -5667,7 +7281,13 @@
         "Write it as just $\\dfrac{B}{x-2}+\\dfrac{C}{1-2x}$",
         "Use the binomial expansion",
         "Multiply out the denominator and differentiate"
-      ]
+      ],
+      "marks": [
+        0,
+        4,
+        3
+      ],
+      "total": 7
     },
     {
       "id": "2018-06-p2-q12",
@@ -5692,7 +7312,13 @@
         "Rewrite everything in terms of $\\sin x$ only",
         "Use the R-form"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        3,
+        6,
+        0
+      ],
+      "total": 9
     },
     {
       "id": "2018-06-p2-q13",
@@ -5715,7 +7341,13 @@
         "Integrate $2x\\ln x$ from 0 to $9e$",
         "Integrate the curve minus the normal from 1 to $9e$",
         "Use the trapezium rule"
-      ]
+      ],
+      "marks": [
+        0,
+        0,
+        10
+      ],
+      "total": 10
     },
     {
       "id": "2018-06-p2-q14",
@@ -5742,7 +7374,15 @@
         "Separate the variables in $\\dfrac{dN}{dt}$",
         "Take logs of both sides first"
       ],
-      "ask": "How do you start part (b)?"
+      "ask": "How do you start part (b)?",
+      "marks": [
+        0,
+        1,
+        4,
+        4,
+        1
+      ],
+      "total": 10
     }
   ]
 }
