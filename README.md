@@ -31,9 +31,19 @@ The progress page (`?view=progress`) has:
 
 Every chart has a table view and works with the keyboard.
 
-Questions mode shows four shuffled answer choices for each card. The first answer counts and moves the card between boxes in the same way. You can open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
+Questions mode sets each card out like the exam paper: the question number, each part on its own line with its marks on the right, and the question's total. Instead of picking from choices, you answer in your own words, so you practise working it out rather than recognising the answer:
 
-On a phone every screen fits without scrolling. A question too long to show with its answers comes first on its own, with a button to the answers. After you answer, the method replaces the choices, and tabs switch between the question, answers and method. Anything still too long, such as a long method, is split into pages: tap the arrows or swipe up and down. Formulas too wide for a line are shrunk to fit. The progress page has Overview, Activity and Topics tabs.
+- **Say your answer.** It's recorded, written down by Whisper and put in the answer box, where you can correct it.
+- **Or type it.** Write the maths however is easiest, like `x^2` or `root 3`.
+- **Mark my answer.** An AI examiner marks each part against the worked solution, as an Edexcel examiner would, and says what to fix. A right answer moves the card up a box; anything else sends it back to Red.
+
+Speaking and AI marking need you to be signed in. Signed out, or if the examiner can't be reached, you check your answer against the worked solution and say whether you got it right. Show the answer gives up on a question, which counts as Red. You can open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
+
+On a phone every screen fits without scrolling. Anything too long for the screen, such as a long worked solution, is split into pages: tap the arrows or swipe up and down. Formulas too wide for a line are shrunk to fit. The progress page has Overview, Activity and Topics tabs.
+
+### AI marking
+
+Marking runs on the Vercel project of [CS Revise](https://github.com/jcooksh/csrevise), which holds the model providers' API keys: `api/maths-mark.js` and `api/maths-transcribe.js` there. The site calls them with the signed-in user's Supabase token, and they check it against this project's Supabase before using any quota. The examiner tries Groq (gpt-oss-120b) first, then Google Gemini, Cohere and NVIDIA, and Whisper on Groq writes down spoken answers. No key is ever in the browser. If CS Revise's Vercel project goes, the site falls back to checking answers yourself.
 
 ## Trigonometry deck
 
@@ -48,7 +58,7 @@ The trig rules cover every identity and formula in the 9MA0 trigonometry content
 - trig equations
 - trig calculus
 
-Cards marked “In the formula booklet” are printed in Pearson’s booklet: compound angles, factor formulae, small angle approximations, and the tan, sec, cot and cosec derivatives and integrals. Cards marked “Recall for the exam” are not printed and must be learned. These include the Pythagorean identities, double angle formulae, sine and cosine rules, arc length and sector area, and the sin and cos derivatives and integrals. The wrong answers are near-misses: sign errors, swapped functions and missing factors.
+Cards marked “In the formula booklet” are printed in Pearson’s booklet: compound angles, factor formulae, small angle approximations, and the tan, sec, cot and cosec derivatives and integrals. Cards marked “Recall for the exam” are not printed and must be learned. These include the Pythagorean identities, double angle formulae, sine and cosine rules, arc length and sector area, and the sin and cos derivatives and integrals.
 
 ## Past papers
 
@@ -58,14 +68,12 @@ The Past papers section has a card for every question in the Edexcel 9MA0 Pure p
 - **Use**: the formulas or identities you need
 - the working for each part, and the answer
 
-In Questions mode, each card asks how you should start, with four approaches to choose from.
-
-The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`.
+The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`. It also puts each part on its own line and adds the marks for each part and the question's total from `tools/past-papers/marks.json`, which was read from the question papers. Where a card leaves out a part of the paper's question, such as one that needs a diagram, that part's marks are left out too.
 
 ## Controls
 
 - Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. The card shows its box, and the swipe stamp shows where it will go. In a session, Skip moves a card to the back of the queue.
-- Questions: press 1–4 or A–D to answer, Enter for the next question.
+- Questions: Enter opens the answer box, Ctrl+Enter marks your answer, and Enter goes to the next question once it's marked.
 - The moon/sun button switches between light and dark mode. It follows the system setting until you choose one.
 - Animations are reduced when the system “reduce motion” setting is on.
 
@@ -90,7 +98,7 @@ Run `python3 -m http.server 8000 --bind 127.0.0.1` from this folder and open `ht
 
 Edit `cards.json`. Each card has a unique `id`, an existing `topic` ID, a question in `front`, and one or more answer lines in `back`. Use `$…$` around LaTeX. To put a formula on its own line, make it a separate entry in `back`. An optional `reference` of `recall` or `booklet` marks its exam status. Use it only when supported by Pearson's materials.
 
-Include a `choices` array with the correct answer first and three distinct wrong answers to include the card in Maths questions. Match their notation and give each question a single correct choice. The site displays `back` as the explanation.
+Every card is also a question in Questions mode, where `back` is the worked solution the answer is marked against. The `choices` arrays from the old multiple-choice mode are no longer used.
 
 Cards can be opened directly with `?card=<id>` on the site URL. GitHub Pages publishes changes to the main branch.
 

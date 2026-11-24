@@ -814,111 +814,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .line-label.method { background: var(--surface-3); color: var(--ink); }
 .line-label.answer, .line-label.answers { background: var(--green-bg); color: var(--green-fg); }
 .line-label.watch-out { background: color-mix(in oklab, var(--danger) 14%, transparent); color: var(--danger); }
-.question-card.exam #question-prompt {
-  max-width: 64ch;
-  font: 560 clamp(1rem, 1.55vw, 1.18rem)/1.55 "Inter", system-ui, sans-serif;
-  font-size: calc(clamp(1rem, 1.55vw, 1.18rem) * var(--fit, 1));
-  letter-spacing: 0;
-  text-wrap: pretty;
-}
-.question-card.exam #question-prompt .katex { white-space: normal; }
-.prompt-line { display: block; }
-.question-card.exam .prompt-line + .prompt-line { margin-top: 0.35em; }
-.ask-line {
-  display: block;
-  margin-top: 0.9em;
-  color: var(--accent-ink);
-  font-size: 0.74rem;
-  font-weight: 760;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
 
-/* ---------- Questions ---------- */
-
-.question-card {
-  gap: 20px;
-  align-items: stretch;
-  padding-block: clamp(24px, 3.4vw, 40px);
-}
-
-#question-prompt {
-  max-width: 34ch;
-  font: 740 clamp(1.6rem, 3.2vw, 2.6rem)/1.14 var(--heading);
-  font-size: calc(clamp(1.6rem, 3.2vw, 2.6rem) * var(--fit, 1));
-  letter-spacing: -0.04em;
-  overflow-wrap: anywhere;
-  text-wrap: balance;
-  scroll-margin-top: 80px;
-}
-#question-prompt .katex { font-size: 1em; letter-spacing: 0; white-space: nowrap; }
-
-.question-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-.question-option {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
-  min-height: 62px;
-  padding: 9px 14px 9px 10px;
-  border: 1.5px solid var(--line);
-  border-radius: 14px;
-  background: var(--surface-2);
-  color: var(--ink);
-  font-size: calc(0.95rem * var(--fit, 1));
-  line-height: 1.42;
-  text-align: left;
-  animation: rise 0.45s var(--ease-out) both;
-  animation-delay: calc(var(--i, 0) * 45ms + 60ms);
-}
-.question-option:hover:not([aria-disabled="true"]) {
-  border-color: color-mix(in oklab, var(--focus) 60%, var(--line));
-  background: var(--surface-3);
-  transform: translateY(-1px);
-}
-.question-option:active:not([aria-disabled="true"]) { transform: scale(0.98); }
-.question-option[aria-disabled="true"] { cursor: default; }
-.question-option[aria-disabled="true"]:not([data-result="correct"], [data-result="wrong"]) { opacity: 0.6; }
-.option-letter {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--surface-3);
-  color: var(--ink-2);
-  font-size: 0.86rem;
-  font-weight: 750;
-  line-height: 1;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.35s var(--ease-spring);
-}
-.option-text { padding-block: 0.16em; overflow-x: auto; overflow-wrap: anywhere; }
-.option-text .katex { font-size: 1.07em; }
-.question-option[data-result="correct"] { border-color: var(--green-line); background: var(--green-bg); }
-.question-option[data-result="correct"] .option-letter { background: oklch(0.7 0.14 155); color: white; transform: scale(1.08); }
-.question-option[data-result="wrong"] { border-color: var(--amber-line); background: var(--amber-bg); }
-.question-option[data-result="wrong"] .option-letter { background: color-mix(in oklab, var(--amber-fg) 20%, transparent); color: var(--amber-fg); }
-
-.question-feedback { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; min-height: 38px; }
-#question-feedback { color: var(--amber-fg); font-size: 0.92rem; font-weight: 680; }
-#question-feedback[data-outcome="revealed"] { color: var(--ink); }
-#question-feedback[data-outcome="correct"] { color: var(--green-fg); }
-.question-feedback .quiet-button { margin-left: auto; }
-.question-explanation {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 6px;
-  padding: 16px 18px;
-  border-radius: 14px;
-  background: var(--surface-3);
-  animation: expand 0.45s var(--ease-out) both;
-}
-.question-explanation .answer-line { max-width: 100%; font-size: calc(1rem * var(--fit, 1)); }
-.question-explanation .answer-line.formula { font-size: calc(1.08rem * var(--fit, 1)); }
 
 /* ---------- Actions ---------- */
 
@@ -1324,49 +1220,199 @@ body:has(dialog[open]) { overflow: hidden; }
 }
 .question-tabs > button:hover:not([aria-pressed="true"]) { color: var(--ink); }
 .question-tabs > button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
-.show-choices { flex: none; align-self: stretch; min-height: 54px; margin-top: auto; font-size: 1rem; }
-.show-choices svg { width: 20px; height: 20px; }
 
-.question-card[data-face="question"] .question-options,
-.question-card[data-face="question"] .question-feedback { display: none; }
-.question-card:not([data-face="question"]) .show-choices { display: none; }
-.question-card[data-face="choose"] .prompt-line { display: none; }
-.question-card[data-face="choose"] .ask-line { margin-top: 0; }
-.question-card[data-face="ask"] .ask-line.generic,
-.question-card[data-face="question"] .ask-line.generic { display: none; }
-.question-card[data-face="method"] #question-prompt,
-.question-card[data-face="method"] .question-options,
-.question-card[data-face="method"] #reveal-question { display: none; }
-.question-card:not([data-face="method"]) .question-explanation { display: none; }
-.question-card[data-face="method"] .question-explanation { gap: calc(8px * var(--fit, 1)); padding: 0; background: transparent; }
-.question-card[data-face="method"] .question-feedback { min-height: 22px; }
+/* ---------- Questions ----------
+ * Three views share the card: the question, your answer, and the marking. The question is set
+ * out like the exam paper: the number hangs in the margin, part labels hang inside that, and
+ * each part's marks sit on the right in bold.
+ */
+
+.question-card {
+  gap: 18px;
+  align-items: stretch;
+  padding-block: clamp(22px, 3.2vw, 36px);
+}
 /* Parts never squash to fit: the card's text is sized (or paged) to fit instead. */
 .question-card > * { flex-shrink: 0; }
-.method-answer {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin: 0 0 4px;
-  padding: calc(10px * var(--fit, 1)) 12px;
-  border-radius: 12px;
-  background: var(--green-bg);
+.question-card[data-face="question"] .answer-panel,
+.question-card[data-face="question"] .result-panel,
+.question-card[data-face="answer"] .paper,
+.question-card[data-face="answer"] .result-panel,
+.question-card[data-face="result"] .paper,
+.question-card[data-face="result"] .answer-panel { display: none; }
+
+.paper {
+  --number: 1.7em;
+  --label: 2.05em;
+  --numeral: 2em;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.55em;
+  max-width: 66ch;
   color: var(--ink);
-  font-size: calc(1rem * var(--fit, 1));
-  font-weight: 650;
-  line-height: 1.45;
+  font: 400 calc(clamp(1.04rem, 1.45vw, 1.2rem) * var(--fit, 1))/1.5 "Times New Roman", Times, "Liberation Serif", "Noto Serif", serif;
+  text-wrap: pretty;
+  scroll-margin-top: 80px;
 }
-.method-tick {
+.paper:focus { outline: none; }
+.question-card:not(.exam) .paper { --number: 0em; }
+.paper .katex { font-size: 1.04em; }
+.paper-head {
+  color: var(--muted);
+  font: 700 0.72rem/1.3 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.paper-line {
+  position: relative;
+  display: flow-root;
+  margin: 0;
+  padding-left: var(--number);
+  overflow-wrap: anywhere;
+}
+.paper-line.part { padding-left: calc(var(--number) + var(--label)); }
+.paper-line.sub,
+.paper-line.with-sub { padding-left: calc(var(--number) + var(--label) + var(--numeral)); }
+.paper-number { position: absolute; top: 0; left: 0; font-weight: 700; }
+.paper-label { position: absolute; top: 0; left: var(--number); }
+.paper-line.sub .paper-label,
+.paper-label.sub { left: calc(var(--number) + var(--label)); }
+.paper-marks { float: right; margin-left: 0.8em; font-weight: 700; }
+.paper-total {
+  margin: 0.2em 0 0;
+  padding-bottom: 0.5em;
+  border-bottom: 1.5px solid var(--line-strong);
+  font-size: 0.88em;
+  font-weight: 700;
+  text-align: right;
+}
+
+.answer-panel { display: flex; flex: 1 1 auto; flex-direction: column; gap: 8px; min-height: 0; }
+.answer-label { color: var(--muted); font-size: 0.72rem; font-weight: 760; letter-spacing: 0.1em; text-transform: uppercase; }
+#answer-input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 7.5em;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--ink);
+  /* At least 16px, or iPhones zoom in when you start typing. */
+  font: 500 1rem/1.55 "Inter", system-ui, sans-serif;
+  resize: none;
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  user-select: text;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+#answer-input::placeholder { color: var(--muted); opacity: 0.85; }
+#answer-input:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 4px color-mix(in oklab, var(--focus) 18%, transparent); }
+#answer-input[readonly] { background: var(--surface-3); }
+.answer-hint { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+.answer-hint:empty { display: none; }
+
+.answer-bar { display: grid; gap: 10px; margin-top: auto; }
+.answer-status { margin: 0; color: var(--muted); font-size: 0.86rem; font-weight: 650; line-height: 1.4; }
+.answer-status:empty { display: none; }
+.answer-status[data-tone="busy"] { color: var(--ink); }
+.answer-actions { display: flex; gap: 10px; }
+.speak-button,
+.type-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-size: 1.02rem;
+  font-weight: 760;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.25s var(--ease-out);
+}
+.speak-button { flex: 1 1 auto; border: 0; background: var(--primary); color: var(--on-primary); }
+.speak-button:hover:not(:disabled) { background: var(--primary-hover); }
+.speak-button:active:not(:disabled),
+.type-button:active { transform: scale(0.97); }
+.speak-button:disabled { opacity: 0.75; }
+.speak-icon {
   display: inline-grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 34px;
+  height: 34px;
   flex: none;
   border-radius: 50%;
-  background: oklch(0.62 0.14 155);
-  color: white;
-  font-size: 0.78rem;
-  transform: translateY(3px);
+  background: color-mix(in oklab, var(--on-primary) 16%, transparent);
 }
+.speak-icon svg,
+.type-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.speak-button.recording { background: var(--danger); color: white; }
+.speak-button.recording .speak-icon { animation: listening 1.3s ease-in-out infinite; }
+@keyframes listening {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, white 50%, transparent); }
+  50% { box-shadow: 0 0 0 9px transparent; }
+}
+.speak-button.compact { flex: 0 0 auto; padding: 0 18px; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); }
+.speak-button.compact:hover:not(:disabled) { border-color: var(--line-strong); background: var(--surface-3); }
+.speak-button.compact .speak-icon { background: transparent; }
+.type-button { flex: none; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); }
+.type-button:hover { border-color: var(--line-strong); background: var(--surface-3); }
+.type-button.wide { flex: 1 1 auto; }
+.mark-button { flex: 1 1 auto; min-height: 58px; font-size: 1.02rem; }
+.mark-button[aria-busy="true"] { opacity: 0.8; }
+.self-mark { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.answer-bar #reveal-question { justify-self: center; }
+.answer-bar.split { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.answer-bar.split > * { grid-column: 1 / -1; }
+.answer-bar.split .answer-actions { display: contents; }
+.answer-bar.split .speak-button { grid-column: 1 / -1; }
+.answer-bar.split .type-button { grid-column: 1; min-height: 48px; font-size: 0.95rem; }
+.answer-bar.split #reveal-question { grid-column: 2; justify-self: stretch; min-height: 48px; }
+
+.result-panel { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: calc(10px * var(--fit, 1)); }
+.result-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: calc(10px * var(--fit, 1)) 14px;
+  border-radius: 14px;
+  font-size: calc(1.08rem * var(--fit, 1));
+  font-weight: 780;
+}
+.result-banner.right { background: var(--green-bg); color: var(--green-fg); }
+.result-banner.wrong { background: var(--amber-bg); color: var(--amber-fg); }
+.result-banner.neutral { background: var(--surface-3); color: var(--ink); }
+.result-icon { display: inline-grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; background: currentColor; }
+.result-icon::before { content: attr(data-icon); color: var(--surface); font-size: 0.82rem; font-weight: 800; line-height: 1; }
+.result-score { margin-left: auto; font: 760 1.15em/1 "Inter", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+.result-move { margin: 0; color: var(--muted); font-size: calc(0.86rem * var(--fit, 1)); font-weight: 650; }
+.result-note,
+.result-overall { margin: 0; font-size: calc(0.98rem * var(--fit, 1)); line-height: 1.45; }
+.result-part {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding: calc(8px * var(--fit, 1)) 12px;
+  border-left: 3px solid var(--line-strong);
+  border-radius: 4px 12px 12px 4px;
+  background: var(--surface-2);
+}
+.result-part.correct { border-left-color: var(--box-green); }
+.result-part.partial { border-left-color: var(--box-amber); }
+.result-part.wrong { border-left-color: var(--box-red); }
+.result-part-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; font-size: calc(0.84rem * var(--fit, 1)); font-weight: 760; }
+.result-dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--muted); }
+.result-part.correct .result-dot { background: var(--box-green); }
+.result-part.partial .result-dot { background: var(--box-amber); }
+.result-part.wrong .result-dot { background: var(--box-red); }
+.result-verdict { color: var(--muted); font-weight: 650; }
+.result-marks { margin-left: auto; font-variant-numeric: tabular-nums; }
+.result-part-text { font-size: calc(0.95rem * var(--fit, 1)); line-height: 1.45; }
+.result-heading { margin: calc(6px * var(--fit, 1)) 0 0; color: var(--accent-ink); font-size: 0.72rem; font-weight: 780; letter-spacing: 0.1em; text-transform: uppercase; }
+.result-panel .answer-line { max-width: 100%; font-size: calc(1rem * var(--fit, 1)); }
+.result-panel .answer-line.formula { font-size: calc(1.06rem * var(--fit, 1)); }
 
 /* Pages for text too long to fit at a readable size (see app.js) */
 .pager {
@@ -1398,8 +1444,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .pager .pager-next:not(:disabled) { background: var(--primary); color: var(--on-primary); padding: 0 10px 0 12px; }
 .pager button:disabled { opacity: 0.35; }
 .pager-label { min-width: 3.2em; color: var(--muted); font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
-.question-pager { flex: none; align-self: flex-end; margin-top: auto; }
-.question-card[data-face="question"].paged .question-pager { margin-top: 0; }
+.question-pager { flex: none; align-self: flex-end; }
 
 /* ---------- Boxes ---------- */
 
@@ -1946,7 +1991,7 @@ summary .meter-name::before {
   .card-content > :first-child { margin-top: auto; }
   .card-content > :last-child { margin-bottom: auto; }
   .question-card { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
-  /* A fade pinned to the bottom of the card while more of the question or its choices is below. */
+  /* A fade pinned to the bottom of the card while more of it is below. */
   .question-card.scrollable::after {
     content: "";
     position: sticky;
@@ -1985,10 +2030,6 @@ summary .meter-name::before {
   .sidebar { padding-inline: 12px; }
   .card-actions { gap: 10px; }
   .study-header h1 { font-size: clamp(2rem, 5vw, 3rem); }
-}
-
-@media (max-width: 900px) {
-  .question-options { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 720px) {
@@ -2127,7 +2168,7 @@ summary .meter-name::before {
   body[data-view="study"] .study { overflow: hidden; padding-top: 10px; }
   .study { overscroll-behavior: none; }
   /* Nothing on a question needs dragging, so a finger resting on an answer can't scroll or bounce it. */
-  .question-card:not(.overflowing) { touch-action: pinch-zoom; }
+  .question-card:not(.overflowing):not([data-face="answer"]) { touch-action: pinch-zoom; }
   .toast { top: max(10px, calc(env(safe-area-inset-top) + 8px)); bottom: auto; text-align: center; transform: translate(-50%, -16px) scale(0.96); }
   .session-chip .chip-extra { display: none; }
   .page-header { margin-top: 6px; gap: 2px; }
@@ -2233,16 +2274,12 @@ summary .meter-name::before {
   .nav-button { height: 42px; min-width: 42px; }
 
   .question-card { flex: 1 1 auto; gap: 14px; padding-block: 18px; }
-  .question-options { margin-top: auto; }
-  #question-prompt { font-size: calc(clamp(1.25rem, 5.6vw, 1.6rem) * var(--fit, 1)); line-height: 1.18; }
-  .question-options { gap: 8px; }
-  .question-options.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .question-options.compact .option-text { white-space: nowrap; }
-  .question-option { min-height: 50px; padding: 7px 10px 7px 8px; gap: 10px; border-radius: 12px; }
-  .option-letter { width: 28px; height: 28px; font-size: 0.8rem; }
-  .question-feedback { min-height: 34px; }
-  .question-feedback .quiet-button { min-height: 34px; }
-  .question-explanation { padding: 12px 14px; }
+  .paper { --number: 1.55em; --label: 1.9em; --numeral: 1.85em; font-size: calc(clamp(1rem, 4.3vw, 1.12rem) * var(--fit, 1)); }
+  .speak-button, .type-button, .mark-button { min-height: 54px; }
+  /* Beside "Mark my answer" the microphone is a round button of its own. */
+  .speak-button.compact { flex: none; width: 54px; padding: 0; }
+  .speak-button.compact .speak-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .answer-hint { font-size: 0.76rem; }
 
   .account-dialog {
     width: 100%;
@@ -2297,7 +2334,9 @@ summary .meter-name::before {
   .flashcard, .notice, .question-card { padding: 16px 18px; }
   .pill { min-height: 46px; }
   .nav-button { height: 38px; min-width: 38px; }
-  .question-option { min-height: 44px; }
+  .speak-button, .type-button, .mark-button { min-height: 50px; }
+  .speak-button.compact { width: 50px; }
+  .speak-icon { width: 30px; height: 30px; }
   .dash-focus .dash-subtitle { display: none; }
   .focus-list { gap: 6px; }
   .focus-item { padding: 7px 8px 7px 12px; }
@@ -2332,14 +2371,13 @@ summary .meter-name::before {
   .segmented > button { padding-inline: 9px; font-size: 0.78rem; }
   .mobile-actions .account-button { padding-inline: 10px; font-size: 0.8rem; }
   .pill { font-size: 0.9rem; }
-  .question-option { font-size: calc(0.9rem * var(--fit, 1)); }
   .answer-line.formula, .answer-line.formula:only-child { font-size: calc(1rem * var(--fit, 1)); }
 }
 
 @media (hover: none) {
   .study, .mobile-header, .topics-dialog { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 }
-.question-option, .pill, .nav-button, .start-button, .group-row button, .question-tabs > button { touch-action: manipulation; }
+.pill, .nav-button, .start-button, .group-row button, .question-tabs > button, .speak-button, .type-button { touch-action: manipulation; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after, ::backdrop {

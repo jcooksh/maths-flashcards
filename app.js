@@ -1,5 +1,5 @@
 import { boxes, boxNames, boxOf, boxCounts, sessionPlan, isDue } from "./progress.js?v=2";
-import { connectAccount } from "./account.js?v=4";
+import { connectAccount } from "./account.js?v=5";
 import { renderDashboard, boxBar, boxLegend, fitLabels, studyStreak } from "./dashboard.js?v=3";
 import { dayKey } from "./activity.js?v=1";
 
@@ -193,7 +193,7 @@ function appendMath(element, value, standalone = true) {
 }
 
 const lineLabel = /^(Spot|Use|Method|Answers?|Watch out|Check|Key idea|Tip):\s*/;
-const partLabel = /^\((?:[a-h]|i{1,3}|iv|v|vi)\)\s+/;
+const partLabel = /^\((?:[a-h]|i{1,3}|iv|v|vi)\)(?:\((?:i{1,3}|iv|v|vi)\))?\s+/;
 
 // Lines can start with a label such as "Spot:" or a part such as "(a)". Both get their own styling.
 function mathLines(lines, className) {
@@ -319,6 +319,9 @@ function useProgress(next, accountChanged) {
     if (view === "study") renderCard();
   } else if (view === "study") {
     renderBoxChip(queue[position]);
+  }
+  if (accountChanged && questionMode && view === "study" && queue[position] && !questionRoundFinished) {
+    renderQuestion(queue[position]);
   }
 }
 
@@ -527,6 +530,7 @@ function renderMode() {
 function changeMode(showQuestions) {
   if (questionMode === showQuestions) return;
   flushMotion();
+  stopRecording(true);
   const card = queue[position];
   questionMode = showQuestions;
 
@@ -556,143 +560,534 @@ function changeMode(showQuestions) {
   }, ...fade, { out: 120, in: 300 });
 }
 
-function renderQuestion(card) {
+/* ---------- Questions ----------
+ * A question is set out like the exam paper. You say or type your answer, an AI examiner marks
+ * it against the worked solution, and the result moves the card between boxes. Signed out, or
+ * when the examiner can't be reached, you check your answer against the worked solution yourself.
+ *
+ * Each question has three views: the question ("question"), your answer ("answer") and the
+ * marking with the worked solution ("result"). Tabs move between them once there's an answer.
+ */
+// Marking runs on CS Revise's Vercel project, which holds the AI providers' keys.
+const markingApi = "https://csrevise.vercel.app/api/";
+const letterLabel = /^\(([a-h])\)\s*/;
+const numeralLabel = /^\((i{1,3}|iv|v|vi)\)\s*/;
+const longestRecording = 120_000;
+const speechSupported = Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+let recorder = null;
+
+function questionAttempt(card) {
   let attempt = questionAttempts.get(card);
   if (!attempt) {
-    const options = shuffled(card.choices.map((text, index) => ({ text, correct: index === 0 })));
-    attempt = { options, wrong: new Set(), outcome: null, firstCorrect: null, move: "", face: "ask", layout: "combined" };
+    // status: "" | "recording" | "transcribing" | "marking". outcome: null | "correct" | "wrong" | "revealed".
+    attempt = { face: "question", status: "", answer: "", spoken: false, result: null, outcome: null, move: "", firstCorrect: null };
     questionAttempts.set(card, attempt);
   }
-
-  const optionList = ui["question-options"];
-  const fresh = displayedQuestion !== attempt;
-  if (fresh) {
-    displayedQuestion = attempt;
-    const exam = isExam(card);
-    ui["question-card"].classList.toggle("exam", exam);
-    ui["question-prompt"].replaceChildren(...frontLines(card).map((line) => {
-      const element = document.createElement("span");
-      element.className = "prompt-line";
-      appendMath(element, line, false);
-      return element;
-    }));
-    // Shown under an exam question, and above the answers when a long question is split in two.
-    const ask = document.createElement("span");
-    ask.className = "ask-line" + (exam ? "" : " generic");
-    ask.textContent = exam ? card.ask ?? "How should you start?" : "Which answer is right?";
-    ui["question-prompt"].append(ask);
-    const visibleLength = (text) => text.replace(/\\[a-zA-Z]+/g, "x").replace(/[${}^_\\\s]/g, "").length;
-    optionList.dataset.fit = attempt.options.every((option) => visibleLength(option.text) <= 24) ? "try" : "";
-    optionList.replaceChildren(...attempt.options.map((option, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "question-option";
-      button.dataset.choice = index;
-      button.style.setProperty("--i", index);
-      button.setAttribute("aria-keyshortcuts", String(index + 1));
-      const letter = document.createElement("span");
-      letter.className = "option-letter";
-      letter.setAttribute("aria-hidden", "true");
-      const text = document.createElement("span");
-      text.className = "option-text";
-      appendMath(text, option.text, false);
-      button.append(letter, text);
-      return button;
-    }));
-    fitOptions();
-  }
-
-  for (const [index, button] of Array.from(optionList.children).entries()) {
-    const correct = attempt.outcome && attempt.options[index].correct;
-    const wrong = attempt.wrong.has(index);
-    button.dataset.result = correct ? "correct" : wrong ? "wrong" : "";
-    button.setAttribute("aria-disabled", String(Boolean(attempt.outcome) || wrong));
-    button.firstElementChild.textContent = correct ? "✓" : wrong ? "×" : "ABCD"[index];
-  }
-
-  let message = attempt.wrong.size ? "Not quite. " + attempt.move + " Try another answer." : "";
-  if (attempt.outcome === "revealed") message = "Answer shown. " + attempt.move;
-  if (attempt.outcome === "correct") message = (attempt.firstCorrect ? "Correct! " : "Correct. ") + attempt.move;
-  ui["question-feedback"].textContent = message;
-  ui["question-feedback"].dataset.outcome = attempt.outcome ?? (attempt.wrong.size ? "wrong" : "");
-  ui["reveal-question"].hidden = Boolean(attempt.outcome);
-  ui["question-explanation"].hidden = !attempt.outcome;
-  if (attempt.outcome) {
-    const right = attempt.options.find((option) => option.correct);
-    const answer = document.createElement("p");
-    answer.className = "method-answer";
-    const tick = document.createElement("span");
-    tick.className = "method-tick";
-    tick.textContent = "✓";
-    tick.setAttribute("aria-hidden", "true");
-    const text = document.createElement("span");
-    appendMath(text, right.text, false);
-    answer.append(tick, text);
-    ui["question-explanation"].replaceChildren(answer, ...mathLines(card.back, "answer-line"));
-  }
-  applyFace(attempt, fresh);
+  return attempt;
 }
 
-/* ---------- Question views ----------
- * A question shows its prompt and answers together when they fit on screen ("ask").
- * A long one is split: the question first ("question"), then the answers ("choose").
- * After it's answered, the method gets its own view ("method"). Tabs move between them.
- */
-const fitMinimum = { ask: 0.84, question: 0.8, choose: 0.76, method: 0.8 };
-let methodTimer;
+// The paper's pieces: each line with its part label, sub-part numeral and marks.
+function paperLines(card) {
+  const marks = Array.isArray(card.marks) ? card.marks : [];
+  let letter = null;
+  return frontLines(card).map((text, index) => {
+    let rest = text;
+    let label = "";
+    let sub = "";
+    const part = letterLabel.exec(rest);
+    if (part) {
+      letter = part[1];
+      label = "(" + letter + ")";
+      rest = rest.slice(part[0].length);
+    }
+    const numeral = numeralLabel.exec(rest);
+    if (numeral) {
+      sub = "(" + numeral[1] + ")";
+      rest = rest.slice(numeral[0].length);
+    }
+    return { text: rest, label, sub, letter, marks: marks[index] || 0 };
+  });
+}
+
+// What the examiner marks: each part that carries marks, or the whole question. When one
+// mark covers several sub-parts, as "(c) (i) … (ii) … (3)" does, the part is marked as a whole.
+function markingParts(card) {
+  const lines = paperLines(card);
+  if (!lines.some((line) => line.marks)) return [{ label: "", marks: null }];
+  const parts = [];
+  let since = [];
+  for (const line of lines) {
+    since.push(line);
+    if (!line.marks) continue;
+    const subs = since.filter((other) => other.letter && other.letter === line.letter && other.sub);
+    const label = line.letter
+      ? "(" + line.letter + ")" + (subs.length > 1 ? "" : line.sub)
+      : line.sub;
+    parts.push({ label, marks: line.marks });
+    since = [];
+  }
+  return parts;
+}
+
+function renderPaper(card) {
+  const exam = isExam(card);
+  const number = exam ? /Q(\d+)$/.exec(card.source ?? "")?.[1] : null;
+  const head = document.createElement("p");
+  head.className = "paper-head";
+  head.textContent = exam ? card.source.replace(/ · Q\d+$/, "") : topics.get(card.topic)?.title ?? "Question";
+  const lines = paperLines(card).map((line, index) => {
+    const row = document.createElement("p");
+    // A numeral with no letter before it, as in "(i) Prove that…", is a part of its own.
+    const numeralPart = line.sub && !line.letter;
+    row.className = "paper-line" + (line.label || numeralPart ? " part" : line.sub ? " sub" : "") + (line.label && line.sub ? " with-sub" : "");
+    if (index === 0 && number) {
+      const tag = document.createElement("span");
+      tag.className = "paper-number";
+      tag.textContent = number + ".";
+      row.append(tag);
+    }
+    for (const [text, className] of [[line.label, "paper-label"], [line.sub, "paper-label" + (line.label ? " sub" : "")]]) {
+      if (!text) continue;
+      const tag = document.createElement("span");
+      tag.className = className;
+      tag.textContent = text;
+      row.append(tag);
+    }
+    appendMath(row, line.text, false);
+    if (line.marks) {
+      const marks = document.createElement("span");
+      marks.className = "paper-marks";
+      marks.textContent = "(" + line.marks + ")";
+      marks.setAttribute("aria-label", plural(line.marks, "mark"));
+      row.append(marks);
+    }
+    return row;
+  });
+  const parts = [head, ...lines];
+  if (exam && card.total && number) {
+    const total = document.createElement("p");
+    total.className = "paper-total";
+    total.textContent = `(Total for Question ${number} is ${plural(card.total, "mark")})`;
+    parts.push(total);
+  }
+  ui["question-prompt"].replaceChildren(...parts);
+}
+
+function resultElement(tag, className, text) {
+  const element = document.createElement(tag);
+  element.className = className;
+  if (text !== undefined) appendMath(element, text, false);
+  return element;
+}
+
+const verdictNames = { correct: "Right", partial: "Partly right", wrong: "Not right", missing: "Not answered" };
+
+// The marking: how it went, the examiner's comment on each part, then the worked solution.
+function renderResult(card, attempt) {
+  const panel = ui["question-result"];
+  const result = attempt.result;
+  if (!result) {
+    panel.replaceChildren();
+    return;
+  }
+  const items = [];
+  const banner = document.createElement("p");
+  const icon = document.createElement("span");
+  icon.className = "result-icon";
+  icon.setAttribute("aria-hidden", "true");
+  const title = document.createElement("span");
+  title.className = "result-title";
+  const exam = isExam(card);
+  let tone = "neutral";
+  if (result.revealed) {
+    title.textContent = "Answer shown.";
+  } else if (result.self) {
+    if (attempt.outcome) {
+      tone = attempt.outcome === "correct" ? "right" : "wrong";
+      title.textContent = attempt.outcome === "correct" ? "You marked it right." : "You marked it not quite.";
+    } else {
+      title.textContent = "Check your answer against the worked solution.";
+    }
+  } else {
+    tone = result.correct ? "right" : "wrong";
+    title.textContent = result.correct ? "Right" : "Not quite";
+  }
+  icon.dataset.icon = tone === "right" ? "✓" : tone === "wrong" ? "✗" : "i";
+  banner.className = "result-banner " + tone;
+  banner.append(icon, title);
+  if (!result.self && !result.revealed && exam) {
+    const score = document.createElement("span");
+    score.className = "result-score";
+    score.textContent = result.score + "/" + result.outOf;
+    score.setAttribute("aria-label", result.score + " out of " + plural(result.outOf, "mark"));
+    banner.append(score);
+  }
+  items.push(banner);
+  if (attempt.move) items.push(resultElement("p", "result-move", attempt.move));
+  if (result.self && !attempt.outcome && result.reason) items.push(resultElement("p", "result-note", result.reason));
+  if (!result.self && !result.revealed) {
+    if (result.overall) items.push(resultElement("p", "result-overall", result.overall));
+    const parts = markingParts(card);
+    for (const [index, part] of result.parts.entries()) {
+      const row = document.createElement("p");
+      row.className = "result-part " + part.verdict;
+      const head = document.createElement("span");
+      head.className = "result-part-head";
+      const dot = document.createElement("span");
+      dot.className = "result-dot";
+      dot.setAttribute("aria-hidden", "true");
+      const name = document.createElement("span");
+      name.textContent = parts[index]?.label || (result.parts.length > 1 ? "Part " + (index + 1) : "Your answer");
+      const verdict = document.createElement("span");
+      verdict.className = "result-verdict";
+      verdict.textContent = verdictNames[part.verdict] ?? "";
+      head.append(dot, name, verdict);
+      if (exam) {
+        const marks = document.createElement("span");
+        marks.className = "result-marks";
+        marks.textContent = part.marks + "/" + part.max;
+        marks.setAttribute("aria-label", part.marks + " out of " + plural(part.max, "mark"));
+        head.append(marks);
+      }
+      const text = resultElement("span", "result-part-text", part.feedback);
+      row.append(head, text);
+      items.push(row);
+    }
+  }
+  items.push(resultElement("p", "result-heading keep-with-next", "Worked solution"));
+  items.push(...mathLines(card.back, "answer-line"));
+  panel.replaceChildren(...items);
+}
 
 function setFace(attempt) {
   const box = ui["question-card"];
   box.dataset.face = attempt.face;
-  ui["question-tabs"].hidden = attempt.layout !== "split" && !attempt.outcome;
-  ui["tab-choose"].hidden = attempt.layout !== "split";
-  ui["tab-method"].hidden = !attempt.outcome;
-  const current = attempt.face === "ask" ? "question" : attempt.face;
+  const hasAnswer = Boolean(attempt.answer.trim()) || attempt.face === "answer";
+  const tabs = { question: true, answer: hasAnswer, result: Boolean(attempt.result) };
+  ui["question-tabs"].hidden = !(hasAnswer || attempt.result) || attempt.status === "recording";
+  ui["tab-answer"].hidden = !tabs.answer;
+  ui["tab-result"].hidden = !tabs.result;
   for (const tab of ui["question-tabs"].querySelectorAll("[data-face]")) {
-    tab.setAttribute("aria-pressed", String(tab.dataset.face === current));
+    tab.setAttribute("aria-pressed", String(tab.dataset.face === attempt.face));
   }
 }
 
+// The buttons under a question change with the view and with what's happening.
+function renderAnswerBar(attempt) {
+  const signedIn = account.signedIn();
+  const finished = Boolean(attempt.outcome);
+  const pendingSelf = Boolean(attempt.result?.self) && !finished;
+  const busy = attempt.status;
+  const onQuestion = attempt.face === "question";
+  const onAnswer = attempt.face === "answer";
+  const canSpeak = signedIn && speechSupported && !finished && !pendingSelf && (busy === "" || busy === "recording" || busy === "transcribing");
+
+  ui["speak-answer"].hidden = !(canSpeak && (onQuestion || onAnswer));
+  ui["speak-answer"].classList.toggle("recording", busy === "recording");
+  ui["speak-answer"].classList.toggle("compact", onAnswer && busy !== "recording");
+  ui["speak-answer"].disabled = busy === "transcribing";
+  ui["speak-label"].textContent = busy === "recording" ? "Stop" : busy === "transcribing" ? "Writing it down…" : onAnswer ? "Add by speaking" : "Say your answer";
+  ui["speak-answer"].setAttribute("aria-pressed", String(busy === "recording"));
+
+  ui["type-answer"].hidden = !onQuestion || finished || pendingSelf || busy !== "";
+  ui["type-answer"].classList.toggle("wide", !canSpeak);
+  ui["type-answer"].querySelector(".type-label").textContent = canSpeak ? "Type" : "Type your answer";
+
+  ui["mark-answer"].hidden = !onAnswer || finished || pendingSelf || busy === "recording";
+  ui["mark-answer"].disabled = busy === "marking" || busy === "transcribing";
+  ui["mark-answer"].setAttribute("aria-busy", String(busy === "marking"));
+  ui["mark-answer"].textContent = busy === "marking" ? "Marking…" : signedIn ? "Mark my answer" : "Check my answer";
+
+  ui["self-mark"].hidden = !pendingSelf || attempt.face !== "result";
+  ui["reveal-question"].hidden = finished || pendingSelf || busy !== "" || attempt.face === "result";
+
+  let status = "";
+  if (busy === "recording") status = "Listening… " + recordingTime() + " · tap Stop when you’re done";
+  else if (busy === "transcribing") status = "Writing down what you said…";
+  else if (busy === "marking") status = "The examiner is marking it…";
+  else if (!signedIn && onQuestion && !finished) status = "Sign in to answer out loud and have it marked.";
+  ui["question-feedback"].textContent = status;
+  ui["question-feedback"].dataset.tone = busy ? "busy" : "";
+  // Speaking gets the full width, with typing and giving up side by side underneath.
+  ui["answer-bar"].classList.toggle("split", !ui["speak-answer"].hidden && !ui["type-answer"].hidden && !ui["reveal-question"].hidden);
+  const actionsShown = !ui["speak-answer"].hidden || !ui["type-answer"].hidden || !ui["mark-answer"].hidden;
+  ui["answer-bar"].querySelector(".answer-actions").hidden = !actionsShown;
+  ui["answer-bar"].hidden = !actionsShown && ui["self-mark"].hidden && ui["reveal-question"].hidden && !status;
+}
+
+function renderQuestion(card) {
+  const attempt = questionAttempt(card);
+  const fresh = displayedQuestion !== attempt;
+  if (fresh) {
+    displayedQuestion = attempt;
+    ui["question-card"].classList.toggle("exam", isExam(card));
+    renderPaper(card);
+    ui["answer-input"].value = attempt.answer;
+    const parts = markingParts(card).filter((part) => part.label);
+    ui["answer-input"].placeholder = parts.length > 1
+      ? "Write your answer to each part, with any working:\n" + parts.slice(0, 3).map((part) => part.label + " …").join("\n")
+      : "Write your answer, with any working.";
+  }
+  ui["answer-input"].readOnly = Boolean(attempt.outcome) || Boolean(attempt.result?.self) || attempt.status === "marking";
+  ui["answer-hint"].textContent = attempt.outcome || attempt.result?.self
+    ? ""
+    : account.signedIn()
+      ? (usingPointer ? "Write maths however is easiest, like x^2 or root 3." : "Write maths however is easiest, like x^2 or root 3. Ctrl + Enter marks it.")
+      : "You’ll check it against the worked solution. Sign in to have it marked by AI.";
+  renderResult(card, attempt);
+  setFace(attempt);
+  renderAnswerBar(attempt);
+  fitFace(attempt);
+}
+
+const fitMinimum = { question: 0.8, result: 0.8 };
+
 function fitFace(attempt) {
   const box = ui["question-card"];
-  const holder = attempt.face === "method" ? ui["question-explanation"] : attempt.face === "question" ? ui["question-prompt"] : null;
-  if (holder) layoutPages(box, holder, ui["question-pager"], fitMinimum[attempt.face]);
-  else {
+  const holder = attempt.face === "result" ? ui["question-result"] : attempt.face === "question" ? ui["question-prompt"] : null;
+  if (holder) {
+    layoutPages(box, holder, ui["question-pager"], fitMinimum[attempt.face]);
+  } else {
     clearPages(box, ui["question-pager"]);
-    fitText(box, fitMinimum[attempt.face]);
+    box.style.setProperty("--fit", "1");
+    box.classList.remove("overflowing");
   }
   markScrollable();
 }
 
-function applyFace(attempt, fresh) {
-  if (fresh && !attempt.outcome) {
-    attempt.face = "ask";
-    attempt.layout = "combined";
+function showFace(face, { animate = true, focus = false } = {}) {
+  const card = queue[position];
+  const attempt = card && questionAttempts.get(card);
+  if (!attempt || attempt.status === "recording") return;
+  if (face === "result" && !attempt.result) return;
+  const changed = attempt.face !== face;
+  attempt.face = face;
+  const swap = () => renderQuestion(card);
+  // A phone only opens its keyboard if the box is focused during the tap itself, so the answer
+  // box appears at once and fades in, instead of waiting for the question to fade out.
+  if (face === "answer" && focus) {
+    flushMotion();
+    swap();
+    ui["answer-input"].focus({ preventScroll: true });
+    if (changed && animate) play(ui["answer-panel"], fade[1], { duration: 240, easing: easeOut });
+    return;
   }
-  setFace(attempt);
-  fitFace(attempt);
-  if (attempt.face === "ask" && !attempt.outcome && ui["question-card"].classList.contains("overflowing")) {
-    attempt.layout = "split";
-    attempt.face = "question";
-    setFace(attempt);
-    fitFace(attempt);
+  if (changed && animate) animateSwap(ui["question-card"], swap, ...fade, { out: 110, in: 260 });
+  else swap();
+}
+
+function refreshQuestion(card) {
+  if (questionMode && view === "study" && queue[position] === card) {
+    renderQuestion(card);
+    renderNextButton();
   }
 }
 
-function showFace(face, { animate = true } = {}) {
+// Saves the result of a question, once: the first verdict is the one that counts.
+function finishQuestion(card, attempt, correct, outcome = correct ? "correct" : "wrong") {
+  attempt.status = "";
+  if (attempt.firstCorrect === null) {
+    attempt.firstCorrect = correct;
+    const result = recordAnswer(card, correct);
+    attempt.move = moveText(result.before, result.after, correct) + (result.saved ? "" : " Progress couldn’t be saved on this device.");
+    flashMove(result.before, result.after);
+    if (!correct) requeue(card);
+    renderProgress();
+  }
+  attempt.outcome = outcome;
+  attempt.face = "result";
+  if (queue[position] === card && questionMode && view === "study") {
+    animateSwap(ui["question-card"], () => {
+      renderQuestion(card);
+      renderNextButton();
+    }, ...fade, { out: 110, in: 280 });
+    ui["question-feedback"].focus({ preventScroll: true });
+  }
+}
+
+function revealAnswer() {
   const card = queue[position];
-  const attempt = questionAttempts.get(card);
-  if (!attempt) return;
-  if (face === "question" && attempt.layout !== "split") face = "ask";
-  if (face === "choose" && attempt.layout !== "split") face = "ask";
-  if (attempt.face === face) return;
-  attempt.face = face;
-  const swap = () => {
-    setFace(attempt);
-    fitFace(attempt);
-  };
-  if (animate) animateSwap(ui["question-card"], swap, ...fade, { out: 110, in: 260 });
-  else swap();
+  const attempt = card && questionAttempt(card);
+  if (!attempt || attempt.outcome || attempt.status) return;
+  attempt.result = { revealed: true };
+  finishQuestion(card, attempt, false, "revealed");
+}
+
+function selfMark(correct) {
+  const card = queue[position];
+  const attempt = card && questionAttempts.get(card);
+  if (!attempt || attempt.outcome || !attempt.result?.self) return;
+  pulse(correct ? ui["self-right"] : ui["self-wrong"]);
+  finishQuestion(card, attempt, correct);
+}
+
+function requestTimeout(ms) {
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), ms);
+  return controller.signal;
+}
+
+async function callApi(path, body, ms) {
+  const token = await account.accessToken();
+  if (!token) throw new Error("signin");
+  let response;
+  try {
+    response = await fetch(markingApi + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+      body: JSON.stringify(body),
+      signal: requestTimeout(ms),
+    });
+  } catch {
+    throw new Error("offline");
+  }
+  if (response.status === 401) throw new Error("signin");
+  if (!response.ok) throw new Error(response.status === 429 ? "busy" : "unavailable");
+  return response.json();
+}
+
+async function markAnswer() {
+  const card = queue[position];
+  const attempt = card && questionAttempt(card);
+  if (!attempt || attempt.outcome || attempt.status || attempt.result?.self) return;
+  attempt.answer = ui["answer-input"].value;
+  if (!attempt.answer.trim()) {
+    toast("Say or type your answer first.");
+    showFace("answer", { focus: true });
+    return;
+  }
+  ui["answer-input"].blur();
+  if (!account.signedIn()) {
+    attempt.result = { self: true, reason: "" };
+    attempt.face = "result";
+    animateSwap(ui["question-card"], () => renderQuestion(card), ...fade, { out: 110, in: 260 });
+    return;
+  }
+  attempt.status = "marking";
+  refreshQuestion(card);
+  try {
+    const result = await callApi("maths-mark", {
+      question: frontLines(card),
+      parts: markingParts(card),
+      solution: card.back,
+      answer: attempt.answer.trim(),
+      spoken: attempt.spoken,
+    }, 65_000);
+    if (!Array.isArray(result.parts) || typeof result.correct !== "boolean") throw new Error("unavailable");
+    attempt.result = result;
+    finishQuestion(card, attempt, result.correct);
+  } catch (error) {
+    attempt.status = "";
+    const reasons = {
+      signin: "Your sign-in has expired, so check this one yourself. Sign in again to have answers marked.",
+      busy: "The examiner is busy, so check this one yourself.",
+      offline: "You’re offline, so check this one yourself.",
+    };
+    attempt.result = { self: true, reason: reasons[error.message] ?? "The examiner couldn’t be reached, so check this one yourself." };
+    attempt.face = "result";
+    refreshQuestion(card);
+  }
+}
+
+/* ---------- Speaking an answer ----------
+ * The answer is recorded in the browser and sent to Whisper, and the words it heard go into the
+ * answer box, where they can be checked and corrected before marking.
+ */
+function recordingTime() {
+  const seconds = recorder ? Math.floor((performance.now() - recorder.started) / 1000) : 0;
+  return Math.floor(seconds / 60) + ":" + String(seconds % 60).padStart(2, "0");
+}
+
+async function startRecording() {
+  const card = queue[position];
+  const attempt = card && questionAttempt(card);
+  if (!attempt || recorder || attempt.outcome || attempt.status) return;
+  if (!account.signedIn()) {
+    account.openSignIn();
+    return;
+  }
+  attempt.answer = ui["answer-input"].value;
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+  } catch {
+    toast("The microphone is blocked. Allow it in your browser’s settings, or type your answer.");
+    return;
+  }
+  const type = ["audio/webm;codecs=opus", "audio/mp4", "audio/webm", "audio/ogg;codecs=opus"].find((candidate) => MediaRecorder.isTypeSupported?.(candidate));
+  let media;
+  try {
+    media = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 32_000 } : undefined);
+  } catch {
+    media = new MediaRecorder(stream);
+  }
+  const current = { media, stream, chunks: [], started: performance.now(), card, attempt, cancelled: false };
+  recorder = current;
+  media.addEventListener("dataavailable", (event) => {
+    if (event.data.size) current.chunks.push(event.data);
+  });
+  media.addEventListener("stop", () => finishRecording(current));
+  media.start(1000);
+  attempt.status = "recording";
+  current.timer = setInterval(() => {
+    if (performance.now() - current.started > longestRecording) stopRecording();
+    else if (queue[position] === card) renderAnswerBar(attempt);
+  }, 500);
+  navigator.vibrate?.(10);
+  refreshQuestion(card);
+}
+
+function stopRecording(cancel = false) {
+  const current = recorder;
+  if (!current) return;
+  current.cancelled = cancel;
+  clearInterval(current.timer);
+  if (current.media.state !== "inactive") current.media.stop();
+  for (const track of current.stream.getTracks()) track.stop();
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(",")[1] ?? "");
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function finishRecording(current) {
+  if (recorder === current) recorder = null;
+  const { card, attempt } = current;
+  attempt.status = "";
+  const blob = new Blob(current.chunks, { type: current.media.mimeType || "audio/webm" });
+  if (current.cancelled) {
+    refreshQuestion(card);
+    return;
+  }
+  if (blob.size < 1500 || performance.now() - current.started < 700) {
+    toast("That was too short to hear. Tap the microphone and talk for a bit longer.");
+    refreshQuestion(card);
+    return;
+  }
+  attempt.status = "transcribing";
+  refreshQuestion(card);
+  try {
+    const { text } = await callApi("maths-transcribe", { audio: await blobToBase64(blob), type: blob.type }, 35_000);
+    const heard = String(text ?? "").trim();
+    if (!heard) throw new Error("silent");
+    attempt.answer = attempt.answer.trim() ? attempt.answer.trimEnd() + "\n" + heard : heard;
+    attempt.spoken = true;
+    attempt.face = "answer";
+    if (queue[position] === card) ui["answer-input"].value = attempt.answer;
+  } catch (error) {
+    toast(error.message === "silent"
+      ? "Nothing was heard. Check the microphone and try again."
+      : error.message === "signin"
+        ? "Sign in again to answer out loud."
+        : "That couldn’t be written down. Try again, or type your answer.");
+  }
+  attempt.status = "";
+  refreshQuestion(card);
 }
 
 /* ---------- Pages ----------
@@ -709,14 +1104,9 @@ function clearPages(box, pager) {
   pager.hidden = true;
 }
 
-function layoutPages(box, holder, pager, min) {
-  clearPages(box, pager);
-  if (fitText(box, min)) return;
-  const lines = Array.from(holder.children);
-  // Group lines greedily at the smallest readable size, with the pager showing.
-  box.classList.add("paged");
-  pager.hidden = false;
-  box.style.setProperty("--fit", String(min));
+// Splits lines greedily into pages that each fit at one text size, with the pager showing.
+function groupLines(box, lines, scale) {
+  box.style.setProperty("--fit", String(scale));
   const fits = () => box.scrollHeight <= box.clientHeight + 1;
   const groups = [];
   let group = [];
@@ -726,12 +1116,37 @@ function layoutPages(box, holder, pager, min) {
     group.push(line);
     if (!fits() && group.length > 1) {
       group.pop();
+      // A heading never ends a page: it moves over with what it introduces.
+      const carried = [];
+      while (group.length > 1 && group.at(-1).classList.contains("keep-with-next")) carried.unshift(group.pop());
       for (const shown of group) shown.hidden = true;
+      for (const moved of carried) moved.hidden = false;
       groups.push(group);
-      group = [line];
+      group = [...carried, line];
     }
   }
   groups.push(group);
+  return groups;
+}
+
+function layoutPages(box, holder, pager, min) {
+  clearPages(box, pager);
+  if (fitText(box, min)) return;
+  const lines = Array.from(holder.children);
+  box.classList.add("paged");
+  pager.hidden = false;
+  // Fewest pages at the smallest readable size, unless full-size text needs only one more.
+  const smallest = groupLines(box, lines, min);
+  let groups = smallest;
+  for (const scale of [1, 0.9]) {
+    if (scale <= min) continue;
+    const larger = groupLines(box, lines, scale);
+    if (larger.length <= smallest.length + 1) {
+      groups = larger;
+      break;
+    }
+  }
+  const fits = () => box.scrollHeight <= box.clientHeight + 1;
   // One text size for every page: the largest that fits them all.
   let scale = 1;
   for (const page of groups) {
@@ -854,60 +1269,6 @@ function fitText(box, min = 0.66) {
   if (!ok) ok = fits();
   box.classList.toggle("overflowing", !ok);
   return ok;
-}
-
-// On phones, short answers sit in a 2×2 grid, but only if every one fits on a single line.
-function fitOptions() {
-  const list = ui["question-options"];
-  list.classList.toggle("compact", list.dataset.fit === "try");
-  if (!list.classList.contains("compact")) return;
-  const overflowing = Array.from(list.querySelectorAll(".option-text")).some((text) => text.scrollWidth > text.clientWidth + 1);
-  if (overflowing) list.classList.remove("compact");
-}
-
-function answerQuestion(choiceIndex) {
-  const card = queue[position];
-  if (!questionMode || !card || questionRoundFinished) return;
-  flushMotion();
-  const attempt = questionAttempts.get(card);
-  if (!attempt || attempt.outcome || attempt.wrong.has(choiceIndex)) return;
-  if (attempt.face === "question" && choiceIndex !== undefined) showFace("choose", { animate: false });
-  const revealed = choiceIndex === undefined;
-  const correct = !revealed && attempt.options[choiceIndex].correct;
-  let saved = true;
-  if (attempt.firstCorrect === null) {
-    attempt.firstCorrect = correct;
-    const result = recordAnswer(card, correct);
-    saved = result.saved;
-    attempt.move = moveText(result.before, result.after, correct);
-    flashMove(result.before, result.after);
-    if (!correct) requeue(card);
-    renderProgress();
-  }
-  if (revealed || correct) attempt.outcome = revealed ? "revealed" : "correct";
-  else attempt.wrong.add(choiceIndex);
-  renderQuestion(card);
-  renderNextButton();
-
-  const button = ui["question-options"].children[choiceIndex];
-  if (correct) {
-    play(button, [{ transform: "scale(1)" }, { transform: "scale(1.035)" }, { transform: "scale(1)" }], { duration: 420, easing: spring });
-  } else if (button) {
-    play(button, [
-      { transform: "translateX(0)" }, { transform: "translateX(-8px)" }, { transform: "translateX(7px)" },
-      { transform: "translateX(-4px)" }, { transform: "translateX(2px)" }, { transform: "translateX(0)" },
-    ], { duration: 420, easing: "ease-out" });
-  }
-  play(ui["question-feedback"], [{ opacity: 0, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: easeOut });
-  if (!saved) ui["question-feedback"].textContent += " Progress couldn’t be saved on this device.";
-  if (revealed) ui["question-feedback"].focus({ preventScroll: true });
-  // Once it's answered, show the method after a moment, so the tick on the right answer is seen first.
-  if (attempt.outcome) {
-    clearTimeout(methodTimer);
-    methodTimer = setTimeout(() => {
-      if (queue[position] === card && questionAttempts.get(card) === attempt) showFace("method");
-    }, revealed ? 120 : 750);
-  }
 }
 
 function renderNextButton() {
@@ -1130,6 +1491,7 @@ function renderNav() {
 
 function setView(next, { push = true } = {}) {
   flushMotion();
+  if (next !== "study") stopRecording(true);
   const previous = view;
   if (previous === "study" && next !== "study" && activeDeck === "session" && session?.stats.done) {
     lastSession = { ...session.stats };
@@ -1212,6 +1574,7 @@ function focusPractice() {
 function moveCard(direction) {
   if (questionRoundFinished) return;
   flushMotion();
+  stopRecording(true);
   // In a session, Skip sends the card to the back of the queue.
   if (activeDeck === "session" && !questionMode) {
     if (direction !== 1 || queue.length - position < 2) {
@@ -1481,8 +1844,8 @@ async function start() {
       cards: [...main.cards, ...(papers?.cards ?? [])],
     };
     cards = data.cards;
-    questionCards = cards.filter(({ choices }) => Array.isArray(choices) && choices.length === 4 &&
-      choices.every((choice) => typeof choice === "string" && choice.trim()) && new Set(choices).size === 4);
+    // Every card can be a question: you answer it in your own words and it's marked against its solution.
+    questionCards = cards.filter((card) => Array.isArray(card.back) && card.back.length > 0);
     topics = new Map(data.topics.map((topic) => [topic.id, topic]));
 
     ui.loading.hidden = true;
@@ -1581,12 +1944,30 @@ ui["topic-picker"].addEventListener("close", () => {
 });
 ui["flashcard-mode"].addEventListener("click", () => changeMode(false));
 ui["question-mode"].addEventListener("click", () => changeMode(true));
-ui["question-options"].addEventListener("click", (event) => {
-  const choice = event.target.closest("[data-choice]");
-  if (choice) answerQuestion(Number(choice.dataset.choice));
+ui["speak-answer"].addEventListener("click", () => {
+  if (recorder) stopRecording();
+  else startRecording();
 });
-ui["reveal-question"].addEventListener("click", () => answerQuestion());
-ui["show-choices"].addEventListener("click", () => showFace("choose"));
+ui["type-answer"].addEventListener("click", () => showFace("answer", { focus: true }));
+ui["mark-answer"].addEventListener("click", markAnswer);
+ui["self-right"].addEventListener("click", () => selfMark(true));
+ui["self-wrong"].addEventListener("click", () => selfMark(false));
+ui["reveal-question"].addEventListener("click", revealAnswer);
+ui["answer-input"].addEventListener("input", () => {
+  const attempt = questionAttempts.get(queue[position]);
+  if (!attempt || attempt.outcome) return;
+  const had = Boolean(attempt.answer.trim());
+  attempt.answer = ui["answer-input"].value;
+  if (had !== Boolean(attempt.answer.trim())) setFace(attempt);
+});
+ui["answer-input"].addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+    event.preventDefault();
+    markAnswer();
+  } else if (event.key === "Escape") {
+    ui["answer-input"].blur();
+  }
+});
 for (const pager of [ui["card-pager"], ui["question-pager"]]) {
   pager.addEventListener("pointerdown", (event) => event.stopPropagation());
   pager.addEventListener("click", (event) => {
@@ -1663,17 +2044,15 @@ document.addEventListener("keydown", (event) => {
   } else if (!questionMode && (key === "1" || key === "2") && !event.repeat) {
     event.preventDefault();
     rateCard(key === "2" ? "known" : "review");
-  } else if (questionMode && !event.repeat && ["1", "2", "3", "4", "a", "b", "c", "d"].includes(key)) {
-    event.preventDefault();
-    // A button clicked earlier, like the mode switch, would otherwise catch the Enter meant for "next".
-    if (event.target.closest("button, a")) event.target.blur();
-    const index = "1234".includes(key) ? Number(key) - 1 : "abcd".indexOf(key);
-    answerQuestion(index);
   } else if (questionMode && event.key === "Enter" && !event.target.closest("button, a")) {
+    // Enter starts typing an answer, and once it's marked moves on to the next question.
     const attempt = questionAttempts.get(queue[position]);
     if (attempt?.outcome) {
       event.preventDefault();
       moveCard(1);
+    } else if (attempt && !attempt.status && !attempt.result) {
+      event.preventDefault();
+      showFace("answer", { focus: true });
     }
   }
 });
@@ -1681,16 +2060,12 @@ document.addEventListener("keydown", (event) => {
 setupSwipe();
 setupPageSwipe();
 placeHeaderActions();
-// Math fonts load lazily, so measure the answer choices again once they arrive.
+// Math fonts load lazily, so measure the card again once they arrive, and when the screen changes.
 function refit() {
   if (view === "study" && queue[position] && !questionRoundFinished) {
     if (questionMode) {
-      fitOptions();
       const attempt = questionAttempts.get(queue[position]);
-      // Fonts or the screen size changed. If the question and its answers no longer fit
-      // together, split them. Never join them back, so nothing jumps under a finger.
-      if (attempt && !attempt.outcome && attempt.face === "ask") applyFace(attempt, false);
-      else if (attempt) fitFace(attempt);
+      if (attempt) fitFace(attempt);
     } else {
       const exam = isExam(queue[position]);
       layoutPages(ui["card-content"], ui["card-content"], ui["card-pager"], !answerVisible && !exam ? 0.6 : 0.8);

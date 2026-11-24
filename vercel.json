@@ -1,9 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "",
-  "outputDirectory": "vercel-site",
-  "functions": {
-    "api/mark.js": { "maxDuration": 60 },
-    "api/transcribe.js": { "maxDuration": 30 }
-  }
-}
