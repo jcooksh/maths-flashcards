@@ -1312,7 +1312,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .answer-hint { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
 .answer-hint:empty { display: none; }
 
-.answer-bar { display: grid; gap: 10px; margin-top: auto; }
+.answer-bar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
+.answer-bar > * { grid-column: 1 / -1; }
 .answer-status { margin: 0; color: var(--muted); font-size: 0.86rem; font-weight: 650; line-height: 1.4; }
 .answer-status:empty { display: none; }
 .answer-status[data-tone="busy"] { color: var(--ink); }
@@ -1362,15 +1363,19 @@ body:has(dialog[open]) { overflow: hidden; }
 .mark-button { flex: 1 1 auto; min-height: 58px; font-size: 1.02rem; }
 .mark-button[aria-busy="true"] { opacity: 0.8; }
 .self-mark { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.answer-bar #reveal-question { justify-self: center; }
-.answer-bar.split { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.answer-bar.split > * { grid-column: 1 / -1; }
-.answer-bar.split .answer-actions { display: contents; }
-.answer-bar.split .speak-button { grid-column: 1 / -1; }
-.answer-bar.split .type-button { grid-column: 1; min-height: 48px; font-size: 0.95rem; }
-.answer-bar.split #reveal-question { grid-column: 2; justify-self: stretch; min-height: 48px; }
+.answer-secondary { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+/* Signed in, on the question: speaking gets the full width, with typing and giving up side by side underneath. */
+.answer-bar[data-layout="speak"] .answer-actions,
+.answer-bar[data-layout="speak"] .answer-secondary { display: contents; }
+.answer-bar[data-layout="speak"] .speak-button { grid-column: 1 / -1; }
+.answer-bar[data-layout="speak"] .type-button { grid-column: 1; min-height: 48px; font-size: 0.95rem; }
+.answer-bar[data-layout="speak"] #reveal-question { grid-column: 2; min-height: 48px; }
+/* Signed out: typing gets the full width, with signing in and giving up underneath. */
+.answer-bar[data-layout="type"] .answer-secondary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.answer-bar[data-layout="type"] .answer-secondary > .quiet-button { min-height: 46px; }
 
 .result-panel { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: calc(10px * var(--fit, 1)); }
+.result-panel:focus { outline: none; }
 .result-banner {
   display: flex;
   align-items: center;

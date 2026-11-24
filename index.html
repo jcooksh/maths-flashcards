@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
-  <meta name="description" content="Flashcards and exam-style questions for Edexcel A level Pure Maths. Say or type your answers and have them marked, with red, amber and green boxes to track what you know.">
+  <meta name="description" content="Flashcards and typed or spoken practice for Edexcel A level Pure Maths, with worked solutions and red, amber and green progress boxes.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#141a2e">
   <title>Maths flashcards · Edexcel A level</title>
@@ -14,10 +14,10 @@
     } catch {}
   </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=17">
+  <link rel="stylesheet" href="./styles.css?v=18">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=17"></script>
+  <script type="module" src="./app.js?v=18"></script>
 </head>
 <body>
   <header class="mobile-header">
@@ -197,11 +197,11 @@
               </div>
               <div class="paper" id="question-prompt" tabindex="-1"></div>
               <div class="answer-panel" id="answer-panel">
-                <label class="answer-label" for="answer-input">Your answer</label>
-                <textarea id="answer-input" rows="5" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+                <label class="visually-hidden" for="answer-input">Your answer</label>
+                <textarea id="answer-input" rows="5" maxlength="6000" aria-describedby="answer-hint" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
                 <p class="answer-hint" id="answer-hint"></p>
               </div>
-              <div class="result-panel" id="question-result"></div>
+              <div class="result-panel" id="question-result" tabindex="-1"></div>
               <div class="pager question-pager" id="question-pager" hidden>
                 <button class="pager-prev" type="button" aria-label="Previous part"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
                 <span class="pager-label">1 / 2</span>
@@ -224,7 +224,10 @@
                   <button class="pill pill-review" id="self-wrong" type="button">Not quite</button>
                   <button class="pill pill-known" id="self-right" type="button">I got it right</button>
                 </div>
-                <button class="quiet-button" id="reveal-question" type="button">Show the answer</button>
+                <div class="answer-secondary" id="answer-secondary">
+                  <button class="quiet-button" id="sign-in-to-mark" type="button" aria-label="Sign in for AI marking" aria-haspopup="dialog" aria-controls="account-dialog">Sign in for AI</button>
+                  <button class="quiet-button" id="reveal-question" type="button">Show answer</button>
+                </div>
               </div>
             </div>
 

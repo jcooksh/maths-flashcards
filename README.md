@@ -33,17 +33,17 @@ Every chart has a table view and works with the keyboard.
 
 Questions mode sets each card out like the exam paper: the question number, each part on its own line with its marks on the right, and the question's total. Instead of picking from choices, you answer in your own words, so you practise working it out rather than recognising the answer:
 
-- **Say your answer.** It's recorded, written down by Whisper and put in the answer box, where you can correct it.
+- **Say your answer.** It's recorded, written down by Whisper and put in the answer box. Check the transcription and correct it before marking.
 - **Or type it.** Write the maths however is easiest, like `x^2` or `root 3`.
-- **Mark my answer.** An AI examiner marks each part against the worked solution, as an Edexcel examiner would, and says what to fix. A right answer moves the card up a box; anything else sends it back to Red.
+- **Mark my answer.** An AI examiner marks each part against the worked solution, as an Edexcel examiner would, and says what to fix. A right answer moves the card up a box; anything else sends it back to Red. Each question counts once towards your boxes.
 
-Speaking and AI marking need you to be signed in. Signed out, or if the examiner can't be reached, you check your answer against the worked solution and say whether you got it right. Show the answer gives up on a question, which counts as Red. You can open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
+Speaking and AI marking need you to be signed in. Signed out, or if the examiner can't be reached, you compare your answer with the worked solution and mark it yourself. Show answer gives up on a question, which counts as Red. The Question, Your answer and Marking tabs move between the views. Open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
 
 On a phone every screen fits without scrolling. Anything too long for the screen, such as a long worked solution, is split into pages: tap the arrows or swipe up and down. Formulas too wide for a line are shrunk to fit. The progress page has Overview, Activity and Topics tabs.
 
 ### AI marking
 
-Marking runs on the Vercel project of [CS Revise](https://github.com/jcooksh/csrevise), which holds the model providers' API keys: `api/maths-mark.js` and `api/maths-transcribe.js` there. The site calls them with the signed-in user's Supabase token, and they check it against this project's Supabase before using any quota. The examiner tries Groq (gpt-oss-120b) first, then Google Gemini, Cohere and NVIDIA, and Whisper on Groq writes down spoken answers. No key is ever in the browser. If CS Revise's Vercel project goes, the site falls back to checking answers yourself.
+Marking runs on [CS Revise's Vercel project](https://github.com/jcooksh/csrevise#maths-flashcards-marking), which holds the model providers' API keys: `api/maths-mark.js` and `api/maths-transcribe.js` there. The site calls them with the signed-in user's Supabase token, and they check it against this project's Supabase before using any quota. The examiner tries Groq (gpt-oss-120b) first, then Google Gemini, Cohere and NVIDIA, and Whisper on Groq writes down spoken answers. No key is ever in the browser. If CS Revise's Vercel project goes, the site falls back to marking answers yourself.
 
 ## Trigonometry deck
 
@@ -68,12 +68,14 @@ The Past papers section has a card for every question in the Edexcel 9MA0 Pure p
 - **Use**: the formulas or identities you need
 - the working for each part, and the answer
 
+In Questions mode, the same reworked questions use a paper-style layout with the question number, part labels, marks and total.
+
 The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`. It also puts each part on its own line and adds the marks for each part and the question's total from `tools/past-papers/marks.json`, which was read from the question papers. Where a card leaves out a part of the paper's question, such as one that needs a diagram, that part's marks are left out too.
 
 ## Controls
 
 - Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. The card shows its box, and the swipe stamp shows where it will go. In a session, Skip moves a card to the back of the queue.
-- Questions: Enter opens the answer box, Ctrl+Enter marks your answer, and Enter goes to the next question once it's marked.
+- Questions: press Enter to start typing, Ctrl+Enter or Command+Enter to mark, then Enter for the next question.
 - The moon/sun button switches between light and dark mode. It follows the system setting until you choose one.
 - Animations are reduced when the system “reduce motion” setting is on.
 
@@ -98,7 +100,7 @@ Run `python3 -m http.server 8000 --bind 127.0.0.1` from this folder and open `ht
 
 Edit `cards.json`. Each card has a unique `id`, an existing `topic` ID, a question in `front`, and one or more answer lines in `back`. Use `$…$` around LaTeX. To put a formula on its own line, make it a separate entry in `back`. An optional `reference` of `recall` or `booklet` marks its exam status. Use it only when supported by Pearson's materials.
 
-Every card is also a question in Questions mode, where `back` is the worked solution the answer is marked against. The `choices` arrays from the old multiple-choice mode are no longer used.
+Write the answer and any essential workings in `back`. Questions mode uses it as the worked solution and the reference for marking.
 
 Cards can be opened directly with `?card=<id>` on the site URL. GitHub Pages publishes changes to the main branch.
 

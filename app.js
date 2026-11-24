@@ -311,6 +311,10 @@ function renderProgress() {
 }
 
 function useProgress(next, accountChanged) {
+  if (accountChanged) {
+    flushMotion();
+    cancelQuestionTask();
+  }
   progress = next;
   if (!cards.length) return;
   renderProgress();
@@ -319,9 +323,7 @@ function useProgress(next, accountChanged) {
     if (view === "study") renderCard();
   } else if (view === "study") {
     renderBoxChip(queue[position]);
-  }
-  if (accountChanged && questionMode && view === "study" && queue[position] && !questionRoundFinished) {
-    renderQuestion(queue[position]);
+    if (accountChanged && questionMode && queue[position] && !questionRoundFinished) renderQuestion(queue[position]);
   }
 }
 
@@ -530,7 +532,7 @@ function renderMode() {
 function changeMode(showQuestions) {
   if (questionMode === showQuestions) return;
   flushMotion();
-  stopRecording(true);
+  cancelQuestionTask();
   const card = queue[position];
   questionMode = showQuestions;
 
@@ -573,13 +575,13 @@ const markingApi = "https://csrevise.vercel.app/api/";
 const letterLabel = /^\(([a-h])\)\s*/;
 const numeralLabel = /^\((i{1,3}|iv|v|vi)\)\s*/;
 const longestRecording = 120_000;
+const maxRecordingBytes = 3 * 1024 * 1024;
 const speechSupported = Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
-let recorder = null;
+let questionTask = null;
 
 function questionAttempt(card) {
   let attempt = questionAttempts.get(card);
   if (!attempt) {
-    // status: "" | "recording" | "transcribing" | "marking". outcome: null | "correct" | "wrong" | "revealed".
     attempt = { face: "question", status: "", answer: "", spoken: false, result: null, outcome: null, move: "", firstCorrect: null };
     questionAttempts.set(card, attempt);
   }
@@ -634,7 +636,7 @@ function renderPaper(card) {
   const number = exam ? /Q(\d+)$/.exec(card.source ?? "")?.[1] : null;
   const head = document.createElement("p");
   head.className = "paper-head";
-  head.textContent = exam ? card.source.replace(/ · Q\d+$/, "") : topics.get(card.topic)?.title ?? "Question";
+  head.textContent = exam && card.source ? card.source.replace(/ · Q\d+$/, "") : topics.get(card.topic)?.title ?? "Question";
   const lines = paperLines(card).map((line, index) => {
     const row = document.createElement("p");
     // A numeral with no letter before it, as in "(i) Prove that…", is a part of its own.
@@ -653,7 +655,10 @@ function renderPaper(card) {
       tag.textContent = text;
       row.append(tag);
     }
-    appendMath(row, line.text, false);
+    const text = document.createElement("span");
+    text.className = "paper-text";
+    appendMath(text, line.text, false);
+    row.append(text);
     if (line.marks) {
       const marks = document.createElement("span");
       marks.className = "paper-marks";
@@ -704,7 +709,7 @@ function renderResult(card, attempt) {
   } else if (result.self) {
     if (attempt.outcome) {
       tone = attempt.outcome === "correct" ? "right" : "wrong";
-      title.textContent = attempt.outcome === "correct" ? "You marked it right." : "You marked it not quite.";
+      title.textContent = attempt.outcome === "correct" ? "Marked right." : "Marked for review.";
     } else {
       title.textContent = "Check your answer against the worked solution.";
     }
@@ -726,7 +731,7 @@ function renderResult(card, attempt) {
   if (attempt.move) items.push(resultElement("p", "result-move", attempt.move));
   if (result.self && !attempt.outcome && result.reason) items.push(resultElement("p", "result-note", result.reason));
   if (!result.self && !result.revealed) {
-    if (result.overall) items.push(resultElement("p", "result-overall", result.overall));
+    if (!result.correct && result.overall) items.push(resultElement("p", "result-overall", result.overall));
     const parts = markingParts(card);
     for (const [index, part] of result.parts.entries()) {
       const row = document.createElement("p");
@@ -749,8 +754,9 @@ function renderResult(card, attempt) {
         marks.setAttribute("aria-label", part.marks + " out of " + plural(part.max, "mark"));
         head.append(marks);
       }
+      row.append(head);
       const text = resultElement("span", "result-part-text", part.feedback);
-      row.append(head, text);
+      row.append(text);
       items.push(row);
     }
   }
@@ -763,10 +769,9 @@ function setFace(attempt) {
   const box = ui["question-card"];
   box.dataset.face = attempt.face;
   const hasAnswer = Boolean(attempt.answer.trim()) || attempt.face === "answer";
-  const tabs = { question: true, answer: hasAnswer, result: Boolean(attempt.result) };
-  ui["question-tabs"].hidden = !(hasAnswer || attempt.result) || attempt.status === "recording";
-  ui["tab-answer"].hidden = !tabs.answer;
-  ui["tab-result"].hidden = !tabs.result;
+  ui["question-tabs"].hidden = !(hasAnswer || attempt.result) || ["requesting", "recording"].includes(attempt.status);
+  ui["tab-answer"].hidden = !hasAnswer;
+  ui["tab-result"].hidden = !attempt.result;
   for (const tab of ui["question-tabs"].querySelectorAll("[data-face]")) {
     tab.setAttribute("aria-pressed", String(tab.dataset.face === attempt.face));
   }
@@ -780,39 +785,43 @@ function renderAnswerBar(attempt) {
   const busy = attempt.status;
   const onQuestion = attempt.face === "question";
   const onAnswer = attempt.face === "answer";
-  const canSpeak = signedIn && speechSupported && !finished && !pendingSelf && (busy === "" || busy === "recording" || busy === "transcribing");
+  const canSpeak = signedIn && speechSupported && !finished && !pendingSelf && busy !== "marking";
 
   ui["speak-answer"].hidden = !(canSpeak && (onQuestion || onAnswer));
   ui["speak-answer"].classList.toggle("recording", busy === "recording");
-  ui["speak-answer"].classList.toggle("compact", onAnswer && busy !== "recording");
-  ui["speak-answer"].disabled = busy === "transcribing";
-  ui["speak-label"].textContent = busy === "recording" ? "Stop" : busy === "transcribing" ? "Writing it down…" : onAnswer ? "Add by speaking" : "Say your answer";
+  ui["speak-answer"].disabled = busy === "requesting" || busy === "transcribing";
+  const speakLabels = { requesting: "Opening microphone…", recording: "Stop recording", transcribing: "Transcribing…" };
+  ui["speak-label"].textContent = speakLabels[busy] ?? (onAnswer ? "Add by speaking" : "Say your answer");
   ui["speak-answer"].setAttribute("aria-pressed", String(busy === "recording"));
 
+  ui["speak-answer"].classList.toggle("compact", onAnswer && busy !== "recording");
   ui["type-answer"].hidden = !onQuestion || finished || pendingSelf || busy !== "";
   ui["type-answer"].classList.toggle("wide", !canSpeak);
   ui["type-answer"].querySelector(".type-label").textContent = canSpeak ? "Type" : "Type your answer";
 
-  ui["mark-answer"].hidden = !onAnswer || finished || pendingSelf || busy === "recording";
-  ui["mark-answer"].disabled = busy === "marking" || busy === "transcribing";
+  ui["mark-answer"].hidden = !onAnswer || finished || pendingSelf || (busy && busy !== "marking");
+  ui["mark-answer"].disabled = Boolean(busy);
   ui["mark-answer"].setAttribute("aria-busy", String(busy === "marking"));
   ui["mark-answer"].textContent = busy === "marking" ? "Marking…" : signedIn ? "Mark my answer" : "Check my answer";
 
   ui["self-mark"].hidden = !pendingSelf || attempt.face !== "result";
   ui["reveal-question"].hidden = finished || pendingSelf || busy !== "" || attempt.face === "result";
+  ui["sign-in-to-mark"].hidden = signedIn || !onQuestion || finished || pendingSelf;
+  ui["answer-secondary"].hidden = ui["sign-in-to-mark"].hidden && ui["reveal-question"].hidden;
 
   let status = "";
-  if (busy === "recording") status = "Listening… " + recordingTime() + " · tap Stop when you’re done";
+  if (busy === "recording") status = "Recording " + recordingTime();
+  else if (busy === "requesting") status = "Allow microphone access to record.";
   else if (busy === "transcribing") status = "Writing down what you said…";
-  else if (busy === "marking") status = "The examiner is marking it…";
-  else if (!signedIn && onQuestion && !finished) status = "Sign in to answer out loud and have it marked.";
-  ui["question-feedback"].textContent = status;
-  ui["question-feedback"].dataset.tone = busy ? "busy" : "";
-  // Speaking gets the full width, with typing and giving up side by side underneath.
-  ui["answer-bar"].classList.toggle("split", !ui["speak-answer"].hidden && !ui["type-answer"].hidden && !ui["reveal-question"].hidden);
+  else if (busy === "marking" && !onAnswer) status = "The examiner is marking it…";
+  const feedback = ui["question-feedback"];
+  if (feedback.textContent !== status) feedback.textContent = status;
   const actionsShown = !ui["speak-answer"].hidden || !ui["type-answer"].hidden || !ui["mark-answer"].hidden;
+  // Speaking gets the full width, with typing and giving up side by side underneath.
+  ui["answer-bar"].dataset.layout = !ui["speak-answer"].hidden && !ui["type-answer"].hidden ? "speak"
+    : !ui["type-answer"].hidden ? "type" : onAnswer ? "answer" : "";
   ui["answer-bar"].querySelector(".answer-actions").hidden = !actionsShown;
-  ui["answer-bar"].hidden = !actionsShown && ui["self-mark"].hidden && ui["reveal-question"].hidden && !status;
+  ui["answer-bar"].hidden = !actionsShown && ui["self-mark"].hidden && ui["answer-secondary"].hidden && !status;
 }
 
 function renderQuestion(card) {
@@ -825,15 +834,13 @@ function renderQuestion(card) {
     ui["answer-input"].value = attempt.answer;
     const parts = markingParts(card).filter((part) => part.label);
     ui["answer-input"].placeholder = parts.length > 1
-      ? "Write your answer to each part, with any working:\n" + parts.slice(0, 3).map((part) => part.label + " …").join("\n")
+      ? "Write each part with any working.\n" + parts.slice(0, 3).map((part) => part.label + " …").join("\n")
       : "Write your answer, with any working.";
   }
-  ui["answer-input"].readOnly = Boolean(attempt.outcome) || Boolean(attempt.result?.self) || attempt.status === "marking";
-  ui["answer-hint"].textContent = attempt.outcome || attempt.result?.self
-    ? ""
-    : account.signedIn()
-      ? (usingPointer ? "Write maths however is easiest, like x^2 or root 3." : "Write maths however is easiest, like x^2 or root 3. Ctrl + Enter marks it.")
-      : "You’ll check it against the worked solution. Sign in to have it marked by AI.";
+  ui["answer-input"].readOnly = Boolean(attempt.outcome || attempt.result || attempt.status);
+  const answerHint = attempt.spoken ? "Check your transcription before marking." : "Use notation like x^2 or write it in words.";
+  ui["answer-hint"].textContent = attempt.result ? ""
+    : account.signedIn() ? answerHint : "You’ll check it against the worked solution. Sign in to have it marked by AI.";
   renderResult(card, attempt);
   setFace(attempt);
   renderAnswerBar(attempt);
@@ -849,35 +856,31 @@ function fitFace(attempt) {
     layoutPages(box, holder, ui["question-pager"], fitMinimum[attempt.face]);
   } else {
     clearPages(box, ui["question-pager"]);
-    box.style.setProperty("--fit", "1");
-    box.classList.remove("overflowing");
+    fitText(box, 1);
   }
   markScrollable();
 }
 
 function showFace(face, { animate = true, focus = false } = {}) {
+  if (view !== "study" || !questionMode || questionRoundFinished) return;
+  flushMotion();
   const card = queue[position];
   const attempt = card && questionAttempts.get(card);
-  if (!attempt || attempt.status === "recording") return;
+  if (!attempt || attempt.status === "recording" || attempt.status === "requesting") return;
   if (face === "result" && !attempt.result) return;
   const changed = attempt.face !== face;
   attempt.face = face;
-  const swap = () => renderQuestion(card);
-  // A phone only opens its keyboard if the box is focused during the tap itself, so the answer
-  // box appears at once and fades in, instead of waiting for the question to fade out.
-  if (face === "answer" && focus) {
-    flushMotion();
-    swap();
-    ui["answer-input"].focus({ preventScroll: true });
-    if (changed && animate) play(ui["answer-panel"], fade[1], { duration: 240, easing: easeOut });
-    return;
-  }
-  if (changed && animate) animateSwap(ui["question-card"], swap, ...fade, { out: 110, in: 260 });
+  const swap = () => {
+    if (changed) ui["question-card"].scrollTop = 0;
+    renderQuestion(card);
+  };
+  if (changed && animate && !focus) animateSwap(ui["question-card"], swap, ...fade, { out: 110, in: 260 });
   else swap();
+  if (face === "answer" && focus) ui["answer-input"].focus({ preventScroll: true });
 }
 
 function refreshQuestion(card) {
-  if (questionMode && view === "study" && queue[position] === card) {
+  if (questionMode && view === "study" && !questionRoundFinished && queue[position] === card) {
     renderQuestion(card);
     renderNextButton();
   }
@@ -885,27 +888,29 @@ function refreshQuestion(card) {
 
 // Saves the result of a question, once: the first verdict is the one that counts.
 function finishQuestion(card, attempt, correct, outcome = correct ? "correct" : "wrong") {
-  attempt.status = "";
-  if (attempt.firstCorrect === null) {
-    attempt.firstCorrect = correct;
-    const result = recordAnswer(card, correct);
-    attempt.move = moveText(result.before, result.after, correct) + (result.saved ? "" : " Progress couldn’t be saved on this device.");
-    flashMove(result.before, result.after);
-    if (!correct) requeue(card);
-    renderProgress();
-  }
+  if (attempt.firstCorrect !== null) return;
+  attempt.firstCorrect = correct;
   attempt.outcome = outcome;
+  const result = recordAnswer(card, correct);
+  attempt.move = moveText(result.before, result.after, correct) + (result.saved ? "" : " Progress couldn’t be saved on this device.");
+  flashMove(result.before, result.after);
+  if (!correct) requeue(card);
+  renderProgress();
+  presentResult(card, attempt);
+}
+
+function presentResult(card, attempt) {
   attempt.face = "result";
-  if (queue[position] === card && questionMode && view === "study") {
-    animateSwap(ui["question-card"], () => {
-      renderQuestion(card);
-      renderNextButton();
-    }, ...fade, { out: 110, in: 280 });
-    ui["question-feedback"].focus({ preventScroll: true });
-  }
+  animateSwap(ui["question-card"], () => {
+    ui["question-card"].scrollTop = 0;
+    renderQuestion(card);
+    renderNextButton();
+    ui["question-result"].focus({ preventScroll: true });
+  }, ...fade, { out: 110, in: 280 });
 }
 
 function revealAnswer() {
+  flushMotion();
   const card = queue[position];
   const attempt = card && questionAttempt(card);
   if (!attempt || attempt.outcome || attempt.status) return;
@@ -914,78 +919,100 @@ function revealAnswer() {
 }
 
 function selfMark(correct) {
+  flushMotion();
   const card = queue[position];
   const attempt = card && questionAttempts.get(card);
-  if (!attempt || attempt.outcome || !attempt.result?.self) return;
+  if (!attempt || attempt.face !== "result" || attempt.outcome || !attempt.result?.self) return;
   pulse(correct ? ui["self-right"] : ui["self-wrong"]);
   finishQuestion(card, attempt, correct);
 }
 
-function requestTimeout(ms) {
-  const controller = new AbortController();
-  setTimeout(() => controller.abort(), ms);
-  return controller.signal;
+function beginQuestionTask(card, attempt, status) {
+  const task = { card, attempt, controller: new AbortController() };
+  questionTask = task;
+  setQuestionTaskStatus(task, status);
+  return task;
 }
 
-async function callApi(path, body, ms) {
-  const token = await account.accessToken();
-  if (!token) throw new Error("signin");
-  let response;
+function setQuestionTaskStatus(task, status) {
+  task.attempt.status = status;
+  refreshQuestion(task.card);
+}
+
+function endQuestionTask(task) {
+  if (questionTask !== task) return false;
+  questionTask = null;
+  task.attempt.status = "";
+  return true;
+}
+
+function cancelQuestionTask() {
+  const task = questionTask;
+  if (!task) return;
+  endQuestionTask(task);
+  task.controller.abort();
+  task.stop?.();
+}
+
+async function callApi(task, path, body, ms) {
+  const { signal } = task.controller;
+  const timer = setTimeout(() => task.controller.abort(), ms);
   try {
-    response = await fetch(markingApi + path, {
+    const token = await account.accessToken();
+    if (!token) throw new Error("signin");
+    const response = await fetch(markingApi + path, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
       body: JSON.stringify(body),
-      signal: requestTimeout(ms),
+      signal,
     });
-  } catch {
-    throw new Error("offline");
+    if (response.status === 401) throw new Error("signin");
+    if (!response.ok) throw new Error(response.status === 429 ? "busy" : "unavailable");
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
   }
-  if (response.status === 401) throw new Error("signin");
-  if (!response.ok) throw new Error(response.status === 429 ? "busy" : "unavailable");
-  return response.json();
 }
 
 async function markAnswer() {
+  flushMotion();
   const card = queue[position];
-  const attempt = card && questionAttempt(card);
-  if (!attempt || attempt.outcome || attempt.status || attempt.result?.self) return;
-  attempt.answer = ui["answer-input"].value;
-  if (!attempt.answer.trim()) {
-    toast("Say or type your answer first.");
-    showFace("answer", { focus: true });
-    return;
-  }
+  const attempt = questionAttempts.get(card);
+  if (!attempt || attempt.face !== "answer" || attempt.outcome || questionTask || attempt.result) return;
+  const answer = attempt.answer.trim();
+  if (!answer) return toast("Say or type your answer first.");
   ui["answer-input"].blur();
   if (!account.signedIn()) {
-    attempt.result = { self: true, reason: "" };
-    attempt.face = "result";
-    animateSwap(ui["question-card"], () => renderQuestion(card), ...fade, { out: 110, in: 260 });
+    attempt.result = { self: true };
+    presentResult(card, attempt);
     return;
   }
-  attempt.status = "marking";
-  refreshQuestion(card);
+
+  const task = beginQuestionTask(card, attempt, "marking");
+  const parts = markingParts(card);
   try {
-    const result = await callApi("maths-mark", {
+    const result = await callApi(task, "maths-mark", {
       question: frontLines(card),
-      parts: markingParts(card),
+      parts,
       solution: card.back,
-      answer: attempt.answer.trim(),
+      answer,
       spoken: attempt.spoken,
     }, 65_000);
-    if (!Array.isArray(result.parts) || typeof result.correct !== "boolean") throw new Error("unavailable");
+    if (!Array.isArray(result?.parts) || result.parts.length !== parts.length ||
+        typeof result.correct !== "boolean" || !Number.isInteger(result.score) || !Number.isInteger(result.outOf)) {
+      throw new Error("unavailable");
+    }
+    if (!endQuestionTask(task)) return;
     attempt.result = result;
     finishQuestion(card, attempt, result.correct);
   } catch (error) {
-    attempt.status = "";
+    if (!endQuestionTask(task)) return;
     const reasons = {
       signin: "Your sign-in has expired, so check this one yourself. Sign in again to have answers marked.",
       busy: "The examiner is busy, so check this one yourself.",
-      offline: "You’re offline, so check this one yourself.",
     };
     attempt.result = { self: true, reason: reasons[error.message] ?? "The examiner couldn’t be reached, so check this one yourself." };
-    attempt.face = "result";
-    refreshQuestion(card);
+    presentResult(card, attempt);
   }
 }
 
@@ -994,56 +1021,75 @@ async function markAnswer() {
  * answer box, where they can be checked and corrected before marking.
  */
 function recordingTime() {
-  const seconds = recorder ? Math.floor((performance.now() - recorder.started) / 1000) : 0;
+  const seconds = Math.floor((performance.now() - questionTask.started) / 1000);
   return Math.floor(seconds / 60) + ":" + String(seconds % 60).padStart(2, "0");
 }
 
 async function startRecording() {
+  flushMotion();
   const card = queue[position];
-  const attempt = card && questionAttempt(card);
-  if (!attempt || recorder || attempt.outcome || attempt.status) return;
-  if (!account.signedIn()) {
-    account.openSignIn();
-    return;
-  }
-  attempt.answer = ui["answer-input"].value;
-  let stream;
+  const attempt = questionAttempts.get(card);
+  if (!attempt || attempt.result || questionTask || !speechSupported || !account.signedIn()) return;
+  ui["answer-input"].blur();
+  const task = beginQuestionTask(card, attempt, "requesting");
   try {
-    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+    task.stop = () => {
+      for (const track of stream.getTracks()) track.stop();
+    };
+    if (questionTask !== task) return task.stop();
+    recordSpeech(task, stream);
   } catch {
-    toast("The microphone is blocked. Allow it in your browser’s settings, or type your answer.");
-    return;
+    if (!endQuestionTask(task)) return;
+    task.stop?.();
+    toast("Couldn’t open the microphone. Check your browser permissions or type your answer.");
+    refreshQuestion(card);
   }
-  const type = ["audio/webm;codecs=opus", "audio/mp4", "audio/webm", "audio/ogg;codecs=opus"].find((candidate) => MediaRecorder.isTypeSupported?.(candidate));
-  let media;
-  try {
-    media = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 32_000 } : undefined);
-  } catch {
-    media = new MediaRecorder(stream);
-  }
-  const current = { media, stream, chunks: [], started: performance.now(), card, attempt, cancelled: false };
-  recorder = current;
-  media.addEventListener("dataavailable", (event) => {
-    if (event.data.size) current.chunks.push(event.data);
-  });
-  media.addEventListener("stop", () => finishRecording(current));
-  media.start(1000);
-  attempt.status = "recording";
-  current.timer = setInterval(() => {
-    if (performance.now() - current.started > longestRecording) stopRecording();
-    else if (queue[position] === card) renderAnswerBar(attempt);
-  }, 500);
-  navigator.vibrate?.(10);
-  refreshQuestion(card);
 }
 
-function stopRecording(cancel = false) {
-  const current = recorder;
-  if (!current) return;
-  current.cancelled = cancel;
-  clearInterval(current.timer);
-  if (current.media.state !== "inactive") current.media.stop();
-  for (const track of current.stream.getTracks()) track.stop();
+function recordSpeech(task, stream) {
+  const type = ["audio/webm;codecs=opus", "audio/mp4", "audio/webm", "audio/ogg;codecs=opus"].find((candidate) => MediaRecorder.isTypeSupported?.(candidate));
+  const media = type ? new MediaRecorder(stream, { mimeType: type, audioBitsPerSecond: 32_000 }) : new MediaRecorder(stream);
+  const chunks = [];
+  const releaseMic = task.stop;
+  let bytes = 0;
+  let timer;
+  task.stop = () => {
+    clearInterval(timer);
+    try {
+      if (media.state !== "inactive") media.stop();
+    } finally {
+      releaseMic();
+    }
+  };
+  media.addEventListener("dataavailable", (event) => {
+    if (!event.data.size || questionTask !== task) return;
+    chunks.push(event.data);
+    bytes += event.data.size;
+    if (bytes >= maxRecordingBytes * 0.9) stopRecording();
+  });
+  media.addEventListener("stop", () => finishRecording(task, chunks, media.mimeType), { once: true });
+  media.addEventListener("error", () => {
+    if (!endQuestionTask(task)) return;
+    task.stop();
+    toast("The recording stopped. Try again or type your answer.");
+    refreshQuestion(task.card);
+  }, { once: true });
+  media.start(1000);
+  task.started = performance.now();
+  setQuestionTaskStatus(task, "recording");
+  timer = setInterval(() => {
+    if (performance.now() - task.started >= longestRecording) stopRecording();
+    else renderAnswerBar(task.attempt);
+  }, 1000);
+  navigator.vibrate?.(10);
+}
+
+function stopRecording() {
+  const task = questionTask;
+  if (task?.attempt.status !== "recording") return;
+  setQuestionTaskStatus(task, "transcribing");
+  task.stop();
 }
 
 function blobToBase64(blob) {
@@ -1055,38 +1101,48 @@ function blobToBase64(blob) {
   });
 }
 
-async function finishRecording(current) {
-  if (recorder === current) recorder = null;
-  const { card, attempt } = current;
-  attempt.status = "";
-  const blob = new Blob(current.chunks, { type: current.media.mimeType || "audio/webm" });
-  if (current.cancelled) {
+async function finishRecording(task, chunks, type) {
+  if (questionTask !== task) return;
+  task.stop();
+  const { card, attempt } = task;
+  const blob = new Blob(chunks, { type: type || chunks[0]?.type || "audio/webm" });
+  if (blob.size > maxRecordingBytes) {
+    endQuestionTask(task);
+    toast("That recording was too long. Try a shorter answer or type the rest.");
     refreshQuestion(card);
     return;
   }
-  if (blob.size < 1500 || performance.now() - current.started < 700) {
-    toast("That was too short to hear. Tap the microphone and talk for a bit longer.");
+  if (blob.size < 1500) {
+    endQuestionTask(task);
+    toast("The recording was too short. Try speaking for a little longer.");
     refreshQuestion(card);
     return;
   }
-  attempt.status = "transcribing";
-  refreshQuestion(card);
+  setQuestionTaskStatus(task, "transcribing");
   try {
-    const { text } = await callApi("maths-transcribe", { audio: await blobToBase64(blob), type: blob.type }, 35_000);
-    const heard = String(text ?? "").trim();
+    const audio = await blobToBase64(blob);
+    if (questionTask !== task) return;
+    const { text } = await callApi(task, "maths-transcribe", { audio, type: blob.type }, 35_000);
+    const heard = typeof text === "string" ? text.trim() : "";
     if (!heard) throw new Error("silent");
-    attempt.answer = attempt.answer.trim() ? attempt.answer.trimEnd() + "\n" + heard : heard;
+    if (!endQuestionTask(task)) return;
+    const answer = [attempt.answer.trimEnd(), heard].filter(Boolean).join("\n");
+    const input = ui["answer-input"];
+    attempt.answer = answer.slice(0, input.maxLength);
     attempt.spoken = true;
     attempt.face = "answer";
-    if (queue[position] === card) ui["answer-input"].value = attempt.answer;
+    input.value = attempt.answer;
+    ui["question-card"].scrollTop = 0;
+    ui.announcer.textContent = "Transcription ready to review.";
+    if (answer.length > input.maxLength) toast("The answer reached its length limit. Check the transcription before marking.");
   } catch (error) {
+    if (!endQuestionTask(task)) return;
     toast(error.message === "silent"
       ? "Nothing was heard. Check the microphone and try again."
       : error.message === "signin"
         ? "Sign in again to answer out loud."
         : "That couldn’t be written down. Try again, or type your answer.");
   }
-  attempt.status = "";
   refreshQuestion(card);
 }
 
@@ -1271,6 +1327,7 @@ function fitText(box, min = 0.66) {
   return ok;
 }
 
+// On phones, short answers sit in a 2×2 grid, but only if every one fits on a single line.
 function renderNextButton() {
   const last = position === queue.length - 1;
   const inSession = activeDeck === "session";
@@ -1407,6 +1464,7 @@ function flashMove(before, after) {
 }
 
 function resetQueue({ keepStats = false } = {}) {
+  cancelQuestionTask();
   const available = availableCards();
   if (activeDeck === "session") {
     const topic = session?.topic ?? null;
@@ -1491,7 +1549,7 @@ function renderNav() {
 
 function setView(next, { push = true } = {}) {
   flushMotion();
-  if (next !== "study") stopRecording(true);
+  if (next !== "study") cancelQuestionTask();
   const previous = view;
   if (previous === "study" && next !== "study" && activeDeck === "session" && session?.stats.done) {
     lastSession = { ...session.stats };
@@ -1522,6 +1580,7 @@ function setView(next, { push = true } = {}) {
 
 function goHome() {
   if (view === "home") return;
+  cancelQuestionTask();
   if (navDepth > 0) history.back();
   else setView("home", { push: false });
 }
@@ -1565,16 +1624,16 @@ function flipCard() {
 
 function focusPractice() {
   if (usingPointer || view !== "study") return;
+  const face = questionAttempts.get(queue[position])?.face;
   const target = questionRoundFinished || !queue.length
     ? ui["return-to-deck"]
-    : questionMode ? ui["question-prompt"] : ui.flashcard;
+    : questionMode ? ui[face === "result" ? "question-result" : face === "answer" ? "tab-answer" : "question-prompt"] : ui.flashcard;
   target.focus({ preventScroll: true });
 }
 
 function moveCard(direction) {
   if (questionRoundFinished) return;
   flushMotion();
-  stopRecording(true);
   // In a session, Skip sends the card to the back of the queue.
   if (activeDeck === "session" && !questionMode) {
     if (direction !== 1 || queue.length - position < 2) {
@@ -1589,6 +1648,7 @@ function moveCard(direction) {
     return;
   }
   const target = position + direction;
+  if (questionMode && target >= 0 && target <= queue.length) cancelQuestionTask();
   if (questionMode && direction === 1 && target === queue.length && queue.length) {
     questionRoundFinished = true;
     animateSwap(stage(), () => {
@@ -1623,6 +1683,7 @@ function shuffled(items) {
 function shuffleCards() {
   if (queue.length < 2) return;
   flushMotion();
+  cancelQuestionTask();
   const currentId = queue[position].id;
   shuffled(queue);
   if (queue[0].id === currentId) {
@@ -1945,20 +2006,19 @@ ui["topic-picker"].addEventListener("close", () => {
 ui["flashcard-mode"].addEventListener("click", () => changeMode(false));
 ui["question-mode"].addEventListener("click", () => changeMode(true));
 ui["speak-answer"].addEventListener("click", () => {
-  if (recorder) stopRecording();
+  if (questionTask?.attempt.status === "recording") stopRecording();
   else startRecording();
 });
 ui["type-answer"].addEventListener("click", () => showFace("answer", { focus: true }));
 ui["mark-answer"].addEventListener("click", markAnswer);
+ui["sign-in-to-mark"].addEventListener("click", () => account.openSignIn());
 ui["self-right"].addEventListener("click", () => selfMark(true));
 ui["self-wrong"].addEventListener("click", () => selfMark(false));
 ui["reveal-question"].addEventListener("click", revealAnswer);
 ui["answer-input"].addEventListener("input", () => {
   const attempt = questionAttempts.get(queue[position]);
-  if (!attempt || attempt.outcome) return;
-  const had = Boolean(attempt.answer.trim());
+  if (!attempt || attempt.outcome || attempt.status) return;
   attempt.answer = ui["answer-input"].value;
-  if (had !== Boolean(attempt.answer.trim())) setFace(attempt);
 });
 ui["answer-input"].addEventListener("keydown", (event) => {
   if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
@@ -1966,7 +2026,12 @@ ui["answer-input"].addEventListener("keydown", (event) => {
     markAnswer();
   } else if (event.key === "Escape") {
     ui["answer-input"].blur();
+    ui["tab-answer"].focus({ preventScroll: true });
   }
+});
+window.addEventListener("pagehide", cancelQuestionTask);
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted && queue[position]) refreshQuestion(queue[position]);
 });
 for (const pager of [ui["card-pager"], ui["question-pager"]]) {
   pager.addEventListener("pointerdown", (event) => event.stopPropagation());
@@ -2001,10 +2066,17 @@ topicsDialog.addEventListener("close", () => {
   }, mobileLayout.matches ? 360 : 0);
 });
 let fitFrame = 0;
-window.addEventListener("resize", () => {
+function scheduleRefit() {
   cancelAnimationFrame(fitFrame);
   fitFrame = requestAnimationFrame(refit);
+}
+window.addEventListener("resize", scheduleRefit);
+window.visualViewport?.addEventListener("resize", scheduleRefit);
+let answerHeightBeforeKeyboard = 0;
+ui["answer-input"].addEventListener("focus", () => {
+  answerHeightBeforeKeyboard = window.visualViewport?.height ?? innerHeight;
 });
+ui["answer-input"].addEventListener("blur", scheduleRefit);
 mobileLayout.addEventListener("change", (event) => {
   if (!event.matches && topicsDialog.open) topicsDialog.close();
   placeHeaderActions();
@@ -2062,6 +2134,13 @@ setupPageSwipe();
 placeHeaderActions();
 // Math fonts load lazily, so measure the card again once they arrive, and when the screen changes.
 function refit() {
+  const viewport = window.visualViewport;
+  const height = viewport?.height ?? innerHeight;
+  const keyboardOpen = mobileLayout.matches && document.activeElement === ui["answer-input"] &&
+    answerHeightBeforeKeyboard - height > 100 && (viewport?.scale ?? 1) <= 1.01;
+  document.body.toggleAttribute("data-answer-keyboard", keyboardOpen);
+  if (keyboardOpen) document.body.style.setProperty("--answer-viewport-height", height + "px");
+  else document.body.style.removeProperty("--answer-viewport-height");
   if (view === "study" && queue[position] && !questionRoundFinished) {
     if (questionMode) {
       const attempt = questionAttempts.get(queue[position]);
