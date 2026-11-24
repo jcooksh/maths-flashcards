@@ -763,7 +763,8 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .answer-line:nth-child(3) { animation-delay: 80ms; }
 .answer-line:nth-child(4) { animation-delay: 120ms; }
 .answer-line:nth-child(n + 5) { animation-delay: 160ms; }
-.formula { min-width: 0; overflow-x: auto; padding: 0.16em 0.05em; scrollbar-width: thin; }
+/* fitFormulas sizes wide equations. Keep the line open so tall fractions can render in full. */
+.formula { min-width: 0; padding: 0.16em 0.05em; }
 .formula .katex-display { margin: 0; }
 .formula .katex-display > .katex { text-align: left; }
 .answer-line.formula { max-width: 100%; font-size: calc(clamp(1.12rem, 2.5vw, 1.85rem) * var(--fit, 1)); }
