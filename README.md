@@ -39,7 +39,7 @@ Questions mode sets each card out like the exam paper: the question number, each
 
 Speaking and AI marking need you to be signed in. Signed out, or if the examiner can't be reached, you compare your answer with the worked solution and mark it yourself. Show answer gives up on a question, which counts as Red. The Question, Your answer and Marking tabs move between the views. Open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
 
-Tap **Too hard** to move a question to your **Review list** on the home screen. It disappears from Questions practice without changing your rating. From the list, use **Copy for Codex** to share the full question for a syllabus check or a starting hint, or **Restore question** to put it back. Reports are saved in this browser and sync after sign-in.
+Tap **Too hard** in Flashcards or Questions to move a card to your **Review list** on the home screen. The card disappears from practice in both modes without changing your rating. From the list, use **Copy for Codex** to share the full prompt for a syllabus check or a starting hint, or **Restore question** to put it back. Reports are saved in this browser and sync after sign-in.
 
 Questions covers Edexcel 9MA0 Pure, including Year 1 foundations that carry into the final exams. The direct inverse trig differentiation extension cards are available in Flashcards.
 

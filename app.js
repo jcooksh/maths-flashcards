@@ -234,11 +234,11 @@ function isExam(card) {
 }
 
 function availableCards() {
-  return questionMode ? questionCards.filter((card) => !questionReports.get(card.id)?.reported) : cards;
+  return (questionMode ? questionCards : cards).filter((card) => !questionReports.get(card.id)?.reported);
 }
 
 function reportedCards() {
-  return questionCards.filter((card) => questionReports.get(card.id)?.reported)
+  return cards.filter((card) => questionReports.get(card.id)?.reported)
     .sort((a, b) => questionReports.get(b.id).at - questionReports.get(a.id).at);
 }
 
@@ -249,8 +249,8 @@ function renderReviews() {
   ui["review-item"].hidden = !card;
   ui["review-prompt"].hidden = true;
   ui["review-status"].textContent = card
-    ? "Copy a question into Codex to check its level or get a starting hint."
-    : "Questions you report as too hard will appear here.";
+    ? "Copy a card into Codex to check its level or get a starting hint."
+    : "Cards you mark as too hard will appear here.";
   if (!card) return;
   ui["review-source"].textContent = card.source ?? topics.get(card.topic)?.title ?? "Maths question";
   ui["review-preview"].replaceChildren();
@@ -273,7 +273,7 @@ function useReports(next, accountChanged = false) {
   if (ui["reviews-dialog"].open) renderReviews();
   renderMode();
   renderProgress();
-  if (!questionMode || view !== "study") return;
+  if (view !== "study") return;
   const card = queue[position];
   if (accountChanged && activeDeck !== "session") {
     resetQueue();
@@ -291,9 +291,10 @@ function useReports(next, accountChanged = false) {
   position = Math.max(0, Math.min(before, queue.length - 1));
   if (currentRemoved) {
     cancelQuestionTask();
-    if (queue.length && before === queue.length) questionRoundFinished = true;
+    answerVisible = false;
+    if (questionMode && queue.length && before === queue.length) questionRoundFinished = true;
   }
-  renderCard(currentRemoved ? "Question moved to your review list." : "");
+  renderCard(currentRemoved ? "Card moved to your review list." : "");
   if (currentRemoved) focusPractice();
 }
 
@@ -585,6 +586,7 @@ function renderMode() {
   ui.practice.classList.toggle("question-mode", questionMode);
   ui.flashcard.hidden = questionMode;
   ui["flashcard-actions"].hidden = questionMode;
+  ui["report-flashcard"].hidden = questionMode;
   ui["question-card"].hidden = !questionMode;
 
   const available = availableCards();
@@ -1997,15 +1999,15 @@ async function start() {
     const cardId = pageParams.get("card");
     const directCard = cards.find((card) => card.id === cardId);
     if (directCard) {
-      if (questionMode && extensionCards.has(directCard.id)) {
+      if (questionReports.get(directCard.id)?.reported) {
         setView("home", { push: false });
-        toast("This extension is available in Flashcards.");
+        openReviews(directCard.id);
         renderProgress();
         return;
       }
-      if (questionMode && questionReports.get(directCard.id)?.reported) {
+      if (questionMode && extensionCards.has(directCard.id)) {
         setView("home", { push: false });
-        openReviews(directCard.id);
+        toast("This extension is available in Flashcards.");
         renderProgress();
         return;
       }
@@ -2058,13 +2060,15 @@ window.addEventListener("popstate", (event) => {
   if (next === "study") renderCard();
 });
 ui["exit-study"].addEventListener("click", goHome);
-ui["report-question"].addEventListener("click", () => {
+function reportCurrentCard() {
   flushMotion();
   const card = queue[position];
-  if (!questionMode || view !== "study" || questionRoundFinished || !card) return;
+  if (view !== "study" || questionRoundFinished || !card) return;
   const saved = account.setQuestionReport(card.id, true);
   toast(saved ? "Moved to your review list." : "Moved for this visit. Browser storage is unavailable.");
-});
+}
+ui["report-question"].addEventListener("click", reportCurrentCard);
+ui["report-flashcard"].addEventListener("click", reportCurrentCard);
 ui["open-reviews"].addEventListener("click", () => openReviews());
 ui["close-reviews"].addEventListener("click", () => ui["reviews-dialog"].close());
 ui["review-previous"].addEventListener("click", () => { reviewIndex--; renderReviews(); });
@@ -2073,17 +2077,17 @@ ui["restore-question"].addEventListener("click", () => {
   const card = reportedCards()[reviewIndex];
   if (!card) return;
   const saved = account.setQuestionReport(card.id, false);
-  ui["review-status"].textContent = saved ? "Restored to Questions." : "Restored for this visit. Browser storage is unavailable.";
+  ui["review-status"].textContent = saved ? "Restored to practice." : "Restored for this visit. Browser storage is unavailable.";
   if (ui["review-item"].hidden) ui["close-reviews"].focus();
 });
 ui["copy-review"].addEventListener("click", async () => {
   const card = reportedCards()[reviewIndex];
   if (!card) return;
   const link = new URL(location.pathname, location.origin);
-  link.searchParams.set("mode", "questions");
+  if (questionCards.includes(card)) link.searchParams.set("mode", "questions");
   link.searchParams.set("card", card.id);
   const prompt = [
-    "I reported this maths question as too hard. Check it against Pearson Edexcel 9MA0 Pure Maths and the Pearson Year 2 course.",
+    "I reported this maths card as too hard. Check it against Pearson Edexcel 9MA0 Pure Maths and the Pearson Year 2 course.",
     "Tell me whether the method is Year 2 content, a Year 1 foundation, or an extension. Check whether the question is well posed and cite the Pearson source.",
     "If it belongs, give me one approachable starting hint without solving the question.",
     card.source ?? topics.get(card.topic)?.title ?? card.id,

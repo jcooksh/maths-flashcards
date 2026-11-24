@@ -14,10 +14,10 @@
     } catch {}
   </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=22">
+  <link rel="stylesheet" href="./styles.css?v=23">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=22"></script>
+  <script type="module" src="./app.js?v=23"></script>
 </head>
 <body>
   <header class="mobile-header">
@@ -244,6 +244,7 @@
               <button class="nav-button" id="shuffle" type="button" aria-label="Shuffle cards" title="Shuffle">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
               </button>
+              <button class="nav-button" id="report-flashcard" type="button">Too hard</button>
               <button class="nav-button nav-next" id="next" type="button">
                 <span id="next-label">Next</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
@@ -270,7 +271,7 @@
 
   <dialog class="account-dialog reviews-dialog" id="reviews-dialog" aria-labelledby="reviews-title">
     <header class="dialog-header">
-      <h2 id="reviews-title">Question review list</h2>
+      <h2 id="reviews-title">Review list</h2>
       <button class="icon-button" id="close-reviews" type="button" aria-label="Close review list">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
@@ -283,7 +284,7 @@
         <button class="pill pill-primary" id="copy-review" type="button">Copy for Codex</button>
         <button class="quiet-button" id="restore-question" type="button">Restore question</button>
       </div>
-      <div class="pager" id="review-pager" aria-label="Browse reported questions">
+      <div class="pager" id="review-pager" aria-label="Browse reported cards">
         <button id="review-previous" class="pager-prev" type="button" aria-label="Previous report">‹</button>
         <span id="review-page" class="pager-label"></span>
         <button id="review-next" class="pager-next" type="button" aria-label="Next report">Next</button>

@@ -861,6 +861,8 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
   max-width: 752px;
   margin: 14px auto 0;
 }
+#practice:not(.question-mode) .card-navigation { grid-template-columns: auto minmax(0, 1fr) repeat(3, auto); }
+#report-flashcard { white-space: nowrap; }
 .nav-button {
   display: inline-flex;
   align-items: center;
@@ -1561,6 +1563,7 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .notice-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 #practice.in-session .card-navigation { grid-template-columns: minmax(0, 1fr) auto; }
+#practice.in-session:not(.question-mode) .card-navigation { grid-template-columns: minmax(0, 1fr) auto auto; }
 #practice.in-session .deck-progress { padding-left: 2px; }
 
 .home-figures {
