@@ -2428,6 +2428,10 @@ summary .meter-name::before {
 @media (max-width: 380px) {
   .study { padding-inline: 10px; }
   .flashcard, .notice, .question-card { padding-inline: 16px; }
+  #practice:not(.question-mode):not(.in-session) .card-navigation { gap: 6px; }
+  #practice:not(.question-mode):not(.in-session) .nav-button { padding-inline: 6px; }
+  #practice:not(.question-mode):not(.in-session) .deck-progress { gap: 4px; padding-inline: 0; }
+  #practice:not(.question-mode):not(.in-session) .deck-progress-text { white-space: nowrap; }
   .segmented > button { padding-inline: 9px; font-size: 0.78rem; }
   .mobile-actions .account-button { padding-inline: 10px; font-size: 0.8rem; }
   .pill { font-size: 0.9rem; }
