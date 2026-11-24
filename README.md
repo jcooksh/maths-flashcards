@@ -31,9 +31,19 @@ The progress page (`?view=progress`) has:
 
 Every chart has a table view and works with the keyboard.
 
-In Questions mode, type your answer or sign in to record it. Check the transcription before submitting. The AI examiner gives feedback and marks each exam part. If the examiner is unavailable or you are signed out, compare your answer with the worked solution and mark it yourself. Each marked question counts once towards your boxes.
+Questions mode sets each card out like the exam paper: the question number, each part on its own line with its marks on the right, and the question's total. Instead of picking from choices, you answer in your own words, so you practise working it out rather than recognising the answer:
 
-Open Questions directly with `?mode=questions`. Use the Question, Your answer and Marking tabs to revisit each view. On a phone, long questions and solutions use pages you can turn with the arrows or a vertical swipe.
+- **Say your answer.** It's recorded, written down by Whisper and put in the answer box. Check the transcription and correct it before marking.
+- **Or type it.** Write the maths however is easiest, like `x^2` or `root 3`.
+- **Mark my answer.** An AI examiner marks each part against the worked solution, as an Edexcel examiner would, and says what to fix. A right answer moves the card up a box; anything else sends it back to Red. Each question counts once towards your boxes.
+
+Speaking and AI marking need you to be signed in. Signed out, or if the examiner can't be reached, you compare your answer with the worked solution and mark it yourself. Show answer gives up on a question, which counts as Red. The Question, Your answer and Marking tabs move between the views. Open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
+
+On a phone every screen fits without scrolling. Anything too long for the screen, such as a long worked solution, is split into pages: tap the arrows or swipe up and down. Formulas too wide for a line are shrunk to fit. The progress page has Overview, Activity and Topics tabs.
+
+### AI marking
+
+Marking runs on [CS Revise's Vercel project](https://github.com/jcooksh/csrevise#maths-flashcards-marking), which holds the model providers' API keys: `api/maths-mark.js` and `api/maths-transcribe.js` there. The site calls them with the signed-in user's Supabase token, and they check it against this project's Supabase before using any quota. The examiner tries Groq (gpt-oss-120b) first, then Google Gemini, Cohere and NVIDIA, and Whisper on Groq writes down spoken answers. No key is ever in the browser. If CS Revise's Vercel project goes, the site falls back to marking answers yourself.
 
 ## Trigonometry deck
 
@@ -48,7 +58,7 @@ The trig rules cover every identity and formula in the 9MA0 trigonometry content
 - trig equations
 - trig calculus
 
-Cards marked “In the formula booklet” are printed in Pearson’s booklet: compound angles, factor formulae, small angle approximations, and the tan, sec, cot and cosec derivatives and integrals. Cards marked “Recall for the exam” are not printed and must be learned. These include the Pythagorean identities, double angle formulae, sine and cosine rules, arc length and sector area, and the sin and cos derivatives and integrals. The wrong answers are near-misses: sign errors, swapped functions and missing factors.
+Cards marked “In the formula booklet” are printed in Pearson’s booklet: compound angles, factor formulae, small angle approximations, and the tan, sec, cot and cosec derivatives and integrals. Cards marked “Recall for the exam” are not printed and must be learned. These include the Pythagorean identities, double angle formulae, sine and cosine rules, arc length and sector area, and the sin and cos derivatives and integrals.
 
 ## Past papers
 
@@ -60,9 +70,7 @@ The Past papers section has a card for every question in the Edexcel 9MA0 Pure p
 
 In Questions mode, the same reworked questions use a paper-style layout with the question number, part labels, marks and total.
 
-The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`.
-
-The signed-in examiner and transcription run on [CS Revise's Vercel project](https://github.com/jcooksh/csrevise#maths-flashcards-marking). The flashcards are served by GitHub Pages.
+The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`. It also puts each part on its own line and adds the marks for each part and the question's total from `tools/past-papers/marks.json`, which was read from the question papers. Where a card leaves out a part of the paper's question, such as one that needs a diagram, that part's marks are left out too.
 
 ## Controls
 

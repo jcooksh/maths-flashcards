@@ -815,167 +815,7 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .line-label.method { background: var(--surface-3); color: var(--ink); }
 .line-label.answer, .line-label.answers { background: var(--green-bg); color: var(--green-fg); }
 .line-label.watch-out { background: color-mix(in oklab, var(--danger) 14%, transparent); color: var(--danger); }
-/* ---------- Questions ---------- */
 
-.question-card {
-  gap: 14px;
-  align-items: stretch;
-  padding-block: clamp(20px, 3vw, 34px);
-}
-.question-card > * { flex-shrink: 0; }
-.question-card:not([data-face="question"]) .paper,
-.question-card:not([data-face="answer"]) .answer-panel,
-.question-card:not([data-face="result"]) .result-panel { display: none; }
-
-.paper {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.5em;
-  font-size: calc(clamp(1.04rem, 1.85vw, 1.25rem) * var(--fit, 1));
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-.question-card.exam .paper {
-  padding-inline-start: 1.55em;
-  font-family: "Times New Roman", "Liberation Serif", serif;
-  font-size: calc(clamp(1.06rem, 1.95vw, 1.34rem) * var(--fit, 1));
-}
-.paper-head {
-  color: var(--muted);
-  font: 650 calc(0.83rem * var(--fit, 1))/1.35 "Inter", system-ui, sans-serif;
-}
-.exam .paper-head { margin-inline-start: -1.55em; }
-.paper-line {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.5em;
-  align-items: end;
-}
-.paper-line.part { padding-inline-start: 1.65em; }
-.paper-line.sub, .paper-line.with-sub { padding-inline-start: 3.6em; }
-.paper-number, .paper-label { position: absolute; inset-block-start: 0; }
-.paper-number { inset-inline-end: calc(100% + 0.35em); font-weight: 700; white-space: nowrap; }
-.paper-label { inset-inline-start: 0; }
-.paper-line.sub > .paper-label, .paper-label.sub { inset-inline-start: 1.65em; }
-.paper-marks { grid-column: 2; justify-self: end; }
-.paper-marks, .paper-total { font-weight: 700; white-space: nowrap; }
-.paper-total {
-  margin-top: 0.45em;
-  padding-top: 0.45em;
-  border-top: 1px solid var(--line);
-  text-align: end;
-  white-space: normal;
-}
-.paper .katex { font-size: 1.06em; }
-.exam .paper .katex { white-space: normal; }
-
-.answer-panel {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  gap: 8px;
-  min-height: 0;
-}
-#answer-input {
-  flex: 1 1 auto;
-  width: 100%;
-  min-height: 5rem;
-  padding: 10px 12px;
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  background: var(--surface-2);
-  color: var(--ink);
-  font: 1rem/1.5 "Inter", system-ui, sans-serif;
-  resize: vertical;
-  touch-action: pan-y;
-  user-select: text;
-  -webkit-user-select: text;
-}
-#answer-input:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
-.answer-hint, .answer-status { color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
-.answer-hint:empty, .answer-status:empty { display: none; }
-.answer-bar { display: grid; gap: 6px; margin-block-start: auto; }
-.answer-actions, .self-mark, .answer-secondary {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  gap: 8px;
-}
-.answer-actions > button, .self-mark > button { flex: 1 1 0; }
-.speak-button, .type-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  min-height: 44px;
-  padding: 6px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  color: var(--ink);
-  background: var(--surface-2);
-  font-weight: 720;
-  line-height: 1.2;
-}
-.speak-button { color: var(--green-fg); background: var(--green-bg); border-color: var(--green-line); }
-.speak-button.recording { color: var(--danger); background: var(--surface-2); }
-.speak-button:hover:not(:disabled) { background: var(--green-bg-hover); }
-.type-button:hover:not(:disabled) { background: var(--surface-3); }
-.answer-actions svg { width: 20px; height: 20px; flex: none; }
-.speak-icon { display: flex; }
-.answer-secondary { justify-content: space-between; gap: 0 10px; }
-.answer-secondary .quiet-button { min-height: 34px; padding-inline: 8px; }
-#reveal-question { margin-inline-start: auto; }
-
-.result-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: calc(0.5rem * var(--fit, 1));
-  font-size: calc(0.98rem * var(--fit, 1));
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-.result-banner {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 12px;
-  border-radius: 12px;
-  background: var(--surface-3);
-  font-weight: 740;
-}
-.result-banner.right { background: var(--green-bg); color: var(--green-fg); }
-.result-banner.wrong { background: var(--amber-bg); color: var(--amber-fg); }
-.result-icon {
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: 1.5em;
-  height: 1.5em;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-}
-.result-icon::before { content: attr(data-icon); }
-.result-score { margin-inline-start: auto; padding-inline-start: 0.5em; font-variant-numeric: tabular-nums; }
-.result-move, .result-note { color: var(--muted); }
-.result-part { display: grid; gap: 2px; padding: 5px 0 5px 9px; border-inline-start: 2px solid var(--line-strong); }
-.result-part.correct { border-inline-start-color: var(--green-fg); }
-.result-part.partial { border-inline-start-color: var(--amber-fg); }
-.result-part.wrong { border-inline-start-color: var(--danger); }
-.result-part-head, .result-heading { font-weight: 740; }
-.result-excerpt {
-  display: grid;
-  gap: 2px;
-  margin: 3px 0;
-  padding: 6px 9px;
-  border-radius: 8px;
-  background: var(--surface-2);
-}
-.result-excerpt-label { color: var(--muted); font-size: 0.86em; font-weight: 660; }
-.result-excerpt q { white-space: pre-wrap; }
-.result-correction { background: var(--surface-2); padding: 7px 9px; border-radius: 0 8px 8px 0; }
-.result-heading { margin-top: 0.35em; padding-top: 0.5em; border-top: 1px solid var(--line); }
-.result-panel .answer-line { max-width: 100%; font-size: calc(1rem * var(--fit, 1)); }
 
 /* ---------- Actions ---------- */
 
@@ -1382,6 +1222,218 @@ body:has(dialog[open]) { overflow: hidden; }
 .question-tabs > button:hover:not([aria-pressed="true"]) { color: var(--ink); }
 .question-tabs > button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
 
+/* ---------- Questions ----------
+ * Three views share the card: the question, your answer, and the marking. The question is set
+ * out like the exam paper: the number hangs in the margin, part labels hang inside that, and
+ * each part's marks sit on the right in bold.
+ */
+
+.question-card {
+  gap: 18px;
+  align-items: stretch;
+  padding-block: clamp(22px, 3.2vw, 36px);
+}
+/* Parts never squash to fit: the card's text is sized (or paged) to fit instead. */
+.question-card > * { flex-shrink: 0; }
+.question-card[data-face="question"] .answer-panel,
+.question-card[data-face="question"] .result-panel,
+.question-card[data-face="answer"] .paper,
+.question-card[data-face="answer"] .result-panel,
+.question-card[data-face="result"] .paper,
+.question-card[data-face="result"] .answer-panel { display: none; }
+
+.paper {
+  --number: 1.7em;
+  --label: 2.05em;
+  --numeral: 2em;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.55em;
+  max-width: 66ch;
+  color: var(--ink);
+  font: 400 calc(clamp(1.04rem, 1.45vw, 1.2rem) * var(--fit, 1))/1.5 "Times New Roman", Times, "Liberation Serif", "Noto Serif", serif;
+  text-wrap: pretty;
+  scroll-margin-top: 80px;
+}
+.paper:focus { outline: none; }
+.question-card:not(.exam) .paper { --number: 0em; }
+.paper .katex { font-size: 1.04em; }
+.paper-head {
+  color: var(--muted);
+  font: 700 0.72rem/1.3 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.paper-line {
+  position: relative;
+  display: flow-root;
+  margin: 0;
+  padding-left: var(--number);
+  overflow-wrap: anywhere;
+}
+.paper-line.part { padding-left: calc(var(--number) + var(--label)); }
+.paper-line.sub,
+.paper-line.with-sub { padding-left: calc(var(--number) + var(--label) + var(--numeral)); }
+.paper-number { position: absolute; top: 0; left: 0; font-weight: 700; }
+.paper-label { position: absolute; top: 0; left: var(--number); }
+.paper-line.sub .paper-label,
+.paper-label.sub { left: calc(var(--number) + var(--label)); }
+.paper-marks { float: right; margin-left: 0.8em; font-weight: 700; }
+.paper-total {
+  margin: 0.2em 0 0;
+  padding-bottom: 0.5em;
+  border-bottom: 1.5px solid var(--line-strong);
+  font-size: 0.88em;
+  font-weight: 700;
+  text-align: right;
+}
+
+.answer-panel { display: flex; flex: 1 1 auto; flex-direction: column; gap: 8px; min-height: 0; }
+.answer-label { color: var(--muted); font-size: 0.72rem; font-weight: 760; letter-spacing: 0.1em; text-transform: uppercase; }
+#answer-input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 7.5em;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--ink);
+  /* At least 16px, or iPhones zoom in when you start typing. */
+  font: 500 1rem/1.55 "Inter", system-ui, sans-serif;
+  resize: none;
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  user-select: text;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+#answer-input::placeholder { color: var(--muted); opacity: 0.85; }
+#answer-input:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 4px color-mix(in oklab, var(--focus) 18%, transparent); }
+#answer-input[readonly] { background: var(--surface-3); }
+.answer-hint { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+.answer-hint:empty { display: none; }
+
+.answer-bar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
+.answer-bar > * { grid-column: 1 / -1; }
+.answer-status { margin: 0; color: var(--muted); font-size: 0.86rem; font-weight: 650; line-height: 1.4; }
+.answer-status:empty { display: none; }
+.answer-status[data-tone="busy"] { color: var(--ink); }
+.answer-actions { display: flex; gap: 10px; }
+.speak-button,
+.type-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-size: 1.02rem;
+  font-weight: 760;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.25s var(--ease-out);
+}
+.speak-button { flex: 1 1 auto; border: 0; background: var(--primary); color: var(--on-primary); }
+.speak-button:hover:not(:disabled) { background: var(--primary-hover); }
+.speak-button:active:not(:disabled),
+.type-button:active { transform: scale(0.97); }
+.speak-button:disabled { opacity: 0.75; }
+.speak-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--on-primary) 16%, transparent);
+}
+.speak-icon svg,
+.type-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.speak-button.recording { background: var(--danger); color: white; }
+.speak-button.recording .speak-icon { animation: listening 1.3s ease-in-out infinite; }
+@keyframes listening {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, white 50%, transparent); }
+  50% { box-shadow: 0 0 0 9px transparent; }
+}
+.speak-button.compact { flex: 0 0 auto; padding: 0 18px; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); }
+.speak-button.compact:hover:not(:disabled) { border-color: var(--line-strong); background: var(--surface-3); }
+.speak-button.compact .speak-icon { background: transparent; }
+.type-button { flex: none; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); }
+.type-button:hover { border-color: var(--line-strong); background: var(--surface-3); }
+.type-button.wide { flex: 1 1 auto; }
+.mark-button { flex: 1 1 auto; min-height: 58px; font-size: 1.02rem; }
+.mark-button[aria-busy="true"] { opacity: 0.8; }
+.self-mark { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.answer-secondary { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+/* Signed in, on the question: speaking gets the full width, with typing and giving up side by side underneath. */
+.answer-bar[data-layout="speak"] .answer-actions,
+.answer-bar[data-layout="speak"] .answer-secondary { display: contents; }
+.answer-bar[data-layout="speak"] .speak-button { grid-column: 1 / -1; }
+.answer-bar[data-layout="speak"] .type-button { grid-column: 1; min-height: 48px; font-size: 0.95rem; }
+.answer-bar[data-layout="speak"] #reveal-question { grid-column: 2; min-height: 48px; }
+/* Signed out: typing gets the full width, with signing in and giving up underneath. */
+.answer-bar[data-layout="type"] .answer-secondary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.answer-bar[data-layout="type"] .answer-secondary > .quiet-button { min-height: 46px; }
+
+.result-panel { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: calc(10px * var(--fit, 1)); }
+.result-panel:focus { outline: none; }
+.result-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: calc(10px * var(--fit, 1)) 14px;
+  border-radius: 14px;
+  font-size: calc(1.08rem * var(--fit, 1));
+  font-weight: 780;
+}
+.result-banner.right { background: var(--green-bg); color: var(--green-fg); }
+.result-banner.wrong { background: var(--amber-bg); color: var(--amber-fg); }
+.result-banner.neutral { background: var(--surface-3); color: var(--ink); }
+.result-icon { display: inline-grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; background: currentColor; }
+.result-icon::before { content: attr(data-icon); color: var(--surface); font-size: 0.82rem; font-weight: 800; line-height: 1; }
+.result-score { margin-left: auto; font: 760 1.15em/1 "Inter", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+.result-move { margin: 0; color: var(--muted); font-size: calc(0.86rem * var(--fit, 1)); font-weight: 650; }
+.result-note,
+.result-overall { margin: 0; font-size: calc(0.98rem * var(--fit, 1)); line-height: 1.45; }
+.result-part {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding: calc(8px * var(--fit, 1)) 12px;
+  border-left: 3px solid var(--line-strong);
+  border-radius: 4px 12px 12px 4px;
+  background: var(--surface-2);
+}
+.result-part.correct { border-left-color: var(--box-green); }
+.result-part.partial { border-left-color: var(--box-amber); }
+.result-part.wrong { border-left-color: var(--box-red); }
+.result-part-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; font-size: calc(0.84rem * var(--fit, 1)); font-weight: 760; }
+.result-dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--muted); }
+.result-part.correct .result-dot { background: var(--box-green); }
+.result-part.partial .result-dot { background: var(--box-amber); }
+.result-part.wrong .result-dot { background: var(--box-red); }
+.result-verdict { color: var(--muted); font-weight: 650; }
+.result-marks { margin-left: auto; font-variant-numeric: tabular-nums; }
+.result-part-text { font-size: calc(0.95rem * var(--fit, 1)); line-height: 1.45; overflow-wrap: anywhere; }
+.result-excerpt {
+  display: grid;
+  gap: 2px;
+  margin: 3px 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--surface-3);
+  font-size: calc(0.93rem * var(--fit, 1));
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.result-excerpt-label { color: var(--muted); font-size: 0.86em; font-weight: 660; }
+.result-excerpt q { white-space: pre-wrap; }
+.result-correction .result-part-head { color: var(--accent-ink); }
+.result-heading { margin: calc(6px * var(--fit, 1)) 0 0; color: var(--accent-ink); font-size: 0.72rem; font-weight: 780; letter-spacing: 0.1em; text-transform: uppercase; }
+.result-panel .answer-line { max-width: 100%; font-size: calc(1rem * var(--fit, 1)); }
+.result-panel .answer-line.formula { font-size: calc(1.06rem * var(--fit, 1)); }
+
 /* Pages for text too long to fit at a readable size (see app.js) */
 .pager {
   display: inline-flex;
@@ -1412,8 +1464,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .pager .pager-next:not(:disabled) { background: var(--primary); color: var(--on-primary); padding: 0 10px 0 12px; }
 .pager button:disabled { opacity: 0.35; }
 .pager-label { min-width: 3.2em; color: var(--muted); font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
-.question-pager { flex: none; align-self: flex-end; margin-top: auto; }
-.question-pager:not([hidden]) + .answer-bar { margin-block-start: 0; }
+.question-pager { flex: none; align-self: flex-end; }
 
 /* ---------- Boxes ---------- */
 
@@ -1960,7 +2011,7 @@ summary .meter-name::before {
   .card-content > :first-child { margin-top: auto; }
   .card-content > :last-child { margin-bottom: auto; }
   .question-card { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
-  /* A fade pinned to the bottom while more of the card is below. */
+  /* A fade pinned to the bottom of the card while more of it is below. */
   .question-card.scrollable::after {
     content: "";
     position: sticky;
@@ -2137,7 +2188,7 @@ summary .meter-name::before {
   body[data-view="study"] .study { overflow: hidden; padding-top: 10px; }
   .study { overscroll-behavior: none; }
   /* Nothing on a question needs dragging, so a finger resting on an answer can't scroll or bounce it. */
-  .question-card:not(.overflowing) { touch-action: pinch-zoom; }
+  .question-card:not(.overflowing):not([data-face="answer"]) { touch-action: pinch-zoom; }
   .toast { top: max(10px, calc(env(safe-area-inset-top) + 8px)); bottom: auto; text-align: center; transform: translate(-50%, -16px) scale(0.96); }
   .session-chip .chip-extra { display: none; }
   .page-header { margin-top: 6px; gap: 2px; }
@@ -2242,13 +2293,16 @@ summary .meter-name::before {
   .card-navigation { margin-top: 10px; gap: 8px; }
   .nav-button { height: 42px; min-width: 42px; }
 
-  .question-card { flex: 1 1 auto; gap: 8px; padding-block: 14px; }
-  .question-tabs { align-self: stretch; }
-  .question-tabs > button { flex: 1 1 auto; min-height: 36px; padding-inline: 6px; }
+  .question-card { flex: 1 1 auto; gap: 14px; padding-block: 18px; }
+  .paper { --number: 1.55em; --label: 1.9em; --numeral: 1.85em; font-size: calc(clamp(1rem, 4.3vw, 1.12rem) * var(--fit, 1)); }
+  .speak-button, .type-button, .mark-button { min-height: 54px; }
+  /* Beside "Mark my answer" the microphone is a round button of its own. */
+  .speak-button.compact { flex: none; width: 54px; padding: 0; }
+  .speak-button.compact .speak-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .answer-hint { font-size: 0.76rem; }
   .question-card[data-face="answer"] { touch-action: auto; }
-  #answer-input { resize: none; }
-  .answer-secondary .quiet-button { min-height: 38px; }
 
+  /* While the keyboard is open, the page shrinks to what's above it (see refit in app.js). */
   body[data-answer-keyboard] {
     display: flex;
     flex-direction: column;
@@ -2318,6 +2372,9 @@ summary .meter-name::before {
   .flashcard, .notice, .question-card { padding: 16px 18px; }
   .pill { min-height: 46px; }
   .nav-button { height: 38px; min-width: 38px; }
+  .speak-button, .type-button, .mark-button { min-height: 50px; }
+  .speak-button.compact { width: 50px; }
+  .speak-icon { width: 30px; height: 30px; }
   .dash-focus .dash-subtitle { display: none; }
   .focus-list { gap: 6px; }
   .focus-item { padding: 7px 8px 7px 12px; }
@@ -2358,7 +2415,7 @@ summary .meter-name::before {
 @media (hover: none) {
   .study, .mobile-header, .topics-dialog { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 }
-.speak-button, .type-button, .pill, .nav-button, .start-button, .group-row button, .question-tabs > button { touch-action: manipulation; }
+.pill, .nav-button, .start-button, .group-row button, .question-tabs > button, .speak-button, .type-button { touch-action: manipulation; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after, ::backdrop {

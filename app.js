@@ -193,7 +193,7 @@ function appendMath(element, value, standalone = true) {
 }
 
 const lineLabel = /^(Spot|Use|Method|Answers?|Watch out|Check|Key idea|Tip):\s*/;
-const partLabel = /^\((?:[a-h]|i{1,3}|iv|v|vi)\)\s+/;
+const partLabel = /^\((?:[a-h]|i{1,3}|iv|v|vi)\)(?:\((?:i{1,3}|iv|v|vi)\))?\s+/;
 
 // Lines can start with a label such as "Spot:" or a part such as "(a)". Both get their own styling.
 function mathLines(lines, className) {
@@ -611,14 +611,24 @@ function paperLines(card) {
   });
 }
 
-// What the examiner marks: each part that carries marks, or the whole question.
+// What the examiner marks: each part that carries marks, or the whole question. When one
+// mark covers several sub-parts, as "(c) (i) … (ii) … (3)" does, the part is marked as a whole.
 function markingParts(card) {
-  const lines = paperLines(card).filter((line) => line.marks);
-  if (!lines.length) return [{ label: "", marks: null }];
-  return lines.map((line) => ({
-    label: line.label ? line.label + line.sub : line.sub && line.letter ? "(" + line.letter + ")" + line.sub : line.sub,
-    marks: line.marks,
-  }));
+  const lines = paperLines(card);
+  if (!lines.some((line) => line.marks)) return [{ label: "", marks: null }];
+  const parts = [];
+  let since = [];
+  for (const line of lines) {
+    since.push(line);
+    if (!line.marks) continue;
+    const subs = since.filter((other) => other.letter && other.letter === line.letter && other.sub);
+    const label = line.letter
+      ? "(" + line.letter + ")" + (subs.length > 1 ? "" : line.sub)
+      : line.sub;
+    parts.push({ label, marks: line.marks });
+    since = [];
+  }
+  return parts;
 }
 
 function renderPaper(card) {
@@ -675,6 +685,8 @@ function resultElement(tag, className, text) {
   return element;
 }
 
+const verdictNames = { correct: "Right", partial: "Partly right", wrong: "Not right", missing: "Not answered" };
+
 // The marking: how it went, the examiner's comment on each part, then the worked solution.
 function renderResult(card, attempt) {
   const panel = ui["question-result"];
@@ -722,13 +734,28 @@ function renderResult(card, attempt) {
     if (!result.correct && result.overall) items.push(resultElement("p", "result-overall", result.overall));
     const parts = markingParts(card);
     for (const [index, part] of result.parts.entries()) {
-      const label = parts[index].label || (result.parts.length > 1 ? "Part " + (index + 1) : "");
+      const label = parts[index]?.label || (result.parts.length > 1 ? "Part " + (index + 1) : "");
       const row = document.createElement("div");
       row.className = "result-part " + part.verdict;
+      const head = document.createElement("span");
+      head.className = "result-part-head";
+      const dot = document.createElement("span");
+      dot.className = "result-dot";
+      dot.setAttribute("aria-hidden", "true");
+      const name = document.createElement("span");
+      name.textContent = label || "Your answer";
+      const verdict = document.createElement("span");
+      verdict.className = "result-verdict";
+      verdict.textContent = verdictNames[part.verdict] ?? "";
+      head.append(dot, name, verdict);
       if (exam) {
-        const head = resultElement("p", "result-part-head", (label || "Marks") + " " + part.marks + "/" + part.max);
-        row.append(head);
+        const marks = document.createElement("span");
+        marks.className = "result-marks";
+        marks.textContent = part.marks + "/" + part.max;
+        marks.setAttribute("aria-label", part.marks + " out of " + plural(part.max, "mark"));
+        head.append(marks);
       }
+      row.append(head);
       if (typeof part.excerpt === "string" && part.excerpt && attempt.answer.includes(part.excerpt)) {
         const quote = document.createElement("blockquote");
         quote.className = "result-excerpt";
@@ -751,7 +778,7 @@ function renderResult(card, attempt) {
       }
     }
   }
-  items.push(resultElement("p", "result-heading", "Worked solution"));
+  items.push(resultElement("p", "result-heading keep-with-next", "Worked solution"));
   items.push(...mathLines(card.back, "answer-line"));
   panel.replaceChildren(...items);
 }
@@ -785,7 +812,9 @@ function renderAnswerBar(attempt) {
   ui["speak-label"].textContent = speakLabels[busy] ?? (onAnswer ? "Add by speaking" : "Say your answer");
   ui["speak-answer"].setAttribute("aria-pressed", String(busy === "recording"));
 
+  ui["speak-answer"].classList.toggle("compact", onAnswer && busy !== "recording");
   ui["type-answer"].hidden = !onQuestion || finished || pendingSelf || busy !== "";
+  ui["type-answer"].classList.toggle("wide", !canSpeak);
   ui["type-answer"].querySelector(".type-label").textContent = canSpeak ? "Type" : "Type your answer";
 
   ui["mark-answer"].hidden = !onAnswer || finished || pendingSelf || (busy && busy !== "marking");
@@ -806,6 +835,9 @@ function renderAnswerBar(attempt) {
   const feedback = ui["question-feedback"];
   if (feedback.textContent !== status) feedback.textContent = status;
   const actionsShown = !ui["speak-answer"].hidden || !ui["type-answer"].hidden || !ui["mark-answer"].hidden;
+  // Speaking gets the full width, with typing and giving up side by side underneath.
+  ui["answer-bar"].dataset.layout = !ui["speak-answer"].hidden && !ui["type-answer"].hidden ? "speak"
+    : !ui["type-answer"].hidden ? "type" : onAnswer ? "answer" : "";
   ui["answer-bar"].querySelector(".answer-actions").hidden = !actionsShown;
   ui["answer-bar"].hidden = !actionsShown && ui["self-mark"].hidden && ui["answer-secondary"].hidden && !status;
 }
@@ -1146,14 +1178,9 @@ function clearPages(box, pager) {
   pager.hidden = true;
 }
 
-function layoutPages(box, holder, pager, min) {
-  clearPages(box, pager);
-  if (fitText(box, min)) return;
-  const lines = Array.from(holder.children);
-  // Group lines greedily at the smallest readable size, with the pager showing.
-  box.classList.add("paged");
-  pager.hidden = false;
-  box.style.setProperty("--fit", String(min));
+// Splits lines greedily into pages that each fit at one text size, with the pager showing.
+function groupLines(box, lines, scale) {
+  box.style.setProperty("--fit", String(scale));
   const fits = () => box.scrollHeight <= box.clientHeight + 1;
   const groups = [];
   let group = [];
@@ -1163,12 +1190,37 @@ function layoutPages(box, holder, pager, min) {
     group.push(line);
     if (!fits() && group.length > 1) {
       group.pop();
+      // A heading never ends a page: it moves over with what it introduces.
+      const carried = [];
+      while (group.length > 1 && group.at(-1).classList.contains("keep-with-next")) carried.unshift(group.pop());
       for (const shown of group) shown.hidden = true;
+      for (const moved of carried) moved.hidden = false;
       groups.push(group);
-      group = [line];
+      group = [...carried, line];
     }
   }
   groups.push(group);
+  return groups;
+}
+
+function layoutPages(box, holder, pager, min) {
+  clearPages(box, pager);
+  if (fitText(box, min)) return;
+  const lines = Array.from(holder.children);
+  box.classList.add("paged");
+  pager.hidden = false;
+  // Fewest pages at the smallest readable size, unless full-size text needs only one more.
+  const smallest = groupLines(box, lines, min);
+  let groups = smallest;
+  for (const scale of [1, 0.9]) {
+    if (scale <= min) continue;
+    const larger = groupLines(box, lines, scale);
+    if (larger.length <= smallest.length + 1) {
+      groups = larger;
+      break;
+    }
+  }
+  const fits = () => box.scrollHeight <= box.clientHeight + 1;
   // One text size for every page: the largest that fits them all.
   let scale = 1;
   for (const page of groups) {
