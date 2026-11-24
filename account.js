@@ -514,5 +514,18 @@ export function connectAccount(ui, onProgress, toast = () => {}, onActivity = ()
     activity() {
       return combineActivity(activity, others);
     },
+    signedIn() {
+      return Boolean(profile);
+    },
+    // A fresh access token for the marking API, or null when signed out.
+    async accessToken() {
+      if (!client || !profile) return null;
+      const { data, error } = await client.auth.getSession();
+      const session = data?.session;
+      return !error && session && session.user.id === profile?.id ? session.access_token : null;
+    },
+    openSignIn() {
+      openAccount("signin");
+    },
   };
 }

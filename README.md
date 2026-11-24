@@ -31,9 +31,9 @@ The progress page (`?view=progress`) has:
 
 Every chart has a table view and works with the keyboard.
 
-Questions mode shows four shuffled answer choices for each card. The first answer counts and moves the card between boxes in the same way. You can open Questions directly with `?mode=questions`. The sidebar (or the menu on a phone) also lets you browse any topic card by card.
+In Questions mode, type your answer or sign in to record it. Check the transcription before submitting. The AI examiner gives feedback and marks each exam part. If the examiner is unavailable or you are signed out, compare your answer with the worked solution and mark it yourself. Each marked question counts once towards your boxes.
 
-On a phone every screen fits without scrolling. A question too long to show with its answers comes first on its own, with a button to the answers. After you answer, the method replaces the choices, and tabs switch between the question, answers and method. Anything still too long, such as a long method, is split into pages: tap the arrows or swipe up and down. Formulas too wide for a line are shrunk to fit. The progress page has Overview, Activity and Topics tabs.
+Open Questions directly with `?mode=questions`. Use the Question, Your answer and Marking tabs to revisit each view. On a phone, long questions and solutions use pages you can turn with the arrows or a vertical swipe.
 
 ## Trigonometry deck
 
@@ -58,14 +58,16 @@ The Past papers section has a card for every question in the Edexcel 9MA0 Pure p
 - **Use**: the formulas or identities you need
 - the working for each part, and the answer
 
-In Questions mode, each card asks how you should start, with four approaches to choose from.
+In Questions mode, the same reworked questions use a paper-style layout with the question number, part labels, marks and total.
 
 The cards are built from `tools/past-papers/`, with one file per exam series. `python3 tools/past-papers/build.py` recomputes every answer with sympy, checks that all the maths renders, and writes `papers.json`.
+
+The signed-in examiner and transcription run on [CS Revise's Vercel project](https://github.com/jcooksh/csrevise#maths-flashcards-marking). The flashcards are served by GitHub Pages.
 
 ## Controls
 
 - Flashcards: click or tap the card (or Space) to flip. Swipe right or press 2 for “Got it”, swipe left or press 1 for “Not yet”. The card shows its box, and the swipe stamp shows where it will go. In a session, Skip moves a card to the back of the queue.
-- Questions: press 1–4 or A–D to answer, Enter for the next question.
+- Questions: press Enter to start typing, Ctrl+Enter or Command+Enter to mark, then Enter for the next question.
 - The moon/sun button switches between light and dark mode. It follows the system setting until you choose one.
 - Animations are reduced when the system “reduce motion” setting is on.
 
@@ -90,7 +92,7 @@ Run `python3 -m http.server 8000 --bind 127.0.0.1` from this folder and open `ht
 
 Edit `cards.json`. Each card has a unique `id`, an existing `topic` ID, a question in `front`, and one or more answer lines in `back`. Use `$…$` around LaTeX. To put a formula on its own line, make it a separate entry in `back`. An optional `reference` of `recall` or `booklet` marks its exam status. Use it only when supported by Pearson's materials.
 
-Include a `choices` array with the correct answer first and three distinct wrong answers to include the card in Maths questions. Match their notation and give each question a single correct choice. The site displays `back` as the explanation.
+Write the answer and any essential workings in `back`. Questions mode uses it as the worked solution and the reference for marking.
 
 Cards can be opened directly with `?card=<id>` on the site URL. GitHub Pages publishes changes to the main branch.
 
