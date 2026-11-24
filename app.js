@@ -1,5 +1,5 @@
 import { boxes, boxNames, boxOf, boxCounts, sessionPlan, isDue } from "./progress.js?v=2";
-import { connectAccount } from "./account.js?v=5";
+import { connectAccount } from "./account.js?v=6";
 import { renderDashboard, boxBar, boxLegend, fitLabels, studyStreak } from "./dashboard.js?v=3";
 import { dayKey } from "./activity.js?v=1";
 
@@ -28,6 +28,8 @@ const referenceLabels = {
   recall: "Recall for the exam",
   booklet: "In the formula booklet",
 };
+// Pearson's 9MA0 Enhanced Content Guidance §7.5 excludes direct inverse trig differentiation.
+const extensionCards = new Set(["differentiate-arcsin", "differentiate-arctan"]);
 const mathOptions = {
   macros: { "\\cosec": "\\operatorname{cosec}" },
   throwOnError: false,
@@ -39,6 +41,8 @@ let cards = [];
 let questionCards = [];
 let topics = new Map();
 let progress = new Map();
+let questionReports = new Map();
+let reviewIndex = 0;
 let queue = [];
 let activeDeck = "all";
 let activeTopic = "all";
@@ -230,7 +234,67 @@ function isExam(card) {
 }
 
 function availableCards() {
-  return questionMode ? questionCards : cards;
+  return questionMode ? questionCards.filter((card) => !questionReports.get(card.id)?.reported) : cards;
+}
+
+function reportedCards() {
+  return questionCards.filter((card) => questionReports.get(card.id)?.reported)
+    .sort((a, b) => questionReports.get(b.id).at - questionReports.get(a.id).at);
+}
+
+function renderReviews() {
+  const reports = reportedCards();
+  reviewIndex = Math.max(0, Math.min(reviewIndex, reports.length - 1));
+  const card = reports[reviewIndex];
+  ui["review-item"].hidden = !card;
+  ui["review-prompt"].hidden = true;
+  ui["review-status"].textContent = card
+    ? "Copy a question into Codex to check its level or get a starting hint."
+    : "Questions you report as too hard will appear here.";
+  if (!card) return;
+  ui["review-source"].textContent = card.source ?? topics.get(card.topic)?.title ?? "Maths question";
+  ui["review-preview"].replaceChildren();
+  appendMath(ui["review-preview"], frontLines(card)[0], false);
+  ui["review-pager"].hidden = reports.length < 2;
+  ui["review-page"].textContent = (reviewIndex + 1) + " / " + reports.length;
+  ui["review-previous"].disabled = reviewIndex === 0;
+  ui["review-next"].disabled = reviewIndex === reports.length - 1;
+}
+
+function openReviews(cardId) {
+  reviewIndex = reportedCards().findIndex((card) => card.id === cardId);
+  renderReviews();
+  if (!ui["reviews-dialog"].open) ui["reviews-dialog"].showModal();
+}
+
+function useReports(next, accountChanged = false) {
+  questionReports = next;
+  if (!cards.length) return;
+  if (ui["reviews-dialog"].open) renderReviews();
+  renderMode();
+  renderProgress();
+  if (!questionMode || view !== "study") return;
+  const card = queue[position];
+  if (accountChanged && activeDeck !== "session") {
+    resetQueue();
+    position = Math.max(0, queue.indexOf(card));
+    renderCard();
+    return;
+  }
+  if (session) session.ahead = session.ahead.filter((entry) => !next.get(entry.id)?.reported);
+  const visible = (entry) => !next.get(entry.id)?.reported;
+  if (queue.every(visible)) return;
+  flushMotion();
+  const currentRemoved = card && !visible(card);
+  const before = queue.slice(0, position).filter(visible).length;
+  queue = queue.filter(visible);
+  position = Math.max(0, Math.min(before, queue.length - 1));
+  if (currentRemoved) {
+    cancelQuestionTask();
+    if (queue.length && before === queue.length) questionRoundFinished = true;
+  }
+  renderCard(currentRemoved ? "Question moved to your review list." : "");
+  if (currentRemoved) focusPractice();
 }
 
 function matchesDeck(card) {
@@ -1923,8 +1987,7 @@ async function start() {
       cards: [...main.cards, ...(papers?.cards ?? [])],
     };
     cards = data.cards;
-    // Every card can be a question: you answer it in your own words and it's marked against its solution.
-    questionCards = cards.filter((card) => Array.isArray(card.back) && card.back.length > 0);
+    questionCards = cards.filter((card) => Array.isArray(card.back) && card.back.length > 0 && !extensionCards.has(card.id));
     topics = new Map(data.topics.map((topic) => [topic.id, topic]));
 
     ui.loading.hidden = true;
@@ -1934,6 +1997,18 @@ async function start() {
     const cardId = pageParams.get("card");
     const directCard = cards.find((card) => card.id === cardId);
     if (directCard) {
+      if (questionMode && extensionCards.has(directCard.id)) {
+        setView("home", { push: false });
+        toast("This extension is available in Flashcards.");
+        renderProgress();
+        return;
+      }
+      if (questionMode && questionReports.get(directCard.id)?.reported) {
+        setView("home", { push: false });
+        openReviews(directCard.id);
+        renderProgress();
+        return;
+      }
       const topic = topics.get(directCard.topic);
       changeDeck(topic.collection, topic.id, false);
       if (queue.includes(directCard)) position = queue.indexOf(directCard);
@@ -1983,6 +2058,50 @@ window.addEventListener("popstate", (event) => {
   if (next === "study") renderCard();
 });
 ui["exit-study"].addEventListener("click", goHome);
+ui["report-question"].addEventListener("click", () => {
+  flushMotion();
+  const card = queue[position];
+  if (!questionMode || view !== "study" || questionRoundFinished || !card) return;
+  const saved = account.setQuestionReport(card.id, true);
+  toast(saved ? "Moved to your review list." : "Moved for this visit. Browser storage is unavailable.");
+});
+ui["open-reviews"].addEventListener("click", () => openReviews());
+ui["close-reviews"].addEventListener("click", () => ui["reviews-dialog"].close());
+ui["review-previous"].addEventListener("click", () => { reviewIndex--; renderReviews(); });
+ui["review-next"].addEventListener("click", () => { reviewIndex++; renderReviews(); });
+ui["restore-question"].addEventListener("click", () => {
+  const card = reportedCards()[reviewIndex];
+  if (!card) return;
+  const saved = account.setQuestionReport(card.id, false);
+  ui["review-status"].textContent = saved ? "Restored to Questions." : "Restored for this visit. Browser storage is unavailable.";
+  if (ui["review-item"].hidden) ui["close-reviews"].focus();
+});
+ui["copy-review"].addEventListener("click", async () => {
+  const card = reportedCards()[reviewIndex];
+  if (!card) return;
+  const link = new URL(location.pathname, location.origin);
+  link.searchParams.set("mode", "questions");
+  link.searchParams.set("card", card.id);
+  const prompt = [
+    "I reported this maths question as too hard. Check it against Pearson Edexcel 9MA0 Pure Maths and the Pearson Year 2 course.",
+    "Tell me whether the method is Year 2 content, a Year 1 foundation, or an extension. Check whether the question is well posed and cite the Pearson source.",
+    "If it belongs, give me one approachable starting hint without solving the question.",
+    card.source ?? topics.get(card.topic)?.title ?? card.id,
+    ...frontLines(card),
+    link.href,
+  ].join("\n\n");
+  try {
+    await navigator.clipboard.writeText(prompt);
+    ui["review-status"].textContent = "Copied. Paste it into Codex to ask for a review.";
+  } catch {
+    const input = ui["review-prompt"];
+    input.hidden = false;
+    input.value = prompt;
+    input.focus();
+    input.select();
+    ui["review-status"].textContent = "Select and copy the review request below.";
+  }
+});
 ui["start-session"].addEventListener("click", () => startSession());
 ui["empty-home"].addEventListener("click", goHome);
 ui["group-picker"].addEventListener("click", (event) => {
@@ -2174,7 +2293,7 @@ function refit() {
 document.fonts?.ready.then(refit);
 document.fonts?.addEventListener("loadingdone", refit);
 renderTheme();
-const account = connectAccount(ui, useProgress, toast, useActivity);
+const account = connectAccount(ui, useProgress, toast, useActivity, useReports);
 start();
 // Cards fall due while the page is open, so refresh the counts now and then.
 let lastDue = -1;

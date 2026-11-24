@@ -1578,6 +1578,25 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .home-view, .progress-view { display: flex; flex-direction: column; }
 .page-header { display: grid; gap: 6px; margin-top: 18px; animation: rise 0.6s var(--ease-out) both; }
+.home-header { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+.home-header .position { grid-column: 1 / -1; }
+#open-reviews { justify-self: end; min-height: 38px; padding-inline: 10px; white-space: nowrap; }
+.question-report { align-self: flex-end; min-height: 32px; padding: 4px 12px; font-size: 0.82rem; }
+body[data-answer-keyboard] .question-report { display: none; }
+.review-help { margin: 10px 0; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+.review-preview {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.review-preview .katex { white-space: normal; }
+.review-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.review-actions button { min-height: 42px; }
+#review-pager { margin-top: 12px; }
+#review-prompt { width: 100%; margin-top: 12px; min-height: 5rem; color: var(--ink); background: var(--surface-2); font: inherit; }
 .page-header h1 {
   font: 790 clamp(2rem, 4vw, 3rem)/1.02 var(--heading);
   letter-spacing: -0.055em;

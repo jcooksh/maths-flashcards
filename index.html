@@ -14,10 +14,10 @@
     } catch {}
   </script>
   <link rel="stylesheet" href="./assets/katex/katex.min.css">
-  <link rel="stylesheet" href="./styles.css?v=21">
+  <link rel="stylesheet" href="./styles.css?v=22">
   <script defer src="./assets/katex/katex.min.js"></script>
   <script defer src="./assets/supabase/supabase-2.119.1.js"></script>
-  <script type="module" src="./app.js?v=21"></script>
+  <script type="module" src="./app.js?v=22"></script>
 </head>
 <body>
   <header class="mobile-header">
@@ -103,9 +103,10 @@
         </div>
 
         <section class="home-view" id="home-view" aria-labelledby="home-title" hidden>
-          <header class="page-header">
+          <header class="page-header home-header">
             <p class="position" id="home-greeting">Revision</p>
             <h1 id="home-title">Ready to revise?</h1>
+            <button class="quiet-button" id="open-reviews" type="button" aria-haspopup="dialog" aria-controls="reviews-dialog">Review list</button>
           </header>
 
           <div class="home-grid">
@@ -229,6 +230,7 @@
                   <button class="quiet-button" id="reveal-question" type="button">Show answer</button>
                 </div>
               </div>
+              <button class="quiet-button question-report" id="report-question" type="button">Too hard</button>
             </div>
 
             <div class="card-navigation" role="group" aria-label="Practice navigation">
@@ -265,6 +267,30 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="account-dialog reviews-dialog" id="reviews-dialog" aria-labelledby="reviews-title">
+    <header class="dialog-header">
+      <h2 id="reviews-title">Question review list</h2>
+      <button class="icon-button" id="close-reviews" type="button" aria-label="Close review list">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </header>
+    <p class="review-help" id="review-status" role="status"></p>
+    <section id="review-item" hidden>
+      <h3 id="review-source"></h3>
+      <p id="review-preview" class="review-preview"></p>
+      <div class="review-actions">
+        <button class="pill pill-primary" id="copy-review" type="button">Copy for Codex</button>
+        <button class="quiet-button" id="restore-question" type="button">Restore question</button>
+      </div>
+      <div class="pager" id="review-pager" aria-label="Browse reported questions">
+        <button id="review-previous" class="pager-prev" type="button" aria-label="Previous report">‹</button>
+        <span id="review-page" class="pager-label"></span>
+        <button id="review-next" class="pager-next" type="button" aria-label="Next report">Next</button>
+      </div>
+      <textarea id="review-prompt" readonly aria-label="Review request for Codex" hidden></textarea>
+    </section>
+  </dialog>
 
   <dialog class="topics-dialog" id="topics-dialog" aria-labelledby="topics-title">
     <header class="drawer-header">

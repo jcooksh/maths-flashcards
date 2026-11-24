@@ -1,4 +1,5 @@
 import { guestKey, readProgress, saveProgress, rateProgress, mergeProgress } from "./progress.js?v=2";
+import { readReports, reportKey, saveReports, mergeReports } from "./question-reports.js?v=1";
 import {
   activityKey, deviceId, readActivity, saveActivity, recordReview, addActivity, combineActivity,
   toRows, fromRow, readOthers, saveOthers,
@@ -115,7 +116,7 @@ function errorMessage(error) {
   return "Something went wrong. Please try again.";
 }
 
-export function connectAccount(ui, onProgress, toast = () => {}, onActivity = () => {}) {
+export function connectAccount(ui, onProgress, toast = () => {}, onActivity = () => {}, onReports = () => {}) {
   const dialog = ui["account-dialog"];
   const form = ui["sign-in-form"];
   const emailInput = ui["account-email"];
@@ -133,6 +134,7 @@ export function connectAccount(ui, onProgress, toast = () => {}, onActivity = ()
   let others = new Map();
   let google = false;
   let profile = null;
+  let reports = readReports();
   let view = "signin";
   let sentText = "";
   let syncState = "";
@@ -302,6 +304,18 @@ export function connectAccount(ui, onProgress, toast = () => {}, onActivity = ()
       saveOthers(others, current.othersKey);
       if (restored) saveActivity(activity, current.activityKey);
       onActivity();
+      if (mergeReports(reports, readReports(current.id))) onReports(reports);
+      const { data: remoteReports, error: reportError } = await client.rpc("sync_flashcard_question_reports", {
+        account_id: current.id,
+        records: Array.from(reports, ([card_id, row]) => ({ card_id, reported: row.reported, updated_at: row.at })),
+      }).abortSignal(AbortSignal.timeout(10_000));
+      if (reportError) throw reportError;
+      if (profile !== current) return;
+      const incoming = remoteReports.map((row) => [row.card_id, { reported: row.reported, at: row.updated_at }]);
+      if (mergeReports(reports, incoming, true)) {
+        saveReports(reports, current.id);
+        onReports(reports);
+      }
       if (!current.syncAgain) setSync("synced", "Progress synced.");
     } catch {
       if (profile === current) {
@@ -349,6 +363,11 @@ export function connectAccount(ui, onProgress, toast = () => {}, onActivity = ()
         others = new Map();
         setSync("", "");
       }
+      reports = readReports(profile?.id);
+      if (profile && mergeReports(reports, readReports()) && saveReports(reports, profile.id)) {
+        saveReports(new Map());
+      }
+      onReports(reports, true);
       onProgress(progress, true);
       onActivity();
     }
@@ -440,6 +459,7 @@ export function connectAccount(ui, onProgress, toast = () => {}, onActivity = ()
     if (!document.hidden) queueSync(0);
   });
   window.addEventListener("storage", (event) => {
+    if (event.key === reportKey(profile?.id) && mergeReports(reports, readReports(profile?.id))) onReports(reports);
     const key = profile?.storageKey ?? guestKey;
     if (event.key === key && mergeProgress(progress, readProgress(key))) onProgress(progress);
     if (event.key === (profile?.activityKey ?? activityKey)) {
@@ -490,8 +510,19 @@ export function connectAccount(ui, onProgress, toast = () => {}, onActivity = ()
   }
   onProgress(progress);
   onActivity();
+  onReports(reports);
 
   return {
+    setQuestionReport(cardId, reported) {
+      const accountId = profile?.id;
+      mergeReports(reports, readReports(accountId));
+      const at = Math.max(Date.now(), (reports.get(cardId)?.at ?? 0) + 1);
+      reports.set(cardId, { reported, at });
+      const saved = saveReports(reports, accountId);
+      if (profile) queueSync();
+      onReports(reports);
+      return saved;
+    },
     rate(cardId, rating) {
       const key = profile?.storageKey ?? guestKey;
       mergeProgress(progress, readProgress(key));
