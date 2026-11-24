@@ -2286,6 +2286,24 @@ summary .meter-name::before {
   .speak-button.compact { flex: none; width: 54px; padding: 0; }
   .speak-button.compact .speak-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .answer-hint { font-size: 0.76rem; }
+  .question-card[data-face="answer"] { touch-action: auto; }
+
+  /* While the keyboard is open, the page shrinks to what's above it (see refit in app.js). */
+  body[data-answer-keyboard] {
+    display: flex;
+    flex-direction: column;
+    height: var(--answer-viewport-height);
+    min-height: 0;
+    overflow: hidden;
+  }
+  body[data-answer-keyboard] :is(.app, .study, .study-layout, .deck-view, #practice) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+  body[data-answer-keyboard] :is(.study-topline, .card-navigation, .answer-hint, .answer-secondary) { display: none; }
+  body[data-answer-keyboard] .question-card { min-height: 0; margin-top: 0; overflow-y: auto; }
 
   .account-dialog {
     width: 100%;
