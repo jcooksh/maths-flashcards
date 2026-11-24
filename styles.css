@@ -963,6 +963,17 @@ button:active:not(:disabled, [aria-disabled="true"]) { transform: scale(0.96); }
 .result-part.partial { border-inline-start-color: var(--amber-fg); }
 .result-part.wrong { border-inline-start-color: var(--danger); }
 .result-part-head, .result-heading { font-weight: 740; }
+.result-excerpt {
+  display: grid;
+  gap: 2px;
+  margin: 3px 0;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.result-excerpt-label { color: var(--muted); font-size: 0.86em; font-weight: 660; }
+.result-excerpt q { white-space: pre-wrap; }
+.result-correction { background: var(--surface-2); padding: 7px 9px; border-radius: 0 8px 8px 0; }
 .result-heading { margin-top: 0.35em; padding-top: 0.5em; border-top: 1px solid var(--line); }
 .result-panel .answer-line { max-width: 100%; font-size: calc(1rem * var(--fit, 1)); }
 

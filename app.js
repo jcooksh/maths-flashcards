@@ -722,16 +722,33 @@ function renderResult(card, attempt) {
     if (!result.correct && result.overall) items.push(resultElement("p", "result-overall", result.overall));
     const parts = markingParts(card);
     for (const [index, part] of result.parts.entries()) {
-      const row = document.createElement("p");
+      const label = parts[index].label || (result.parts.length > 1 ? "Part " + (index + 1) : "");
+      const row = document.createElement("div");
       row.className = "result-part " + part.verdict;
       if (exam) {
-        const label = parts[index].label || (result.parts.length > 1 ? "Part " + (index + 1) : "Marks");
-        const head = resultElement("span", "result-part-head", label + " " + part.marks + "/" + part.max);
+        const head = resultElement("p", "result-part-head", (label || "Marks") + " " + part.marks + "/" + part.max);
         row.append(head);
       }
-      const text = resultElement("span", "result-part-text", part.feedback);
-      row.append(text);
+      if (typeof part.excerpt === "string" && part.excerpt && attempt.answer.includes(part.excerpt)) {
+        const quote = document.createElement("blockquote");
+        quote.className = "result-excerpt";
+        const excerpt = document.createElement("q");
+        excerpt.textContent = part.excerpt;
+        quote.append(resultElement("span", "result-excerpt-label", "From your answer"), excerpt);
+        row.append(quote);
+      }
+      row.append(resultElement("p", "result-part-text", part.feedback));
       items.push(row);
+      if (part.correction) {
+        const correction = document.createElement("div");
+        correction.className = "result-part result-correction " + part.verdict;
+        const heading = label ? "What to write for " + label : "What to write";
+        correction.append(
+          resultElement("p", "result-part-head", heading),
+          resultElement("p", "result-part-text", part.correction),
+        );
+        items.push(correction);
+      }
     }
   }
   items.push(resultElement("p", "result-heading", "Worked solution"));
